@@ -1,0 +1,177 @@
+{
+  "_meta": {
+    "fetched_at": "2026-06-22T23:03:06.953Z",
+    "source": "NADI Data Bot",
+    "api_key": "tourism_data"
+  },
+  "data": [
+    {
+      "date": "2024-10-01",
+      "country": "BEL",
+      "arrivals": 2101,
+      "arrivals_male": 1221,
+      "arrivals_female": 880
+    },
+    {
+      "date": "2024-10-01",
+      "country": "BHR",
+      "arrivals": 211,
+      "arrivals_male": 133,
+      "arrivals_female": 78
+    },
+    {
+      "date": "2024-10-01",
+      "country": "AUS",
+      "arrivals": 35063,
+      "arrivals_male": 20700,
+      "arrivals_female": 14363
+    },
+    {
+      "date": "2024-10-01",
+      "country": "BDI",
+      "arrivals": 7,
+      "arrivals_male": 5,
+      "arrivals_female": 2
+    },
+    {
+      "date": "2024-10-01",
+      "country": "BGR",
+      "arrivals": 293,
+      "arrivals_male": 174,
+      "arrivals_female": 119
+    },
+    {
+      "date": "2024-10-01",
+      "country": "ARM",
+      "arrivals": 68,
+      "arrivals_male": 39,
+      "arrivals_female": 29
+    },
+    {
+      "date": "2024-10-01",
+      "country": "ATA",
+      "arrivals": 0,
+      "arrivals_male": 0,
+      "arrivals_female": 0
+    },
+    {
+      "date": "2024-10-01",
+      "country": "ATG",
+      "arrivals": 18,
+      "arrivals_male": 13,
+      "arrivals_female": 5
+    },
+    {
+      "date": "2024-10-01",
+      "country": "AUT",
+      "arrivals": 1006,
+      "arrivals_male": 634,
+      "arrivals_female": 372
+    },
+    {
+      "date": "2024-10-01",
+      "country": "AZE",
+      "arrivals": 186,
+      "arrivals_male": 112,
+      "arrivals_female": 74
+    },
+    {
+      "date": "2024-10-01",
+      "country": "BFA",
+      "arrivals": 3,
+      "arrivals_male": 3,
+      "arrivals_female": 0
+    },
+    {
+      "date": "2024-10-01",
+      "country": "BGD",
+      "arrivals": 30385,
+      "arrivals_male": 25751,
+      "arrivals_female": 4634
+    },
+    {
+      "date": "2024-10-01",
+      "country": "ALL",
+      "arrivals": 3099807,
+      "arrivals_male": 1679534,
+      "arrivals_female": 1420273
+    },
+    {
+      "date": "2024-10-01",
+      "country": "ABW",
+      "arrivals": 0,
+      "arrivals_male": 0,
+      "arrivals_female": 0
+    },
+    {
+      "date": "2024-10-01",
+      "country": "ALB",
+      "arrivals": 167,
+      "arrivals_male": 87,
+      "arrivals_female": 80
+    },
+    {
+      "date": "2024-10-01",
+      "country": "ARG",
+      "arrivals": 513,
+      "arrivals_male": 263,
+      "arrivals_female": 250
+    },
+    {
+      "date": "2024-10-01",
+      "country": "AND",
+      "arrivals": 15,
+      "arrivals_male": 11,
+      "arrivals_female": 4
+    },
+    {
+      "date": "2024-10-01",
+      "country": "ANT",
+      "arrivals": 0,
+      "arrivals_male": 0,
+      "arrivals_female": 0
+    },
+    {
+      "date": "2024-10-01",
+      "country": "ARE",
+      "arrivals": 358,
+      "arrivals_male": 234,
+      "arrivals_female": 124
+    },
+    {
+      "date": "2024-10-01",
+      "country": "AGO",
+      "arrivals": 11,
+      "arrivals_male": 9,
+      "arrivals_female": 2
+    },
+    {
+      "date": "2024-10-01",
+      "country": "AIA",
+      "arrivals": 0,
+      "arrivals_male": 0,
+      "arrivals_female": 0
+    },
+    {
+      "date": "2024-10-01",
+      "country": "AFG",
+      "arrivals": 80,
+      "arrivals_male": 49,
+      "arrivals_female": 31
+    },
+    {
+      "date": "2024-10-01",
+      "country": "BEN",
+      "arrivals": 15,
+      "arrivals_male": 8,
+      "arrivals_female": 7
+    },
+    {
+      "date": "2024-10-01",
+      "country": "BHS",
+      "arrivals": 14,
+      "arrivals_male": 4,
+      "arrivals_female": 10
+    }
+  ]
+}

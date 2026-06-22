@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NADI — Terms & Conditions</title>
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    body {
+      padding: var(--space-4xl) 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .content-box {
+      max-width: 800px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="container content-box">
+    <div class="glass-card reveal revealed">
+      <div class="flex-between mb-xl">
+        <a href="../index.html" class="btn btn-outline" style="padding: 8px 16px;">← Back Home</a>
+        <div class="nav-logo" style="font-size: 1.5rem;">
+          <div class="logo-icon">🇲🇾</div>
+          <span>NADI</span>
+        </div>
+      </div>
+
+      <h1 class="gradient-text mb-md" style="font-size: var(--fs-h1); font-weight: var(--fw-black); letter-spacing: -1px;">Terms & Conditions</h1>
+      
+      <p class="text-muted mb-lg" style="font-size: var(--fs-xs);">Last updated: June 22, 2026</p>
+
+      <h3 class="mt-lg mb-sm" style="color: var(--primary);">1. Acceptance of Terms</h3>
+      <p class="mb-md">
+        By accessing NADI (the "Website"), you agree to be bound by these Terms & Conditions. If you do not agree, please discontinue using the service immediately.
+      </p>
+
+      <h3 class="mt-lg mb-sm" style="color: var(--primary);">2. Use of Information</h3>
+      <p class="mb-md">
+        The data presented on NADI is sourced from public API endpoints provided by the Malaysian Government (data.gov.my). This information is provided "as is" for general reference and convenience purposes.
+      </p>
+
+      <h3 class="mt-lg mb-sm" style="color: var(--primary);">3. Disclaimer of Liability</h3>
+      <p class="mb-md">
+        While we strive to keep data synchronized and accurate:
+      </p>
+      <ul style="list-style: disc; padding-left: var(--space-lg); color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg);">
+        <li>We make no guarantees regarding the completeness, accuracy, or availability of the underlying APIs.</li>
+        <li>We are not responsible for any financial losses, travel disruptions, or business decisions made based on this data.</li>
+        <li>Subsidies, grants, and exchange rates are subject to change by respective government ministries without notice.</li>
+      </ul>
+
+      <h3 class="mt-lg mb-sm" style="color: var(--primary);">4. Modifications</h3>
+      <p class="mb-md">
+        We reserve the right to edit or modify the code of this dashboard or these terms at any time.
+      </p>
+    </div>
+  </div>
+
+  <script src="../js/animations.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      NadiAnimations.init();
+    });
+  </script>
+</body>
+</html>

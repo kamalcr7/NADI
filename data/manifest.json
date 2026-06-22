@@ -1,0 +1,24 @@
+{
+  "_meta": {
+    "generated_at": "2026-06-22T23:03:31.200Z",
+    "duration_ms": 205619,
+    "success": 13,
+    "failed": 0,
+    "next_refresh": "2026-06-23T01:03:31.200Z"
+  },
+  "datasets": [
+    "weather_forecast.json",
+    "weather_warnings.json",
+    "earthquake.json",
+    "flood_warnings.json",
+    "fuel.json",
+    "exchange.json",
+    "population.json",
+    "gdp.json",
+    "inflation.json",
+    "unemployment.json",
+    "trade.json",
+    "tourism.json",
+    "openmeteo_all.json"
+  ]
+}

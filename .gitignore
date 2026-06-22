@@ -1,0 +1,16 @@
+# Dependencies (none currently)
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+*.swp
+
+# Logs
+*.log
+
+# The /data/ folder is COMMITTED to git (it's our "database")
+# Do NOT add data/ to .gitignore

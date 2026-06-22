@@ -1,0 +1,50 @@
+name: Refresh NADI Data
+
+on:
+  # Run every 2 hours
+  schedule:
+    - cron: '0 */2 * * *'
+
+  # Also allow manual trigger from GitHub UI
+  workflow_dispatch:
+
+jobs:
+  fetch-data:
+    name: Fetch & Update Data Files
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # needed to commit and push JSON files
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run data fetcher
+        run: node scripts/fetch-data.js
+        timeout-minutes: 30  # full fetch takes ~8min (12 datasets * 16s + Open-Meteo)
+
+      - name: Check if data files changed
+        id: check-changes
+        run: |
+          git diff --quiet data/ || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push updated data files
+        if: steps.check-changes.outputs.changed == 'true'
+        run: |
+          git config user.name  "NADI Data Bot"
+          git config user.email "bot@nadi.my"
+          git add data/
+          git commit -m "chore: refresh data files [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: No changes detected
+        if: steps.check-changes.outputs.changed != 'true'
+        run: echo "Data files are unchanged, no commit needed."

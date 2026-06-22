@@ -1,0 +1,109 @@
+{
+  "_meta": {
+    "fetched_at": "2026-06-22T23:02:00.973Z",
+    "source": "NADI Data Bot",
+    "api_key": "gdp"
+  },
+  "data": [
+    {
+      "date": "2026-01-01",
+      "value": -4.4,
+      "series": "growth_qoq"
+    },
+    {
+      "date": "2026-01-01",
+      "value": 437719.404,
+      "series": "abs"
+    },
+    {
+      "date": "2026-01-01",
+      "value": 5.4,
+      "series": "growth_yoy"
+    },
+    {
+      "date": "2025-10-01",
+      "value": 6.2,
+      "series": "growth_yoy"
+    },
+    {
+      "date": "2025-10-01",
+      "value": 457858.602,
+      "series": "abs"
+    },
+    {
+      "date": "2025-10-01",
+      "value": 3.3,
+      "series": "growth_qoq"
+    },
+    {
+      "date": "2025-07-01",
+      "value": 443119.629,
+      "series": "abs"
+    },
+    {
+      "date": "2025-07-01",
+      "value": 5.4,
+      "series": "growth_qoq"
+    },
+    {
+      "date": "2025-07-01",
+      "value": 5.3,
+      "series": "growth_yoy"
+    },
+    {
+      "date": "2025-04-01",
+      "value": 4.6,
+      "series": "growth_yoy"
+    },
+    {
+      "date": "2025-04-01",
+      "value": 1.2,
+      "series": "growth_qoq"
+    },
+    {
+      "date": "2025-04-01",
+      "value": 420534.085,
+      "series": "abs"
+    },
+    {
+      "date": "2025-01-01",
+      "value": 415440.954,
+      "series": "abs"
+    },
+    {
+      "date": "2025-01-01",
+      "value": -3.6,
+      "series": "growth_qoq"
+    },
+    {
+      "date": "2025-01-01",
+      "value": 4.4,
+      "series": "growth_yoy"
+    },
+    {
+      "date": "2024-10-01",
+      "value": 2.4,
+      "series": "growth_qoq"
+    },
+    {
+      "date": "2024-10-01",
+      "value": 5,
+      "series": "growth_yoy"
+    },
+    {
+      "date": "2024-10-01",
+      "value": 431152.239,
+      "series": "abs"
+    },
+    {
+      "date": "2024-07-01",
+      "value": 5.5,
+      "series": "growth_yoy"
+    },
+    {
+      "date": "2024-07-01",
+      "value": 4.7,
+      "series": "growth_qoq"
+    }
+  ]
+}

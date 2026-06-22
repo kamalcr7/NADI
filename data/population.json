@@ -1,0 +1,219 @@
+{
+  "_meta": {
+    "fetched_at": "2026-06-22T23:01:44.267Z",
+    "source": "NADI Data Bot",
+    "api_key": "population"
+  },
+  "data": [
+    {
+      "age": "5-9",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "overall",
+      "population": 2516.4
+    },
+    {
+      "age": "15-19",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "overall",
+      "population": 2705.2
+    },
+    {
+      "age": "overall",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "other_noncitizen",
+      "population": 3380.7
+    },
+    {
+      "age": "0-4",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "other_noncitizen",
+      "population": 242.2
+    },
+    {
+      "age": "10-14",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "overall",
+      "population": 2579.3
+    },
+    {
+      "age": "10-14",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "other_noncitizen",
+      "population": 90.7
+    },
+    {
+      "age": "overall",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "bumi_other",
+      "population": 3779.8
+    },
+    {
+      "age": "overall",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "other_citizen",
+      "population": 234.3
+    },
+    {
+      "age": "0-4",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "bumi_other",
+      "population": 266.8
+    },
+    {
+      "age": "0-4",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "other_citizen",
+      "population": 28
+    },
+    {
+      "age": "5-9",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "chinese",
+      "population": 412.5
+    },
+    {
+      "age": "5-9",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "other_noncitizen",
+      "population": 190.5
+    },
+    {
+      "age": "10-14",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "chinese",
+      "population": 512.2
+    },
+    {
+      "age": "10-14",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "other_citizen",
+      "population": 17.7
+    },
+    {
+      "age": "overall",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "overall",
+      "population": 34231.7
+    },
+    {
+      "age": "overall",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "bumi_malay",
+      "population": 17981.2
+    },
+    {
+      "age": "overall",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "chinese",
+      "population": 6849.6
+    },
+    {
+      "age": "overall",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "indian",
+      "population": 2006.1
+    },
+    {
+      "age": "0-4",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "overall",
+      "population": 2306.7
+    },
+    {
+      "age": "0-4",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "bumi_malay",
+      "population": 1459.2
+    },
+    {
+      "age": "0-4",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "chinese",
+      "population": 218.9
+    },
+    {
+      "age": "0-4",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "indian",
+      "population": 91.7
+    },
+    {
+      "age": "5-9",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "bumi_malay",
+      "population": 1485.5
+    },
+    {
+      "age": "5-9",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "bumi_other",
+      "population": 286.5
+    },
+    {
+      "age": "5-9",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "indian",
+      "population": 124.7
+    },
+    {
+      "age": "5-9",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "other_citizen",
+      "population": 16.7
+    },
+    {
+      "age": "10-14",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "bumi_malay",
+      "population": 1518.4
+    },
+    {
+      "age": "10-14",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "bumi_other",
+      "population": 288.2
+    },
+    {
+      "age": "10-14",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "indian",
+      "population": 152.1
+    },
+    {
+      "age": "15-19",
+      "sex": "both",
+      "date": "2025-01-01",
+      "ethnicity": "bumi_malay",
+      "population": 1419.8
+    }
+  ]
+}

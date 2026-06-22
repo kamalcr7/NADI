@@ -1,0 +1,242 @@
+/* ============================================================
+   NADI — Responsive Breakpoints
+   ============================================================ */
+
+/* ---------- Tablet (768px) ---------- */
+@media (max-width: 768px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+
+  .nav-links { display: none; }
+
+  .mobile-menu-btn { display: flex; }
+
+  .nav-links.mobile-open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 14, 39, 0.97);
+    backdrop-filter: blur(20px);
+    padding: var(--space-xl);
+    gap: var(--space-sm);
+    overflow-y: auto;
+    max-width: 100%;
+    animation: fadeIn var(--duration-fast) var(--ease-out);
+    z-index: var(--z-overlay);
+  }
+
+  .nav-links.mobile-open .nav-link {
+    width: 100%;
+    padding: var(--space-md) var(--space-lg);
+    font-size: var(--fs-body);
+    border-radius: var(--radius-md);
+  }
+
+  .hero-title { letter-spacing: -1px; }
+
+  .hero-stats {
+    gap: var(--space-xl);
+  }
+
+  .hero-stat .stat-number {
+    font-size: var(--fs-h3);
+  }
+
+  .section-header { margin-bottom: var(--space-xl); }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+  }
+
+  .glass-card {
+    padding: var(--space-lg);
+  }
+
+  .chart-container {
+    padding: var(--space-lg);
+    min-height: 250px;
+  }
+
+  .tabs {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .filter-bar {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: var(--space-sm);
+  }
+
+  .filter-chip {
+    flex-shrink: 0;
+  }
+}
+
+/* ---------- Small Tablet / Large Phone (640px) ---------- */
+@media (max-width: 640px) {
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-auto {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: var(--space-4xl) var(--container-padding);
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .price-tag {
+    padding: var(--space-lg);
+  }
+
+  .currency-card {
+    flex-wrap: wrap;
+  }
+
+  .currency-card .currency-sparkline {
+    width: 100%;
+    order: 4;
+  }
+}
+
+/* ---------- Phone (480px) ---------- */
+@media (max-width: 480px) {
+  :root {
+    --container-padding: 1rem;
+  }
+
+  .grid-4 { grid-template-columns: 1fr; }
+
+  .section {
+    padding: var(--space-3xl) 0;
+  }
+
+  .nav-inner {
+    padding: 0 var(--space-md);
+  }
+
+  .nav-logo {
+    font-size: 1.25rem;
+  }
+
+  .glass-card {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+  }
+
+  .weather-card {
+    padding: var(--space-md);
+  }
+
+  .stat-number {
+    font-size: var(--fs-h3);
+  }
+
+  .info-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .info-card .info-icon {
+    align-self: center;
+  }
+
+  .data-table {
+    font-size: var(--fs-xs);
+  }
+
+  .data-table thead th,
+  .data-table tbody td {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .back-to-top {
+    width: 40px;
+    height: 40px;
+    bottom: var(--space-md);
+    right: var(--space-md);
+  }
+}
+
+/* ---------- Large Desktop (1440px+) ---------- */
+@media (min-width: 1440px) {
+  :root {
+    --container-max: 1600px;
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ---------- Print Styles ---------- */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .nav,
+  .back-to-top,
+  .particle-canvas,
+  .ticker {
+    display: none !important;
+  }
+
+  .glass-card {
+    background: white;
+    border: 1px solid #ccc;
+    backdrop-filter: none;
+  }
+
+  .section {
+    page-break-inside: avoid;
+  }
+}
+
+/* ---------- Reduced Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
+    opacity: 1;
+    transform: none;
+  }
+}
