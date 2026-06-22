@@ -25,31 +25,22 @@
       </div>
     `;
 
-    try {
-      const rawData = await NadiAPI.catalogue('pricecatcher', { limit: 100, sort: '-date' })
-        .catch(() => null);
+    // Subscribe to NADI prices data
+    NadiStore.on('prices', (data, status) => {
+      if (status === 'loading') return;
 
       let records = [];
-      if (rawData) {
-        if (Array.isArray(rawData)) {
-          records = rawData;
-        } else if (rawData.data && Array.isArray(rawData.data)) {
-          records = rawData.data;
-        }
+      if (data) {
+        records = Array.isArray(data) ? data : (data.data || []);
       }
 
-      // If data is empty or fail, load high-fidelity standard price catcher records
       if (records.length === 0) {
         records = getMockPriceData();
       }
 
       cachedData = records;
       renderSection(container, cachedData);
-    } catch (err) {
-      console.error('Prices module fetch error:', err);
-      cachedData = getMockPriceData();
-      renderSection(container, cachedData);
-    }
+    });
   }
 
   function getMockPriceData() {

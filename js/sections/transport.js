@@ -25,22 +25,15 @@
       </div>
     `;
 
-    try {
-      // Fetch public transport ridership data
-      const rawData = await NadiAPI.catalogue('ridership_headline', { limit: 12, sort: '-date' })
-        .catch(() => NadiAPI.catalogue('ridership_rail', { limit: 12, sort: '-date' }))
-        .catch(() => null);
+    // Subscribe to NADI transport data
+    NadiStore.on('transport', (data, status) => {
+      if (status === 'loading') return;
 
       let records = [];
-      if (rawData) {
-        if (Array.isArray(rawData)) {
-          records = rawData;
-        } else if (rawData.data && Array.isArray(rawData.data)) {
-          records = rawData.data;
-        }
+      if (data) {
+        records = Array.isArray(data) ? data : (data.data || []);
       }
 
-      // If API fails or is empty, we load static high-fidelity data
       if (records.length === 0) {
         records = getMockRidershipData();
       }
@@ -49,12 +42,7 @@
       cachedData = records;
 
       renderSection(container, cachedData);
-    } catch (err) {
-      console.error('Transport section fetch error:', err);
-      // Even on total failure, render using high-fidelity fallback to guarantee UI success
-      cachedData = getMockRidershipData();
-      renderSection(container, cachedData);
-    }
+    });
   }
 
   function getMockRidershipData() {

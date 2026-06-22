@@ -1,0 +1,19 @@
+{
+  "_meta": {
+    "fetched_at": "2026-06-23T00:25:00.000Z",
+    "source": "NADI PriceCatcher Database",
+    "api_key": "prices"
+  },
+  "data": [
+    { "date": "2026-06-20", "item_name": "Standard Chicken (Ayam Bersih Standard)", "category": "meat", "price": 9.40, "premise": "Pasar Awam Larkin, Johor" },
+    { "date": "2026-06-20", "item_name": "Local Beef (Daging Lembu Tempatan)", "category": "meat", "price": 38.00, "premise": "Pasar Awam Chow Kit, KL" },
+    { "date": "2026-06-20", "item_name": "Chicken Eggs Grade A (Telur Ayam Gred A)", "category": "grocery", "price": 13.50, "premise": "Lotus Extra Cheras, KL" },
+    { "date": "2026-06-20", "item_name": "Cooking Oil 5kg (Minyak Masak Pek 5kg)", "category": "grocery", "price": 29.50, "premise": "Mydin USJ, Selangor" },
+    { "date": "2026-06-20", "item_name": "Grade B Eggs (Telur Gred B - 30 Biji)", "category": "grocery", "price": 12.90, "premise": "Econsave Balakong, Selangor" },
+    { "date": "2026-06-20", "item_name": "Indian Red Onion (Bawang Merah India)", "category": "vegetable", "price": 6.50, "premise": "Pasar Jalan Besar, Melaka" },
+    { "date": "2026-06-20", "item_name": "Round Cabbage (Kobis Bulat)", "category": "vegetable", "price": 4.50, "premise": "Pasar Awam Chow Kit, KL" },
+    { "date": "2026-06-20", "item_name": "Local Tomato (Tomato Tempatan)", "category": "vegetable", "price": 5.80, "premise": "Giant Hypermarket, Johor" },
+    { "date": "2026-06-20", "item_name": "Mackerel (Ikan Kembung)", "category": "fish", "price": 16.00, "premise": "Pasar Awam Larkin, Johor" },
+    { "date": "2026-06-20", "item_name": "Red Chillies (Cili Merah Kulai)", "category": "vegetable", "price": 18.50, "premise": "Pasar Tani Shah Alam" }
+  ]
+}

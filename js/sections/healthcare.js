@@ -25,19 +25,13 @@
       </div>
     `;
 
-    try {
-      // Fetch healthcare / dengue surveillance datasets
-      const rawData = await NadiAPI.catalogue('dengue_state', { limit: 16, sort: '-date' })
-        .catch(() => NadiAPI.catalogue('covid_hospital', { limit: 16, sort: '-date' }))
-        .catch(() => null);
+    // Subscribe to NADI healthcare data
+    NadiStore.on('healthcare', (data, status) => {
+      if (status === 'loading') return;
 
       let records = [];
-      if (rawData) {
-        if (Array.isArray(rawData)) {
-          records = rawData;
-        } else if (rawData.data && Array.isArray(rawData.data)) {
-          records = rawData.data;
-        }
+      if (data) {
+        records = Array.isArray(data) ? data : (data.data || []);
       }
 
       if (records.length === 0) {
@@ -46,11 +40,7 @@
 
       cachedData = records;
       renderSection(container, cachedData);
-    } catch (err) {
-      console.error('Healthcare fetch error:', err);
-      cachedData = getMockHealthData();
-      renderSection(container, cachedData);
-    }
+    });
   }
 
   function getMockHealthData() {

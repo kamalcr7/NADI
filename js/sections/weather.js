@@ -1,7 +1,7 @@
 /* ============================================================
    NADI — Advanced Weather Station Module
-   Uses Open-Meteo API (free, no key) for real wind/rain/temp
-   data with animated wind field visualization.
+   Uses Open-Meteo API for local city forecasts &
+   Windy.com interactive satellite/radar/wind map.
    ============================================================ */
 
 (function () {
@@ -9,98 +9,14 @@
 
   let initialized = false;
   let selectedCityName = 'Kuala Lumpur';
-  let windCanvas = null;
-  let windCtx = null;
-  let animFrame = null;
-  let particles = [];
   let cityData = null; // current city open-meteo data
-
-  /* --- Wind Particle System --- */
-  const PARTICLE_COUNT = 200;
-
-  function initWindParticles(w, h) {
-    particles = [];
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      particles.push({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        age: Math.floor(Math.random() * 80),
-        maxAge: 60 + Math.floor(Math.random() * 60),
-        speed: 0
-      });
-    }
-  }
-
-  function animateWind(windSpeed, windDirDeg) {
-    if (!windCtx || !windCanvas) return;
-    const w = windCanvas.width;
-    const h = windCanvas.height;
-
-    // Convert wind direction to radians (meteorological: 0=from N, 90=from E)
-    const radians = ((windDirDeg + 180) % 360) * Math.PI / 180;
-    const vx = Math.sin(radians) * (windSpeed / 40);
-    const vy = -Math.cos(radians) * (windSpeed / 40);
-
-    windCtx.clearRect(0, 0, w, h);
-
-    particles.forEach(p => {
-      p.age++;
-      if (p.age > p.maxAge) {
-        p.x = Math.random() * w;
-        p.y = Math.random() * h;
-        p.age = 0;
-        p.maxAge = 60 + Math.floor(Math.random() * 60);
-      }
-
-      const prevX = p.x;
-      const prevY = p.y;
-
-      // Add slight turbulence
-      const turbX = (Math.random() - 0.5) * 0.3;
-      const turbY = (Math.random() - 0.5) * 0.3;
-      p.x += vx * 2.5 + turbX;
-      p.y += vy * 2.5 + turbY;
-
-      // Wrap around
-      if (p.x < 0) p.x = w;
-      if (p.x > w) p.x = 0;
-      if (p.y < 0) p.y = h;
-      if (p.y > h) p.y = 0;
-
-      // Fade based on age
-      const alpha = Math.sin((p.age / p.maxAge) * Math.PI) * 0.7;
-      const speedNorm = windSpeed / 60; // normalize 0-1
-
-      // Color by wind speed (blue=calm, cyan=moderate, yellow=strong, red=gale)
-      let r, g, b;
-      if (speedNorm < 0.3) { r = 77; g = 200; b = 255; }
-      else if (speedNorm < 0.6) { r = 0; g = 201; b = 167; }
-      else if (speedNorm < 0.8) { r = 255; g = 215; b = 0; }
-      else { r = 255; g = 71; b = 87; }
-
-      windCtx.beginPath();
-      windCtx.moveTo(prevX, prevY);
-      windCtx.lineTo(p.x, p.y);
-      windCtx.strokeStyle = `rgba(${r},${g},${b},${alpha})`;
-      windCtx.lineWidth = 1.2 + speedNorm * 1.5;
-      windCtx.stroke();
-    });
-
-    animFrame = requestAnimationFrame(() => animateWind(windSpeed, windDirDeg));
-  }
-
-  function stopWind() {
-    if (animFrame) {
-      cancelAnimationFrame(animFrame);
-      animFrame = null;
-    }
-  }
 
   /* --- Weather Code Helpers --- */
   function wmoToDesc(code) {
     return (NadiStore.WMO_CODES && NadiStore.WMO_CODES[code]) || 'Unknown';
   }
 
+  // WMO Weather Emoji mapping helper
   function wmoToEmoji(code) {
     return (NadiStore.WMO_EMOJI && NadiStore.WMO_EMOJI[code]) || '⛅';
   }
@@ -253,7 +169,6 @@
       return d.getHours() + ':00';
     });
     const hourlyTemps = (hourly.temperature_2m || []).slice(0, 24);
-    const hourlyHumidity = (hourly.relative_humidity_2m || []).slice(0, 24);
     const hourlyWinds = (hourly.wind_speed_10m || []).slice(0, 24);
     const hourlyRain = (hourly.precipitation_probability || []).slice(0, 24);
 
@@ -306,23 +221,51 @@
         </div>
       </div>
 
-      <!-- Wind Field Visualization -->
-      <div class="glass-card reveal mb-lg" style="position:relative; overflow:hidden;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: var(--space-md);">
-          <h3 style="margin:0; font-size: var(--fs-h4);">🌬️ Live Wind Field</h3>
-          <div style="font-size: var(--fs-xs); color: var(--text-muted);">
-            Wind: <strong style="color:var(--primary)">${Math.round(windSpeed)} km/h ${windDirLabel(windDir)}</strong>
+      <!-- Live Interactive Weather Map -->
+      <div class="glass-card reveal mb-lg" style="position:relative; overflow:hidden; padding: 0;">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding: var(--space-md) var(--space-xl); border-bottom: 1px solid var(--glass-border); flex-wrap: wrap; gap: var(--space-sm);">
+          <h3 style="margin:0; font-size: var(--fs-h4); display: flex; align-items: center; gap: 8px;">📡 Live Interactive Weather Map</h3>
+          <div style="display: flex; align-items: center; gap: var(--space-sm);">
+            <a href="https://zoom.earth/#view=${city.lat},${city.lon},8z" target="_blank" class="btn btn-outline" style="font-size: 0.72rem; padding: 4px 10px; display: flex; align-items: center; gap: 4px; text-decoration: none;">
+              🌍 Open in Zoom Earth
+            </a>
+            <span class="nav-badge" style="background: var(--primary); color: var(--text-inverse); font-size: 9px; padding: 2px 5px;">LIVE</span>
           </div>
         </div>
-        <div style="position:relative; border-radius: var(--radius-md); overflow:hidden;">
-          <canvas id="wind-field-canvas" style="width:100%; height:220px; display:block; background: radial-gradient(ellipse at center, rgba(0,201,167,0.05) 0%, rgba(10,14,39,0.9) 100%);"></canvas>
-          <div style="position:absolute; bottom:8px; right:8px; font-size:var(--fs-xs); color: var(--text-muted); background: rgba(10,14,39,0.7); padding:4px 8px; border-radius:4px;">
-            Particle density indicates wind strength
-          </div>
+        
+        <!-- Map Layer Selector -->
+        <div class="map-layer-selector" style="display: flex; gap: 8px; padding: 8px 16px; background: rgba(10, 14, 39, 0.4); border-bottom: 1px solid var(--glass-border); overflow-x: auto; scrollbar-width: none;">
+          <button class="map-layer-btn active" data-overlay="wind" style="background: rgba(0, 201, 167, 0.12); border: 1px solid var(--primary); color: var(--primary); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 4px; white-space: nowrap; transition: all 0.2s; border-style: solid;">
+            💨 Wind Flow
+          </button>
+          <button class="map-layer-btn" data-overlay="temp" style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-secondary); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; white-space: nowrap; transition: all 0.2s; border-style: solid;">
+            🌡️ Temperature
+          </button>
+          <button class="map-layer-btn" data-overlay="rain" style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-secondary); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; white-space: nowrap; transition: all 0.2s; border-style: solid;">
+            🌧️ Rain / Precip
+          </button>
+          <button class="map-layer-btn" data-overlay="radar" style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-secondary); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; white-space: nowrap; transition: all 0.2s; border-style: solid;">
+            📡 Weather Radar
+          </button>
+          <button class="map-layer-btn" data-overlay="satellite" style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-secondary); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; white-space: nowrap; transition: all 0.2s; border-style: solid;">
+            🛰️ Satellite
+          </button>
+          <button class="map-layer-btn" data-overlay="clouds" style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-secondary); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; white-space: nowrap; transition: all 0.2s; border-style: solid;">
+            ☁️ Cloud Cover
+          </button>
+        </div>
+
+        <div style="position:relative; width: 100%; height: 480px; overflow: hidden; background: #0b0e27;">
+          <iframe 
+            id="windy-weather-map"
+            src="https://embed.windy.com/embed2.html?lat=${city.lat}&lon=${city.lon}&zoom=7&level=surface&overlay=wind&menu=&message=true&marker=true&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1" 
+            style="width: 100%; height: 100%; border: none;" 
+            allowfullscreen>
+          </iframe>
         </div>
       </div>
 
-      <!-- 7-Day Forecast Carousel -->
+      <!-- 7-Day Forecast -->
       <div class="reveal mb-lg">
         <h3 style="margin-bottom: var(--space-md);">📅 7-Day Forecast</h3>
         <div class="forecast-days-container">
@@ -355,19 +298,8 @@
       </div>
     `;
 
-    // Start wind field animation
-    requestAnimationFrame(() => {
-      stopWind();
-      windCanvas = document.getElementById('wind-field-canvas');
-      if (windCanvas) {
-        const rect = windCanvas.getBoundingClientRect();
-        windCanvas.width = rect.width || 700;
-        windCanvas.height = 220;
-        windCtx = windCanvas.getContext('2d');
-        initWindParticles(windCanvas.width, windCanvas.height);
-        animateWind(windSpeed, windDir);
-      }
-
+    // Render charts & Map bindings
+    setTimeout(() => {
       // Draw hourly charts
       NadiCharts.destroyChart('chart-hourly-temp');
       NadiCharts.destroyChart('chart-hourly-rain');
@@ -401,6 +333,29 @@
           color: NadiCharts.COLORS.primary
         }],
         yLabel: 'km/h'
+      });
+
+      // Bind Map layer buttons
+      const mapButtons = display.querySelectorAll('.map-layer-btn');
+      const iframe = display.querySelector('#windy-weather-map');
+      mapButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          mapButtons.forEach(b => {
+            b.classList.remove('active');
+            b.style.background = 'var(--glass-bg)';
+            b.style.borderColor = 'var(--glass-border)';
+            b.style.color = 'var(--text-secondary)';
+            b.style.fontWeight = '500';
+          });
+          btn.classList.add('active');
+          btn.style.background = 'rgba(0, 201, 167, 0.12)';
+          btn.style.borderColor = 'var(--primary)';
+          btn.style.color = 'var(--primary)';
+          btn.style.fontWeight = '600';
+          
+          const overlay = btn.getAttribute('data-overlay');
+          iframe.src = `https://embed.windy.com/embed2.html?lat=${city.lat}&lon=${city.lon}&zoom=7&level=surface&overlay=${overlay}&menu=&message=true&marker=true&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1`;
+        });
       });
     });
 
@@ -456,8 +411,6 @@
       selectedCityName = name;
       updateCityDisplay();
     },
-    destroy() {
-      stopWind();
-    }
+    destroy() {}
   };
 })();

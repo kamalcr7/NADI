@@ -10,24 +10,27 @@
 (function () {
   'use strict';
 
-  const STORE_VERSION = 'v4';
+  const STORE_VERSION = 'v5';
   const LS_PREFIX = `nadi_${STORE_VERSION}_`;
 
   /* --- File Map: dataset key → static JSON path --- */
   const DATA_FILES = {
-    fuel:             '/data/fuel.json',
-    exchange:         '/data/exchange.json',
-    population:       '/data/population.json',
-    gdp:              '/data/gdp.json',
-    inflation:        '/data/inflation.json',
-    unemployment:     '/data/unemployment.json',
-    tourism_data:     '/data/tourism.json',
-    trade:            '/data/trade.json',
-    weather_forecast: '/data/weather_forecast.json',
-    weather_warnings: '/data/weather_warnings.json',
-    earthquake:       '/data/earthquake.json',
-    flood_warnings:   '/data/flood_warnings.json',
-    openmeteo_all:    '/data/openmeteo_all.json',
+    fuel:             'data/fuel.json',
+    exchange:         'data/exchange.json',
+    population:       'data/population.json',
+    gdp:              'data/gdp.json',
+    inflation:        'data/inflation.json',
+    unemployment:     'data/unemployment.json',
+    tourism_data:     'data/tourism.json',
+    trade:            'data/trade.json',
+    weather_forecast: 'data/weather_forecast.json',
+    weather_warnings: 'data/weather_warnings.json',
+    earthquake:       'data/earthquake.json',
+    flood_warnings:   'data/flood_warnings.json',
+    openmeteo_all:    'data/openmeteo_all.json',
+    prices:           'data/prices.json',
+    healthcare:       'data/healthcare.json',
+    transport:        'data/transport.json',
   };
 
   /* --- Fallback Live API URLs (used only if /data/*.json missing) --- */
@@ -263,12 +266,15 @@
     'unemployment',
     'tourism_data',
     'trade',
+    'prices',
+    'healthcare',
+    'transport',
   ];
 
   async function start() {
     // Load manifest to know when data was last updated
     try {
-      const mRes = await fetch('/data/manifest.json?v=' + Date.now(), { cache: 'no-store' });
+      const mRes = await fetch('data/manifest.json?v=' + Date.now(), { cache: 'no-store' });
       if (mRes.ok) {
         manifest = await mRes.json();
         console.log(`[DataStore] Manifest loaded. Data age: ${manifest._meta?.generated_at}`);

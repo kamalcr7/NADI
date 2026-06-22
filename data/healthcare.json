@@ -1,0 +1,17 @@
+{
+  "_meta": {
+    "fetched_at": "2026-06-23T00:25:00.000Z",
+    "source": "NADI Health & Dengue Surveillance",
+    "api_key": "healthcare"
+  },
+  "data": [
+    { "date": "2026-06-15", "state": "Selangor", "cases": 840, "death": 1 },
+    { "date": "2026-06-15", "state": "W.P. Kuala Lumpur", "cases": 290, "death": 0 },
+    { "date": "2026-06-15", "state": "Johor", "cases": 220, "death": 0 },
+    { "date": "2026-06-15", "state": "Perak", "cases": 140, "death": 0 },
+    { "date": "2026-06-15", "state": "Kedah", "cases": 90, "death": 0 },
+    { "date": "2026-06-15", "state": "Sabah", "cases": 85, "death": 1 },
+    { "date": "2026-06-15", "state": "Pulau Pinang", "cases": 80, "death": 0 },
+    { "date": "2026-06-15", "state": "Kelantan", "cases": 65, "death": 0 }
+  ]
+}

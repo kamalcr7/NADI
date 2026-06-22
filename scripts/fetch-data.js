@@ -90,6 +90,7 @@ const CATALOGUE_DATASETS = [
   { key: 'unemployment', file: 'unemployment.json',  url: `${BASE_URL}/data-catalogue?id=lfs_month&limit=36&sort=-date`,                 label: 'Unemployment' },
   { key: 'trade',        file: 'trade.json',         url: `${BASE_URL}/data-catalogue?id=trade_sitc_1d&limit=24&sort=-date`,             label: 'Trade Monthly' },
   { key: 'tourism_data', file: 'tourism.json',       url: `${BASE_URL}/data-catalogue?id=arrivals&limit=24&sort=-date`,                 label: 'Tourism Arrivals' },
+  { key: 'transport',    file: 'transport.json',     url: `${BASE_URL}/data-catalogue?id=ridership_headline&limit=12&sort=-date`,        label: 'Transit Ridership' },
 ];
 
 const WEATHER_DATASETS = [
