@@ -34,33 +34,24 @@
   }
 
   function renderSection(container, records) {
-    const sorted = [...records].sort((a, b) => new Date(a.date) - new Date(b.date));
+    // Filter to get the overall national population per year
+    const nationalOverall = records.filter(r => 
+      r.age === 'overall' && 
+      r.sex === 'both' && 
+      (r.ethnicity === 'overall' || !r.ethnicity)
+    );
+
+    const sorted = [...nationalOverall].sort((a, b) => new Date(a.date) - new Date(b.date));
     const latest = sorted[sorted.length - 1] || {};
     const prev = sorted[sorted.length - 2] || {};
 
-    // Get population key
-    const popKey = Object.keys(latest).find(k => k !== 'date' && !k.includes('state') && !k.includes('sex') && !k.includes('age')) || 'value';
-    const latestPop = latest[popKey] || latest.population || latest.value || 34219400;
-    const prevPop = prev[popKey] || prev.population || prev.value || latestPop;
+    // In population_malaysia, population is in thousands (e.g. 34219.4)
+    const latestPop = (latest.population || latest.value || 34219.4) * 1000;
+    const prevPop = (prev.population || prev.value || latestPop / 1000) * 1000;
     const growth = latestPop - prevPop;
 
-    // State breakdown from data if available
-    const stateMap = {};
-    records.forEach(r => {
-      if (r.state && r.state !== 'Malaysia') {
-        const stateKey = r.state;
-        const val = r[popKey] || r.population || r.value || 0;
-        if (!stateMap[stateKey] || new Date(r.date) > new Date(stateMap[stateKey].date)) {
-          stateMap[stateKey] = { ...r, value: parseFloat(val) };
-        }
-      }
-    });
-
-    const stateEntries = Object.entries(stateMap)
-      .map(([s, d]) => ({ state: s, value: d.value }))
-      .filter(e => e.value > 0)
-      .sort((a, b) => b.value - a.value)
-      .slice(0, 16);
+    // State breakdown from data if available (none in national population dataset)
+    const stateEntries = [];
 
     container.innerHTML = `
       <!-- KPIs -->
@@ -150,7 +141,7 @@
           labels: trendMalaysia.map(r => new Date(r.date).getFullYear()),
           datasets: [{
             label: 'Malaysia Population',
-            data: trendMalaysia.map(r => r[popKey] || r.population || r.value || 0),
+            data: trendMalaysia.map(r => parseFloat(r.population || r.value || 0) * 1000),
             color: NadiCharts.COLORS.primary
           }]
         });
