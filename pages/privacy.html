@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NADI — Privacy Policy</title>
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    body {
+      padding: var(--space-4xl) 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .content-box {
+      max-width: 800px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="container content-box">
+    <div class="glass-card reveal revealed">
+      <div class="flex-between mb-xl">
+        <a href="../index.html" class="btn btn-outline" style="padding: 8px 16px;">← Back Home</a>
+        <div class="nav-logo" style="font-size: 1.5rem;">
+          <div class="logo-icon">🇲🇾</div>
+          <span>NADI</span>
+        </div>
+      </div>
+
+      <h1 class="gradient-text mb-md" style="font-size: var(--fs-h1); font-weight: var(--fw-black); letter-spacing: -1px;">Privacy Policy</h1>
+      
+      <p class="text-muted mb-lg" style="font-size: var(--fs-xs);">Last updated: June 22, 2026</p>
+
+      <h3 class="mt-lg mb-sm" style="color: var(--primary);">1. Data Collection</h3>
+      <p class="mb-md">
+        NADI does NOT collect, store, or transmit any personal user information. There are no backend database user accounts, log files, or cookies.
+      </p>
+
+      <h3 class="mt-lg mb-sm" style="color: var(--primary);">2. Local Storage Cache</h3>
+      <p class="mb-md">
+        To prevent API rate-limiting issues (such as the 4 requests/minute limit), NADI caches public government API responses locally inside your browser's **LocalStorage**. This cache contains only general open data (e.g. current weather forecast, fuel prices, GDP stats) and does not store user-identifiable data. You can clear this cache at any time using your browser settings.
+      </p>
+
+      <h3 class="mt-lg mb-sm" style="color: var(--primary);">3. Third-Party Links</h3>
+      <p class="mb-md">
+        Our site contains external links to official Malaysian government registration forms and utility websites (such as LHDN, Budi Madani, and Bank Negara). We do not control these websites and are not responsible for their individual privacy practices.
+      </p>
+    </div>
+  </div>
+
+  <script src="../js/animations.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      NadiAnimations.init();
+    });
+  </script>
+</body>
+</html>

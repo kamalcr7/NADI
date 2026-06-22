@@ -1,0 +1,153 @@
+{
+  "_meta": {
+    "fetched_at": "2026-06-22T23:02:50.562Z",
+    "source": "NADI Data Bot",
+    "api_key": "trade"
+  },
+  "data": [
+    {
+      "date": "2026-03-01",
+      "exports": 5872816498,
+      "imports": 1190951832,
+      "section": "4"
+    },
+    {
+      "date": "2026-03-01",
+      "exports": 17817880070,
+      "imports": 8429470610,
+      "section": "8"
+    },
+    {
+      "date": "2026-03-01",
+      "exports": 148752304156,
+      "imports": 124199086437,
+      "section": "overall"
+    },
+    {
+      "date": "2026-03-01",
+      "exports": 4008837738,
+      "imports": 6641395675,
+      "section": "0"
+    },
+    {
+      "date": "2026-03-01",
+      "exports": 3349654797,
+      "imports": 4874562730,
+      "section": "2"
+    },
+    {
+      "date": "2026-03-01",
+      "exports": 1616624419,
+      "imports": 3495919543,
+      "section": "9"
+    },
+    {
+      "date": "2026-03-01",
+      "exports": 8056602553,
+      "imports": 9662122873,
+      "section": "5"
+    },
+    {
+      "date": "2026-03-01",
+      "exports": 11302933756,
+      "imports": 10101180058,
+      "section": "6"
+    },
+    {
+      "date": "2026-03-01",
+      "exports": 80492049894,
+      "imports": 68501913346,
+      "section": "7"
+    },
+    {
+      "date": "2026-03-01",
+      "exports": 16011233441,
+      "imports": 11046014791,
+      "section": "3"
+    },
+    {
+      "date": "2026-03-01",
+      "exports": 223670990,
+      "imports": 255554979,
+      "section": "1"
+    },
+    {
+      "date": "2026-02-01",
+      "exports": 4265073677.9999995,
+      "imports": 4659143231,
+      "section": "2"
+    },
+    {
+      "date": "2026-02-01",
+      "exports": 9500450956,
+      "imports": 9204990744,
+      "section": "6"
+    },
+    {
+      "date": "2026-02-01",
+      "exports": 130952350790,
+      "imports": 114244329980,
+      "section": "overall"
+    },
+    {
+      "date": "2026-02-01",
+      "exports": 1341667459,
+      "imports": 3071686866,
+      "section": "9"
+    },
+    {
+      "date": "2026-02-01",
+      "exports": 5704626033,
+      "imports": 1009338194,
+      "section": "4"
+    },
+    {
+      "date": "2026-02-01",
+      "exports": 67963198489.99999,
+      "imports": 62220455264,
+      "section": "7"
+    },
+    {
+      "date": "2026-02-01",
+      "exports": 7810329949,
+      "imports": 8410998955.999999,
+      "section": "5"
+    },
+    {
+      "date": "2026-02-01",
+      "exports": 3949606598,
+      "imports": 6607161076,
+      "section": "0"
+    },
+    {
+      "date": "2026-02-01",
+      "exports": 192415054,
+      "imports": 222680233,
+      "section": "1"
+    },
+    {
+      "date": "2026-02-01",
+      "exports": 12045171268,
+      "imports": 10289074973,
+      "section": "3"
+    },
+    {
+      "date": "2026-02-01",
+      "exports": 18179811305,
+      "imports": 8548800443,
+      "section": "8"
+    },
+    {
+      "date": "2026-01-01",
+      "exports": 6943147952,
+      "imports": 1143268370,
+      "section": "4"
+    },
+    {
+      "date": "2026-01-01",
+      "exports": 146827728181,
+      "imports": 124869232122,
+      "section": "overall"
+    }
+  ]
+}

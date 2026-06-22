@@ -1,0 +1,22 @@
+/*
+  # Caching rules for Cloudflare Pages
+
+  # Static data files — allow fresh cache for 2 hours (matches refresh interval)
+  Cache-Control: public, max-age=7200, stale-while-revalidate=300
+
+/data/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=300
+
+  # HTML — always fresh (users always get latest UI)
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+  # JS/CSS — cache for 1 hour
+/js/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=60
+
+/css/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=60

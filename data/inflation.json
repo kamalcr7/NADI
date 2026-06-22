@@ -1,0 +1,129 @@
+{
+  "_meta": {
+    "fetched_at": "2026-06-22T23:02:17.547Z",
+    "source": "NADI Data Bot",
+    "api_key": "inflation"
+  },
+  "data": [
+    {
+      "date": "2026-05-01",
+      "index": 133.1,
+      "division": "04"
+    },
+    {
+      "date": "2026-05-01",
+      "index": 126.7,
+      "division": "07"
+    },
+    {
+      "date": "2026-05-01",
+      "index": 117.3,
+      "division": "12"
+    },
+    {
+      "date": "2026-05-01",
+      "index": 93,
+      "division": "03"
+    },
+    {
+      "date": "2026-05-01",
+      "index": 178.1,
+      "division": "02"
+    },
+    {
+      "date": "2026-05-01",
+      "index": 160,
+      "division": "01"
+    },
+    {
+      "date": "2026-05-01",
+      "index": 160,
+      "division": "11"
+    },
+    {
+      "date": "2026-05-01",
+      "index": 133.4,
+      "division": "06"
+    },
+    {
+      "date": "2026-05-01",
+      "index": 136.5,
+      "division": "13"
+    },
+    {
+      "date": "2026-05-01",
+      "index": 137.1,
+      "division": "overall"
+    },
+    {
+      "date": "2026-05-01",
+      "index": 91.3,
+      "division": "08"
+    },
+    {
+      "date": "2026-05-01",
+      "index": 127.2,
+      "division": "05"
+    },
+    {
+      "date": "2026-05-01",
+      "index": 121.7,
+      "division": "09"
+    },
+    {
+      "date": "2026-05-01",
+      "index": 132.2,
+      "division": "10"
+    },
+    {
+      "date": "2026-04-01",
+      "index": 132.1,
+      "division": "10"
+    },
+    {
+      "date": "2026-04-01",
+      "index": 93,
+      "division": "03"
+    },
+    {
+      "date": "2026-04-01",
+      "index": 127.1,
+      "division": "05"
+    },
+    {
+      "date": "2026-04-01",
+      "index": 127.3,
+      "division": "07"
+    },
+    {
+      "date": "2026-04-01",
+      "index": 159.6,
+      "division": "11"
+    },
+    {
+      "date": "2026-04-01",
+      "index": 91.3,
+      "division": "08"
+    },
+    {
+      "date": "2026-04-01",
+      "index": 136.9,
+      "division": "overall"
+    },
+    {
+      "date": "2026-04-01",
+      "index": 133.5,
+      "division": "06"
+    },
+    {
+      "date": "2026-04-01",
+      "index": 178.1,
+      "division": "02"
+    },
+    {
+      "date": "2026-04-01",
+      "index": 159.6,
+      "division": "01"
+    }
+  ]
+}

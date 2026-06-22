@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NADI — Malaysia's All-in-One Data Dashboard</title>
+  <meta name="description" content="Real-time Malaysia data portal: weather forecasts, fuel prices, economic indicators, population stats, government incentives, safety alerts, and more.">
+  <meta name="keywords" content="Malaysia data, weather Malaysia, fuel price Malaysia, MYR exchange rate, NADI Malaysia, Malaysia statistics">
+  <meta property="og:title" content="NADI — The Pulse of Malaysia">
+  <meta property="og:description" content="Real-time open data dashboard for Malaysia. Weather, economy, fuel, safety, society and more.">
+  <meta name="theme-color" content="#0A0E27">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    /* ============================================================
+       DASHBOARD SHELL LAYOUT
+       ============================================================ */
+
+    .app-layout {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    /* ---- SIDEBAR ---- */
+    .sidebar {
+      width: 260px;
+      min-width: 260px;
+      background: rgba(8, 12, 32, 0.92);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-right: 1px solid var(--glass-border);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; bottom: 0; left: 0;
+      z-index: 100;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar-header {
+      padding: 20px 20px 12px;
+      border-bottom: 1px solid var(--glass-border);
+      flex-shrink: 0;
+    }
+
+    .sidebar-scroll {
+      flex: 1;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--glass-border) transparent;
+      padding: 12px 0 12px;
+    }
+
+    .sidebar-scroll::-webkit-scrollbar { width: 4px; }
+    .sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
+    .sidebar-scroll::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 2px; }
+
+    .sidebar-footer {
+      padding: 12px 16px;
+      border-top: 1px solid var(--glass-border);
+      flex-shrink: 0;
+    }
+
+    /* Nav Groups */
+    .nav-group {
+      padding: 0 8px;
+      margin-bottom: 4px;
+    }
+
+    .nav-group-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 10px 12px 4px;
+    }
+
+    /* Tab Links */
+    .tab-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: all 0.18s ease;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .tab-link:hover {
+      color: var(--text-primary);
+      background: var(--glass-bg);
+    }
+
+    .tab-link.active {
+      color: var(--primary);
+      background: rgba(0, 201, 167, 0.12);
+      font-weight: 600;
+    }
+
+    .tab-link .nav-icon {
+      font-size: 1.1rem;
+      width: 22px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .tab-link .nav-badge {
+      margin-left: auto;
+      font-size: 0.6rem;
+      padding: 1px 6px;
+      border-radius: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-badge.live { background: rgba(0,255,136,0.15); color: var(--success); }
+    .nav-badge.new  { background: rgba(77,124,254,0.15); color: var(--accent-blue); }
+    .nav-badge.hot  { background: rgba(220,20,60,0.15);  color: var(--accent-crimson); }
+
+    /* ---- MAIN CONTENT ---- */
+    .main-content {
+      flex: 1;
+      margin-left: 260px;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Top Bar (inside main) */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(10, 14, 39, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 12px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .topbar-breadcrumb {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .topbar-breadcrumb span { color: var(--text-secondary); }
+    .topbar-breadcrumb .sep { color: var(--text-muted); }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .topbar-refresh-btn {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--text-secondary);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .topbar-refresh-btn:hover {
+      background: var(--glass-bg-hover);
+      color: var(--text-primary);
+      border-color: var(--primary);
+    }
+
+    .content-area {
+      padding: 28px 32px;
+    }
+
+    /* ---- TAB CONTENT PANELS ---- */
+    .tab-content {
+      display: none;
+      animation: tabFadeIn 0.3s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes tabFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- MOBILE HEADER ---- */
+    .mobile-header {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 56px;
+      background: rgba(8, 12, 32, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      z-index: 200;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+    }
+
+    .mobile-menu-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .mobile-menu-btn span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-secondary);
+      border-radius: 1px;
+      transition: all 0.25s ease;
+    }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 99;
+      backdrop-filter: blur(2px);
+    }
+
+    .sidebar-overlay.visible { display: block; }
+
+    /* ---- MOBILE BOTTOM NAV ---- */
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 60px;
+      background: rgba(8, 12, 32, 0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--glass-border);
+      z-index: 200;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .mobile-bottom-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      color: var(--text-muted);
+      font-size: 0.62rem;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s ease;
+      flex: 1;
+    }
+
+    .mobile-bottom-item .bottom-icon { font-size: 1.3rem; }
+
+    .mobile-bottom-item.active {
+      color: var(--primary);
+    }
+
+    .mobile-bottom-item:hover { color: var(--text-primary); }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 1024px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      .sidebar.mobile-open {
+        transform: translateX(0);
+        box-shadow: 4px 0 32px rgba(0,0,0,0.5);
+      }
+      .main-content {
+        margin-left: 0;
+        padding-top: 56px;
+        padding-bottom: 60px;
+      }
+      .topbar { display: none; }
+      .mobile-header { display: flex; }
+      .mobile-bottom-nav { display: flex; }
+      .content-area { padding: 16px; }
+    }
+
+    /* ============================================================
+       WEATHER MODULE STYLES
+       ============================================================ */
+
+    .city-select {
+      background: var(--bg-secondary);
+      border: 1px solid var(--glass-border);
+      color: var(--text-primary);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: var(--fs-small);
+      cursor: pointer;
+      min-width: 220px;
+    }
+
+    .city-select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .weather-controls { margin-bottom: var(--space-md); }
+
+    .weather-current-hero {
+      padding: var(--space-xl) !important;
+    }
+
+    .weather-main-info {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xl);
+      margin-bottom: var(--space-xl);
+      flex-wrap: wrap;
+    }
+
+    .weather-emoji-large {
+      font-size: 5rem;
+      line-height: 1;
+      filter: drop-shadow(0 0 20px rgba(255,255,255,0.2));
+    }
+
+    .weather-temp-main {
+      font-size: 4rem;
+      font-weight: 800;
+      font-family: var(--font-heading);
+      line-height: 1;
+      color: var(--text-primary);
+    }
+
+    .weather-unit { font-size: 2rem; color: var(--text-muted); }
+    .weather-desc { font-size: var(--fs-h4); color: var(--primary); margin-top: 4px; }
+    .weather-city-name { font-size: var(--fs-small); color: var(--text-secondary); margin-top: 4px; }
+    .weather-feels { font-size: var(--fs-small); color: var(--text-muted); margin-top: 2px; }
+
+    .weather-gauges-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+    }
+
+    @media (max-width: 768px) {
+      .weather-gauges-row { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .weather-gauge-item {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      text-align: center;
+    }
+
+    .gauge-icon { font-size: 1.5rem; margin-bottom: 4px; }
+    .gauge-val { font-size: 1.3rem; font-weight: 700; color: var(--text-primary); }
+    .gauge-label { font-size: 0.7rem; color: var(--text-muted); margin: 4px 0; }
+    .gauge-bar { background: var(--glass-bg); border-radius: 4px; height: 4px; overflow: hidden; }
+    .gauge-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+
+    /* Forecast Days */
+    .forecast-days-container {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: var(--space-sm);
+    }
+
+    @media (max-width: 900px) { .forecast-days-container { grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width: 500px) { .forecast-days-container { grid-template-columns: repeat(2, 1fr); } }
+
+    .forecast-day-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-sm);
+      text-align: center;
+      transition: all 0.2s ease;
+      cursor: default;
+    }
+
+    .forecast-day-card:hover {
+      background: var(--glass-bg-hover);
+      transform: translateY(-2px);
+    }
+
+    .forecast-day-name { font-size: 0.72rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .forecast-emoji { font-size: 1.8rem; margin: 8px 0 4px; }
+    .forecast-desc { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 8px; min-height: 24px; }
+    .forecast-temps { display: flex; justify-content: center; gap: 8px; font-size: var(--fs-small); }
+    .forecast-hi { font-weight: 700; color: var(--accent-gold); }
+    .forecast-lo { color: var(--text-muted); }
+    .forecast-meta { display: flex; flex-direction: column; gap: 2px; font-size: 0.62rem; color: var(--text-muted); margin-top: 6px; }
+
+    /* City weather grid */
+    .city-weather-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: var(--space-sm);
+    }
+
+    .city-weather-tile {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .city-weather-tile:hover, .city-weather-tile.active {
+      background: rgba(0, 201, 167, 0.08);
+      border-color: var(--primary);
+    }
+
+    .city-emoji { font-size: 1.5rem; margin-bottom: 4px; }
+    .city-name { font-size: 0.78rem; font-weight: 600; color: var(--text-primary); }
+    .city-state { font-size: 0.62rem; color: var(--text-muted); margin-bottom: 4px; }
+    .city-temp { font-size: 1.2rem; font-weight: 700; color: var(--accent-gold); }
+    .city-meta { font-size: 0.6rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* ============================================================
+       HERO QUICK LINKS
+       ============================================================ */
+
+    .hero-quick-links {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+    }
+
+    @media (max-width: 900px) { .hero-quick-links { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .hero-quick-links { grid-template-columns: repeat(2, 1fr); } }
+
+    .quick-link-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 4px;
+    }
+
+    .quick-link-card:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 201, 167, 0.12);
+    }
+
+    .ql-icon { font-size: 1.8rem; }
+    .ql-label { font-size: 0.8rem; font-weight: 600; color: var(--text-primary); }
+    .ql-sub { font-size: 0.65rem; color: var(--text-muted); }
+
+    /* ============================================================
+       STAT HIGHLIGHT CARDS
+       ============================================================ */
+
+    .stat-highlight {
+      text-align: center;
+      padding: var(--space-lg) !important;
+    }
+
+    .stat-icon { font-size: 2rem; margin-bottom: 8px; }
+    .stat-date { font-size: 0.65rem; color: var(--text-muted); margin-top: 4px; }
+
+  </style>
+</head>
+<body>
+
+  <!-- Particle Background -->
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="app-layout">
+
+    <!-- ==================== SIDEBAR ==================== -->
+    <aside class="sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <div class="nav-logo">
+          <div class="logo-icon">🇲🇾</div>
+          <span>NADI</span>
+        </div>
+        <div style="font-size:0.65rem; color:var(--text-muted); margin-top:2px;">Malaysia Data Portal</div>
+      </div>
+
+      <nav class="sidebar-scroll">
+
+        <!-- Overview -->
+        <div class="nav-group">
+          <a href="#overview" class="tab-link active" data-tab="overview">
+            <span class="nav-icon">🏠</span>
+            <span>Overview</span>
+          </a>
+        </div>
+
+        <!-- Live Data -->
+        <div class="nav-group">
+          <div class="nav-group-label">Live Data</div>
+          <a href="#weather" class="tab-link" data-tab="weather">
+            <span class="nav-icon">🌦️</span>
+            <span>Weather Station</span>
+            <span class="nav-badge live">LIVE</span>
+          </a>
+          <a href="#safety" class="tab-link" data-tab="safety">
+            <span class="nav-icon">🚨</span>
+            <span>Safety Alerts</span>
+          </a>
+        </div>
+
+        <!-- Economics -->
+        <div class="nav-group">
+          <div class="nav-group-label">Economics</div>
+          <a href="#cost" class="tab-link" data-tab="cost">
+            <span class="nav-icon">⛽</span>
+            <span>Cost of Living</span>
+          </a>
+          <a href="#economy" class="tab-link" data-tab="economy">
+            <span class="nav-icon">📈</span>
+            <span>Economy & GDP</span>
+          </a>
+          <a href="#society" class="tab-link" data-tab="society">
+            <span class="nav-icon">👥</span>
+            <span>Society & Transit</span>
+          </a>
+        </div>
+
+        <!-- Government -->
+        <div class="nav-group">
+          <div class="nav-group-label">Government</div>
+          <a href="#government" class="tab-link" data-tab="government">
+            <span class="nav-icon">🏛️</span>
+            <span>Incentives & Support</span>
+          </a>
+          <a href="#environment" class="tab-link" data-tab="environment">
+            <span class="nav-icon">🌿</span>
+            <span>Environment & Energy</span>
+          </a>
+        </div>
+
+        <!-- Travel -->
+        <div class="nav-group">
+          <div class="nav-group-label">Travel & Lifestyle</div>
+          <a href="#visitor" class="tab-link" data-tab="visitor">
+            <span class="nav-icon">🌴</span>
+            <span>Visitor Guide</span>
+            <span class="nav-badge new">EXP</span>
+          </a>
+        </div>
+
+        <!-- Legal -->
+        <div class="nav-group" style="margin-top:auto;">
+          <div class="nav-group-label">About</div>
+          <a href="pages/about.html" class="tab-link">
+            <span class="nav-icon">ℹ️</span>
+            <span>About NADI</span>
+          </a>
+          <a href="pages/terms.html" class="tab-link">
+            <span class="nav-icon">📄</span>
+            <span>Terms & Privacy</span>
+          </a>
+        </div>
+
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="lang-toggle" id="lang-toggle" style="width:100%; justify-content:center;">
+          <button class="lang-btn active" id="lang-en" data-lang="en" style="flex:1;">EN</button>
+          <button class="lang-btn" id="lang-bm" data-lang="bm" style="flex:1;">BM</button>
+        </div>
+        <div style="font-size:0.6rem; color:var(--text-muted); text-align:center; margin-top:8px;">
+          Data: data.gov.my · Open-Meteo
+        </div>
+      </div>
+    </aside>
+
+    <!-- Sidebar overlay (mobile) -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- ==================== MOBILE HEADER ==================== -->
+    <header class="mobile-header">
+      <div class="nav-logo">
+        <div class="logo-icon">🇲🇾</div>
+        <span>NADI</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div class="lang-toggle" id="lang-toggle-mobile">
+          <button class="lang-btn active" id="lang-en-mob" data-lang="en">EN</button>
+          <button class="lang-btn" id="lang-bm-mob" data-lang="bm">BM</button>
+        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="main-content">
+
+      <!-- Top bar (desktop) -->
+      <div class="topbar" id="main-topbar">
+        <div class="topbar-breadcrumb">
+          <span>NADI</span>
+          <span class="sep">/</span>
+          <span id="topbar-section-name">Overview</span>
+        </div>
+        <div class="topbar-actions">
+          <span id="topbar-last-updated" style="font-size:0.72rem; color:var(--text-muted);"></span>
+          <button class="topbar-refresh-btn" onclick="NadiStore.refresh(window._activeTab || 'fuel')">
+            ⟳ Refresh
+          </button>
+          <div class="lang-toggle" id="lang-toggle-top" style="scale:0.9;">
+            <button class="lang-btn active" id="lang-en-top" data-lang="en">EN</button>
+            <button class="lang-btn" id="lang-bm-top" data-lang="bm">BM</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-area">
+
+        <!-- TAB: Overview -->
+        <div id="tab-overview" class="tab-content active">
+          <div id="section-hero-content"></div>
+        </div>
+
+        <!-- TAB: Weather -->
+        <div id="tab-weather" class="tab-content">
+          <div class="section-header">
+            <div class="section-badge">
+              <span class="badge-dot warning"></span>
+              <span>Live Weather</span>
+            </div>
+            <h2 class="section-title">Weather Station</h2>
+            <p class="section-subtitle">Real-time forecasts powered by Open-Meteo. Wind field, 7-day outlook, hourly charts.</p>
+          </div>
+          <div id="section-weather-content"></div>
+        </div>
+
+        <!-- TAB: Cost of Living -->
+        <div id="tab-cost" class="tab-content">
+          <div class="section-header">
+            <div class="section-badge">
+              <span class="badge-dot"></span>
+              <span>Weekly Update</span>
+            </div>
+            <h2 class="section-title">Cost of Living</h2>
+            <p class="section-subtitle">Fuel prices, consumer goods, and daily essential cost tracking.</p>
+          </div>
+          <div id="section-fuel-content" class="mb-2xl"></div>
+
+          <div class="section-header mt-2xl">
+            <div class="section-badge">
+              <span class="badge-dot"></span>
+              <span>PriceCatcher</span>
+            </div>
+            <h2 class="section-title">Consumer Prices</h2>
+            <p class="section-subtitle">Real prices of daily essentials tracked by the Ministry of Domestic Trade.</p>
+          </div>
+          <div id="section-prices-content"></div>
+        </div>
+
+        <!-- TAB: Economy & Jobs -->
+        <div id="tab-economy" class="tab-content">
+          <div class="section-header">
+            <div class="section-badge">
+              <span class="badge-dot"></span>
+              <span>Economic Indicators</span>
+            </div>
+            <h2 class="section-title">Economy Dashboard</h2>
+            <p class="section-subtitle">GDP, CPI, inflation and trade data from DOSM.</p>
+          </div>
+          <div id="section-economy-content" class="mb-2xl"></div>
+
+          <div class="section-header mt-2xl">
+            <div class="section-badge">
+              <span class="badge-dot"></span>
+              <span>Labour Market</span>
+            </div>
+            <h2 class="section-title">Employment & Jobs</h2>
+            <p class="section-subtitle">Labour force, unemployment trends, and sector breakdown.</p>
+          </div>
+          <div id="section-employment-content"></div>
+        </div>
+
+        <!-- TAB: Society & Transit -->
+        <div id="tab-society" class="tab-content">
+          <div class="section-header">
+            <div class="section-badge">
+              <span class="badge-dot"></span>
+              <span>Demographics</span>
+            </div>
+            <h2 class="section-title">Population & Demographics</h2>
+            <p class="section-subtitle">Population by state, ethnic groups, and historical trends.</p>
+          </div>
+          <div id="section-population-content" class="mb-2xl"></div>
+
+          <div class="section-header mt-2xl">
+            <div class="section-badge">
+              <span class="badge-dot"></span>
+              <span>Public Transport</span>
+            </div>
+            <h2 class="section-title">Transportation</h2>
+            <p class="section-subtitle">KTM, LRT, MRT ridership and public transit network.</p>
+          </div>
+          <div id="section-transport-content" class="mb-2xl"></div>
+
+          <div class="section-header mt-2xl">
+            <div class="section-badge">
+              <span class="badge-dot"></span>
+              <span>Education Data</span>
+            </div>
+            <h2 class="section-title">Education Infrastructure</h2>
+            <p class="section-subtitle">School enrollment, university stats, and education metrics.</p>
+          </div>
+          <div id="section-education-content" class="mb-2xl"></div>
+
+          <div class="section-header mt-2xl">
+            <div class="section-badge">
+              <span class="badge-dot"></span>
+              <span>Public Health</span>
+            </div>
+            <h2 class="section-title">Healthcare</h2>
+            <p class="section-subtitle">Hospital capacity, medical personnel and health indicators.</p>
+          </div>
+          <div id="section-healthcare-content"></div>
+        </div>
+
+        <!-- TAB: Safety Alerts -->
+        <div id="tab-safety" class="tab-content">
+          <div class="section-header">
+            <div class="section-badge">
+              <span class="badge-dot danger"></span>
+              <span>Safety Alerts</span>
+            </div>
+            <h2 class="section-title">Safety Alerts Console</h2>
+            <p class="section-subtitle">Active weather warnings, flood alerts, and seismic events across Malaysia.</p>
+          </div>
+          <div id="section-safety-content"></div>
+        </div>
+
+        <!-- TAB: Gov Incentives -->
+        <div id="tab-government" class="tab-content">
+          <div class="section-header">
+            <div class="section-badge">
+              <span class="badge-dot"></span>
+              <span>Public Finance</span>
+            </div>
+            <h2 class="section-title">Government Incentives & Support</h2>
+            <p class="section-subtitle">Federal subsidies, grants, aids, sponsorships and fiscal data.</p>
+          </div>
+          <div id="section-government-content"></div>
+        </div>
+
+        <!-- TAB: Environment & Energy -->
+        <div id="tab-environment" class="tab-content">
+          <div class="section-header">
+            <div class="section-badge">
+              <span class="badge-dot"></span>
+              <span>Environmental Data</span>
+            </div>
+            <h2 class="section-title">Environment & Green Energy</h2>
+            <p class="section-subtitle">Renewable energy capacity, air quality, and sustainability metrics.</p>
+          </div>
+          <div id="section-environment-content"></div>
+        </div>
+
+        <!-- TAB: Visitor Guide -->
+        <div id="tab-visitor" class="tab-content">
+          <div class="section-header">
+            <div class="section-badge">
+              <span class="badge-dot"></span>
+              <span>Visitor Guide</span>
+            </div>
+            <h2 class="section-title">Tourist Essentials & Tools</h2>
+            <p class="section-subtitle">Currency converter, public holidays, emergency contacts, and travel tips.</p>
+          </div>
+          <div id="section-tourism-content"></div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="footer mt-2xl">
+          <div class="container">
+            <div class="footer-grid">
+              <div class="footer-brand reveal">
+                <div class="nav-logo mb-md">
+                  <div class="logo-icon">🇲🇾</div>
+                  <span>NADI</span>
+                </div>
+                <p class="mb-md" data-i18n="footer.description">Open data dashboard for Malaysia. Powered by Malaysia Open Data API and Open-Meteo.</p>
+                <p class="text-muted" data-i18n="footer.disclaimer">Data sourced from official Malaysian government APIs. Not an official government portal.</p>
+              </div>
+
+              <div class="footer-links-group reveal">
+                <h4 data-i18n="footer.resources">Data Sources</h4>
+                <ul>
+                  <li><a href="https://developer.data.gov.my" target="_blank">data.gov.my API</a></li>
+                  <li><a href="https://open-meteo.com" target="_blank">Open-Meteo Weather</a></li>
+                  <li><a href="https://www.dosm.gov.my" target="_blank">DOSM Portal</a></li>
+                  <li><a href="https://www.bnm.gov.my" target="_blank">Bank Negara Malaysia</a></li>
+                </ul>
+              </div>
+
+              <div class="footer-links-group reveal">
+                <h4 data-i18n="footer.legal">Legal & Info</h4>
+                <ul>
+                  <li><a href="pages/about.html" data-i18n="footer.about">About NADI</a></li>
+                  <li><a href="pages/terms.html" data-i18n="footer.terms">Terms & Conditions</a></li>
+                  <li><a href="pages/privacy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="footer-bottom flex-between">
+              <p class="text-muted">© 2025 NADI. Open data, open future. 🇲🇾</p>
+              <button id="back-to-top" class="btn btn-outline" aria-label="Back to top">↑ Top</button>
+            </div>
+          </div>
+        </footer>
+      </div><!-- /content-area -->
+    </main>
+  </div><!-- /app-layout -->
+
+  <!-- Mobile Bottom Nav -->
+  <div class="mobile-bottom-nav" id="mobile-bottom-nav">
+    <a href="#overview" class="mobile-bottom-item active" data-tab="overview">
+      <span class="bottom-icon">🏠</span>
+      <span class="bottom-label">Home</span>
+    </a>
+    <a href="#weather" class="mobile-bottom-item" data-tab="weather">
+      <span class="bottom-icon">🌦️</span>
+      <span class="bottom-label">Weather</span>
+    </a>
+    <a href="#cost" class="mobile-bottom-item" data-tab="cost">
+      <span class="bottom-icon">⛽</span>
+      <span class="bottom-label">Cost</span>
+    </a>
+    <a href="#economy" class="mobile-bottom-item" data-tab="economy">
+      <span class="bottom-icon">📈</span>
+      <span class="bottom-label">Economy</span>
+    </a>
+    <button class="mobile-bottom-item" id="mobile-more-btn">
+      <span class="bottom-icon">☰</span>
+      <span class="bottom-label">More</span>
+    </button>
+  </div>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Core Infrastructure -->
+  <script src="js/api.js"></script>
+  <script src="js/datastore.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/animations.js"></script>
+
+  <!-- Section Modules -->
+  <script src="js/sections/hero.js"></script>
+  <script src="js/sections/weather.js"></script>
+  <script src="js/sections/fuel.js"></script>
+  <script src="js/sections/economy.js"></script>
+  <script src="js/sections/population.js"></script>
+  <script src="js/sections/exchange.js"></script>
+  <script src="js/sections/transport.js"></script>
+  <script src="js/sections/prices.js"></script>
+  <script src="js/sections/safety.js"></script>
+  <script src="js/sections/employment.js"></script>
+  <script src="js/sections/government.js"></script>
+  <script src="js/sections/healthcare.js"></script>
+  <script src="js/sections/education.js"></script>
+  <script src="js/sections/environment.js"></script>
+  <script src="js/sections/tourism.js"></script>
+
+  <!-- App Router -->
+  <script src="js/app.js"></script>
+
+</body>
+</html>

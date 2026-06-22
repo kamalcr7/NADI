@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NADI — About Us</title>
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    body {
+      padding: var(--space-4xl) 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .content-box {
+      max-width: 800px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="container content-box">
+    <div class="glass-card reveal revealed">
+      <div class="flex-between mb-xl">
+        <a href="../index.html" class="btn btn-outline" style="padding: 8px 16px;">← Back Home</a>
+        <div class="nav-logo" style="font-size: 1.5rem;">
+          <div class="logo-icon">🇲🇾</div>
+          <span>NADI</span>
+        </div>
+      </div>
+
+      <h1 class="gradient-text mb-md" style="font-size: var(--fs-h1); font-weight: var(--fw-black); letter-spacing: -1px;">About NADI</h1>
+      
+      <p class="mb-lg" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-primary);">
+        NADI (meaning "Pulse" in Bahasa Melayu) is an open-source, all-in-one data portal designed to track the vital statistics and real-time updates of Malaysia. 
+      </p>
+
+      <h3 class="mt-xl mb-sm" style="color: var(--primary);">Our Mission</h3>
+      <p class="mb-md">
+        We believe that open public data is key to civic participation, tourist utility, and expat relocation success. By converting raw data feeds from the Malaysia Open Data APIs into premium, fluid-animated, interactive visualizations, NADI empowers citizens and visitors with clear, actionable insights.
+      </p>
+
+      <h3 class="mt-xl mb-sm" style="color: var(--primary);">Data Integrity</h3>
+      <p class="mb-md">
+        All information displayed on this website is pulled directly from official government endpoints:
+      </p>
+      <ul style="list-style: disc; padding-left: var(--space-lg); color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg);">
+        <li>Ministry of Health (MOH) — Dengue Surveillance</li>
+        <li>Department of Statistics Malaysia (DOSM) — Population, GDP, Inflation, Labour Force</li>
+        <li>Malaysian Meteorological Department (MET) — Weather Forecast & Warnings</li>
+        <li>Bank Negara Malaysia (BNM) — Daily Exchange Rates</li>
+        <li>Ministry of Domestic Trade (KPDN) — PriceCatcher Consumer Goods</li>
+      </ul>
+
+      <p class="text-muted mt-2xl" style="font-size: var(--fs-xs);">
+        NADI is an independent project and is not officially affiliated with the Government of Malaysia.
+      </p>
+    </div>
+  </div>
+
+  <script src="../js/animations.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      NadiAnimations.init();
+    });
+  </script>
+</body>
+</html>
