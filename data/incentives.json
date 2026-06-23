@@ -16,7 +16,7 @@
           "aid_amount": "RM2,500/year (paid in installments)",
           "requirements": [
             "Malaysian citizen",
-            "Household income \u2264 RM5,000",
+            "Household income ≤ RM5,000",
             "Not a government pensioner"
           ]
         },
@@ -27,7 +27,7 @@
           "requirements": [
             "Malaysian citizen",
             "Single, divorced, or widowed",
-            "Income \u2264 RM2,500"
+            "Income ≤ RM2,500"
           ]
         },
         "senior": {
@@ -91,21 +91,23 @@
       "website": "https://www.kwsp.gov.my"
     },
     "fuel_subsidy": {
-      "name": "Targeted Diesel Subsidy",
-      "description": "Targeted fuel subsidy program replacing blanket subsidies",
+      "name": "Fuel Subsidy & Price Control Mechanism",
+      "description": "Government fuel subsidy system covering RON95, diesel, and LPG",
       "category": "fuel",
-      "effective_date": "2024-06-10",
-      "details": {
-        "diesel": "RON97 \u2014 market price. Diesel \u2014 targeted subsidy via BUDI mechanism.",
-        "ron95": "Still blanket-subsidized at RM2.05/litre (as of 2025)",
-        "eligibility_for_diesel_subsidy": [
-          "Logistics companies",
-          "Public transport operators",
-          "Fishermen",
-          "Small traders (via BUDI95 app)"
-        ]
+      "effective_date": "2024-2025",
+      "prices": {
+        "RON95": "RM2.05/litre (subsidised)",
+        "RON97": "Market price (~RM3.55/litre)",
+        "Diesel": "RM3.35/litre (market, with BUDI subsidy)",
+        "LPG (14kg)": "RM26.00 (subsidised)",
+        "LPG (12kg)": "RM22.00 (subsidised)"
       },
-      "note": "RON95 targeted subsidy implementation expected in 2025"
+      "subsidy_allocation_by_group": {
+        "households": "Fuel subsidy cost ~RM4 billion/year for B40 households",
+        "fishermen": "Allocated ~200 litres/month at subsidised diesel rate",
+        "public_transport": "Fleet card system for buses and taxis"
+      },
+      "note": "RON95 targeted subsidy implementation is a key government reform, expected to save ~RM4 billion/year"
     },
     "tax_reliefs": {
       "name": "Personal Income Tax Reliefs",
@@ -237,6 +239,123 @@
           "hotline": "15999"
         }
       ]
+    },
+    "budi_madani": {
+      "name": "BUDI Madani (Diesel Subsidy)",
+      "description": "Targeted diesel subsidy for eligible individuals and farmers",
+      "category": "fuel",
+      "effective_date": "2024-06-10",
+      "programs": [
+        {
+          "name": "BUDI Individu",
+          "coverage": "Diesel vehicle owners (personal use)",
+          "amount": "RM200/month",
+          "quota": "Up to 200 litres/month at subsidised rate",
+          "eligibility": [
+            "Malaysian citizen",
+            "Own a diesel vehicle registered under personal name",
+            "Not a commercial vehicle"
+          ],
+          "how_to_apply": [
+            "Register via BUDI Madani portal: https://budimadani.gov.my",
+            "Provide vehicle registration details",
+            "Link MyKad for disbursement"
+          ],
+          "website": "https://budimadani.gov.my",
+          "payment_method": "Credited to bank account or MyKad-linked account"
+        },
+        {
+          "name": "BUDI Agrikomoditi",
+          "coverage": "Farmers, smallholders, fishermen",
+          "amount": "RM200/month",
+          "quota": "Up to 200 litres/month at subsidised rate",
+          "eligibility": [
+            "Malaysian citizen",
+            "Active farmer/fisherman registered with KKM or LKM",
+            "Land size up to 10 hectares"
+          ],
+          "how_to_apply": [
+            "Register via BUDI Madani portal: https://budimadani.gov.my",
+            "Provide farming licence or registration",
+            "Link MyKad for disbursement"
+          ],
+          "website": "https://budimadani.gov.my"
+        }
+      ],
+      "note": "Overseas diesel companies and foreign vehicle owners not eligible"
+    },
+    "ewallet_credit": {
+      "name": "RM100 e-Wallet Credit (STR Top-Up)",
+      "description": "One-time RM100 e-wallet credit for all eligible STR recipients",
+      "category": "financial_aid",
+      "effective_date": "2025",
+      "details": {
+        "amount": "RM100/person",
+        "total_allocation": "RM700 million",
+        "target": "STR recipients (linked to MyKad)",
+        "distribution": "Via e-wallet platforms (Touch 'n Go, GrabPay, ShopeePay, etc.)",
+        "usage": [
+          "Online purchases at over 1 million merchant outlets",
+          "Pay in-store using DuitNow QR",
+          "Purchase groceries, food, transport, etc."
+        ]
+      },
+      "how_to_apply": [
+        "Automatic for existing STR recipients",
+        "New applicants must register via MyTax at https://mytax.hasil.gov.my",
+        "Claim via participating e-wallet apps"
+      ],
+      "expiry": "30 June 2025 (may be extended)",
+      "website": "https://budimadani.gov.my"
+    },
+    "fuel_quota": {
+      "name": "RON95 Fuel Subsidy & Quota System",
+      "description": "Subsidized RON95 fuel and quota-based allocation for eligible groups",
+      "category": "fuel",
+      "effective_date": "2024-2025",
+      "details": {
+        "current_ron95_price": "RM2.05/litre (subsidised)",
+        "market_price": "Estimated RM3.20-3.50/litre",
+        "quota_system": "Planned for implementation — targeted quota via MyKad or fleet card",
+        "proposed_quota": [
+          "Low-income (B40): Up to 60 litres/month at subsidised rate",
+          "Middle-income (M40): Up to 40 litres/month at subsidised rate",
+          "Above threshold: Market price"
+        ],
+        "eligible_vehicles": [
+          "Personal vehicles below 2,000cc",
+          "Motorcycles below 250cc",
+          "Excludes luxury vehicles and foreign-registered vehicles"
+        ],
+        "how_it_works": [
+          "MyKad-linked purchase at petrol stations",
+          "Quota monitored via fleet card or MyKad swipes",
+          "Excess usage charged at market price"
+        ]
+      },
+      "note": "Full targeted RON95 subsidy implementation expected in 2025-2026",
+      "website": "https://www.kementerian.kpwkm.gov.my"
+    },
+    "sara": {
+      "name": "Sumbangan Asas Rahmah (SARA)",
+      "description": "Cashless food aid for basic groceries",
+      "category": "financial_aid",
+      "effective_date": "2025",
+      "details": {
+        "amount": "RM1,200/year (RM100/month)",
+        "target": "Hardcore poor STR recipients",
+        "allocation": "RM1.3 billion",
+        "usage": [
+          "Purchase basic necessities at participating retailers",
+          "Cashless payment via MyKad or e-wallet",
+          "Over 1,200 approved retailers nationwide"
+        ]
+      },
+      "how_to_apply": [
+        "Automatic for existing STR recipients",
+        "Must activate via MyTax portal"
+      ],
+      "website": "https://bantuantunai.hasil.gov.my/"
     }
   }
 }

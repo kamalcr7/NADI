@@ -15,8 +15,7 @@
   const FALLBACK = {
     aid: [
       { name: 'Sumbangan Tunai Rahmah (STR)', agency: 'LHDN', coverage: 'B40 & M40 Households / Singles', amount: 'Up to RM3,700 / year', desc: 'Direct cash assistance for low-to-medium income households.', link: 'https://bantuantunai.hasil.gov.my/' },
-      { name: 'BUDI Madani Subsidies', agency: 'MOF', coverage: 'Smallholders, Farmers & Diesel Vehicle Owners', amount: 'RM200 / month', desc: 'Targeted diesel subsidy aid for eligible individuals.', link: 'https://budimadani.gov.my/' },
-      { name: 'Sumbangan Asas Rahmah (SARA)', agency: 'LHDN', coverage: 'Hardcore Poor STR Recipients', amount: 'RM1,200 / year', desc: 'Cashless food aid for basic groceries.', link: 'https://bantuantunai.hasil.gov.my/' }
+      { name: 'BUDI Madani Subsidies', agency: 'MOF', coverage: 'Smallholders, Farmers & Diesel Vehicle Owners', amount: 'RM200 / month', desc: 'Targeted diesel subsidy aid for eligible individuals.', link: 'https://budimadani.gov.my/' }
     ],
     study: [
       { name: 'JPA Program Khas', agency: 'JPA', coverage: 'Post-SPM Top Scorers', amount: 'Full tuition + living allowance', desc: 'Scholarship for outstanding SPM scorers.', link: 'https://esilav2.jpa.gov.my/' },
@@ -78,7 +77,7 @@
         coverage: 'Merged into STR',
         amount: 'N/A',
         desc: d.bsh.note || d.bsh.description,
-        link: '#'
+        link: 'https://bantuantunai.hasil.gov.my/'
       });
     }
     if (d.tax_reliefs) {
@@ -99,7 +98,7 @@
     // Education
     if (d.education_aid?.programs) {
       d.education_aid.programs.forEach(p => {
-        result.study.push({ name: p.name, agency: 'Government', coverage: p.eligibility || 'Various', amount: p.amount, desc: p.name, link: '#' });
+        result.study.push({ name: p.name, agency: 'Government', coverage: p.eligibility || 'Various', amount: p.amount, desc: p.name, link: '#' }); // education programs — link from JSON data if available
       });
     }
 
@@ -129,6 +128,70 @@
         amount: d.epf_isuri.contribution?.government_match || 'RM60/year',
         desc: d.epf_isuri.description,
         link: d.epf_isuri.website
+      });
+    }
+
+    // Fuel Subsidies — detail the BUDI & quota info
+    if (d.budi_madani?.programs) {
+      d.budi_madani.programs.forEach(p => {
+        result.aid.push({
+          name: p.name,
+          agency: 'MOF/KPWKM',
+          coverage: p.coverage,
+          amount: p.amount,
+          desc: p.eligibility?.join('; ') || '',
+          link: p.website || '#'
+        });
+      });
+    }
+
+    // RM100 e-Wallet Credit
+    if (d.ewallet_credit) {
+      result.aid.push({
+        name: d.ewallet_credit.name,
+        agency: 'MOF',
+        coverage: d.ewallet_credit.details?.target || 'STR recipients',
+        amount: d.ewallet_credit.details?.amount || 'RM100',
+        desc: d.ewallet_credit.description,
+        link: d.ewallet_credit.website || '#'
+      });
+    }
+
+    // Fuel Quota
+    if (d.fuel_quota) {
+      result.aid.push({
+        name: d.fuel_quota.name,
+        agency: 'KPWKM/MOF',
+        coverage: 'B40/M40 vehicle owners',
+        amount: 'RM2.05/litre subsidised',
+        desc: d.fuel_quota.details?.proposed_quota?.join('; ') || d.fuel_quota.description,
+        link: d.fuel_quota.website || '#'
+      });
+    }
+
+    // Fuel Subsidy summary
+    if (d.fuel_subsidy?.prices) {
+      const priceSummary = Object.entries(d.fuel_subsidy.prices)
+        .map(([k, v]) => `${k}: ${v}`).join(' | ');
+      result.aid.push({
+        name: 'Fuel Prices (Current)',
+        agency: 'KPWKM',
+        coverage: 'All registered vehicle owners',
+        amount: 'From RM2.05/litre',
+        desc: priceSummary,
+        link: 'https://www.kpwkm.gov.my'
+      });
+    }
+
+    // SARA
+    if (d.sara) {
+      result.aid.push({
+        name: d.sara.name,
+        agency: 'LHDN',
+        coverage: 'Hardcore Poor STR Recipients',
+        amount: d.sara.details?.amount || 'RM1,200 / year',
+        desc: d.sara.description,
+        link: d.sara.website || '#'
       });
     }
 
@@ -188,6 +251,20 @@
           <div class="spinner"></div>
           <p>${NadiI18n.t('common.loading')}</p>
         </div>`;
+    }
+
+    // If data is already loaded (status === 'done') but rendered is still false,
+    // the on() handler might have been called before our render logic above.
+    // Trigger a second attempt to ensure render happens.
+    if (NadiStore.status('incentives') === 'done' && !rendered) {
+      const existing = NadiStore.get('incentives');
+      if (existing) {
+        let incentives = FALLBACK;
+        try { incentives = mapIncentiveData(existing); } catch (e) {}
+        const allData = { budget, incentives };
+        renderSection(container, allData);
+        rendered = true;
+      }
     }
   }
 
