@@ -43,8 +43,10 @@
     const sorted = [...records].sort((a, b) => new Date(a.date) - new Date(b.date));
     const latest = sorted[sorted.length - 1] || {};
 
-    const uKey = Object.keys(latest).find(k => k.includes('unemployment') || k.includes('unemployed') || k.includes('rate')) || 'value';
-    const uRate = fallback?.unemploymentRate || parseFloat(latest[uKey] || latest.rate || latest.unemployment || 3.3);
+    const uRate = latest.u_rate !== undefined ? parseFloat(latest.u_rate) : (fallback?.unemploymentRate || 3.3);
+    const lfVal = latest.lf !== undefined ? (parseFloat(latest.lf) / 1000).toFixed(1) : (fallback?.labourForce || '16.9');
+    const employedVal = latest.lf_employed !== undefined ? (parseFloat(latest.lf_employed) / 1000).toFixed(1) : (fallback?.employed || '16.3');
+    const pRate = latest.p_rate !== undefined ? parseFloat(latest.p_rate) : (fallback?.participation || 70.8);
 
     const fmtDate = latest.date ? new Date(latest.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : 'Latest';
 
@@ -59,17 +61,17 @@
         </div>
         <div class="glass-card reveal stat-highlight">
           <div class="stat-icon">👷</div>
-          <div class="stat-number gradient-text">${fallback?.labourForce || '16.9'}M</div>
+          <div class="stat-number gradient-text">${lfVal}M</div>
           <div class="stat-label">Labour Force</div>
         </div>
         <div class="glass-card reveal stat-highlight">
           <div class="stat-icon">💼</div>
-          <div class="stat-number text-success">${fallback?.employed || '16.3'}M</div>
+          <div class="stat-number text-success">${employedVal}M</div>
           <div class="stat-label">Employed</div>
         </div>
         <div class="glass-card reveal stat-highlight">
           <div class="stat-icon">📈</div>
-          <div class="stat-number">${fallback?.participation || '70.8'}%</div>
+          <div class="stat-number">${pRate.toFixed(1)}%</div>
           <div class="stat-label">Participation Rate</div>
         </div>
       </div>
@@ -130,20 +132,20 @@
       </div>
     `;
 
-    setTimeout(() => {
-      if (sorted.length > 2) {
-        NadiCharts.destroyChart('chart-unemployment-trend');
-        NadiCharts.createAreaChart('chart-unemployment-trend', {
-          labels: sorted.map(r => new Date(r.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })),
-          datasets: [{
-            label: 'Unemployment Rate (%)',
-            data: sorted.map(r => parseFloat(r[uKey] || r.rate || r.unemployment || 0)),
-            color: NadiCharts.COLORS.gold
-          }],
-          yLabel: '%'
-        });
-      }
-    }, 0);
+      setTimeout(() => {
+        if (sorted.length > 2) {
+          NadiCharts.destroyChart('chart-unemployment-trend');
+          NadiCharts.createAreaChart('chart-unemployment-trend', {
+            labels: sorted.map(r => new Date(r.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })),
+            datasets: [{
+              label: 'Unemployment Rate (%)',
+              data: sorted.map(r => parseFloat(r.u_rate || r.rate || r.unemployment || 0)),
+              color: NadiCharts.COLORS.gold
+            }],
+            yLabel: '%'
+          });
+        }
+      }, 0);
 
     NadiI18n.applyTranslations();
     NadiAnimations.initScrollReveals();

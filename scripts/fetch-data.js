@@ -84,7 +84,7 @@ function save(filename, data, meta = {}) {
 const CATALOGUE_DATASETS = [
   { key: 'fuel',         file: 'fuel.json',         url: `${BASE_URL}/data-catalogue?id=fuelprice&limit=52&sort=-date`,                 label: 'Fuel Prices' },
   { key: 'exchange',     file: 'exchange.json',      url: `${BASE_URL}/data-catalogue?id=exchangerates_daily_1200&limit=30&sort=-date`,  label: 'Exchange Rates' },
-  { key: 'population',   file: 'population.json',    url: `${BASE_URL}/data-catalogue?id=population_malaysia&limit=30&sort=-date`,       label: 'Population' },
+  { key: 'population',   file: 'population.json',    url: `${BASE_URL}/data-catalogue?id=population_malaysia&limit=2000&sort=-date`,       label: 'Population' },
   { key: 'gdp',          file: 'gdp.json',           url: `${BASE_URL}/data-catalogue?id=gdp_qtr_real&limit=100&sort=-date`,             label: 'GDP Quarterly' },
   { key: 'inflation',    file: 'inflation.json',     url: `${BASE_URL}/data-catalogue?id=cpi_headline&limit=500&sort=-date`,             label: 'CPI / Inflation' },
   { key: 'unemployment', file: 'unemployment.json',  url: `${BASE_URL}/data-catalogue?id=lfs_month&limit=36&sort=-date`,                 label: 'Unemployment' },

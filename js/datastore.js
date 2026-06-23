@@ -10,7 +10,7 @@
 (function () {
   'use strict';
 
-  const STORE_VERSION = 'v6';
+  const STORE_VERSION = 'v7';
   const LS_PREFIX = `nadi_${STORE_VERSION}_`;
 
   /* --- File Map: dataset key → static JSON path --- */
@@ -37,7 +37,7 @@
   const LIVE_API_FALLBACKS = {
     fuel:             'https://api.data.gov.my/data-catalogue?id=fuelprice&limit=52&sort=-date',
     exchange:         'https://api.data.gov.my/data-catalogue?id=exchangerates_daily_1200&limit=30&sort=-date',
-    population:       'https://api.data.gov.my/data-catalogue?id=population_malaysia&limit=30&sort=-date',
+    population:       'https://api.data.gov.my/data-catalogue?id=population_malaysia&limit=2000&sort=-date',
     gdp:              'https://api.data.gov.my/data-catalogue?id=gdp_qtr_real&limit=20&sort=-date',
     inflation:        'https://api.data.gov.my/data-catalogue?id=cpi_headline&limit=24&sort=-date',
     unemployment:     'https://api.data.gov.my/data-catalogue?id=lfs_month&limit=36&sort=-date',
