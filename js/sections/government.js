@@ -95,7 +95,14 @@
     // Healthcare
     if (d.healthcare?.programs) {
       d.healthcare.programs.forEach(p => {
-        result.healthcare.push({ name: p.name, agency: 'MOH', coverage: p.eligibility || 'Various', amount: p.coverage || p.description, desc: p.description, link: p.website || '#' });
+        result.healthcare.push({
+          name: p.name,
+          agency: 'MOH',
+          coverage: p.eligibility || 'Various',
+          amount: p.amount || p.description || 'Free / subsidised',
+          desc: p.description,
+          link: p.website || '#'
+        });
       });
     }
 

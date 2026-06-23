@@ -216,13 +216,16 @@
           "name": "PeKa B40",
           "description": "Free health screening for B40",
           "eligibility": "Household income <RM4,000/month",
-          "website": "https://pekab40.moh.gov.my"
+          "website": "https://pekab40.moh.gov.my",
+          "amount": "Free screening up to RM350"
         },
         {
           "name": "mySalam",
           "description": "Free insurance for B40",
           "eligibility": "B40 households",
-          "coverage": "Critical illness (36 conditions) + hospitalisation"
+          "coverage": "Critical illness (36 conditions) + hospitalisation",
+          "amount": "Free insurance (up to RM8,000)",
+          "website": "https://www.mysalam.com.my"
         },
         {
           "name": "MySejahtera",
@@ -231,12 +234,16 @@
             "Vaccination records",
             "Hospital appointments",
             "Health screening"
-          ]
+          ],
+          "amount": "Free digital health platform",
+          "website": "https://mysejahtera.malaysia.gov.my"
         },
         {
           "name": "Talian Kasih",
           "description": "Mental health & crisis support",
-          "hotline": "15999"
+          "hotline": "15999",
+          "amount": "24/7 crisis support (free)",
+          "website": "https://www.talankasih.gov.my"
         }
       ]
     },
