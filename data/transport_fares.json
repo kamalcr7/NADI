@@ -1,0 +1,107 @@
+{
+  "_meta": {
+    "fetched_at": "2026-06-23T00:00:00.000Z",
+    "source": "RapidKL, KTM, MRT Co official fare charts",
+    "note": "Static curated data. Fares updated when operators announce changes."
+  },
+  "data": {
+    "mrt_lrt": {
+      "name": "MRT & LRT Fares",
+      "operator": "RapidKL",
+      "currency": "MYR",
+      "minimum_fare": "RM1.00",
+      "maximum_fare": "RM6.40 (single trip)",
+      "day_pass": "RM5.00 (unlimited rides)",
+      "notes": "Fares calculated by distance. Touch 'n Go required."
+    },
+    "kktm": {
+      "name": "KTM Komuter Fares",
+      "operator": "KTMB",
+      "routes": [
+        {
+          "route": "KL Sentral - Batu Caves",
+          "fare": "RM2.50",
+          "duration": "30 min"
+        },
+        {
+          "route": "KL Sentral - Port Klang",
+          "fare": "RM4.80",
+          "duration": "70 min"
+        },
+        {
+          "route": "KL Sentral - Rawang",
+          "fare": "RM3.90",
+          "duration": "50 min"
+        },
+        {
+          "route": "KL Sentral - Seremban",
+          "fare": "RM7.50",
+          "duration": "120 min"
+        }
+      ]
+    },
+    "ets": {
+      "name": "ETS (Electric Train Service)",
+      "operator": "KTMB",
+      "routes": [
+        {
+          "route": "KL Sentral - Ipoh",
+          "fare": "RM35-55",
+          "duration": "2h 15m",
+          "classes": [
+            "Platinum",
+            "Gold",
+            "Silver"
+          ]
+        },
+        {
+          "route": "KL Sentral - Butterworth",
+          "fare": "RM55-80",
+          "duration": "4h",
+          "classes": [
+            "Platinum",
+            "Gold"
+          ]
+        },
+        {
+          "route": "Ipoh - Butterworth",
+          "fare": "RM25-40",
+          "duration": "1h 45m",
+          "classes": [
+            "Platinum",
+            "Gold",
+            "Silver"
+          ]
+        }
+      ]
+    },
+    "klia_express": {
+      "name": "KLIA Ekspres",
+      "operator": "ERL",
+      "fare": "RM55.00 (single) / RM100.00 (return)",
+      "duration": "33 minutes",
+      "frequency": "Every 20 minutes"
+    },
+    "grab": {
+      "name": "Grab (Ride-hailing)",
+      "estimated_fares": [
+        {
+          "route": "KLIA - KLCC",
+          "fare": "RM70-100",
+          "duration": "45-60 min"
+        },
+        {
+          "route": "KL Sentral - Bukit Bintang",
+          "fare": "RM8-15",
+          "duration": "15 min"
+        },
+        {
+          "route": "KL Sentral - Petaling Jaya",
+          "fare": "RM25-40",
+          "duration": "30 min"
+        }
+      ],
+      "note": "Fares vary by demand (surge pricing)"
+    }
+  }
+}

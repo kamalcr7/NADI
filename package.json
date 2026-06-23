@@ -10,6 +10,14 @@
   "engines": {
     "node": ">=18"
   },
-  "keywords": ["malaysia", "data", "dashboard", "open-data"],
-  "license": "MIT"
+  "keywords": [
+    "malaysia",
+    "data",
+    "dashboard",
+    "open-data"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
 }

@@ -1,0 +1,183 @@
+{
+  "_meta": {
+    "fetched_at": "2026-06-23T00:00:00.000Z",
+    "source": "TNB official rates",
+    "note": "Rates as of Jan 2024. Updated via cron scrape of tnb.com.my"
+  },
+  "data": {
+    "residential": {
+      "name": "Residential (Tariff A)",
+      "description": "Domestic household supply",
+      "effective_date": "2024-01-01",
+      "currency": "MYR",
+      "tiers": [
+        {
+          "tier": 1,
+          "range": "1-200 kWh",
+          "rate": 0.218,
+          "monthly_min": "RM0",
+          "monthly_max": "RM43.60"
+        },
+        {
+          "tier": 2,
+          "range": "201-300 kWh",
+          "rate": 0.334,
+          "monthly_min": "RM43.60",
+          "monthly_max": "RM77.00"
+        },
+        {
+          "tier": 3,
+          "range": "301-600 kWh",
+          "rate": 0.571,
+          "monthly_min": "RM77.00",
+          "monthly_max": "RM248.30"
+        },
+        {
+          "tier": 4,
+          "range": "601-900 kWh",
+          "rate": 0.891,
+          "monthly_min": "RM248.30",
+          "monthly_max": "RM515.60"
+        },
+        {
+          "tier": 5,
+          "range": "901+ kWh",
+          "rate": 1.022,
+          "monthly_min": "RM515.60",
+          "monthly_max": "No limit"
+        }
+      ],
+      "minimum_charge": "RM3.00",
+      "service_charge": "RM0.45/day (single phase) / RM0.45/day (three phase)",
+      "kwtbb_levy": "1.6% (KAWALAN)"
+    },
+    "commercial": {
+      "name": "Commercial (Tariff B)",
+      "description": "Office, shop, hotel, etc.",
+      "effective_date": "2024-01-01",
+      "currency": "MYR",
+      "tiers": [
+        {
+          "tier": 1,
+          "range": "1-200 kWh",
+          "rate": 0.255,
+          "monthly_min": "RM0",
+          "monthly_max": "RM51.00"
+        },
+        {
+          "tier": 2,
+          "range": "201-300 kWh",
+          "rate": 0.371,
+          "monthly_min": "RM51.00",
+          "monthly_max": "RM88.10"
+        },
+        {
+          "tier": 3,
+          "range": "301-600 kWh",
+          "rate": 0.609,
+          "monthly_min": "RM88.10",
+          "monthly_max": "RM271.10"
+        },
+        {
+          "tier": 4,
+          "range": "601-900 kWh",
+          "rate": 0.929,
+          "monthly_min": "RM271.10",
+          "monthly_max": "RM549.80"
+        },
+        {
+          "tier": 5,
+          "range": "901+ kWh",
+          "rate": 1.06,
+          "monthly_min": "RM549.80",
+          "monthly_max": "No limit"
+        }
+      ],
+      "minimum_charge": "RM6.00",
+      "service_charge": "RM0.45/day"
+    },
+    "industrial": {
+      "name": "Industrial (Tariff C)",
+      "description": "Factory, manufacturing",
+      "effective_date": "2024-01-01",
+      "currency": "MYR",
+      "tiers": [
+        {
+          "tier": 1,
+          "range": "1-200 kWh",
+          "rate": 0.255,
+          "monthly_min": "RM0",
+          "monthly_max": "RM51.00"
+        },
+        {
+          "tier": 2,
+          "range": "201-300 kWh",
+          "rate": 0.371,
+          "monthly_min": "RM51.00",
+          "monthly_max": "RM88.10"
+        },
+        {
+          "tier": 3,
+          "range": "301-600 kWh",
+          "rate": 0.609,
+          "monthly_min": "RM88.10",
+          "monthly_max": "RM271.10"
+        },
+        {
+          "tier": 4,
+          "range": "601-900 kWh",
+          "rate": 0.929,
+          "monthly_min": "RM271.10",
+          "monthly_max": "RM549.80"
+        },
+        {
+          "tier": 5,
+          "range": "901+ kWh",
+          "rate": 1.06,
+          "monthly_min": "RM549.80",
+          "monthly_max": "No limit"
+        }
+      ],
+      "minimum_charge": "RM6.00",
+      "service_charge": "RM0.45/day"
+    },
+    "agriculture": {
+      "name": "Agriculture (Tariff D)",
+      "description": "Farming, fisheries, livestock",
+      "effective_date": "2024-01-01",
+      "currency": "MYR",
+      "tiers": [
+        {
+          "tier": 1,
+          "range": "1-200 kWh",
+          "rate": 0.218,
+          "monthly_min": "RM0",
+          "monthly_max": "RM43.60"
+        },
+        {
+          "tier": 2,
+          "range": "201-300 kWh",
+          "rate": 0.334,
+          "monthly_min": "RM43.60",
+          "monthly_max": "RM77.00"
+        },
+        {
+          "tier": 3,
+          "range": "301-600 kWh",
+          "rate": 0.571,
+          "monthly_min": "RM77.00",
+          "monthly_max": "RM248.30"
+        },
+        {
+          "tier": 4,
+          "range": "601+ kWh",
+          "rate": 0.571,
+          "monthly_min": "RM248.30",
+          "monthly_max": "No limit"
+        }
+      ],
+      "minimum_charge": "RM3.00",
+      "service_charge": "RM0.45/day"
+    }
+  }
+}
