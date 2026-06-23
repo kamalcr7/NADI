@@ -220,7 +220,8 @@
       </div>`;
 
     // Subscribe to DataStore — fires immediately if cached
-    NadiStore.on('incentives', (data, status) => {
+    let dataCallback = null;
+    const unsubscribe = NadiStore.on('incentives', (data, status) => {
       if (status === 'loading') {
         if (!rendered) container.innerHTML = `
           <div class="loading-state">
@@ -244,27 +245,37 @@
       rendered = true;
     });
 
-    // If idle, show loading
-    if (NadiStore.status('incentives') === 'idle') {
-      container.innerHTML = `
-        <div class="loading-state">
-          <div class="spinner"></div>
-          <p>${NadiI18n.t('common.loading')}</p>
-        </div>`;
-    }
-
-    // If data is already loaded (status === 'done') but rendered is still false,
-    // the on() handler might have been called before our render logic above.
-    // Trigger a second attempt to ensure render happens.
-    if (NadiStore.status('incentives') === 'done' && !rendered) {
+    // Fallback: if data is already loaded (status 'done') but init was called
+    // before the on() handler could fire (e.g. data was loaded between the
+    // 'loading' emission and listener registration), re-check and render.
+    if (!rendered && NadiStore.status('incentives') === 'done') {
       const existing = NadiStore.get('incentives');
       if (existing) {
         let incentives = FALLBACK;
         try { incentives = mapIncentiveData(existing); } catch (e) {}
-        const allData = { budget, incentives };
-        renderSection(container, allData);
+        renderSection(container, { budget, incentives });
         rendered = true;
       }
+    }
+
+    // Final fallback: retry after a short delay if still not rendered
+    if (!rendered) {
+      const retryTimer = setTimeout(() => {
+        if (!rendered && NadiStore.status('incentives') === 'done') {
+          const existing = NadiStore.get('incentives');
+          if (existing) {
+            let incentives = FALLBACK;
+            try { incentives = mapIncentiveData(existing); } catch (e) {}
+            renderSection(container, { budget, incentives });
+            rendered = true;
+          }
+        }
+        // If still not rendered after 3s, force-render with FALLBACK
+        if (!rendered) {
+          renderSection(container, { budget, incentives: FALLBACK });
+          rendered = true;
+        }
+      }, 3000);
     }
   }
 
