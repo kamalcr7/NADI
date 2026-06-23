@@ -20,6 +20,9 @@
     "trade.json",
     "tourism.json",
     "transport.json",
-    "openmeteo_all.json"
+    "openmeteo_all.json",
+    "tnb_tariffs.json",
+    "transport_fares.json",
+    "incentives.json"
   ]
 }

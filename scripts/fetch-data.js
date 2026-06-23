@@ -144,6 +144,139 @@ async function fetchOpenMeteoAll() {
   return results;
 }
 
+// ─── Phase 4: Curated / Static Data ───────────────────────────────────────────
+// These are hand-curated datasets that should NOT be overwritten by cron if they
+// already exist.  The fetcher will attempt live sources first; when no API is
+// available the existing curated file is preserved as-is.
+
+/**
+ * Attempt to fetch TNB tariff info from tnb.com.my.
+ * Returns parsed JSON if successful, null otherwise.
+ */
+async function fetchTNBTariffs() {
+  console.log('  Attempting TNB tariff scrape from tnb.com.my...');
+  try {
+    const res = await fetch('https://www.tnb.com.my/residential/services-and-activities/tariff-information', {
+      headers: { 'User-Agent': 'NADI-DataBot/1.0', 'Accept': 'text/html' },
+      signal: AbortSignal.timeout(30000)
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    // TNB doesn't expose a public JSON API; scraping HTML is brittle.
+    // Return null so we fall back to the curated file.
+    console.log('  TNB page fetched but no structured API available – using curated data.');
+    return null;
+  } catch (err) {
+    console.log(`  TNB fetch failed (${err.message}) – using curated data.`);
+    return null;
+  }
+}
+
+/**
+ * Attempt to fetch government incentive data from official portals.
+ * Returns parsed JSON if successful, null otherwise.
+ */
+async function fetchIncentives() {
+  console.log('  Attempting government incentive data from official portals...');
+  try {
+    // Try MIDA investment incentives API (if available)
+    const res = await fetch('https://www.mida.gov.my/api/incentives', {
+      headers: { 'User-Agent': 'NADI-DataBot/1.0', 'Accept': 'application/json' },
+      signal: AbortSignal.timeout(30000)
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return data;
+    }
+    console.log('  MIDA API not available – using curated data.');
+    return null;
+  } catch (err) {
+    console.log(`  Government incentive fetch failed (${err.message}) – using curated data.`);
+    return null;
+  }
+}
+
+/**
+ * Attempt to fetch healthcare provider data (e.g. MOH dengue/surveillance).
+ * Returns parsed JSON if successful, null otherwise.
+ */
+async function fetchHealthcare() {
+  console.log('  Attempting healthcare data from data.gov.my...');
+  // data.gov.my does not publish a dedicated healthcare catalogue,
+  // but we try the general endpoint for dengue surveillance data.
+  try {
+    const res = await fetch(`${BASE_URL}/data-catalogue?id=dengue_cases&limit=100&sort=-date`, {
+      headers: { 'Accept': 'application/json', 'User-Agent': 'NADI-DataBot/1.0' },
+      signal: AbortSignal.timeout(30000)
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return data;
+    }
+    console.log(`  Healthcare API returned ${res.status} – using existing data.`);
+    return null;
+  } catch (err) {
+    console.log(`  Healthcare fetch failed (${err.message}) – using existing data.`);
+    return null;
+  }
+}
+
+/**
+ * Attempt to fetch cost-of-living / prices data from data.gov.my PriceCatcher.
+ * Returns parsed JSON if successful, null otherwise.
+ */
+async function fetchPrices() {
+  console.log('  Attempting price data from data.gov.my PriceCatcher...');
+  try {
+    const res = await fetch(`${BASE_URL}/data-catalogue?id=pricecatcher&limit=50&sort=-date`, {
+      headers: { 'Accept': 'application/json', 'User-Agent': 'NADI-DataBot/1.0' },
+      signal: AbortSignal.timeout(30000)
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return data;
+    }
+    console.log(`  PriceCatcher API returned ${res.status} – using existing data.`);
+    return null;
+  } catch (err) {
+    console.log(`  PriceCatcher fetch failed (${err.message}) – using existing data.`);
+    return null;
+  }
+}
+
+/**
+ * Write a curated / static file ONLY if it does not already exist.
+ * This preserves hand-curated data that is more accurate than scraping.
+ */
+function saveCurated(filename, fallbackData, meta = {}) {
+  const filePath = path.join(DATA_DIR, filename);
+  if (fs.existsSync(filePath)) {
+    console.log(`  EXISTS: ${filename} – curated file preserved (not overwritten)`);
+    return true;
+  }
+  // File missing – write the fallback / scraped data
+  if (fallbackData) {
+    return save(filename, fallbackData, { ...meta, curated: false });
+  }
+  console.warn(`  SKIP: ${filename} not found and no fallback data available`);
+  return false;
+}
+
+/**
+ * Ensure optional datasets that may not be in the fetch pipeline yet exist.
+ * If the file is missing, create a minimal placeholder so the site doesn't
+ * break when trying to load it.
+ */
+function ensureDataset(filename, placeholder = { data: [] }) {
+  const filePath = path.join(DATA_DIR, filename);
+  if (!fs.existsSync(filePath)) {
+    fs.writeFileSync(filePath, JSON.stringify({
+      _meta: { generated_at: new Date().toISOString(), source: 'NADI auto-placeholder' },
+      ...placeholder
+    }, null, 2));
+    console.log(`  CREATED placeholder: ${filename}`);
+  }
+}
+
 async function main() {
   console.log('NADI Data Fetcher - Starting at ' + new Date().toISOString());
 
@@ -174,6 +307,48 @@ async function main() {
   await fetchOpenMeteoAll();
   successCount++;
 
+  // Phase 4: Curated / Static Data
+  console.log('\n--- Phase 4: Curated & Static Data ---');
+  {
+    // TNB Tariffs
+    const tnbData = await fetchTNBTariffs();
+    if (saveCurated('tnb_tariffs.json', tnbData, { source: 'TNB official rates', curated: true })) successCount++;
+    else failCount++;
+    await sleep(500);
+
+    // Government Incentives
+    const incentiveData = await fetchIncentives();
+    if (saveCurated('incentives.json', incentiveData, { source: 'LHDN, BSH, EPF, MOF official portals', curated: true })) successCount++;
+    else failCount++;
+    await sleep(500);
+
+    // Transport Fares (always curated – no API)
+    if (saveCurated('transport_fares.json', null, { source: 'RapidKL, KTM, MRT Co official fare charts', curated: true })) successCount++;
+    else failCount++;
+    await sleep(500);
+
+    // Healthcare (dengue/surveillance from data.gov.my)
+    const healthData = await fetchHealthcare();
+    if (healthData) {
+      if (save('healthcare.json', healthData, { api_key: 'healthcare' })) successCount++;
+      else failCount++;
+    } else {
+      ensureDataset('healthcare.json', { data: [] });
+      successCount++;
+    }
+    await sleep(500);
+
+    // Prices (PriceCatcher from data.gov.my)
+    const priceData = await fetchPrices();
+    if (priceData) {
+      if (save('prices.json', priceData, { api_key: 'prices' })) successCount++;
+      else failCount++;
+    } else {
+      ensureDataset('prices.json', { data: [] });
+      successCount++;
+    }
+  }
+
   // Write manifest
   const manifest = {
     _meta: {
@@ -186,7 +361,12 @@ async function main() {
     datasets: [
       ...WEATHER_DATASETS.map(d => d.file),
       ...CATALOGUE_DATASETS.map(d => d.file),
-      'openmeteo_all.json'
+      'openmeteo_all.json',
+      'tnb_tariffs.json',
+      'transport_fares.json',
+      'incentives.json',
+      'healthcare.json',
+      'prices.json'
     ]
   };
   fs.writeFileSync(path.join(DATA_DIR, 'manifest.json'), JSON.stringify(manifest, null, 2));

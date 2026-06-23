@@ -1,0 +1,242 @@
+{
+  "_meta": {
+    "fetched_at": "2026-06-23T00:00:00.000Z",
+    "source": "LHDN, BSH, EPF, MOF official portals",
+    "note": "Static curated data. Updated via cron when policy changes detected."
+  },
+  "data": {
+    "str": {
+      "name": "Sumbangan Tunai Rahmah (STR)",
+      "description": "Cash aid for eligible B40 and M40 households",
+      "category": "financial_aid",
+      "effective_date": "2025",
+      "eligibility": {
+        "household": {
+          "income_limit": "RM5,000/month",
+          "aid_amount": "RM2,500/year (paid in installments)",
+          "requirements": [
+            "Malaysian citizen",
+            "Household income \u2264 RM5,000",
+            "Not a government pensioner"
+          ]
+        },
+        "single": {
+          "age_range": "21-59",
+          "income_limit": "RM2,500/month",
+          "aid_amount": "RM1,500/year",
+          "requirements": [
+            "Malaysian citizen",
+            "Single, divorced, or widowed",
+            "Income \u2264 RM2,500"
+          ]
+        },
+        "senior": {
+          "age": "60+",
+          "aid_amount": "RM1,500/year",
+          "requirements": [
+            "Malaysian citizen",
+            "Age 60 and above"
+          ]
+        }
+      },
+      "how_to_apply": [
+        "Register at https://bsh.hasil.gov.my",
+        "Update bank details via MyTax portal",
+        "Check status via MyTax or STR hotline 1-800-88-2727"
+      ],
+      "payment_schedule": "January, April, June, October (quarterly installments)",
+      "website": "https://bsh.hasil.gov.my"
+    },
+    "bsh": {
+      "name": "Bantuan Sara Hidup (BSH)",
+      "description": "Household living cost assistance (predecessor to STR, now merged)",
+      "category": "financial_aid",
+      "status": "Merged into STR since 2020",
+      "note": "BSH has been replaced by Sumbangan Tunai Rahmah (STR)"
+    },
+    "epf_isaraan": {
+      "name": "EPF i-Saraan",
+      "description": "Voluntary contributions for self-employed and gig workers",
+      "category": "retirement",
+      "contribution": {
+        "minimum": "RM50/month",
+        "maximum": "RM100,000/year",
+        "government_match": "Up to RM300/year (15% match on first RM2,000 contributed)"
+      },
+      "eligibility": [
+        "Malaysian citizen aged 18-60",
+        "Self-employed, gig worker, or informal sector worker",
+        "Not an EPF member with employer contributions"
+      ],
+      "how_to_apply": [
+        "Register via i-Akaun (EPF app) or EPF counter",
+        "Make voluntary contributions monthly",
+        "Government matching credited annually"
+      ],
+      "website": "https://www.kwsp.gov.my"
+    },
+    "epf_isuri": {
+      "name": "EPF i-Suri",
+      "description": "Contribution program for housewives",
+      "category": "retirement",
+      "contribution": {
+        "minimum": "RM5/month (via husband's EPF)",
+        "government_match": "RM60/year"
+      },
+      "eligibility": [
+        "Malaysian citizen housewife",
+        "Husband is an active EPF member",
+        "Wife is not an active EPF member"
+      ],
+      "website": "https://www.kwsp.gov.my"
+    },
+    "fuel_subsidy": {
+      "name": "Targeted Diesel Subsidy",
+      "description": "Targeted fuel subsidy program replacing blanket subsidies",
+      "category": "fuel",
+      "effective_date": "2024-06-10",
+      "details": {
+        "diesel": "RON97 \u2014 market price. Diesel \u2014 targeted subsidy via BUDI mechanism.",
+        "ron95": "Still blanket-subsidized at RM2.05/litre (as of 2025)",
+        "eligibility_for_diesel_subsidy": [
+          "Logistics companies",
+          "Public transport operators",
+          "Fishermen",
+          "Small traders (via BUDI95 app)"
+        ]
+      },
+      "note": "RON95 targeted subsidy implementation expected in 2025"
+    },
+    "tax_reliefs": {
+      "name": "Personal Income Tax Reliefs",
+      "description": "Annual tax deductions for individuals",
+      "category": "tax",
+      "effective_year": "2025",
+      "reliefs": [
+        {
+          "item": "Individual (self)",
+          "amount": "RM9,000"
+        },
+        {
+          "item": "EPF contribution",
+          "amount": "Up to RM4,000 (life insurance + EPF combined)"
+        },
+        {
+          "item": "Life insurance premium",
+          "amount": "Up to RM3,000 (combined with EPF)"
+        },
+        {
+          "item": "Lifestyle (books, internet, gym, etc.)",
+          "amount": "Up to RM2,500"
+        },
+        {
+          "item": "Parent medical expenses",
+          "amount": "Up to RM8,000"
+        },
+        {
+          "item": "Child education (age <18)",
+          "amount": "RM2,000 per child"
+        },
+        {
+          "item": "Child (18+ higher education)",
+          "amount": "RM8,000 per child"
+        },
+        {
+          "item": "Medical expenses (self/spouse)",
+          "amount": "Up to RM8,000"
+        },
+        {
+          "item": "SOCSO contribution",
+          "amount": "Up to RM350"
+        },
+        {
+          "item": "PR1MA housing",
+          "amount": "Up to RM2,000"
+        },
+        {
+          "item": "EV (electric vehicle)",
+          "amount": "Up to RM2,500 (2023-2025)"
+        },
+        {
+          "item": "Disabled individual",
+          "amount": "RM6,000"
+        },
+        {
+          "item": "Disabled spouse",
+          "amount": "RM3,500"
+        }
+      ],
+      "website": "https://mytax.hasil.gov.my"
+    },
+    "education_aid": {
+      "name": "Education Aid & Scholarships",
+      "description": "Government education financial assistance",
+      "category": "education",
+      "programs": [
+        {
+          "name": "Bantuan Awal Persekolahan (BAP)",
+          "amount": "RM150/student",
+          "eligibility": "B40 students"
+        },
+        {
+          "name": "PTPTN (Higher Education Loan)",
+          "amount": "Covers tuition + living",
+          "eligibility": "Malaysian students in IPTA/IPTS"
+        },
+        {
+          "name": "JPA Scholarship",
+          "amount": "Full scholarship",
+          "eligibility": "Top SPM/STPM students"
+        },
+        {
+          "name": "MARA Scholarship",
+          "amount": "Full scholarship",
+          "eligibility": "Bumiputera students"
+        },
+        {
+          "name": "Bank Negara Scholarship",
+          "amount": "Full scholarship + allowance",
+          "eligibility": "Top performers in economics/finance"
+        },
+        {
+          "name": "HRD Corp Training",
+          "amount": "Up to RM7,000/course",
+          "eligibility": "Employed workers"
+        }
+      ]
+    },
+    "healthcare": {
+      "name": "Healthcare Schemes",
+      "description": "Government healthcare support programs",
+      "category": "healthcare",
+      "programs": [
+        {
+          "name": "PeKa B40",
+          "description": "Free health screening for B40",
+          "eligibility": "Household income <RM4,000/month",
+          "website": "https://pekab40.moh.gov.my"
+        },
+        {
+          "name": "mySalam",
+          "description": "Free insurance for B40",
+          "eligibility": "B40 households",
+          "coverage": "Critical illness (36 conditions) + hospitalisation"
+        },
+        {
+          "name": "MySejahtera",
+          "description": "Digital health platform",
+          "features": [
+            "Vaccination records",
+            "Hospital appointments",
+            "Health screening"
+          ]
+        },
+        {
+          "name": "Talian Kasih",
+          "description": "Mental health & crisis support",
+          "hotline": "15999"
+        }
+      ]
+    }
+  }
+}

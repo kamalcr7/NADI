@@ -31,6 +31,9 @@
     prices:           'data/prices.json',
     healthcare:       'data/healthcare.json',
     transport:        'data/transport.json',
+    tnb_tariffs:      'data/tnb_tariffs.json',
+    transport_fares:  'data/transport_fares.json',
+    incentives:       'data/incentives.json',
   };
 
   /* --- Fallback Live API URLs (used only if /data/*.json missing) --- */
@@ -269,6 +272,9 @@
     'prices',
     'healthcare',
     'transport',
+    'tnb_tariffs',
+    'transport_fares',
+    'incentives',
   ];
 
   async function start() {

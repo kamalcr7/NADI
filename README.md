@@ -37,7 +37,25 @@ graph TD
 ## 📂 Project Structure
 
 ```
-├── data/                    # Pre-fetched static JSON datasets (GDP, CPI, Weather, etc.)
+├── data/                    # Pre-fetched static JSON datasets
+│   ├── fuel.json            # Fuel prices
+│   ├── exchange.json        # Exchange rates
+│   ├── gdp.json             # GDP quarterly
+│   ├── inflation.json       # CPI / Inflation
+│   ├── unemployment.json    # Unemployment
+│   ├── trade.json           # Trade monthly
+│   ├── tourism.json         # Tourism arrivals
+│   ├── transport.json       # Transit ridership
+│   ├── population.json      # Population data
+│   ├── weather_forecast.json
+│   ├── weather_warnings.json
+│   ├── earthquake.json
+│   ├── flood_warnings.json
+│   ├── openmeteo_all.json   # Open-Meteo weather for 16 cities
+│   ├── tnb_tariffs.json     # TNB electricity tariffs (v1.2, curated)
+│   ├── incentives.json      # Government incentives directory (v1.2, curated)
+│   ├── transport_fares.json # Transport fare reference (v1.2, curated)
+│   └── manifest.json        # Fetch metadata
 ├── css/                     # Styling sheet hierarchy
 │   ├── index.css            # Base styles, variables, typography, and theme tokens
 │   ├── components.css       # Cards, tables, loaders, alerts, and navigation styles
@@ -50,6 +68,8 @@ graph TD
 │   │   ├── population.js    # Demographics and growth trend
 │   │   ├── employment.js    # Labour force and unemployment
 │   │   ├── transport.js     # Public transit aggregation
+│   │   ├── tariffs.js       # TNB electricity tariffs (v1.2)
+│   │   ├── government.js    # Government incentives & support directory (v1.2)
 │   │   └── ...              # Other sectors (fuel, prices, safety, etc.)
 │   ├── api.js               # API fetch helper utility
 │   ├── datastore.js         # Unified datastore manager
@@ -62,6 +82,18 @@ graph TD
 ├── index.html               # Main dashboard shell
 └── package.json             # Dev server config & script definitions
 ```
+
+---
+
+## What's New in v1.2
+
+*   **TNB Electricity Tariffs** — Full residential 5-tier progressive rate table, plus commercial, industrial, and agriculture tariffs.
+*   **Government Incentives Directory** — 5-tab directory covering social aid (STR, BSH), education (PTPTN, JPA, MARA), SME grants, healthcare (PeKa B40, mySalam), and EPF retirement schemes.
+*   **Transport Fares Data** — Curated fare reference for LRT, MRT, monorail, KTM, bus, and e-hailing.
+*   **Fetch Script Phase 4** — Cron now guards curated data files (never overwrites hand-curated content).
+*   **Comprehensive Documentation** — `CHANGES-v1.2.md` with architecture overview, developer guide, and instructions for adding new sections.
+
+See `CHANGES-v1.2.md` for full details.
 
 ---
 

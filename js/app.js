@@ -14,6 +14,7 @@
     society:     { label: 'Society & Transit',       modules: ['population', 'transport', 'education', 'healthcare'] },
     safety:      { label: 'Safety Alerts',           modules: ['safety'] },
     government:  { label: 'Government Incentives',   modules: ['government'] },
+    tariffs:     { label: 'TNB Electricity Tariffs',  modules: ['tariffs'] },
     environment: { label: 'Environment & Energy',    modules: ['environment'] },
     visitor:     { label: 'Visitor Guide',           modules: ['tourism'] },
   };
