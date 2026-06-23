@@ -1,10 +1,10 @@
 {
   "_meta": {
-    "generated_at": "2026-06-23T00:07:23.271Z",
-    "duration_ms": 223076,
-    "success": 14,
+    "generated_at": "2026-06-23T06:16:30.522Z",
+    "duration_ms": 254578,
+    "success": 19,
     "failed": 0,
-    "next_refresh": "2026-06-23T02:07:23.271Z"
+    "next_refresh": "2026-06-23T08:16:30.522Z"
   },
   "datasets": [
     "weather_forecast.json",
@@ -23,6 +23,8 @@
     "openmeteo_all.json",
     "tnb_tariffs.json",
     "transport_fares.json",
-    "incentives.json"
+    "incentives.json",
+    "healthcare.json",
+    "prices.json"
   ]
 }
