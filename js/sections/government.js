@@ -56,18 +56,7 @@
         agency: 'MOF',
         coverage: 'Targeted eligible groups',
         amount: 'Variable',
-        desc: d.fuel_subsidy.description,
         link: 'https://budimadani.gov.my/'
-      });
-    }
-    if (d.sara) {
-      result.aid.push({
-        name: d.sara.name,
-        agency: 'LHDN',
-        coverage: 'Hardcore Poor STR Recipients',
-        amount: d.sara.amount || 'RM1,200 / year',
-        desc: d.sara.description,
-        link: 'https://bantuantunai.hasil.gov.my/'
       });
     }
     if (d.bsh && d.bsh.status) {
@@ -77,9 +66,10 @@
         coverage: 'Merged into STR',
         amount: 'N/A',
         desc: d.bsh.note || d.bsh.description,
-        link: 'https://bantuantunai.hasil.gov.my/'
+        link: d.bsh.website || 'https://bantuantunai.hasil.gov.my/'
       });
     }
+    // Fuel Subsidies — detail the BUDI & quota info
     if (d.tax_reliefs) {
       // Add tax reliefs as a bonus aid item
       const tr = d.tax_reliefs;
@@ -194,8 +184,6 @@
         link: d.sara.website || '#'
       });
     }
-
-    // Business (use fallback)
     result.business = FALLBACK.business;
 
     return result;
