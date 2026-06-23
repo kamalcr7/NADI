@@ -60,7 +60,22 @@
 
   /* ---- Hash Routing ---- */
   function handleRouting() {
-    const hash = window.location.hash.replace('#', '') || 'overview';
+    let hash = window.location.hash.replace('#', '') || 'overview';
+    // Route aliases for common navigation paths
+    const ALIASES = {
+      transport: 'society',
+      transit: 'society',
+      population: 'society',
+      education_module: 'society',
+      healthcare_module: 'society',
+      fuel: 'cost',
+      prices: 'cost',
+      employment: 'economy',
+      gdp: 'economy',
+      trade: 'economy',
+      tourism: 'visitor',
+    };
+    if (ALIASES[hash]) hash = ALIASES[hash];
     switchTab(hash);
   }
 
