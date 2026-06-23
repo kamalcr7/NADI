@@ -1,47 +1,47 @@
 {
   "_meta": {
-    "fetched_at": "2026-06-23T18:02:30.402Z",
+    "fetched_at": "2026-06-23T21:45:48.144Z",
     "source": "NADI Data Bot",
     "api_key": "weather_warnings"
   },
   "data": [
     {
       "warning_issue": {
-        "issued": "2026-06-24T00:00:00",
+        "issued": "2026-06-24T05:00:00",
         "title_bm": "Amaran Ribut Petir",
         "title_en": "Thunderstorms Warning"
       },
-      "valid_from": "2026-06-24T00:00:00",
-      "valid_to": "2026-06-24T05:00:00",
+      "valid_from": "2026-06-24T05:00:00",
+      "valid_to": "2026-06-24T09:00:00",
       "heading_en": "Warning on Thunderstorms",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of Perlis & Kedah, Penang, Perak, Selangor, N. Sembilan, Melaka, West Johor, Pahang, Terengganu, Kelantan, Western Sarawak and Eastern Sabah, Lahad Datu until 5:00AM; Wednesday, 24 June 2026.",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of Perlis & Kedah, Penang, Perak, Selangor, N. Sembilan, Melaka, West Johor, Pahang, Terengganu, Western Sarawak and Lahad Datu until 9:00AM; Wednesday, 24 June 2026.",
       "instruction_en": null,
       "heading_bm": "Amaran Ribut petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan Perlis & Kedah, Pulau Pinang, Perak, Selangor, N. Sembilan, Melaka, Johor Barat, Pahang, Terengganu, Kelantan, Sarawak Barat dan Sabah Timur, Lahad Datu sehingga 5:00 pagi; Rabu, 24 Jun 2026.",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan Perlis & Kedah, Pulau Pinang, Perak, Selangor, N. Sembilan, Melaka, Johor Barat, Pahang, Terengganu, Sarawak Barat dan Lahad Datu sehingga 9:00 pagi; Rabu, 24 Jun 2026.",
       "instruction_bm": null
     },
     {
       "warning_issue": {
-        "issued": "2026-06-24T00:00:00",
+        "issued": "2026-06-24T05:00:00",
         "title_bm": "Amaran Ribut Petir",
         "title_en": "Thunderstorms Warning"
       },
-      "valid_from": "2026-06-24T00:00:00",
-      "valid_to": "2026-06-24T05:00:00",
+      "valid_from": "2026-06-24T05:00:00",
+      "valid_to": "2026-06-24T09:00:00",
       "heading_en": "Warning on Thunderstorms",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of eastern part of Phuket, Straits of Melaka, Samui, Tioman, Condore, Reef North, southern part of Reef South, Layang-Layang, Palawan, Sulu and Sulawesi until 5:00AM; Wednesday, 24 June 2026.",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of southeastern part of Phuket, Straits of Melaka, Samui, Tioman, southern part of Condore, southeastern part of Bunguran, Reef North, southern part of Reef South, Layang-Layang, Palawan, Sulu and Sulawesi until 9:00AM; Wednesday, 24 June 2026.",
       "instruction_en": null,
       "heading_bm": "Amaran Ribut petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan timur Phuket, Selat Melaka, Samui, Tioman, Condore, Reef North, selatan Reef South, Layang-Layang, Palawan, Sulu dan Sulawesi sehingga 5:00 pagi; Rabu, 24 Jun 2026.",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan tenggara Phuket, Selat Melaka, Samui, Tioman, selatan Condore, tenggara Bunguran, Reef North, selatan Reef South, Layang-Layang, Palawan, Sulu dan Sulawesi sehingga 9:00 pagi; Rabu, 24 Jun 2026.",
       "instruction_bm": null
     },
     {
       "warning_issue": {
-        "issued": "2026-06-24T00:00:00",
+        "issued": "2026-06-24T05:00:00",
         "title_bm": "Amaran Ribut Petir",
         "title_en": "Thunderstorms Warning"
       },
-      "valid_from": "2026-06-24T00:00:00",
+      "valid_from": "2026-06-24T05:00:00",
       "valid_to": "2026-06-28T00:00:00",
       "heading_en": "Warning on Strong Wind and Rough Seas (First Category)",
       "text_en": "Strong westerly winds of 40-50 kmph with wave height up to 3.5 metres are expected over the waters of Phuket until Saturday, 27 June 2026.",
@@ -52,47 +52,32 @@
     },
     {
       "warning_issue": {
-        "issued": "2026-06-24T00:40:00",
+        "issued": "2026-06-24T04:00:00",
         "title_bm": "Amaran Ribut Petir",
         "title_en": "Thunderstorms Warning"
       },
-      "valid_from": "2026-06-24T00:40:00",
-      "valid_to": "2026-06-24T03:00:00",
+      "valid_from": "2026-06-24T04:00:00",
+      "valid_to": "2026-06-24T08:00:00",
       "heading_en": "Thunderstorms Warning",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Perlis ; and  Kedah  (Langkawi) until 3:00AM; Wednesday, 24 June 2026.",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Perlis ;  Kedah  (Langkawi, Kubang Pasu, Kota Setar, Yan and Kuala Muda);  Penang ;  Perak  (Kerian);  Pahang  (Jerantut, Kuantan and Pekan); and  Johor  (Tangkak, Muar, Batu Pahat and Pontian) until 8:00AM; Wednesday, 24 June 2026.",
       "instruction_en": null,
       "heading_bm": "Amaran Ribut Petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Perlis ; dan  Kedah  (Langkawi) sehingga 3:00 pagi; Rabu, 24 Jun 2026.",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Perlis ;  Kedah  (Langkawi, Kubang Pasu, Kota Setar, Yan dan Kuala Muda);  Pulau Pinang ;  Perak  (Kerian);  Pahang  (Jerantut, Kuantan dan Pekan); dan  Johor  (Tangkak, Muar, Batu Pahat dan Pontian) sehingga 8:00 pagi; Rabu, 24 Jun 2026.",
       "instruction_bm": null
     },
     {
       "warning_issue": {
-        "issued": "2026-06-24T00:40:00",
-        "title_bm": "Amaran Ribut Petir",
-        "title_en": "Thunderstorms Warning"
-      },
-      "valid_from": "2026-06-24T00:40:00",
-      "valid_to": "2026-06-24T04:00:00",
-      "heading_en": "Thunderstorms Warning",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Pahang  (Lipis, Jerantut and Kuantan) until 4:00AM; Wednesday, 24 June 2026.",
-      "instruction_en": null,
-      "heading_bm": "Amaran Ribut Petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Pahang  (Lipis, Jerantut dan Kuantan) sehingga 4:00 pagi; Rabu, 24 Jun 2026.",
-      "instruction_bm": null
-    },
-    {
-      "warning_issue": {
-        "issued": "2026-06-24T00:00:00",
-        "title_bm": "Nasihat Taufan",
-        "title_en": "Typhoon Advisory"
+        "issued": "2026-06-24T05:00:00",
+        "title_bm": "Tiada Nasihat",
+        "title_en": "No Advisory"
       },
       "valid_from": null,
       "valid_to": null,
-      "heading_en": "Typhoon Advisory",
-      "text_en": "Category:  Typhoon Advisory (MEKKHALA)                  Time of Observation:  23:00, 23 June 2026                  Location:  Latitude 19.8 North and Longitude 124.5 East                  Movement:  North 7 km/h.                  Maximum wind speed:  157 km/h                  Distance from nearest international city:  approximately 383 km Northeast of Tuguegarao City, Philippines.                  Distance from nearest Malaysian city:  Approximately 1658 km Northeast of Kudat, Sabah.                  Threat to Malaysia:  No significant impact.",
+      "heading_en": "No Advisory",
+      "text_en": "No Tropical Cyclone system is observed under MMD monitoring region (Latitude: 0-20 North &amp; Longitude: 95-130 East)",
       "instruction_en": null,
-      "heading_bm": "Nasihat Taufan",
-      "text_bm": "Kategori:  Nasihat Taufan (MEKKHALA)                  Masa Pencerapan:  23:00, 23 Jun 2026                  Kedudukan:  Latitud 19.8 Utara dan Longitud 124.5 Timur                  Pergerakan:  Ke arah Utara dengan kelajuan 7 km/j.                  Kelajuan angin maksimum:  157 km/j                  Jarak dari bandar antarabangsa terdekat:  kira-kira 383 km ke Timur Laut Tuguegarao City, Filipina.                  Jarak dari bandar terdekat:  Kira-kira 1658 km Timur Laut Kudat, Sabah.                  Kesan terhadap Malaysia:  Tiada kesan signifikan.",
+      "heading_bm": "Tiada Nasihat",
+      "text_bm": "Tiada sistem Siklon Tropika dicerap di dalam kawasan pemantauan MMD (Latitud: 0-20 Utara &amp; Longitud: 95-130 Timur)",
       "instruction_bm": null
     }
   ]
