@@ -105,6 +105,13 @@
       'transport.bus': 'Bus Services',
       'transport.agencies': 'Transport Agencies',
       'transport.coverage': 'Coverage Areas',
+      'transport.operator.prasarana': 'Prasarana Malaysia',
+      'transport.operator.prasarana.desc': 'Operates Rapid KL LRT, MRT, Monorail, and Rapid Bus networks across Klang Valley.',
+      'transport.operator.ktmb': 'KTMB (Keretapi Tanah Melayu)',
+      'transport.operator.ktmb.desc': 'Runs KTM Komuter, ETS (Intercity high-speed rail), and KTM Intercity lines.',
+      'transport.operator.mybas': 'myBAS / bas.my',
+      'transport.operator.mybas.desc': 'National initiative improving stage bus service integration across regional cities.',
+      'transport.chart.title': '12-Month Transit Ridership Trend',
 
       /* --- Prices --- */
       'prices.badge': 'PriceCatcher',
@@ -303,6 +310,13 @@
       'transport.bus': 'Perkhidmatan Bas',
       'transport.agencies': 'Agensi Pengangkutan',
       'transport.coverage': 'Kawasan Liputan',
+      'transport.operator.prasarana': 'Prasarana Malaysia',
+      'transport.operator.prasarana.desc': 'Mengendalikan LRT Rapid KL, MRT, Monorel, dan rangkaian Rapid Bus di Lembah Klang.',
+      'transport.operator.ktmb': 'KTMB (Keretapi Tanah Melayu)',
+      'transport.operator.ktmb.desc': 'Menjalankan KTM Komuter, ETS, dan perkhidmatan KTM Intercity.',
+      'transport.operator.mybas': 'myBAS / bas.my',
+      'transport.operator.mybas.desc': 'Inisiatif nasional menambah baik integrasi perkhidmatan bas di bandar-bandar utama.',
+      'transport.chart.title': 'Trend Perjalanan Transit 12 Bulan',
 
       /* --- Prices --- */
       'prices.badge': 'PriceCatcher',
@@ -433,10 +447,13 @@
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       const translated = t(key);
-      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-        el.placeholder = translated;
-      } else {
-        el.textContent = translated;
+      // Only replace if a real translation was found (not the raw key)
+      if (translated !== key) {
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.placeholder = translated;
+        } else {
+          el.textContent = translated;
+        }
       }
     });
     /* Update html lang attribute */
