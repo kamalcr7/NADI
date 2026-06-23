@@ -10,7 +10,7 @@
 (function () {
   'use strict';
 
-  const STORE_VERSION = 'v9';
+  const STORE_VERSION = 'v10';
   const LS_PREFIX = `nadi_${STORE_VERSION}_`;
 
   /* --- File Map: dataset key → static JSON path --- */
