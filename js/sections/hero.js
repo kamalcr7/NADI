@@ -21,6 +21,7 @@
   }
 
   function renderSection(container) {
+    const isBm = KtmyI18n.getLang() === 'bm';
     container.innerHTML = `
       <div class="hero-bg" data-parallax="0.2"></div>
       <div class="container" style="position:relative; z-index:10;">
@@ -34,8 +35,8 @@
         </p>
 
         <div class="reveal mt-lg" style="display:flex; gap:var(--space-md); flex-wrap:wrap;">
-          <a href="#weather" class="btn btn-primary btn-lg" data-i18n="hero.cta">Explore Data →</a>
-          <a href="#cost" class="btn btn-outline btn-lg">Fuel &amp; Cost</a>
+          <a href="#weather" class="btn btn-primary btn-lg" data-i18n="hero.cta">Explore Data</a>
+          <a href="#cost" class="btn btn-outline btn-lg">${isBm ? 'Bahan Api & Kos' : 'Fuel & Cost'}</a>
         </div>
 
         <!-- Live Stats Ticker Grid -->
@@ -54,14 +55,14 @@
         <!-- Category Quick-Links -->
         <div class="hero-quick-links reveal mt-xl">
           ${[
-            { href: '#weather', icon: '🌦️', label: 'Weather', sub: 'Live forecasts' },
-            { href: '#cost', icon: '⛽', label: 'Cost of Living', sub: 'Fuel & prices' },
-            { href: '#economy', icon: '📈', label: 'Economy', sub: 'GDP & jobs' },
-            { href: '#society', icon: '👥', label: 'Society', sub: 'People & transit' },
-            { href: '#safety', icon: '🚨', label: 'Safety', sub: 'Alerts & warnings' },
-            { href: '#government', icon: '🏛️', label: 'Gov Support', sub: 'Incentives & grants' },
-            { href: '#environment', icon: '🌿', label: 'Environment', sub: 'Energy & green' },
-            { href: '#visitor', icon: '🌴', label: 'Visitor Guide', sub: 'Travel essentials' }
+            { href: '#weather', icon: '🌦️', label: isBm ? 'Cuaca' : 'Weather', sub: isBm ? 'Ramalan langsung' : 'Live forecasts' },
+            { href: '#cost', icon: '⛽', label: isBm ? 'Kos Sara Hidup' : 'Cost of Living', sub: isBm ? 'Bahan api & harga' : 'Fuel & prices' },
+            { href: '#economy', icon: '📈', label: isBm ? 'Ekonomi' : 'Economy', sub: isBm ? 'KDNK & pekerjaan' : 'GDP & jobs' },
+            { href: '#society', icon: '👥', label: isBm ? 'Masyarakat' : 'Society', sub: isBm ? 'Rakyat & transit' : 'People & transit' },
+            { href: '#safety', icon: '🚨', label: isBm ? 'Keselamatan' : 'Safety', sub: isBm ? 'Amaran & bahaya' : 'Alerts & warnings' },
+            { href: '#government', icon: '🏛️', label: isBm ? 'Sokongan Kerajaan' : 'Gov Support', sub: isBm ? 'Insentif & geran' : 'Incentives & grants' },
+            { href: '#environment', icon: '🌿', label: isBm ? 'Alam Sekitar' : 'Environment', sub: isBm ? 'Tenaga & hijau' : 'Energy & green' },
+            { href: '#visitor', icon: '🌴', label: isBm ? 'Panduan Pelawat' : 'Visitor Guide', sub: isBm ? 'Keperluan travel' : 'Travel essentials' }
           ].map(q => `
             <a href="${q.href}" class="quick-link-card reveal">
               <div class="ql-icon">${q.icon}</div>
@@ -119,7 +120,7 @@
   function translate() {
     const container = document.getElementById('section-hero-content');
     if (container) {
-      KtmyI18n.applyTranslations();
+      renderSection(container);
       startTickers();
     }
   }

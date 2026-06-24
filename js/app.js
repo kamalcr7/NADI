@@ -133,9 +133,9 @@
 
     KtmyI18n.on(lang => {
       updateBtns(lang);
-      // Re-translate currently active modules
-      (TABS[activeTabId]?.modules || []).forEach(name => {
-        if (window.KtmySections?.[name]?.translate) {
+      // Re-translate all registered section modules
+      Object.keys(window.KtmySections || {}).forEach(name => {
+        if (window.KtmySections[name].translate) {
           window.KtmySections[name].translate();
         }
       });

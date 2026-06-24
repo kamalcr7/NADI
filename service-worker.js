@@ -5,7 +5,7 @@
    data files and API calls.
    ============================================================ */
 
-const CACHE_NAME = 'ktmy-v1';
+const CACHE_NAME = 'ktmy-v4';
 
 const STATIC_ASSETS = [
   '/',

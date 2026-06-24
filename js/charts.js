@@ -123,7 +123,8 @@
       options: {
         plugins: {
           legend: { display: showLegend },
-          title: title ? { display: true, text: title, font: { size: 14, weight: '600' } } : { display: false }
+          title: title ? { display: true, text: title, font: { size: 14, weight: '600' } } : { display: false },
+          tooltip: { enabled: true }
         },
         scales: {
           x: {
@@ -171,8 +172,9 @@
       options: {
         indexAxis: horizontal ? 'y' : 'x',
         plugins: {
-          legend: { display: showLegend },
-          title: title ? { display: true, text: title, font: { size: 14, weight: '600' } } : { display: false }
+           legend: { display: showLegend },
+           title: title ? { display: true, text: title, font: { size: 14, weight: '600' } } : { display: false },
+           tooltip: { enabled: true }
         },
         scales: {
           x: {
@@ -235,7 +237,8 @@
             position: 'bottom',
             labels: { padding: 16, usePointStyle: true, pointStyleWidth: 10 }
           },
-          title: title ? { display: true, text: title, font: { size: 14, weight: '600' } } : { display: false }
+          title: title ? { display: true, text: title, font: { size: 14, weight: '600' } } : { display: false },
+          tooltip: { enabled: true }
         }
       }
     });
@@ -284,7 +287,7 @@
   /* --- Destroy chart by canvas ID --- */
   function destroyChart(canvasId) {
     const canvas = document.getElementById(canvasId);
-    if (!canvas) return;
+    if (!canvas || !window.Chart) return;
     const existing = Chart.getChart(canvas);
     if (existing) existing.destroy();
   }

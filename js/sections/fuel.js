@@ -7,16 +7,26 @@
 
 (function () {
   'use strict';
+  let initialized = false;
   let rendered = false;
   let chartInstance = null;
   let lastRecords = null;
+  let storeUnsubscribe = null;
 
   function init() {
     const container = document.getElementById('section-fuel-content');
     if (!container) return;
 
+    if (lastRecords) {
+      renderSection(container, lastRecords);
+      return;
+    }
+
+    if (initialized) return;
+    initialized = true;
+
     // Subscribe to DataStore — will fire immediately if data is cached
-    KtmyStore.on('fuel', (data, status) => {
+    storeUnsubscribe = KtmyStore.on('fuel', (data, status) => {
       if (status === 'loading') {
         if (!rendered) showLoading(container);
         return;
