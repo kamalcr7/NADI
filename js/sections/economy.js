@@ -4,7 +4,10 @@
 
 (function () {
   'use strict';
-  let rendered = false;
+  let initialized = false;
+  let cacheGdp = null;
+  let cacheCpi = null;
+  let cacheTrade = null;
 
   function parseDS(raw) {
     if (Array.isArray(raw)) return raw;
@@ -12,58 +15,71 @@
     return [];
   }
 
+  function getQuarterString(dateStr, isBm) {
+    if (!dateStr) return '—';
+    const d = new Date(dateStr);
+    const year = d.getFullYear();
+    const q = Math.floor(d.getMonth() / 3) + 1;
+    return isBm ? `S${q} ${year}` : `Q${q} ${year}`;
+  }
+
   function init() {
     const container = document.getElementById('section-economy-content');
     if (!container) return;
 
+    if (cacheGdp && cacheCpi && cacheTrade) {
+      renderSection(container, cacheGdp, cacheCpi, cacheTrade);
+      return;
+    }
+
+    if (initialized) return;
+    initialized = true;
+
+    const isBm = KtmyI18n.getLang() === 'bm';
     container.innerHTML = `
       <div class="loading-state"><div class="spinner"></div>
-      <p>Loading economic indicators...</p></div>`;
-
-    // Use DataStore for GDP, inflation and trade
-    let gdpData = null;
-    let cpiData = null;
-    let tradeData = null;
+      <p>${isBm ? 'Memuatkan petunjuk ekonomi...' : 'Loading economic indicators...'}</p></div>`;
 
     function tryRender() {
-      if (gdpData !== null && cpiData !== null && tradeData !== null) {
-        renderSection(container, gdpData, cpiData, tradeData);
-        rendered = true;
+      if (cacheGdp !== null && cacheCpi !== null && cacheTrade !== null) {
+        renderSection(container, cacheGdp, cacheCpi, cacheTrade);
       }
     }
 
     KtmyStore.on('gdp', (data, status) => {
       if (status === 'done') {
-        gdpData = parseDS(data);
+        cacheGdp = parseDS(data);
         tryRender();
       } else if (status === 'error') {
-        gdpData = [];
+        cacheGdp = [];
         tryRender();
       }
     });
 
     KtmyStore.on('inflation', (data, status) => {
       if (status === 'done') {
-        cpiData = parseDS(data);
+        cacheCpi = parseDS(data);
         tryRender();
       } else if (status === 'error') {
-        cpiData = [];
+        cacheCpi = [];
         tryRender();
       }
     });
 
     KtmyStore.on('trade', (data, status) => {
       if (status === 'done') {
-        tradeData = parseDS(data);
+        cacheTrade = parseDS(data);
         tryRender();
       } else if (status === 'error') {
-        tradeData = [];
+        cacheTrade = [];
         tryRender();
       }
     });
   }
 
   function renderSection(container, gdp, cpi, trade) {
+    const isBm = KtmyI18n.getLang() === 'bm';
+
     // Filter and sort GDP
     const gdpAbs = gdp.filter(r => r.series === 'abs');
     const gdpYoy = gdp.filter(r => r.series === 'growth_yoy');
@@ -111,9 +127,9 @@
     const latestImports = parseFloat(latestTrade.imports || 0);
     const latestBalance = latestExports - latestImports;
 
-    const fmtGdpDate = latestGdp.date ? new Date(latestGdp.date).toLocaleDateString('en-US', { year: 'numeric', quarter: 'narrow' }).replace(' ', ' Q') : '—';
-    const fmtCpiDate = latestCpi.date ? new Date(latestCpi.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '—';
-    const fmtTradeDate = latestTrade.date ? new Date(latestTrade.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '—';
+    const fmtGdpDate = latestGdp.date ? getQuarterString(latestGdp.date, isBm) : '—';
+    const fmtCpiDate = latestCpi.date ? new Date(latestCpi.date).toLocaleDateString(isBm ? 'ms-MY' : 'en-US', { month: 'short', year: 'numeric' }) : '—';
+    const fmtTradeDate = latestTrade.date ? new Date(latestTrade.date).toLocaleDateString(isBm ? 'ms-MY' : 'en-US', { month: 'short', year: 'numeric' }) : '—';
 
     const gdpDisplay = gdpVal > 0 ? `RM ${(gdpVal / 1000).toFixed(1)}B` : '—';
     const growthDisplay = gdpYoyVal !== 0 ? `${gdpYoyVal.toFixed(1)}%` : '—';
@@ -126,32 +142,32 @@
         <div class="glass-card reveal stat-highlight">
           <div class="stat-icon">📊</div>
           <div class="stat-number gradient-text">${gdpDisplay}</div>
-          <div class="stat-label">Real GDP (Qtr)</div>
+          <div class="stat-label">${isBm ? 'KDNK Sebenar (Suku)' : 'Real GDP (Qtr)'}</div>
           <div class="stat-date">${fmtGdpDate}</div>
         </div>
         <div class="glass-card reveal stat-highlight">
           <div class="stat-icon">📈</div>
           <div class="stat-number ${gdpYoyVal >= 0 ? 'text-success' : 'text-danger'}">${growthDisplay}</div>
-          <div class="stat-label">GDP Growth (YoY)</div>
+          <div class="stat-label">${isBm ? 'Pertumbuhan KDNK (YoY)' : 'GDP Growth (YoY)'}</div>
           <div class="stat-date">${fmtGdpDate}</div>
         </div>
         <div class="glass-card reveal stat-highlight">
           <div class="stat-icon">💹</div>
           <div class="stat-number ${inflation < 3 ? 'text-success' : 'text-danger'}">${inflationDisplay}</div>
-          <div class="stat-label">Inflation Rate</div>
+          <div class="stat-label">${isBm ? 'Kadar Inflasi' : 'Inflation Rate'}</div>
           <div class="stat-date">${fmtCpiDate}</div>
         </div>
         <div class="glass-card reveal stat-highlight">
           <div class="stat-icon">🚢</div>
           <div class="stat-number ${latestBalance >= 0 ? 'text-success' : 'text-danger'}">${latestBalance >= 0 ? '+' : ''}${balanceDisplay}</div>
-          <div class="stat-label">Trade Surplus/Deficit</div>
+          <div class="stat-label">${isBm ? 'Lebihan/Defisit Perdagangan' : 'Trade Surplus/Deficit'}</div>
           <div class="stat-date">${fmtTradeDate}</div>
         </div>
       </div>
 
       <!-- GDP Chart -->
       <div class="glass-card reveal mb-lg">
-        <h3 class="chart-title">📊 Real GDP Trend (Quarterly)</h3>
+        <h3 class="chart-title">${isBm ? '📊 Trend KDNK Sebenar (Suku Tahunan)' : '📊 Real GDP Trend (Quarterly)'}</h3>
         <div class="chart-container" style="height:360px;">
           <canvas id="chart-gdp-trend"></canvas>
         </div>
@@ -160,13 +176,13 @@
       <!-- CPI & Trade Charts Grid -->
       <div class="grid grid-2 reveal mb-lg" style="gap: var(--space-md);">
         <div class="glass-card">
-          <h3 class="chart-title">💹 Consumer Price Index (CPI)</h3>
+          <h3 class="chart-title">${isBm ? '💹 Indeks Harga Pengguna (IHP)' : '💹 Consumer Price Index (CPI)'}</h3>
           <div class="chart-container" style="height:340px;">
             <canvas id="chart-cpi-trend"></canvas>
           </div>
         </div>
         <div class="glass-card">
-          <h3 class="chart-title">🚢 External Trade (Exports & Imports)</h3>
+          <h3 class="chart-title">${isBm ? '🚢 Perdagangan Luar (Eksport & Import)' : '🚢 External Trade (Exports & Imports)'}</h3>
           <div class="chart-container" style="height:340px;">
             <canvas id="chart-trade-trend"></canvas>
           </div>
@@ -179,13 +195,13 @@
       if (displayGdp.length > 0) {
         KtmyCharts.destroyChart('chart-gdp-trend');
         KtmyCharts.createAreaChart('chart-gdp-trend', {
-          labels: displayGdp.map(r => new Date(r.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })),
+          labels: displayGdp.map(r => new Date(r.date).toLocaleDateString(isBm ? 'ms-MY' : 'en-US', { year: 'numeric', month: 'short' })),
           datasets: [{
-            label: 'Real GDP (RM Million)',
+            label: isBm ? 'KDNK Sebenar (RM Juta)' : 'Real GDP (RM Million)',
             data: displayGdp.map(r => r.value),
             color: KtmyCharts.COLORS.primary
           }],
-          yLabel: 'RM Million'
+          yLabel: isBm ? 'RM Juta' : 'RM Million'
         });
       }
 
@@ -193,13 +209,13 @@
       if (displayCpi.length > 0) {
         KtmyCharts.destroyChart('chart-cpi-trend');
         KtmyCharts.createLineChart('chart-cpi-trend', {
-          labels: displayCpi.map(r => new Date(r.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })),
+          labels: displayCpi.map(r => new Date(r.date).toLocaleDateString(isBm ? 'ms-MY' : 'en-US', { year: 'numeric', month: 'short' })),
           datasets: [{
-            label: 'CPI Index',
+            label: isBm ? 'Indeks IHP' : 'CPI Index',
             data: displayCpi.map(r => r.value || r.index || 0),
             color: KtmyCharts.COLORS.gold
           }],
-          yLabel: 'Index'
+          yLabel: isBm ? 'Indeks' : 'Index'
         });
       }
 
@@ -207,24 +223,24 @@
       if (displayTrade.length > 0) {
         KtmyCharts.destroyChart('chart-trade-trend');
         KtmyCharts.createLineChart('chart-trade-trend', {
-          labels: displayTrade.map(r => new Date(r.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })),
+          labels: displayTrade.map(r => new Date(r.date).toLocaleDateString(isBm ? 'ms-MY' : 'en-US', { year: 'numeric', month: 'short' })),
           datasets: [
             {
-              label: KtmyI18n.getLang() === 'bm' ? 'Eksport (RM Juta)' : 'Exports (RM Billion)',
+              label: isBm ? 'Eksport (RM Bilion)' : 'Exports (RM Billion)',
               data: displayTrade.map(r => parseFloat(r.exports || 0) / 1e9),
               color: KtmyCharts.COLORS.primary,
               fill: true,
               extra: { backgroundColor: 'rgba(0, 201, 167, 0.1)' }
             },
             {
-              label: KtmyI18n.getLang() === 'bm' ? 'Import (RM Juta)' : 'Imports (RM Billion)',
+              label: isBm ? 'Import (RM Bilion)' : 'Imports (RM Billion)',
               data: displayTrade.map(r => parseFloat(r.imports || 0) / 1e9),
               color: KtmyCharts.COLORS.blue,
               fill: true,
               extra: { backgroundColor: 'rgba(77, 124, 254, 0.1)' }
             }
           ],
-          yLabel: 'RM Billion'
+          yLabel: isBm ? 'RM Bilion' : 'RM Billion'
         });
       }
     }, 0);
@@ -236,6 +252,11 @@
   window.KtmySections = window.KtmySections || {};
   window.KtmySections.economy = {
     init,
-    translate() { KtmyI18n.applyTranslations(); }
+    translate() {
+      const container = document.getElementById('section-economy-content');
+      if (container && cacheGdp && cacheCpi && cacheTrade) {
+        renderSection(container, cacheGdp, cacheCpi, cacheTrade);
+      }
+    }
   };
 })();

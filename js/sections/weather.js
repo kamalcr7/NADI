@@ -11,9 +11,41 @@
   let selectedCityName = 'Kuala Lumpur';
   let cityData = null; // current city open-meteo data
 
+  const WMO_BM = {
+    'Clear sky': 'Cerah',
+    'Mainly clear': 'Sebahagian cerah',
+    'Partly cloudy': 'Sebahagian berawan',
+    'Overcast': 'Mendung',
+    'Foggy': 'Berkabus',
+    'Icy fog': 'Kabus beku',
+    'Light drizzle': 'Gerimis ringan',
+    'Moderate drizzle': 'Gerimis sederhana',
+    'Dense drizzle': 'Gerimis lebat',
+    'Slight rain': 'Hujan renyai',
+    'Moderate rain': 'Hujan sederhana',
+    'Heavy rain': 'Hujan lebat',
+    'Slight snow': 'Salji nipis',
+    'Moderate snow': 'Salji sederhana',
+    'Heavy snow': 'Salji tebal',
+    'Slight showers': 'Hujan renyai singkat',
+    'Moderate showers': 'Hujan singkat',
+    'Violent showers': 'Hujan ribut',
+    'Thunderstorm': 'Ribut petir',
+    'Thunderstorm with hail': 'Ribut petir dengan hujan batu',
+    'Thunderstorm heavy hail': 'Ribut petir hujan batu lebat',
+    'Unknown': 'Tidak diketahui'
+  };
+
+  const TRANSLATED_STATES = {
+    'Penang': 'Pulau Pinang',
+    'Malacca': 'Melaka'
+  };
+
   /* --- Weather Code Helpers --- */
   function wmoToDesc(code) {
-    return (KtmyStore.WMO_CODES && KtmyStore.WMO_CODES[code]) || 'Unknown';
+    const isBm = KtmyI18n.getLang() === 'bm';
+    const desc = (KtmyStore.WMO_CODES && KtmyStore.WMO_CODES[code]) || 'Unknown';
+    return isBm ? (WMO_BM[desc] || desc) : desc;
   }
 
   // WMO Weather Emoji mapping helper
@@ -37,10 +69,12 @@
   async function init() {
     const container = document.getElementById('section-weather-content');
     if (!container) return;
+    
+    // Always render/update options when entering tab
+    renderShell(container);
+
     if (initialized) { updateCityDisplay(); return; }
     initialized = true;
-
-    renderShell(container);
 
     // Subscribe to Open-Meteo data
     KtmyStore.on('openmeteo_all', (data, status) => {
@@ -67,33 +101,36 @@
   function showStatus(type) {
     const display = document.getElementById('weather-live-display');
     if (!display) return;
+    const isBm = KtmyI18n.getLang() === 'bm';
     if (type === 'loading') {
       display.innerHTML = `
         <div class="loading-state">
           <div class="spinner"></div>
-          <p>Fetching real-time weather data from Open-Meteo...</p>
+          <p>${isBm ? 'Mengambil data cuaca masa nyata dari Open-Meteo...' : 'Fetching real-time weather data from Open-Meteo...'}</p>
         </div>`;
     } else {
       display.innerHTML = `
         <div class="error-state">
           <div class="error-icon">🌡️</div>
-          <p>Could not load weather data. Please check your connection.</p>
-          <button class="btn btn-outline" onclick="KtmySections.weather.init()">Retry</button>
+          <p>${isBm ? 'Tidak dapat memuatkan data cuaca. Sila periksa sambungan anda.' : 'Could not load weather data. Please check your connection.'}</p>
+          <button class="btn btn-outline" onclick="KtmySections.weather.init()">${isBm ? 'Cuba Semula' : 'Retry'}</button>
         </div>`;
     }
   }
 
   function renderShell(container) {
+    const isBm = KtmyI18n.getLang() === 'bm';
     const cities = KtmyStore.getCities();
-    const cityOptions = cities.map(c =>
-      `<option value="${c.name}" ${c.name === selectedCityName ? 'selected' : ''}>${c.name} (${c.state})</option>`
-    ).join('');
+    const cityOptions = cities.map(c => {
+      const stateName = isBm ? (TRANSLATED_STATES[c.state] || c.state) : c.state;
+      return `<option value="${c.name}" ${c.name === selectedCityName ? 'selected' : ''}>${c.name} (${stateName})</option>`;
+    }).join('');
 
     container.innerHTML = `
       <!-- City Selector Bar -->
       <div class="weather-controls reveal">
         <div class="glass-card" style="padding: var(--space-md); display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: center;">
-          <label style="color: var(--text-secondary); font-size: var(--fs-small); font-weight: var(--fw-medium);">📍 Location</label>
+          <label style="color: var(--text-secondary); font-size: var(--fs-small); font-weight: var(--fw-medium);">📍 ${isBm ? 'Lokasi' : 'Location'}</label>
           <select id="weather-city-select" class="city-select">
             ${cityOptions}
           </select>
@@ -105,7 +142,7 @@
       <div id="weather-live-display" class="reveal">
         <div class="loading-state">
           <div class="spinner"></div>
-          <p>Connecting to weather satellites...</p>
+          <p>${isBm ? 'Menyambung ke satelit cuaca...' : 'Connecting to weather satellites...'}</p>
         </div>
       </div>
     `;
@@ -123,6 +160,7 @@
     const entry = allData.find(r => r.city.name === selectedCityName) || allData[0];
     if (!entry) return;
 
+    const isBm = KtmyI18n.getLang() === 'bm';
     const { city, data } = entry;
     const current = data.current;
     const daily = data.daily;
@@ -138,10 +176,12 @@
 
     // Build 7-day forecast cards
     const now = new Date();
-    const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const dayNames = isBm 
+      ? ['Ahad','Isnin','Selasa','Rabu','Khamis','Jumaat','Sabtu']
+      : ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
     const forecastCards = (daily.time || []).map((dateStr, i) => {
       const d = new Date(dateStr);
-      const name = i === 0 ? 'Today' : dayNames[d.getDay()];
+      const name = i === 0 ? (isBm ? 'Hari Ini' : 'Today') : dayNames[d.getDay()];
       const hi = daily.temperature_2m_max[i];
       const lo = daily.temperature_2m_min[i];
       const dayCode = daily.weather_code[i];
@@ -157,8 +197,8 @@
             <span class="forecast-lo">${Math.round(lo)}°</span>
           </div>
           <div class="forecast-meta">
-            <span title="Rain probability">🌧️ ${rain}%</span>
-            <span title="Wind">💨 ${Math.round(wMax)}</span>
+            <span title="${isBm ? 'Kebarangkalian hujan' : 'Rain probability'}">🌧️ ${rain}%</span>
+            <span title="${isBm ? 'Angin' : 'Wind'}">💨 ${Math.round(wMax)}</span>
           </div>
         </div>`;
     }).join('');
@@ -179,6 +219,8 @@
     // Determine heat index / feel
     const heatIndex = Math.round(temp + (humidity - 40) * 0.1);
 
+    const stateName = isBm ? (TRANSLATED_STATES[city.state] || city.state) : city.state;
+
     display.innerHTML = `
       <!-- Current Conditions Hero -->
       <div class="weather-current-hero glass-card reveal mb-lg">
@@ -187,8 +229,8 @@
           <div class="weather-temp-block">
             <div class="weather-temp-main">${Math.round(temp)}<span class="weather-unit">°C</span></div>
             <div class="weather-desc">${desc}</div>
-            <div class="weather-city-name">📍 ${city.name}, ${city.state}</div>
-            <div class="weather-feels">Feels like ${heatIndex}°C</div>
+            <div class="weather-city-name">📍 ${city.name}, ${stateName}</div>
+            <div class="weather-feels">${isBm ? 'Terasa seperti' : 'Feels like'} ${heatIndex}°C</div>
           </div>
         </div>
 
@@ -197,25 +239,25 @@
           <div class="weather-gauge-item">
             <div class="gauge-icon">💧</div>
             <div class="gauge-val">${humidity}%</div>
-            <div class="gauge-label">Humidity</div>
+            <div class="gauge-label">${isBm ? 'Kelembapan' : 'Humidity'}</div>
             <div class="gauge-bar"><div class="gauge-fill" style="width:${humidity}%; background: var(--accent-blue);"></div></div>
           </div>
           <div class="weather-gauge-item">
             <div class="gauge-icon">💨</div>
             <div class="gauge-val">${Math.round(windSpeed)} <small>km/h</small></div>
-            <div class="gauge-label">Wind ${windDirLabel(windDir)}</div>
+            <div class="gauge-label">${isBm ? 'Angin' : 'Wind'} ${windDirLabel(windDir)}</div>
             <div class="gauge-bar"><div class="gauge-fill" style="width:${Math.min(windSpeed, 100)}%; background: var(--primary);"></div></div>
           </div>
           <div class="weather-gauge-item">
             <div class="gauge-icon">☀️</div>
             <div class="gauge-val">${uvVal}</div>
-            <div class="gauge-label">UV Index</div>
+            <div class="gauge-label">${isBm ? 'Indeks UV' : 'UV Index'}</div>
             <div class="gauge-bar"><div class="gauge-fill" style="width:${uvVal * 9}%; background: ${uvVal > 7 ? 'var(--danger)' : uvVal > 4 ? 'var(--warning)' : 'var(--success)'};"></div></div>
           </div>
           <div class="weather-gauge-item">
             <div class="gauge-icon">🌧️</div>
             <div class="gauge-val">${hourlyRain[currentHour] || 0}%</div>
-            <div class="gauge-label">Rain Chance</div>
+            <div class="gauge-label">${isBm ? 'Peluang Hujan' : 'Rain Chance'}</div>
             <div class="gauge-bar"><div class="gauge-fill" style="width:${hourlyRain[currentHour] || 0}%; background: var(--accent-purple);"></div></div>
           </div>
         </div>
@@ -224,10 +266,10 @@
       <!-- Live Interactive Weather Map -->
       <div class="glass-card reveal mb-lg" style="position:relative; overflow:hidden; padding: 0;">
         <div style="display:flex; justify-content:space-between; align-items:center; padding: var(--space-md) var(--space-xl); border-bottom: 1px solid var(--glass-border); flex-wrap: wrap; gap: var(--space-sm);">
-          <h3 style="margin:0; font-size: var(--fs-h4); display: flex; align-items: center; gap: 8px;">📡 Live Interactive Weather Map</h3>
+          <h3 style="margin:0; font-size: var(--fs-h4); display: flex; align-items: center; gap: 8px;">📡 ${isBm ? 'Peta Cuaca Interaktif Langsung' : 'Live Interactive Weather Map'}</h3>
           <div style="display: flex; align-items: center; gap: var(--space-sm);">
             <a href="https://zoom.earth/#view=${city.lat},${city.lon},8z" target="_blank" class="btn btn-outline" style="font-size: 0.72rem; padding: 4px 10px; display: flex; align-items: center; gap: 4px; text-decoration: none;">
-              🌍 Open in Zoom Earth
+              🌍 ${isBm ? 'Buka di Zoom Earth' : 'Open in Zoom Earth'}
             </a>
             <span class="nav-badge" style="background: var(--primary); color: var(--text-inverse); font-size: 9px; padding: 2px 5px;">LIVE</span>
           </div>
@@ -236,22 +278,22 @@
         <!-- Map Layer Selector -->
         <div class="map-layer-selector" style="display: flex; gap: 8px; padding: 8px 16px; background: rgba(10, 14, 39, 0.4); border-bottom: 1px solid var(--glass-border); overflow-x: auto; scrollbar-width: none;">
           <button class="map-layer-btn active" data-overlay="wind" style="background: rgba(0, 201, 167, 0.12); border: 1px solid var(--primary); color: var(--primary); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 4px; white-space: nowrap; transition: all 0.2s; border-style: solid;">
-            💨 Wind Flow
+            ${isBm ? '💨 Aliran Angin' : '💨 Wind Flow'}
           </button>
           <button class="map-layer-btn" data-overlay="temp" style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-secondary); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; white-space: nowrap; transition: all 0.2s; border-style: solid;">
-            🌡️ Temperature
+            ${isBm ? '🌡️ Suhu' : '🌡️ Temperature'}
           </button>
           <button class="map-layer-btn" data-overlay="rain" style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-secondary); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; white-space: nowrap; transition: all 0.2s; border-style: solid;">
-            🌧️ Rain / Precip
+            ${isBm ? '🌧️ Hujan / Kerpasan' : '🌧️ Rain / Precip'}
           </button>
           <button class="map-layer-btn" data-overlay="radar" style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-secondary); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; white-space: nowrap; transition: all 0.2s; border-style: solid;">
-            📡 Weather Radar
+            ${isBm ? '📡 Radar Cuaca' : '📡 Weather Radar'}
           </button>
           <button class="map-layer-btn" data-overlay="satellite" style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-secondary); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; white-space: nowrap; transition: all 0.2s; border-style: solid;">
-            🛰️ Satellite
+            ${isBm ? '🛰️ Satelit' : '🛰️ Satellite'}
           </button>
           <button class="map-layer-btn" data-overlay="clouds" style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-secondary); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; white-space: nowrap; transition: all 0.2s; border-style: solid;">
-            ☁️ Cloud Cover
+            ${isBm ? '☁️ Litupan Awan' : '☁️ Cloud Cover'}
           </button>
         </div>
 
@@ -267,7 +309,7 @@
 
       <!-- 7-Day Forecast -->
       <div class="reveal mb-lg">
-        <h3 style="margin-bottom: var(--space-md);">📅 7-Day Forecast</h3>
+        <h3 style="margin-bottom: var(--space-md);">📅 ${isBm ? 'Ramalan 7 Hari' : '7-Day Forecast'}</h3>
         <div class="forecast-days-container">
           ${forecastCards}
         </div>
@@ -276,22 +318,22 @@
       <!-- 24-Hour Charts -->
       <div class="grid grid-2 reveal mb-lg" style="gap: var(--space-md);">
         <div class="glass-card">
-          <h4 class="chart-title">🌡️ Temperature (24h)</h4>
+          <h4 class="chart-title">${isBm ? '🌡️ Suhu (24j)' : '🌡️ Temperature (24h)'}</h4>
           <div class="chart-container" style="height:260px;"><canvas id="chart-hourly-temp"></canvas></div>
         </div>
         <div class="glass-card">
-          <h4 class="chart-title">🌧️ Rain Probability (24h)</h4>
+          <h4 class="chart-title">${isBm ? '🌧️ Kebarangkalian Hujan (24j)' : '🌧️ Rain Probability (24h)'}</h4>
           <div class="chart-container" style="height:260px;"><canvas id="chart-hourly-rain"></canvas></div>
         </div>
       </div>
       <div class="glass-card reveal mb-lg">
-        <h4 class="chart-title">💨 Wind Speed (24h)</h4>
+        <h4 class="chart-title">${isBm ? '💨 Kelajuan Angin (24j)' : '💨 Wind Speed (24h)'}</h4>
         <div class="chart-container" style="height:240px;"><canvas id="chart-hourly-wind"></canvas></div>
       </div>
 
       <!-- Malaysia-Wide Status Grid -->
       <div class="reveal">
-        <h3 style="margin-bottom: var(--space-md);">🗺️ Malaysia Weather Overview</h3>
+        <h3 style="margin-bottom: var(--space-md);">🗺️ ${isBm ? 'Tinjauan Cuaca Seluruh Malaysia' : 'Malaysia Weather Overview'}</h3>
         <div id="malaysia-city-grid" class="city-weather-grid">
           ${buildCityGrid(allData)}
         </div>
@@ -308,7 +350,7 @@
       KtmyCharts.createLineChart('chart-hourly-temp', {
         labels: hourlyLabels,
         datasets: [{
-          label: 'Temperature (°C)',
+          label: isBm ? 'Suhu (°C)' : 'Temperature (°C)',
           data: hourlyTemps,
           color: KtmyCharts.COLORS.gold
         }],
@@ -318,7 +360,7 @@
       KtmyCharts.createBarChart('chart-hourly-rain', {
         labels: hourlyLabels,
         datasets: [{
-          label: 'Rain Probability (%)',
+          label: isBm ? 'Peluang Hujan (%)' : 'Rain Probability (%)',
           data: hourlyRain,
           color: KtmyCharts.COLORS.purple
         }],
@@ -328,7 +370,7 @@
       KtmyCharts.createLineChart('chart-hourly-wind', {
         labels: hourlyLabels,
         datasets: [{
-          label: 'Wind Speed (km/h)',
+          label: isBm ? 'Kelajuan Angin (km/j)' : 'Wind Speed (km/h)',
           data: hourlyWinds,
           color: KtmyCharts.COLORS.primary
         }],
@@ -362,7 +404,7 @@
     // Update last-updated timestamp
     const lastUpdated = document.getElementById('weather-last-updated');
     if (lastUpdated) {
-      lastUpdated.textContent = `Updated: ${new Date().toLocaleTimeString('en-MY')}`;
+      lastUpdated.textContent = `${isBm ? 'Dikemas kini' : 'Updated'}: ${new Date().toLocaleTimeString('en-MY')}`;
     }
 
     KtmyI18n.applyTranslations();
@@ -370,6 +412,7 @@
   }
 
   function buildCityGrid(allData) {
+    const isBm = KtmyI18n.getLang() === 'bm';
     return allData.map(({ city, data }) => {
       if (!data || !data.current) return '';
       const t = Math.round(data.current.temperature_2m);
@@ -377,13 +420,14 @@
       const w = Math.round(data.current.wind_speed_10m);
       const c = data.current.weather_code;
       const isActive = city.name === selectedCityName;
+      const stateName = isBm ? (TRANSLATED_STATES[city.state] || city.state) : city.state;
       return `
         <div class="city-weather-tile ${isActive ? 'active' : ''}" 
              onclick="KtmySections.weather.selectCity('${city.name}')"
              style="cursor:pointer;">
           <div class="city-emoji">${wmoToEmoji(c)}</div>
           <div class="city-name">${city.name}</div>
-          <div class="city-state">${city.state}</div>
+          <div class="city-state">${stateName}</div>
           <div class="city-temp">${t}°C</div>
           <div class="city-meta">💧${h}% 💨${w}km/h</div>
         </div>`;
@@ -405,7 +449,10 @@
   window.KtmySections.weather = {
     init,
     translate() {
-      KtmyI18n.applyTranslations();
+      const container = document.getElementById('section-weather-content');
+      if (container) {
+        updateCityDisplay();
+      }
     },
     selectCity(name) {
       selectedCityName = name;

@@ -4,6 +4,7 @@
 
 (function () {
   'use strict';
+  let initialized = false;
   let lastWarnings = null;
   let lastEarthquakes = null;
   let lastFloods = null;
@@ -11,6 +12,14 @@
   function init() {
     const container = document.getElementById('section-safety-content');
     if (!container) return;
+
+    if (lastWarnings !== null && lastEarthquakes !== null && lastFloods !== null) {
+      renderSection(container, lastWarnings, lastEarthquakes, lastFloods);
+      return;
+    }
+
+    if (initialized) return;
+    initialized = true;
 
     const isBm = KtmyI18n.getLang() === 'bm';
     container.innerHTML = `<div class="loading-state"><div class="spinner"></div><p>${isBm ? 'Menyemak amaran keselamatan...' : 'Checking safety alerts...'}</p></div>`;

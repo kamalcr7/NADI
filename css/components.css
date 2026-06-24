@@ -295,10 +295,12 @@
   border-radius: var(--radius-lg);
   padding: var(--space-md);
   min-height: 300px;
+  pointer-events: auto !important;
 }
 
 .chart-container canvas {
   max-height: 400px;
+  pointer-events: auto !important;
 }
 
 .chart-title {

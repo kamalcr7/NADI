@@ -17,6 +17,11 @@
     const container = document.getElementById('section-tourism-content');
     if (!container) return;
 
+    if (initialized && cachedData && cachedData.arrivals && cachedData.arrivals.length > 0) {
+      renderSection(container, cachedData);
+      return;
+    }
+
     // Holidays list and exchange converter fallbacks
     cachedData = {
       holidays: [
@@ -41,6 +46,9 @@
       },
       arrivals: []
     };
+
+    if (initialized) return;
+    initialized = true;
 
     container.innerHTML = `
       <div class="loading-state">
