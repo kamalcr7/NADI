@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — Chart.js Factory with Dark Theme
+   KTMY — Chart.js Factory with Dark Theme
    ============================================================ */
 
 (function () {
@@ -253,7 +253,7 @@
   }
 
   /* --- Expose --- */
-  window.NadiCharts = {
+  window.KtmyCharts = {
     init,
     createLineChart,
     createBarChart,

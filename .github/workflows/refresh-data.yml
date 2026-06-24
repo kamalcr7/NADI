@@ -1,4 +1,4 @@
-name: Refresh NADI Data
+name: Refresh KTMY Data
 
 on:
   # Run every 2 hours
@@ -37,8 +37,8 @@ jobs:
       - name: Commit and push updated data files
         if: steps.check-changes.outputs.changed == 'true'
         run: |
-          git config user.name  "NADI Data Bot"
-          git config user.email "bot@nadi.my"
+          git config user.name  "KTMY Data Bot"
+          git config user.email "bot@ktmy.my"
           git add data/
           git commit -m "chore: refresh data files [$(date -u '+%Y-%m-%d %H:%M UTC')]"
           git push

@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — Economy Dashboard Section (DataStore-powered)
+   KTMY — Economy Dashboard Section (DataStore-powered)
    ============================================================ */
 
 (function () {
@@ -32,7 +32,7 @@
       }
     }
 
-    NadiStore.on('gdp', (data, status) => {
+    KtmyStore.on('gdp', (data, status) => {
       if (status === 'done') {
         gdpData = parseDS(data);
         tryRender();
@@ -42,7 +42,7 @@
       }
     });
 
-    NadiStore.on('inflation', (data, status) => {
+    KtmyStore.on('inflation', (data, status) => {
       if (status === 'done') {
         cpiData = parseDS(data);
         tryRender();
@@ -52,7 +52,7 @@
       }
     });
 
-    NadiStore.on('trade', (data, status) => {
+    KtmyStore.on('trade', (data, status) => {
       if (status === 'done') {
         tradeData = parseDS(data);
         tryRender();
@@ -131,7 +131,7 @@
         </div>
         <div class="glass-card reveal stat-highlight">
           <div class="stat-icon">📈</div>
-          <div class="stat-number ${gdpYoy >= 0 ? 'text-success' : 'text-danger'}">${growthDisplay}</div>
+          <div class="stat-number ${gdpYoyVal >= 0 ? 'text-success' : 'text-danger'}">${growthDisplay}</div>
           <div class="stat-label">GDP Growth (YoY)</div>
           <div class="stat-date">${fmtGdpDate}</div>
         </div>
@@ -177,13 +177,13 @@
     setTimeout(() => {
       // GDP Chart
       if (displayGdp.length > 0) {
-        NadiCharts.destroyChart('chart-gdp-trend');
-        NadiCharts.createAreaChart('chart-gdp-trend', {
+        KtmyCharts.destroyChart('chart-gdp-trend');
+        KtmyCharts.createAreaChart('chart-gdp-trend', {
           labels: displayGdp.map(r => new Date(r.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })),
           datasets: [{
             label: 'Real GDP (RM Million)',
             data: displayGdp.map(r => r.value),
-            color: NadiCharts.COLORS.primary
+            color: KtmyCharts.COLORS.primary
           }],
           yLabel: 'RM Million'
         });
@@ -191,13 +191,13 @@
 
       // CPI Chart
       if (displayCpi.length > 0) {
-        NadiCharts.destroyChart('chart-cpi-trend');
-        NadiCharts.createLineChart('chart-cpi-trend', {
+        KtmyCharts.destroyChart('chart-cpi-trend');
+        KtmyCharts.createLineChart('chart-cpi-trend', {
           labels: displayCpi.map(r => new Date(r.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })),
           datasets: [{
             label: 'CPI Index',
             data: displayCpi.map(r => r.value || r.index || 0),
-            color: NadiCharts.COLORS.gold
+            color: KtmyCharts.COLORS.gold
           }],
           yLabel: 'Index'
         });
@@ -205,21 +205,21 @@
 
       // Trade Chart
       if (displayTrade.length > 0) {
-        NadiCharts.destroyChart('chart-trade-trend');
-        NadiCharts.createLineChart('chart-trade-trend', {
+        KtmyCharts.destroyChart('chart-trade-trend');
+        KtmyCharts.createLineChart('chart-trade-trend', {
           labels: displayTrade.map(r => new Date(r.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })),
           datasets: [
             {
-              label: NadiI18n.getLang() === 'bm' ? 'Eksport (RM Juta)' : 'Exports (RM Billion)',
+              label: KtmyI18n.getLang() === 'bm' ? 'Eksport (RM Juta)' : 'Exports (RM Billion)',
               data: displayTrade.map(r => parseFloat(r.exports || 0) / 1e9),
-              color: NadiCharts.COLORS.primary,
+              color: KtmyCharts.COLORS.primary,
               fill: true,
               extra: { backgroundColor: 'rgba(0, 201, 167, 0.1)' }
             },
             {
-              label: NadiI18n.getLang() === 'bm' ? 'Import (RM Juta)' : 'Imports (RM Billion)',
+              label: KtmyI18n.getLang() === 'bm' ? 'Import (RM Juta)' : 'Imports (RM Billion)',
               data: displayTrade.map(r => parseFloat(r.imports || 0) / 1e9),
-              color: NadiCharts.COLORS.blue,
+              color: KtmyCharts.COLORS.blue,
               fill: true,
               extra: { backgroundColor: 'rgba(77, 124, 254, 0.1)' }
             }
@@ -229,13 +229,13 @@
       }
     }, 0);
 
-    NadiI18n.applyTranslations();
-    NadiAnimations.initScrollReveals();
+    KtmyI18n.applyTranslations();
+    KtmyAnimations.initScrollReveals();
   }
 
-  window.NadiSections = window.NadiSections || {};
-  window.NadiSections.economy = {
+  window.KtmySections = window.KtmySections || {};
+  window.KtmySections.economy = {
     init,
-    translate() { NadiI18n.applyTranslations(); }
+    translate() { KtmyI18n.applyTranslations(); }
   };
 })();

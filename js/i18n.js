@@ -1,11 +1,11 @@
 /* ============================================================
-   NADI — Internationalization (BM / EN)
+   KTMY — Internationalization (BM / EN)
    ============================================================ */
 
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'nadi_lang';
+  const STORAGE_KEY = 'ktmy_lang';
   let currentLang = localStorage.getItem(STORAGE_KEY) || 'en';
   const listeners = [];
 
@@ -201,7 +201,7 @@
       'footer.api_docs': 'API Documentation',
       'footer.open_data': 'Open Data Portal',
       'footer.dosm': 'DOSM Portal',
-      'footer.copyright': '© 2025 NADI. Open data, open future.',
+      'footer.copyright': '© 2025 KTMY. Open data, open future.',
       'footer.disclaimer': 'Data sourced from official Malaysian government APIs.',
 
       /* --- Common --- */
@@ -234,7 +234,7 @@
       'nav.tourism': 'Pelancongan',
 
       /* --- Hero --- */
-      'hero.title': 'Nadi',
+      'hero.title': 'Ktmy',
       'hero.title.highlight': 'Malaysia',
       'hero.subtitle': 'Data masa nyata, maklumat dan panduan penting — semua di satu tempat. Untuk rakyat Malaysia, ekspatriat, dan pelancong.',
       'hero.cta': 'Terokai Data',
@@ -406,7 +406,7 @@
       'footer.api_docs': 'Dokumentasi API',
       'footer.open_data': 'Portal Data Terbuka',
       'footer.dosm': 'Portal DOSM',
-      'footer.copyright': '© 2025 NADI. Data terbuka, masa depan terbuka.',
+      'footer.copyright': '© 2025 KTMY. Data terbuka, masa depan terbuka.',
       'footer.disclaimer': 'Data diperolehi daripada API rasmi kerajaan Malaysia.',
 
       /* --- Common --- */
@@ -461,7 +461,7 @@
   }
 
   /* ---- Expose globally ---- */
-  window.NadiI18n = {
+  window.KtmyI18n = {
     t,
     setLang,
     getLang,

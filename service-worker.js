@@ -1,11 +1,11 @@
 /* ============================================================
-   NADI — Service Worker for Offline & PWA support
+   KTMY — Service Worker for Offline & PWA support
    ============================================================
    Strategy: Cache-first for static assets, network-first for
    data files and API calls.
    ============================================================ */
 
-const CACHE_NAME = 'nadi-v1';
+const CACHE_NAME = 'ktmy-v1';
 
 const STATIC_ASSETS = [
   '/',

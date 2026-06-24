@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "fetched_at": "2026-06-23T00:00:00.000Z",
-    "source": "LHDN, BSH, EPF, MOF official portals",
+    "fetched_at": "2026-06-24T01:23:00.000Z",
+    "source": "LHDN, BSH, EPF, MOF, MOH, KPWKM official portals",
     "note": "Static curated data. Updated via cron when policy changes detected."
   },
   "data": {
@@ -40,19 +40,20 @@
         }
       },
       "how_to_apply": [
-        "Register at https://bsh.hasil.gov.my",
+        "Register at https://bantuantunai.hasil.gov.my",
         "Update bank details via MyTax portal",
         "Check status via MyTax or STR hotline 1-800-88-2727"
       ],
       "payment_schedule": "January, April, June, October (quarterly installments)",
-      "website": "https://bsh.hasil.gov.my"
+      "website": "https://bantuantunai.hasil.gov.my"
     },
     "bsh": {
       "name": "Bantuan Sara Hidup (BSH)",
       "description": "Household living cost assistance (predecessor to STR, now merged)",
       "category": "financial_aid",
       "status": "Merged into STR since 2020",
-      "note": "BSH has been replaced by Sumbangan Tunai Rahmah (STR)"
+      "note": "BSH has been replaced by Sumbangan Tunai Rahmah (STR)",
+      "website": "https://bantuantunai.hasil.gov.my"
     },
     "epf_isaraan": {
       "name": "EPF i-Saraan",
@@ -73,7 +74,7 @@
         "Make voluntary contributions monthly",
         "Government matching credited annually"
       ],
-      "website": "https://www.kwsp.gov.my"
+      "website": "https://www.kwsp.gov.my/member/contribution/i-saraan"
     },
     "epf_isuri": {
       "name": "EPF i-Suri",
@@ -88,7 +89,7 @@
         "Husband is an active EPF member",
         "Wife is not an active EPF member"
       ],
-      "website": "https://www.kwsp.gov.my"
+      "website": "https://www.kwsp.gov.my/member/contribution/i-suri"
     },
     "fuel_subsidy": {
       "name": "Fuel Subsidy & Price Control Mechanism",
@@ -178,32 +179,44 @@
         {
           "name": "Bantuan Awal Persekolahan (BAP)",
           "amount": "RM150/student",
-          "eligibility": "B40 students"
+          "eligibility": "Primary & Secondary school students from households earning ≤ RM8,000",
+          "description": "One-off assistance of RM150 to help prepare school supplies for school-going children.",
+          "website": "https://www.moe.gov.my"
         },
         {
           "name": "PTPTN (Higher Education Loan)",
-          "amount": "Covers tuition + living",
-          "eligibility": "Malaysian students in IPTA/IPTS"
+          "amount": "Covers tuition + living expenses",
+          "eligibility": "Malaysian students accepted into accredited diploma/degree courses",
+          "description": "Low-interest study financing for tertiary students at public and private colleges/universities.",
+          "website": "https://www.ptptn.gov.my"
         },
         {
-          "name": "JPA Scholarship",
-          "amount": "Full scholarship",
-          "eligibility": "Top SPM/STPM students"
-        },
-        {
-          "name": "MARA Scholarship",
-          "amount": "Full scholarship",
-          "eligibility": "Bumiputera students"
-        },
-        {
-          "name": "Bank Negara Scholarship",
+          "name": "JPA Program Khas Scholarship",
           "amount": "Full scholarship + allowance",
-          "eligibility": "Top performers in economics/finance"
+          "eligibility": "Top SPM/STPM scorers in various critical fields",
+          "description": "Federal government scholarship program for outstanding students pursuing local or overseas degrees.",
+          "website": "https://esilav2.jpa.gov.my"
         },
         {
-          "name": "HRD Corp Training",
+          "name": "MARA Education Loans & Sponsorship",
+          "amount": "Convertible study loans",
+          "eligibility": "Bumiputera students studying STEM, technical, and business fields",
+          "description": "Study sponsorship with convertible loan options (up to 90% discount based on academic performance).",
+          "website": "https://www.mara.gov.my"
+        },
+        {
+          "name": "Bank Negara Malaysia Scholarship",
+          "amount": "Full scholarship + internship placement",
+          "eligibility": "Top scorers majoring in Economics, Finance, Actuarial Science, Law, and IT",
+          "description": "Prestigious scholarships for undergraduate and postgraduate studies at top universities.",
+          "website": "https://www.bnm.gov.my/careers/scholarships"
+        },
+        {
+          "name": "HRD Corp Training Grants",
           "amount": "Up to RM7,000/course",
-          "eligibility": "Employed workers"
+          "eligibility": "Malaysian employees of registered levy-paying companies",
+          "description": "Funding and subsidies to help workers upskill and obtain professional certifications.",
+          "website": "https://hrdcorp.gov.my"
         }
       ]
     },
@@ -215,21 +228,22 @@
         {
           "name": "PeKa B40",
           "description": "Free health screening for B40",
-          "eligibility": "Household income <RM4,000/month",
-          "website": "https://pekab40.moh.gov.my",
+          "eligibility": "STR recipients and spouses aged 40 and above",
+          "website": "https://protecthealth.com.my/pekab40/",
           "amount": "Free screening up to RM350"
         },
         {
           "name": "mySalam",
           "description": "Free insurance for B40",
-          "eligibility": "B40 households",
-          "coverage": "Critical illness (36 conditions) + hospitalisation",
+          "eligibility": "STR recipients aged 18-65",
+          "coverage": "Critical illness (36 conditions) + hospitalisation benefits",
           "amount": "Free insurance (up to RM8,000)",
           "website": "https://www.mysalam.com.my"
         },
         {
           "name": "MySejahtera",
           "description": "Digital health platform",
+          "eligibility": "All residents in Malaysia",
           "features": [
             "Vaccination records",
             "Hospital appointments",
@@ -241,9 +255,38 @@
         {
           "name": "Talian Kasih",
           "description": "Mental health & crisis support",
+          "eligibility": "All individuals in distress or domestic crisis",
           "hotline": "15999",
           "amount": "24/7 crisis support (free)",
-          "website": "https://www.talankasih.gov.my"
+          "website": "https://taliankasih.kpwkm.gov.my"
+        }
+      ]
+    },
+    "business": {
+      "name": "SME & Business Grants",
+      "description": "Financial grants and micro-financing for SMEs and startups",
+      "category": "business",
+      "programs": [
+        {
+          "name": "SME Digitalisation Grant",
+          "description": "50% matching grant up to RM5,000 to help micro-businesses and SMEs adopt digital tools.",
+          "eligibility": "Micro-businesses & SMEs registered in Malaysia",
+          "website": "https://mdec.my",
+          "amount": "Up to RM5,000 matching"
+        },
+        {
+          "name": "TERAJU Superb Grant",
+          "description": "Grants for Bumiputera startups to launch tech-enabled innovative products.",
+          "eligibility": "Bumiputera-owned Startups",
+          "website": "https://www.teraju.gov.my",
+          "amount": "Up to RM500,000"
+        },
+        {
+          "name": "TEKUN Niaga Financing",
+          "description": "Fast micro-financing for small traders and micro-entrepreneurs.",
+          "eligibility": "Micro-entrepreneurs and small business owners",
+          "website": "https://www.tekun.gov.my",
+          "amount": "RM1,000 to RM100,000"
         }
       ]
     },
@@ -341,7 +384,13 @@
         ]
       },
       "note": "Full targeted RON95 subsidy implementation expected in 2025-2026",
-      "website": "https://www.kementerian.kpwkm.gov.my"
+      "website": "https://budimadani.gov.my"
+    },
+    "customs": {
+      "name": "Customs Duty Relief",
+      "description": "Duty exemptions for specific imports and personal belongings",
+      "category": "tax",
+      "website": "https://www.customs.gov.my"
     },
     "sara": {
       "name": "Sumbangan Asas Rahmah (SARA)",

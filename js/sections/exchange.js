@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — Currency Exchange Section Module
+   KTMY — Currency Exchange Section Module
    ============================================================ */
 
 (function () {
@@ -35,7 +35,7 @@
         <p>Loading exchange rates...</p>
       </div>`;
 
-    NadiStore.on('exchange', (data, status) => {
+    KtmyStore.on('exchange', (data, status) => {
       if (status === 'loading') return;
       let records = [];
       if (Array.isArray(data)) records = data;
@@ -46,7 +46,7 @@
           <div class="error-state">
             <div class="error-icon">💱</div>
             <p>Could not load exchange rates.</p>
-            <button class="btn btn-outline" onclick="NadiStore.refresh('exchange')">Retry</button>
+            <button class="btn btn-outline" onclick="KtmyStore.refresh('exchange')">Retry</button>
           </div>`;
         return;
       }
@@ -60,7 +60,7 @@
     const latest = records[records.length - 1];
     
     const formattedDate = new Date(latest.date).toLocaleDateString(
-      NadiI18n.getLang() === 'bm' ? 'ms-MY' : 'en-US',
+      KtmyI18n.getLang() === 'bm' ? 'ms-MY' : 'en-US',
       { day: 'numeric', month: 'long', year: 'numeric' }
     );
 
@@ -101,7 +101,7 @@
     // Render sparklines
     setTimeout(() => {
       // Destroy old sparklines
-      Object.keys(sparklines).forEach(key => NadiCharts.destroyChart(key));
+      Object.keys(sparklines).forEach(key => KtmyCharts.destroyChart(key));
 
       CURRENCIES.forEach(c => {
         const canvasId = `sparkline-${c.code.toLowerCase()}`;
@@ -111,16 +111,16 @@
 
         if (dataPoints.length > 0) {
           const color = dataPoints[dataPoints.length - 1] >= dataPoints[0] 
-            ? NadiCharts.COLORS.primary 
-            : NadiCharts.COLORS.danger;
-          sparklines[canvasId] = NadiCharts.createSparkline(canvasId, dataPoints, color);
+            ? KtmyCharts.COLORS.primary 
+            : KtmyCharts.COLORS.danger;
+          sparklines[canvasId] = KtmyCharts.createSparkline(canvasId, dataPoints, color);
         }
       });
     }, 0);
 
     // Apply translations
-    NadiI18n.applyTranslations();
-    NadiAnimations.initScrollReveals();
+    KtmyI18n.applyTranslations();
+    KtmyAnimations.initScrollReveals();
   }
 
   function translate() {
@@ -130,6 +130,6 @@
     }
   }
 
-  window.NadiSections = window.NadiSections || {};
-  window.NadiSections.exchange = { init, translate };
+  window.KtmySections = window.KtmySections || {};
+  window.KtmySections.exchange = { init, translate };
 })();

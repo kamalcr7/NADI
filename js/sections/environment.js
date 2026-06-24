@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — Environment & Energy Section Module
+   KTMY — Environment & Energy Section Module
    ============================================================ */
 
 (function () {
@@ -21,11 +21,11 @@
     // High-fidelity environment dataset
     cachedData = {
       energy_mix: [
-        { source: 'Natural Gas (Gas Asli)', percentage: 42.1, color: NadiCharts.COLORS.blue },
-        { source: 'Coal (Arang Batu)', percentage: 37.4, color: NadiCharts.COLORS.crimson },
-        { source: 'Hydroelectric (Empangan Hidro)', percentage: 15.6, color: NadiCharts.COLORS.primary },
-        { source: 'Solar PV (Suria)', percentage: 4.1, color: NadiCharts.COLORS.gold },
-        { source: 'Biomass & Others (Biomas & Lain)', percentage: 0.8, color: NadiCharts.COLORS.purple }
+        { source: 'Natural Gas (Gas Asli)', percentage: 42.1, color: KtmyCharts.COLORS.blue },
+        { source: 'Coal (Arang Batu)', percentage: 37.4, color: KtmyCharts.COLORS.crimson },
+        { source: 'Hydroelectric (Empangan Hidro)', percentage: 15.6, color: KtmyCharts.COLORS.primary },
+        { source: 'Solar PV (Suria)', percentage: 4.1, color: KtmyCharts.COLORS.gold },
+        { source: 'Biomass & Others (Biomas & Lain)', percentage: 0.8, color: KtmyCharts.COLORS.purple }
       ],
       stats: {
         forest_cover: 54.3, // % of land area
@@ -107,13 +107,13 @@
 
     // Render chart
     setTimeout(() => {
-      NadiCharts.destroyChart('chart-environment-mix');
+      KtmyCharts.destroyChart('chart-environment-mix');
 
       const labels = energy_mix.map(e => e.source);
       const values = energy_mix.map(e => e.percentage);
       const colors = energy_mix.map(e => e.color);
 
-      chartInstance = NadiCharts.createDoughnutChart('chart-environment-mix', {
+      chartInstance = KtmyCharts.createDoughnutChart('chart-environment-mix', {
         labels,
         data: values,
         colors
@@ -121,8 +121,8 @@
     }, 0);
 
     // Apply translations
-    NadiI18n.applyTranslations();
-    NadiAnimations.initScrollReveals();
+    KtmyI18n.applyTranslations();
+    KtmyAnimations.initScrollReveals();
   }
 
   function translate() {
@@ -132,6 +132,6 @@
     }
   }
 
-  window.NadiSections = window.NadiSections || {};
-  window.NadiSections.environment = { init, translate };
+  window.KtmySections = window.KtmySections || {};
+  window.KtmySections.environment = { init, translate };
 })();

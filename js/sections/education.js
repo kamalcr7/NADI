@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — Education Section Module
+   KTMY — Education Section Module
    ============================================================ */
 
 (function () {
@@ -21,11 +21,11 @@
     // Load data
     cachedData = {
       enrollment: [
-        { level: 'Primary (Rendah)', students: 3012000, color: NadiCharts.COLORS.primary },
-        { level: 'Lower Secondary (Menengah Rendah)', students: 1224000, color: NadiCharts.COLORS.blue },
-        { level: 'Upper Secondary (Menengah Atas)', students: 840000, color: NadiCharts.COLORS.gold },
-        { level: 'Post-Secondary (Pra-U / STPM)', students: 104000, color: NadiCharts.COLORS.purple },
-        { level: 'Tertiary (Universiti / UA)', students: 580000, color: NadiCharts.COLORS.orange }
+        { level: 'Primary (Rendah)', students: 3012000, color: KtmyCharts.COLORS.primary },
+        { level: 'Lower Secondary (Menengah Rendah)', students: 1224000, color: KtmyCharts.COLORS.blue },
+        { level: 'Upper Secondary (Menengah Atas)', students: 840000, color: KtmyCharts.COLORS.gold },
+        { level: 'Post-Secondary (Pra-U / STPM)', students: 104000, color: KtmyCharts.COLORS.purple },
+        { level: 'Tertiary (Universiti / UA)', students: 580000, color: KtmyCharts.COLORS.orange }
       ],
       schools: {
         primary: 7780,
@@ -107,12 +107,12 @@
 
     // Render chart
     setTimeout(() => {
-      NadiCharts.destroyChart('chart-education-enrollment');
+      KtmyCharts.destroyChart('chart-education-enrollment');
 
       const labels = enrollment.map(e => e.level);
       const values = enrollment.map(e => e.students / 1000); // in thousands
 
-      chartInstance = NadiCharts.createBarChart('chart-education-enrollment', {
+      chartInstance = KtmyCharts.createBarChart('chart-education-enrollment', {
         labels,
         datasets: [{
           label: 'Students (Thousands)',
@@ -124,8 +124,8 @@
     }, 0);
 
     // Apply translations
-    NadiI18n.applyTranslations();
-    NadiAnimations.initScrollReveals();
+    KtmyI18n.applyTranslations();
+    KtmyAnimations.initScrollReveals();
   }
 
   function translate() {
@@ -135,6 +135,6 @@
     }
   }
 
-  window.NadiSections = window.NadiSections || {};
-  window.NadiSections.education = { init, translate };
+  window.KtmySections = window.KtmySections || {};
+  window.KtmySections.education = { init, translate };
 })();

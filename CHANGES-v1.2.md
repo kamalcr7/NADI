@@ -1,4 +1,4 @@
-# NADI v1.2 — Changelog & Developer Guide
+# KTMY v1.2 — Changelog & Developer Guide
 
 **Release date:** 2026-06-23
 
@@ -72,18 +72,18 @@ Phase 4 added to the cron pipeline:
 │                                                         │
 │  index.html (SPA shell)                                │
 │       │                                                 │
-│       ├── js/datastore.js (NadiStore)                  │
+│       ├── js/datastore.js (KtmyStore)                  │
 │       │     Loads data/*.json via fetch()               │
-│       │     Caches in localStorage (prefix: nadi_v7_)  │
-│       │     Event pattern: NadiStore.on(key, callback) │
+│       │     Caches in localStorage (prefix: ktmy_v7_)  │
+│       │     Event pattern: KtmyStore.on(key, callback) │
 │       │                                                 │
 │       ├── js/app.js (Router)                           │
 │       │     Hash routing: #government, #tariffs, etc.   │
 │       │     Tab switching + lazy module init            │
 │       │                                                 │
 │       └── js/sections/*.js (Modules)                   │
-│             Each exports: NadiSections.<name>.init()    │
-│             Subscribe to data via NadiStore.on()        │
+│             Each exports: KtmySections.<name>.init()    │
+│             Subscribe to data via KtmyStore.on()        │
 │             Render HTML into #section-<name>-content    │
 └─────────────────────────────────────────────────────────┘
 ```
@@ -124,7 +124,7 @@ In `js/datastore.js`, add the key to the `DATASETS` array:
     if (!container || initialized) return;
     initialized = true;
 
-    NadiStore.on('my_new_data', (data, status) => {
+    KtmyStore.on('my_new_data', (data, status) => {
       if (status === 'loading' || !data) {
         container.innerHTML = '<div class="loading-state"><div class="spinner"></div></div>';
         return;
@@ -138,8 +138,8 @@ In `js/datastore.js`, add the key to the `DATASETS` array:
     container.innerHTML = `<div class="section-header">...</div>`;
   }
 
-  window.NadiSections = window.NadiSections || {};
-  window.NadiSections.my_section = { init };
+  window.KtmySections = window.KtmySections || {};
+  window.KtmySections.my_section = { init };
 })();
 ```
 
@@ -213,7 +213,7 @@ These datasets contain hand-curated content that doesn't have public APIs:
 
 ## Deployment
 
-- **Hosting:** Cloudflare Pages (project: `nadi-malaysia`)
-- **Domain:** `nadi.kamalrajnaidu.com` (CNAME → nadi-malaysia.pages.dev)
+- **Hosting:** Cloudflare Pages (project: `ktmy-malaysia`)
+- **Domain:** `ktmy.kamalrajnaidu.com` (CNAME → ktmy-malaysia.pages.dev)
 - **Deploy trigger:** Any git push to `main` branch
 - **Data refresh:** GitHub Actions cron every 2 hours → fetch script → commit data → Pages auto-deploys

@@ -1,12 +1,12 @@
-# NADI — Malaysia's All-in-One Data Dashboard
+# KTMY — Malaysia's All-in-One Data Dashboard
 
-NADI is a premium, high-fidelity, real-time open data dashboard for Malaysia. It aggregates meteorological, economic, financial, demographic, social, and transit indicators into a responsive, unified tabbed interface.
+KTMY is a premium, high-fidelity, real-time open data dashboard for Malaysia. It aggregates meteorological, economic, financial, demographic, social, and transit indicators into a responsive, unified tabbed interface.
 
 ---
 
 ## 🏗️ Architecture & Data Flow
 
-NADI is built with a **Static-First, Server-Side Aggregation** model. It separates data retrieval from frontend rendering to maximize speed, eliminate API rate limits, and ensure 100% availability.
+KTMY is built with a **Static-First, Server-Side Aggregation** model. It separates data retrieval from frontend rendering to maximize speed, eliminate API rate limits, and ensure 100% availability.
 
 ```mermaid
 graph TD
@@ -14,7 +14,7 @@ graph TD
     B[Open-Meteo API] -->|scripts/fetch-data.js| C
     C -->|Fetch on page load| D[js/datastore.js]
     D -->|Local Storage Cache| D
-    D -->|NadiStore.on| E[js/sections/*.js Modules]
+    D -->|KtmyStore.on| E[js/sections/*.js Modules]
     E -->|Render HTML & Draw Charts| F[Browser DOM]
 ```
 
@@ -25,12 +25,12 @@ graph TD
 
 ### 2. The DataStore (`js/datastore.js`)
 *   **Role**: The frontend state manager.
-*   **Caching Strategy**: On page load, it fetches the static `/data/*.json` files. It saves successful queries to `localStorage` (prefix: `nadi_v7_`).
+*   **Caching Strategy**: On page load, it fetches the static `/data/*.json` files. It saves successful queries to `localStorage` (prefix: `ktmy_v7_`).
 *   **Fallbacks**: If a static file is missing or corrupted, it automatically attempts a direct fallback fetch to the live `data.gov.my` API as a last resort.
 
 ### 3. Cache-Busting Mechanism
 *   **Script Cache-Busting**: Browsers heavily cache static Javascript files. To force immediate updates, all scripts in `index.html` include a versioned query parameter (e.g., `js/sections/economy.js?v=7`).
-*   **Local Storage Invalidation**: Bumping the `STORE_VERSION = 'v7'` in `datastore.js` changes the `localStorage` prefix to `nadi_v7_`, instantly evicting stale cached objects across all client browsers.
+*   **Local Storage Invalidation**: Bumping the `STORE_VERSION = 'v7'` in `datastore.js` changes the `localStorage` prefix to `ktmy_v7_`, instantly evicting stale cached objects across all client browsers.
 
 ---
 
@@ -100,9 +100,9 @@ See `CHANGES-v1.2.md` for full details.
 ## 🔀 Section Module Integration
 
 Each module in `js/sections/` implements a standard lifecycle:
-1.  **Registering**: Appends itself to the global `window.NadiSections` namespace.
-2.  **Initializing (`init`)**: Sets up DOM containers and subscribes to data keys in `NadiStore`.
-3.  **Rendering (`renderSection`)**: Sorts, filters, scales metrics, inserts layouts, and calls `NadiCharts` wrappers to draw canvas charts.
+1.  **Registering**: Appends itself to the global `window.KtmySections` namespace.
+2.  **Initializing (`init`)**: Sets up DOM containers and subscribes to data keys in `KtmyStore`.
+3.  **Rendering (`renderSection`)**: Sorts, filters, scales metrics, inserts layouts, and calls `KtmyCharts` wrappers to draw canvas charts.
 4.  **Localizing (`translate`)**: Re-renders text and formats numbers when language toggles are clicked.
 
 ### Example: Economy Section (`js/sections/economy.js`)
@@ -122,7 +122,7 @@ Each module in `js/sections/` implements a standard lifecycle:
 
 *   `js/i18n.js` contains a comprehensive lookup dictionary for English (`en`) and Bahasa Malaysia (`bm`).
 *   Translate static HTML elements using the `data-i18n="key"` attribute.
-*   Translate dynamic elements inside scripts by calling `NadiI18n.t('key')` or `NadiI18n.getLang()`.
+*   Translate dynamic elements inside scripts by calling `KtmyI18n.t('key')` or `KtmyI18n.getLang()`.
 
 ---
 
@@ -134,8 +134,8 @@ Each module in `js/sections/` implements a standard lifecycle:
 ### Setup & Run
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/kamalcr7/NADI.git
-    cd NADI
+    git clone https://github.com/kamalcr7/KTMY.git
+    cd KTMY
     ```
 2.  Install development dependencies (uses `http-server` locally):
     ```bash
@@ -155,8 +155,8 @@ Each module in `js/sections/` implements a standard lifecycle:
 
 ## 💡 Developer Guidelines for Agents & Collaborators
 
-When modifying NADI, preserve these core design guidelines:
-1.  **Keep it Static-First**: Do not introduce direct live API fetches in the frontend code. If you add a new API feature, add it to `scripts/fetch-data.js` first, save it to `data/`, and fetch it via `NadiStore.on()`.
+When modifying KTMY, preserve these core design guidelines:
+1.  **Keep it Static-First**: Do not introduce direct live API fetches in the frontend code. If you add a new API feature, add it to `scripts/fetch-data.js` first, save it to `data/`, and fetch it via `KtmyStore.on()`.
 2.  **Filter Dimension Datasets**: Catalogue datasets from `data.gov.my` often merge absolute values, QoQ, YoY, and individual divisions. Always filter records (e.g. `series === 'abs'`, `division === 'overall'`) before drawing charts to avoid oscillation bugs.
 3.  **Scale Correctly**: Be mindful of units. The raw APIs report some statistics in absolute figures, some in thousands, and some in millions. Document the scaling conversions in your modules.
 4.  **Bust the Cache**: If you change any dynamic logic in a script file, bump the version query parameter in `index.html` (e.g., change `?v=7` to `?v=8`) and the `STORE_VERSION` in `datastore.js`.

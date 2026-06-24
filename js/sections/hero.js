@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — Hero Section Module with Live DataStore Status
+   KTMY — Hero Section Module with Live DataStore Status
    ============================================================ */
 
 (function () {
@@ -72,8 +72,8 @@
       </div>
     `;
 
-    NadiI18n.applyTranslations();
-    NadiAnimations.initScrollReveals();
+    KtmyI18n.applyTranslations();
+    KtmyAnimations.initScrollReveals();
   }
 
   function startTickers() {
@@ -94,7 +94,7 @@
       timeEl.textContent = `${hh}:${mm}:${ss}`;
 
       if (dateEl) {
-        const lang = NadiI18n.getLang() === 'bm' ? 'ms-MY' : 'en-US';
+        const lang = KtmyI18n.getLang() === 'bm' ? 'ms-MY' : 'en-US';
         dateEl.textContent = myt.toLocaleDateString(lang, { day: 'numeric', month: 'short', year: 'numeric' }) + ' (MYT)';
       }
     }
@@ -119,11 +119,11 @@
   function translate() {
     const container = document.getElementById('section-hero-content');
     if (container) {
-      NadiI18n.applyTranslations();
+      KtmyI18n.applyTranslations();
       startTickers();
     }
   }
 
-  window.NadiSections = window.NadiSections || {};
-  window.NadiSections.hero = { init, translate };
+  window.KtmySections = window.KtmySections || {};
+  window.KtmySections.hero = { init, translate };
 })();

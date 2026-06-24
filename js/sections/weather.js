@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — Advanced Weather Station Module
+   KTMY — Advanced Weather Station Module
    Uses Open-Meteo API for local city forecasts &
    Windy.com interactive satellite/radar/wind map.
    ============================================================ */
@@ -13,12 +13,12 @@
 
   /* --- Weather Code Helpers --- */
   function wmoToDesc(code) {
-    return (NadiStore.WMO_CODES && NadiStore.WMO_CODES[code]) || 'Unknown';
+    return (KtmyStore.WMO_CODES && KtmyStore.WMO_CODES[code]) || 'Unknown';
   }
 
   // WMO Weather Emoji mapping helper
   function wmoToEmoji(code) {
-    return (NadiStore.WMO_EMOJI && NadiStore.WMO_EMOJI[code]) || '⛅';
+    return (KtmyStore.WMO_EMOJI && KtmyStore.WMO_EMOJI[code]) || '⛅';
   }
 
   function windDirLabel(deg) {
@@ -43,7 +43,7 @@
     renderShell(container);
 
     // Subscribe to Open-Meteo data
-    NadiStore.on('openmeteo_all', (data, status) => {
+    KtmyStore.on('openmeteo_all', (data, status) => {
       if (status === 'loading') {
         showStatus('loading');
         return;
@@ -61,7 +61,7 @@
     });
 
     // If already cached, data callback fires immediately; also trigger fetch
-    NadiStore.fetchWeather();
+    KtmyStore.fetchWeather();
   }
 
   function showStatus(type) {
@@ -78,13 +78,13 @@
         <div class="error-state">
           <div class="error-icon">🌡️</div>
           <p>Could not load weather data. Please check your connection.</p>
-          <button class="btn btn-outline" onclick="NadiSections.weather.init()">Retry</button>
+          <button class="btn btn-outline" onclick="KtmySections.weather.init()">Retry</button>
         </div>`;
     }
   }
 
   function renderShell(container) {
-    const cities = NadiStore.getCities();
+    const cities = KtmyStore.getCities();
     const cityOptions = cities.map(c =>
       `<option value="${c.name}" ${c.name === selectedCityName ? 'selected' : ''}>${c.name} (${c.state})</option>`
     ).join('');
@@ -301,36 +301,36 @@
     // Render charts & Map bindings
     setTimeout(() => {
       // Draw hourly charts
-      NadiCharts.destroyChart('chart-hourly-temp');
-      NadiCharts.destroyChart('chart-hourly-rain');
-      NadiCharts.destroyChart('chart-hourly-wind');
+      KtmyCharts.destroyChart('chart-hourly-temp');
+      KtmyCharts.destroyChart('chart-hourly-rain');
+      KtmyCharts.destroyChart('chart-hourly-wind');
 
-      NadiCharts.createLineChart('chart-hourly-temp', {
+      KtmyCharts.createLineChart('chart-hourly-temp', {
         labels: hourlyLabels,
         datasets: [{
           label: 'Temperature (°C)',
           data: hourlyTemps,
-          color: NadiCharts.COLORS.gold
+          color: KtmyCharts.COLORS.gold
         }],
         yLabel: '°C'
       });
 
-      NadiCharts.createBarChart('chart-hourly-rain', {
+      KtmyCharts.createBarChart('chart-hourly-rain', {
         labels: hourlyLabels,
         datasets: [{
           label: 'Rain Probability (%)',
           data: hourlyRain,
-          color: NadiCharts.COLORS.purple
+          color: KtmyCharts.COLORS.purple
         }],
         yLabel: '%'
       });
 
-      NadiCharts.createLineChart('chart-hourly-wind', {
+      KtmyCharts.createLineChart('chart-hourly-wind', {
         labels: hourlyLabels,
         datasets: [{
           label: 'Wind Speed (km/h)',
           data: hourlyWinds,
-          color: NadiCharts.COLORS.primary
+          color: KtmyCharts.COLORS.primary
         }],
         yLabel: 'km/h'
       });
@@ -365,8 +365,8 @@
       lastUpdated.textContent = `Updated: ${new Date().toLocaleTimeString('en-MY')}`;
     }
 
-    NadiI18n.applyTranslations();
-    NadiAnimations.initScrollReveals();
+    KtmyI18n.applyTranslations();
+    KtmyAnimations.initScrollReveals();
   }
 
   function buildCityGrid(allData) {
@@ -379,7 +379,7 @@
       const isActive = city.name === selectedCityName;
       return `
         <div class="city-weather-tile ${isActive ? 'active' : ''}" 
-             onclick="NadiSections.weather.selectCity('${city.name}')"
+             onclick="KtmySections.weather.selectCity('${city.name}')"
              style="cursor:pointer;">
           <div class="city-emoji">${wmoToEmoji(c)}</div>
           <div class="city-name">${city.name}</div>
@@ -391,7 +391,7 @@
   }
 
   function updateCityDisplay() {
-    const all = NadiStore.get('openmeteo_all');
+    const all = KtmyStore.get('openmeteo_all');
     if (!all) return;
     renderWeatherDisplay(all);
 
@@ -401,11 +401,11 @@
   }
 
   /* --- Public API --- */
-  window.NadiSections = window.NadiSections || {};
-  window.NadiSections.weather = {
+  window.KtmySections = window.KtmySections || {};
+  window.KtmySections.weather = {
     init,
     translate() {
-      NadiI18n.applyTranslations();
+      KtmyI18n.applyTranslations();
     },
     selectCity(name) {
       selectedCityName = name;
