@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "fetched_at": "2026-06-24T21:26:43.046Z",
+    "fetched_at": "2026-06-24T23:09:10.052Z",
     "source": "KTMY Data Bot",
     "api_key": "earthquake"
   },
@@ -15147,6 +15147,44 @@
       "visible": true,
       "lat_vector": "1.7205° U",
       "lon_vector": "102.7391° T"
+    },
+    {
+      "utcdatetime": "2026-06-24T22:04:31",
+      "localdatetime": "2026-06-25T06:04:31",
+      "lat": 10.364007,
+      "lon": -68.361961,
+      "depth": 10,
+      "location": "Near Coast of Venezuela",
+      "location_original": "Near Coast of Venezuela",
+      "n_distancemas": "17,760km NW Padang Besar,Perlis",
+      "n_distancerest": "1,655km N Iquitos,Peru",
+      "nbm_distancemas": "17,760km BL Padang Besar,Perlis",
+      "nbm_distancerest": "1,655km U Iquitos,Peru",
+      "magdefault": 6.9,
+      "magtypedefault": "Mwp",
+      "status": "NORMAL",
+      "visible": true,
+      "lat_vector": "10.3640° U",
+      "lon_vector": "68.3620° B"
+    },
+    {
+      "utcdatetime": "2026-06-24T22:30:16",
+      "localdatetime": "2026-06-25T06:30:16",
+      "lat": 40.232491,
+      "lon": 142.162933,
+      "depth": 79,
+      "location": "Near East Coast of Honshu, Japan",
+      "location_original": "Near East Coast of Honshu, Japan",
+      "n_distancemas": "4,434km NE Pulau Banggi,SABAH",
+      "n_distancerest": "64km SE Hachinohe,Japan",
+      "nbm_distancemas": "4,434km TL Pulau Banggi,SABAH",
+      "nbm_distancerest": "64km TG Hachinohe,Japan",
+      "magdefault": 6.9,
+      "magtypedefault": "Mwp",
+      "status": "NORMAL",
+      "visible": true,
+      "lat_vector": "40.2325° U",
+      "lon_vector": "142.1629° T"
     }
   ]
 }
