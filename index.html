@@ -18,10 +18,10 @@
   <meta name="theme-color" content="#0A0E27">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="css/index.css?v=18">
-  <link rel="stylesheet" href="css/components.css?v=18">
-  <link rel="stylesheet" href="css/responsive.css?v=18">
-  <link rel="stylesheet" href="css/overhaul.css?v=18">
+  <link rel="stylesheet" href="css/index.css?v=19">
+  <link rel="stylesheet" href="css/components.css?v=19">
+  <link rel="stylesheet" href="css/responsive.css?v=19">
+  <link rel="stylesheet" href="css/overhaul.css?v=19">
 
   <style>
     /* ============================================================
@@ -512,6 +512,168 @@
 
     .stat-icon { font-size: 2rem; margin-bottom: 8px; }
     .stat-date { font-size: 0.65rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* ============================================================
+       MOBILE OVERRIDES — these run last and win all specificity
+       ============================================================ */
+    @media (max-width: 1024px) {
+      /* Ensure main content never gets a left margin on mobile */
+      .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+      }
+      /* Content area: sensible padding on tablets */
+      .content-area {
+        padding: 20px !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      /* Prevent ALL horizontal overflow */
+      html, body { overflow-x: hidden !important; }
+      .content-area { padding: 14px !important; }
+
+      /* TABS: always scrollable, never overflow */
+      .tabs {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: flex !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+        flex-wrap: nowrap !important;
+        border-radius: 999px;
+      }
+      .tabs::-webkit-scrollbar { display: none; }
+
+      /* FAB: above bottom nav */
+      .feedback-fab {
+        bottom: 76px !important;
+        right: 14px !important;
+        width: 46px !important;
+        height: 46px !important;
+        z-index: 201 !important;
+      }
+      .feedback-card {
+        bottom: 132px !important;
+        right: 12px !important;
+        width: calc(100vw - 24px) !important;
+        max-width: 300px !important;
+        z-index: 201 !important;
+      }
+
+      /* City select: full width */
+      .city-select, #weather-city-select {
+        min-width: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      /* Weather controls card: vertical stack */
+      .weather-controls .glass-card {
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+      #weather-last-updated { margin-left: 0 !important; }
+
+      /* Weather gauges: 2 columns */
+      .weather-gauges-row {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      /* Weather map: constrained */
+      .weather-map-iframe-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 300px !important;
+        overflow: hidden !important;
+      }
+
+      /* Map layer buttons: horizontal scroll */
+      .map-layer-selector {
+        display: flex !important;
+        overflow-x: auto !important;
+        flex-wrap: nowrap !important;
+        scrollbar-width: none !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+      .map-layer-selector::-webkit-scrollbar { display: none; }
+      .map-layer-btn { flex-shrink: 0 !important; }
+
+      /* Forecast: horizontal carousel */
+      .forecast-days-container {
+        display: flex !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        scroll-snap-type: x mandatory !important;
+        scrollbar-width: none !important;
+        gap: 8px !important;
+      }
+      .forecast-days-container::-webkit-scrollbar { display: none; }
+      .forecast-day-card {
+        flex: 0 0 105px !important;
+        min-width: 105px !important;
+        scroll-snap-align: start !important;
+        padding: 10px 6px !important;
+      }
+
+      /* City weather grid: 2 cols */
+      .city-weather-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      /* Incentive cards: prevent flex pushing tag offscreen */
+      .glass-card .flex-between {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        align-items: flex-start !important;
+      }
+      .glass-card .flex-between .tag,
+      .glass-card .flex-between .stat-change {
+        margin-left: 0 !important;
+        align-self: flex-start !important;
+      }
+
+      /* Back-to-top: above bottom nav */
+      .back-to-top {
+        bottom: 76px !important;
+        right: 12px !important;
+      }
+
+      /* Grid layout: less gap on mobile */
+      .grid { gap: 12px !important; }
+      .grid-3 { grid-template-columns: repeat(2, 1fr) !important; }
+      .grid-2 { grid-template-columns: 1fr !important; }
+
+      /* Weather main info: stack vertically */
+      .weather-main-info {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+      }
+
+      /* Hero quick links: 2 columns */
+      .hero-quick-links {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .content-area { padding: 12px !important; }
+      .weather-map-iframe-container { height: 250px !important; }
+      .weather-temp-main { font-size: 2.5rem !important; }
+      .weather-emoji-large { font-size: 3rem !important; }
+      .weather-unit { font-size: 1.4rem !important; }
+      .grid-3 { grid-template-columns: 1fr !important; }
+      .grid-4 { grid-template-columns: 1fr !important; }
+      .glass-card { padding: 1rem !important; }
+      .feedback-fab { bottom: 72px !important; right: 10px !important; width: 42px !important; height: 42px !important; }
+      .feedback-card { bottom: 124px !important; right: 8px !important; width: calc(100vw - 16px) !important; }
+    }
 
   </style>
 </head>
