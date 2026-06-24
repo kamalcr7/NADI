@@ -181,8 +181,8 @@
       result.aid.push({
         name: d.fuel_quota.name,
         agency: 'MOF / KPDN',
-        coverage: '85% of Malaysian citizens',
-        amount: 'RM2.05/litre (Unlimited)',
+        coverage: 'Malaysian citizens (with driving licence)',
+        amount: 'RM1.99/litre (200L quota)',
         desc: d.fuel_quota.details?.eligibility_rules?.join('; ') || d.fuel_quota.description,
         link: d.fuel_quota.website || '#'
       });
@@ -194,11 +194,11 @@
         .map(([k, v]) => `${k}: ${v}`).join(' | ');
       result.aid.push({
         name: 'Fuel Prices (Current)',
-        agency: 'KPWKM',
+        agency: 'MOF / KPDN',
         coverage: 'All registered vehicle owners',
-        amount: 'From RM2.05/litre',
+        amount: 'From RM1.99/litre',
         desc: priceSummary,
-        link: 'https://www.kpwkm.gov.my'
+        link: 'https://budimadani.gov.my'
       });
     }
 

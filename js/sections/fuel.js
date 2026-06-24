@@ -65,7 +65,7 @@
     const latest = records[records.length - 1];
     const previous = records.length > 1 ? records[records.length - 2] : latest;
 
-    const ron95 = parseFloat(latest.ron95 || 2.05);
+    const ron95 = parseFloat(latest.ron95 || 1.99);
     const ron97 = parseFloat(latest.ron97 || 3.47);
     const dieselP = parseFloat(latest.diesel_peninsular || latest.diesel || 3.35);
     const dieselE = parseFloat(latest.diesel_east_msia || latest.diesel_east || 2.15);
@@ -126,11 +126,11 @@
           <div class="info-card" style="padding: var(--space-md); margin-bottom: 2px;">
             <div class="info-icon" style="width: 36px; height: 36px; font-size: 1.1rem; background: rgba(255, 215, 0, 0.1); border: 1px solid var(--accent-gold); color: var(--accent-gold);">⛽</div>
             <div class="info-content">
-              <h4 style="color: var(--accent-gold);">RON 95 Targeted Subsidy</h4>
+              <h4 style="color: var(--accent-gold);">RON 95 Targeted Subsidy (BUDI95)</h4>
               <p style="font-size: 0.72rem; line-height: 1.4; color: var(--text-secondary);">
-                Subsidised Rate: <strong>RM2.05/litre</strong> (Market rate floated at ~RM3.25/litre).<br>
-                <strong>Eligibility:</strong> Covers <strong>85% of all Malaysian citizens</strong> (including B40, M40, and lower T20 groups). Only the top 15% high-income class (T15) and foreign nationals are ineligible. MyKad verification at the pump or PADU registration is required.<br>
-                <strong>Quota Limit:</strong> Unlimited volume per transaction/month for all eligible citizens (no specific volume cap).
+                Subsidised Rate: <strong>RM1.99/litre</strong> (Market rate floated at ~RM3.25/litre).<br>
+                <strong>Eligibility:</strong> Malaysian citizens holding a valid driving licence. Excludes the top 15% earners (T15) and foreign nationals. Verification is conducted via MyKad at the pump terminal.<br>
+                <strong>Quota Limit:</strong> <strong>200 litres/month</strong> (Flexible/shared with Diesel under the BUDI MADANI program). Purchases exceeding this quota are charged at the floated market price.
               </p>
             </div>
           </div>
