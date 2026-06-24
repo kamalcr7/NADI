@@ -97,7 +97,7 @@
       "category": "fuel",
       "effective_date": "2024-2025",
       "prices": {
-        "RON95": "RM2.05/litre (subsidised)",
+        "RON95": "RM1.99/litre (subsidised)",
         "RON97": "Market price (~RM3.55/litre)",
         "Diesel": "RM3.35/litre (market, with BUDI subsidy)",
         "LPG (14kg)": "RM26.00 (subsidised)",
@@ -378,13 +378,14 @@
       "category": "fuel",
       "effective_date": "2025-2026",
       "details": {
-        "current_ron95_price": "RM2.05/litre (subsidised)",
+        "current_ron95_price": "RM1.99/litre (subsidised)",
         "market_price": "Estimated RM3.20-3.50/litre",
-        "subsidy_system": "Direct retail price subsidy with verification at the payment terminal",
+        "subsidy_system": "Targeted pricing via MyKad verification at the pump terminal",
         "eligibility_rules": [
-          "Covers 85% of all Malaysian citizens",
-          "Only top 15% earners (T15) and foreign nationals are ineligible",
-          "No volume quota limit applies for eligible citizens (unlimited usage)"
+          "Malaysian citizen holding a valid driving licence",
+          "Entitled to a flexible monthly quota of 200 litres (shared with Diesel under BUDI95)",
+          "Excludes top 15% high-income class (T15) and foreign nationals",
+          "Usage beyond the 200-litre monthly limit is charged at the floated market price"
         ],
         "eligible_vehicles": [
           "All private vehicles registered to eligible citizens",
