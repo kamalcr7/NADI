@@ -40,7 +40,10 @@
 
     // Update topbar breadcrumb
     const breadcrumb = document.getElementById('topbar-section-name');
-    if (breadcrumb) breadcrumb.textContent = TABS[tabId].label;
+    if (breadcrumb) {
+      breadcrumb.setAttribute('data-i18n', 'tab.' + tabId);
+      breadcrumb.textContent = KtmyI18n.t('tab.' + tabId);
+    }
 
     // Initialize section modules
     const { modules } = TABS[tabId];

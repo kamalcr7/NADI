@@ -71,6 +71,7 @@
     Chart.defaults.plugins.tooltip.padding = 12;
     Chart.defaults.plugins.tooltip.cornerRadius = 8;
     Chart.defaults.plugins.tooltip.displayColors = true;
+    Chart.defaults.plugins.tooltip.enabled = true;
     Chart.defaults.animation.duration = 1000;
     Chart.defaults.animation.easing = 'easeOutQuart';
     Chart.defaults.responsive = true;
@@ -202,7 +203,8 @@
             },
             stacked
           }
-        }
+        },
+        interaction: { intersect: false, mode: 'index' }
       }
     });
   }

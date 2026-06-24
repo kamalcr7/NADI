@@ -116,18 +116,18 @@
         </div>
       </div>
 
-      <div class="grid grid-2 stagger mb-xl">
-        <div class="glass-card reveal">
-          <h3 class="chart-title">${isBm ? 'Sejarah Harga (12 Bulan)' : 'Price History (12 Months)'}</h3>
-          <div class="chart-container" style="height:380px;">
-            <canvas id="chart-fuel-history"></canvas>
-          </div>
+      <div class="glass-card reveal mb-xl">
+        <h3 class="chart-title">${isBm ? 'Sejarah Harga (12 Bulan)' : 'Price History (12 Months)'}</h3>
+        <div class="chart-container" style="height:380px;">
+          <canvas id="chart-fuel-history"></canvas>
         </div>
+      </div>
 
-        <div class="glass-card reveal flex-col gap-md" style="text-align: left;">
-          <h3 class="chart-title">${isBm ? 'Subsidi & Kuota (Peraturan Rasmi)' : 'Subsidy & Quotas (Official Rules)'}</h3>
-          
-          <div class="info-card" style="padding: var(--space-md); margin-bottom: 2px;">
+      <div class="glass-card reveal flex-col gap-md mb-xl" style="text-align: left;">
+        <h3 class="chart-title">${isBm ? 'Subsidi & Kuota (Peraturan Rasmi)' : 'Subsidy & Quotas (Official Rules)'}</h3>
+        
+        <div class="grid grid-2 stagger" style="gap: var(--space-md);">
+          <div class="info-card" style="padding: var(--space-md); margin-bottom: 0;">
             <div class="info-icon" style="width: 36px; height: 36px; font-size: 1.1rem; background: rgba(255, 215, 0, 0.1); border: 1px solid var(--accent-gold); color: var(--accent-gold);">⛽</div>
             <div class="info-content">
               <h4 style="color: var(--accent-gold);">${isBm ? 'Subsidi Bersasar RON 95' : 'RON 95 Targeted Subsidy'}</h4>
@@ -145,7 +145,7 @@
             </div>
           </div>
 
-          <div class="info-card" style="padding: var(--space-md);">
+          <div class="info-card" style="padding: var(--space-md); margin-bottom: 0;">
             <div class="info-icon" style="width: 36px; height: 36px; font-size: 1.1rem; background: rgba(77, 124, 254, 0.1); border: 1px solid var(--accent-blue); color: var(--accent-blue);">🚛</div>
             <div class="info-content">
               <h4 style="color: var(--accent-blue);">${isBm ? 'Kuota & Subsidi Diesel (BUDI Madani)' : 'Diesel & Fuel Quotas (BUDI Madani)'}</h4>
