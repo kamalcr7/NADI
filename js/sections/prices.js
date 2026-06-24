@@ -1,5 +1,8 @@
 /* ============================================================
    KTMY — Consumer Prices Section Module (PriceCatcher)
+   ------------------------------------------------------------
+   Data Source: Curated retail price averages cross-checked
+   against KPDN's PriceCatcher database (data.gov.my).
    ============================================================ */
 
 (function () {

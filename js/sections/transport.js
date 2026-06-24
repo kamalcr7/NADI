@@ -1,5 +1,11 @@
 /* ============================================================
    KTMY — Transportation Section Module
+   ------------------------------------------------------------
+   Data Sources:
+   1. Ridership Trends: Live daily boarding data fetched from
+      Ministry of Transport API (data.gov.my).
+   2. Fares & Info: Hand-curated from official operator matrices
+      (RapidKL, KTMB, ERL, and Grab).
    ============================================================ */
 
 (function () {
@@ -198,6 +204,11 @@
           <span style="font-size:0.78rem; color:var(--primary); font-weight:600;">🎫 ${isBm ? 'Pas Harian MyCity' : 'MyCity Day Pass'}</span>
           <strong style="color:var(--primary); font-size:0.85rem;">${lrt.day_pass || 'RM 5.00'}</strong>
         </div>
+        <div class="mt-xs">
+          <a href="https://www.myrapid.com.my" target="_blank" class="btn btn-outline" style="padding: 4px 12px; font-size: 0.65rem; width:100%; display:block; text-align:center; text-decoration:none;">
+            🔗 ${isBm ? 'Portal Rasmi RapidKL' : 'RapidKL Official Portal'}
+          </a>
+        </div>
         <p style="font-size:0.68rem; color:var(--text-muted); margin:4px 0 0; line-height:1.3;">
           ℹ️ ${isBm ? 'Tambang berdasarkan jarak perjalanan. Touch \'n Go diperlukan.' : 'Fares calculated by distance. Touch \'n Go required.'}
         </p>
@@ -226,6 +237,11 @@
           <span style="font-size:0.78rem; color:var(--text-secondary);">${isBm ? 'Kekerapan' : 'Frequency'}</span>
           <strong style="color:var(--text-primary); font-size:0.85rem;">${klia.frequency || 'Every 20 mins'}</strong>
         </div>
+        <div class="mt-xs">
+          <a href="https://www.kliaekspres.com" target="_blank" class="btn btn-outline" style="padding: 4px 12px; font-size: 0.65rem; width:100%; display:block; text-align:center; text-decoration:none;">
+            🔗 ${isBm ? 'Portal Rasmi KLIA Ekspres' : 'KLIA Ekspres Official Portal'}
+          </a>
+        </div>
         <p style="font-size:0.68rem; color:var(--text-muted); margin:4px 0 0; line-height:1.3;">
           ℹ️ ${isBm ? 'Hubungan tanpa henti antara KL Sentral dan Lapangan Terbang (KLIA T1 & T2).' : 'Non-stop connection between KL Sentral and Airport (KLIA T1 & T2).'}
         </p>
@@ -251,6 +267,11 @@
         <div class="flex-col gap-xs">
           ${grabRows}
         </div>
+        <div class="mt-xs">
+          <a href="https://www.grab.com/my/" target="_blank" class="btn btn-outline" style="padding: 4px 12px; font-size: 0.65rem; width:100%; display:block; text-align:center; text-decoration:none;">
+            🔗 ${isBm ? 'Layari Laman Web Grab' : 'Visit Grab Website'}
+          </a>
+        </div>
         <p style="font-size:0.68rem; color:var(--warning); margin:4px 0 0; line-height:1.3;">
           ⚠️ ${isBm ? 'Tambang berubah mengikut permintaan (harga lonjakan).' : 'Fares vary by demand (surge pricing).'}
         </p>
@@ -268,9 +289,14 @@
     `).join('');
     const ktmHtml = `
       <div class="glass-card reveal" style="padding: 0; overflow-x: auto;">
-        <div style="padding: var(--space-md) var(--space-lg) 0; display:flex; align-items:center; gap:8px;">
-          <span style="font-size:1.5rem;">🚆</span>
-          <h4 style="margin:0; font-size:var(--fs-body);">${ktm.name || 'KTM Komuter Fares'}</h4>
+        <div style="padding: var(--space-md) var(--space-lg) 0; display:flex; align-items:center; justify-content:space-between; gap:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:1.5rem;">🚆</span>
+            <h4 style="margin:0; font-size:var(--fs-body);">${ktm.name || 'KTM Komuter Fares'}</h4>
+          </div>
+          <a href="https://www.ktmb.com.my" target="_blank" class="btn btn-outline" style="padding: 4px 10px; font-size: 0.62rem; text-decoration:none;">
+            🔗 ${isBm ? 'Beli Tiket KTMB' : 'Buy KTMB Tickets'}
+          </a>
         </div>
         <div style="padding: 2px var(--space-lg) 10px; font-size:0.72rem; color:var(--text-muted);">${isBm ? 'Pengendali' : 'Operator'}: KTMB · ${isBm ? 'Laluan popular dari KL Sentral' : 'Popular routes from KL Sentral'}</div>
         <table class="data-table" style="margin-top: 4px;">
@@ -302,9 +328,14 @@
     `).join('');
     const etsHtml = `
       <div class="glass-card reveal" style="padding: 0; overflow-x: auto;">
-        <div style="padding: var(--space-md) var(--space-lg) 0; display:flex; align-items:center; gap:8px;">
-          <span style="font-size:1.5rem;">⚡</span>
-          <h4 style="margin:0; font-size:var(--fs-body);">${ets.name || 'ETS (Electric Train Service)'}</h4>
+        <div style="padding: var(--space-md) var(--space-lg) 0; display:flex; align-items:center; justify-content:space-between; gap:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:1.5rem;">⚡</span>
+            <h4 style="margin:0; font-size:var(--fs-body);">${ets.name || 'ETS (Electric Train Service)'}</h4>
+          </div>
+          <a href="https://www.ktmb.com.my" target="_blank" class="btn btn-outline" style="padding: 4px 10px; font-size: 0.62rem; text-decoration:none;">
+            🔗 ${isBm ? 'Beli Tiket KTMB' : 'Buy KTMB Tickets'}
+          </a>
         </div>
         <div style="padding: 2px var(--space-lg) 10px; font-size:0.72rem; color:var(--text-muted);">${isBm ? 'Pengendali' : 'Operator'}: KTMB · ${isBm ? 'Tren antara bandar kelajuan tinggi' : 'High-speed intercity train service'}</div>
         <table class="data-table" style="margin-top: 4px;">

@@ -1,5 +1,8 @@
 /* ============================================================
    KTMY — Fuel Prices Section Module (DataStore-powered)
+   ------------------------------------------------------------
+   Data Source: Real weekly retail fuel prices fetched from
+   Ministry of Finance API (data.gov.my) and BUDI Madani guidelines.
    ============================================================ */
 
 (function () {
@@ -109,10 +112,39 @@
         </div>
       </div>
 
-      <div class="glass-card reveal">
-        <h3 class="chart-title">Price History (12 Months)</h3>
-        <div class="chart-container" style="height:350px;">
-          <canvas id="chart-fuel-history"></canvas>
+      <div class="grid grid-2 stagger mb-xl">
+        <div class="glass-card reveal">
+          <h3 class="chart-title">Price History (12 Months)</h3>
+          <div class="chart-container" style="height:350px;">
+            <canvas id="chart-fuel-history"></canvas>
+          </div>
+        </div>
+
+        <div class="glass-card reveal flex-col gap-md" style="text-align: left;">
+          <h3 class="chart-title">Subsidy & Quotas (Official Rules)</h3>
+          
+          <div class="info-card" style="padding: var(--space-md); margin-bottom: 2px;">
+            <div class="info-icon" style="width: 36px; height: 36px; font-size: 1.1rem; background: rgba(255, 215, 0, 0.1); border: 1px solid var(--accent-gold); color: var(--accent-gold);">⛽</div>
+            <div class="info-content">
+              <h4 style="color: var(--accent-gold);">RON 95 Targeted Subsidy</h4>
+              <p style="font-size: 0.72rem; line-height: 1.4; color: var(--text-secondary);">
+                Subsidised Rate: <strong>RM2.05/litre</strong> (Market rate floated at ~RM3.25/litre).<br>
+                <strong>Eligibility:</strong> Restricted to Malaysian citizens in B40 and M40 income classes. Swiping MyKad at the pump or registering through the official PADU database is required. High-income earners (T20 class) are ineligible.
+              </p>
+            </div>
+          </div>
+
+          <div class="info-card" style="padding: var(--space-md);">
+            <div class="info-icon" style="width: 36px; height: 36px; font-size: 1.1rem; background: rgba(77, 124, 254, 0.1); border: 1px solid var(--accent-blue); color: var(--accent-blue);">🚛</div>
+            <div class="info-content">
+              <h4 style="color: var(--accent-blue);">Diesel Targeted Subsidies</h4>
+              <p style="font-size: 0.72rem; line-height: 1.4; color: var(--text-secondary);">
+                Subsidised Pump Rate: <strong>RM2.15/litre</strong> (Sabah/Sarawak) and market rate of <strong>RM3.35/litre</strong> (Peninsular).<br>
+                <strong>BUDI Madani Cash Aid:</strong> RM200/month direct cash assistance for eligible private diesel vehicle owners (Malaysian, car/pickup <2,000cc, non-luxury) and smallholders (land size <10 hectares).<br>
+                <strong>Fleet Cards (SKDS):</strong> Approved logistics, public transport, and emergency services vehicles are issued fleet cards for pump discounts.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     `;
