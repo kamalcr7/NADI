@@ -75,6 +75,23 @@
     Chart.defaults.animation.easing = 'easeOutQuart';
     Chart.defaults.responsive = true;
     Chart.defaults.maintainAspectRatio = false;
+
+    // Default tooltip formatting for absolute numbers
+    Chart.defaults.plugins.tooltip.callbacks = {
+      label: function(context) {
+        let label = context.dataset.label || '';
+        if (label) {
+          label += ': ';
+        }
+        const val = context.raw;
+        if (typeof val === 'number') {
+          label += val.toLocaleString();
+        } else {
+          label += val;
+        }
+        return label;
+      }
+    };
   }
 
   /* --- Factory: Line Chart --- */
@@ -114,7 +131,12 @@
           },
           y: {
             grid: { color: CHART_COLORS.grid, drawBorder: false },
-            ticks: { font: { size: 11 } },
+            ticks: {
+              font: { size: 11 },
+              callback: function(value) {
+                return typeof value === 'number' ? value.toLocaleString() : value;
+              }
+            },
             title: yLabel ? { display: true, text: yLabel, font: { size: 11 } } : undefined
           }
         },
@@ -154,12 +176,30 @@
         scales: {
           x: {
             grid: { color: CHART_COLORS.grid, drawBorder: false },
-            ticks: { font: { size: 11 } },
+            ticks: {
+              font: { size: 11 },
+              callback: function(value) {
+                if (horizontal) {
+                  return typeof value === 'number' ? value.toLocaleString() : value;
+                } else {
+                  return this.getLabelForValue(value);
+                }
+              }
+            },
             stacked
           },
           y: {
             grid: { color: horizontal ? CHART_COLORS.grid : CHART_COLORS.grid, drawBorder: false },
-            ticks: { font: { size: 11 } },
+            ticks: {
+              font: { size: 11 },
+              callback: function(value) {
+                if (!horizontal) {
+                  return typeof value === 'number' ? value.toLocaleString() : value;
+                } else {
+                  return this.getLabelForValue(value);
+                }
+              }
+            },
             stacked
           }
         }

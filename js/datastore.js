@@ -44,7 +44,7 @@
     gdp:              'https://api.data.gov.my/data-catalogue?id=gdp_qtr_real&limit=20&sort=-date',
     inflation:        'https://api.data.gov.my/data-catalogue?id=cpi_headline&limit=24&sort=-date',
     unemployment:     'https://api.data.gov.my/data-catalogue?id=lfs_month&limit=36&sort=-date',
-    tourism_data:     'https://api.data.gov.my/data-catalogue?id=arrivals&limit=24&sort=-date',
+    tourism_data:     'https://api.data.gov.my/data-catalogue?id=arrivals&limit=24&country=ALL',
     trade:            'https://api.data.gov.my/data-catalogue?id=trade_sitc_1d&limit=24&sort=-date',
     weather_forecast: 'https://api.data.gov.my/weather/forecast',
     weather_warnings: 'https://api.data.gov.my/weather/warning',

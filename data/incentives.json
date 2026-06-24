@@ -299,37 +299,51 @@
         {
           "name": "BUDI Individu",
           "coverage": "Diesel vehicle owners (personal use)",
-          "amount": "RM200/month",
-          "quota": "Up to 200 litres/month at subsidised rate",
+          "amount": "200 litres/month quota",
+          "quota": "200 litres/month (Flexible Diesel/RON95 at RM2.10/litre)",
           "eligibility": [
             "Malaysian citizen",
-            "Own a diesel vehicle registered under personal name",
-            "Not a commercial vehicle"
+            "Own a diesel vehicle registered under personal name (non-luxury, <2,000cc)",
+            "Additional 100 litres/month (total 300L) eligible for pickup/jeep owners"
           ],
           "how_to_apply": [
-            "Register via BUDI Madani portal: https://budimadani.gov.my",
-            "Provide vehicle registration details",
-            "Link MyKad for disbursement"
+            "Register/Verify status via BUDI Madani portal: https://budimadani.gov.my",
+            "Link MyKad for instant verification at the pump"
           ],
           "website": "https://budimadani.gov.my",
-          "payment_method": "Credited to bank account or MyKad-linked account"
+          "payment_method": "Verified via MyKad at petrol stations"
         },
         {
           "name": "BUDI Agrikomoditi",
-          "coverage": "Farmers, smallholders, fishermen",
-          "amount": "RM200/month",
-          "quota": "Up to 200 litres/month at subsidised rate",
+          "coverage": "Farmers & smallholders",
+          "amount": "200 litres/month quota",
+          "quota": "200 litres/month (Flexible Diesel/RON95 at RM2.10/litre)",
           "eligibility": [
             "Malaysian citizen",
-            "Active farmer/fisherman registered with KKM or LKM",
+            "Active smallholder registered with relevant agency",
             "Land size up to 10 hectares"
           ],
           "how_to_apply": [
             "Register via BUDI Madani portal: https://budimadani.gov.my",
-            "Provide farming licence or registration",
-            "Link MyKad for disbursement"
+            "Link MyKad for instant verification at the pump"
           ],
           "website": "https://budimadani.gov.my"
+        },
+        {
+          "name": "Subsidised Diesel Control System (SKDS) Fleet Card",
+          "coverage": "Logistics & Land Public Transport",
+          "amount": "RM1.88 or RM2.15/litre",
+          "quota": "Monthly volume quota (1,000 to 5,000+ litres)",
+          "eligibility": [
+            "Registered logistics company vehicles (SKDS 2.0)",
+            "Public transport vehicles, school buses, and taxis (SKDS 1.0)",
+            "Emergency services and ambulances"
+          ],
+          "how_to_apply": [
+            "Apply via KPDN MySubsidi portal: https://mysubsidi.kpdn.gov.my",
+            "Select participating oil companies to issue fleet cards"
+          ],
+          "website": "https://mysubsidi.kpdn.gov.my"
         }
       ],
       "note": "Overseas diesel companies and foreign vehicle owners not eligible"
@@ -359,31 +373,30 @@
       "website": "https://budimadani.gov.my"
     },
     "fuel_quota": {
-      "name": "RON95 Fuel Subsidy & Quota System",
-      "description": "Subsidized RON95 fuel and quota-based allocation for eligible groups",
+      "name": "RON95 Targeted Subsidy System",
+      "description": "Subsidised RON95 fuel pricing at the pump via MyKad verification.",
       "category": "fuel",
-      "effective_date": "2024-2025",
+      "effective_date": "2025-2026",
       "details": {
         "current_ron95_price": "RM2.05/litre (subsidised)",
         "market_price": "Estimated RM3.20-3.50/litre",
-        "quota_system": "Planned for implementation — targeted quota via MyKad or fleet card",
-        "proposed_quota": [
-          "Low-income (B40): Up to 60 litres/month at subsidised rate",
-          "Middle-income (M40): Up to 40 litres/month at subsidised rate",
-          "Above threshold: Market price"
+        "subsidy_system": "Direct retail price subsidy with verification at the payment terminal",
+        "eligibility_rules": [
+          "Covers 85% of all Malaysian citizens",
+          "Only top 15% earners (T15) and foreign nationals are ineligible",
+          "No volume quota limit applies for eligible citizens (unlimited usage)"
         ],
         "eligible_vehicles": [
-          "Personal vehicles below 2,000cc",
-          "Motorcycles below 250cc",
-          "Excludes luxury vehicles and foreign-registered vehicles"
+          "All private vehicles registered to eligible citizens",
+          "Excludes luxury vehicles registered under high-income (T15) criteria",
+          "Excludes foreign-registered vehicles"
         ],
         "how_it_works": [
-          "MyKad-linked purchase at petrol stations",
-          "Quota monitored via fleet card or MyKad swipes",
-          "Excess usage charged at market price"
+          "Present MyKad or scan at the petrol station pump terminal",
+          "Real-time eligibility check via PADU centralized database"
         ]
       },
-      "note": "Full targeted RON95 subsidy implementation expected in 2025-2026",
+      "note": "Implementation starting in phases across Malaysia.",
       "website": "https://budimadani.gov.my"
     },
     "customs": {

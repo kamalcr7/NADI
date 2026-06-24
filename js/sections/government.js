@@ -155,10 +155,10 @@
       d.budi_madani.programs.forEach(p => {
         result.aid.push({
           name: p.name,
-          agency: 'MOF/KPWKM',
+          agency: 'MOF / KPDN',
           coverage: p.coverage,
           amount: p.amount,
-          desc: p.eligibility?.join('; ') || '',
+          desc: (p.quota ? `Quota: ${p.quota} | ` : '') + (p.eligibility?.join('; ') || ''),
           link: p.website || '#'
         });
       });
@@ -180,10 +180,10 @@
     if (d.fuel_quota) {
       result.aid.push({
         name: d.fuel_quota.name,
-        agency: 'KPWKM/MOF',
-        coverage: 'B40/M40 vehicle owners',
-        amount: 'RM2.05/litre subsidised',
-        desc: d.fuel_quota.details?.proposed_quota?.join('; ') || d.fuel_quota.description,
+        agency: 'MOF / KPDN',
+        coverage: '85% of Malaysian citizens',
+        amount: 'RM2.05/litre (Unlimited)',
+        desc: d.fuel_quota.details?.eligibility_rules?.join('; ') || d.fuel_quota.description,
         link: d.fuel_quota.website || '#'
       });
     }

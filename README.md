@@ -46,12 +46,13 @@ These datasets are fetched directly from the official Malaysian Open Data portal
 *   **Unemployment**: Monthly labor force and jobless rate indices.
 *   **External Trade**: Monthly import/export indices.
 *   **Transit Ridership**: Daily public transit passenger boarding volumes.
-*   **Tourism Arrivals**: Monthly visitor entries by country (exhibits standard DOSM publishing lag).
+*   **Tourism Arrivals**: Monthly visitor entries by country (exhibits standard DOSM publishing lag; supplemented with curated 2025/2026 figures).
 *   **Weather & Warning Feeds**: Live 7-day forecast data and active disaster alerts (flood/seismic warnings).
 *   **Healthcare (Dengue)**: Weekly dengue cases and deaths by state.
 
 ### 2. Hand-Curated & Scraped Directories (Verified References)
 These datasets cannot be parsed reliably from live APIs due to lack of JSON endpoints or overly large unstructured streams. They are cross-checked against official resources and saved in `data/`:
+*   **Latest Tourism Arrivals (2025/2026)** (supplemented inside `data/tourism.json`): Pre-loaded with official total arrivals for all months of 2025 and Q1 2026 sourced directly from Tourism Malaysia reports.
 *   **TNB Electricity Tariffs** (`data/tnb_tariffs.json`): Manually scraped from the Tenaga Nasional Berhad official tariff guide and cross-checked.
 *   **Government Incentives Directory** (`data/incentives.json`): Curated directly from LHDN, BSH, EPF, and MOF official announcement sheets.
 *   **Transport Fares** (`data/transport_fares.json`): Extracted from RapidKL, KTM Komuter, ETS, ERL, and Grab official fare matrices.

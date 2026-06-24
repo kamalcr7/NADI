@@ -129,7 +129,8 @@
               <h4 style="color: var(--accent-gold);">RON 95 Targeted Subsidy</h4>
               <p style="font-size: 0.72rem; line-height: 1.4; color: var(--text-secondary);">
                 Subsidised Rate: <strong>RM2.05/litre</strong> (Market rate floated at ~RM3.25/litre).<br>
-                <strong>Eligibility:</strong> Restricted to Malaysian citizens in B40 and M40 income classes. Swiping MyKad at the pump or registering through the official PADU database is required. High-income earners (T20 class) are ineligible.
+                <strong>Eligibility:</strong> Covers <strong>85% of all Malaysian citizens</strong> (including B40, M40, and lower T20 groups). Only the top 15% high-income class (T15) and foreign nationals are ineligible. MyKad verification at the pump or PADU registration is required.<br>
+                <strong>Quota Limit:</strong> Unlimited volume per transaction/month for all eligible citizens (no specific volume cap).
               </p>
             </div>
           </div>
@@ -137,11 +138,11 @@
           <div class="info-card" style="padding: var(--space-md);">
             <div class="info-icon" style="width: 36px; height: 36px; font-size: 1.1rem; background: rgba(77, 124, 254, 0.1); border: 1px solid var(--accent-blue); color: var(--accent-blue);">🚛</div>
             <div class="info-content">
-              <h4 style="color: var(--accent-blue);">Diesel Targeted Subsidies</h4>
+              <h4 style="color: var(--accent-blue);">Diesel & Fuel Quotas (BUDI Madani)</h4>
               <p style="font-size: 0.72rem; line-height: 1.4; color: var(--text-secondary);">
                 Subsidised Pump Rate: <strong>RM2.15/litre</strong> (Sabah/Sarawak) and market rate of <strong>RM3.35/litre</strong> (Peninsular).<br>
-                <strong>BUDI Madani Cash Aid:</strong> RM200/month direct cash assistance for eligible private diesel vehicle owners (Malaysian, car/pickup <2,000cc, non-luxury) and smallholders (land size <10 hectares).<br>
-                <strong>Fleet Cards (SKDS):</strong> Approved logistics, public transport, and emergency services vehicles are issued fleet cards for pump discounts.
+                <strong>BUDI Madani Volume Quota:</strong> Entitles eligible private diesel vehicle owners and smallholders to a monthly quota of <strong>200 litres</strong> at a subsidised rate of <strong>RM2.10/litre</strong> (flexible for both diesel and RON95) via MyKad verification at the pump. Private pickup/jeep owners can apply for an additional 100 litres, bringing the total quota to <strong>300 litres/month</strong>.<br>
+                <strong>SKDS Fleet Cards (Commercial):</strong> Approved logistics, public transport, and emergency services vehicles are allocated specific monthly volume quotas (ranging from 1,000 to 5,000+ litres) via fleet cards at RM1.88/litre or RM2.15/litre.
               </p>
             </div>
           </div>

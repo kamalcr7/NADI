@@ -113,12 +113,12 @@
       KtmyCharts.destroyChart('chart-education-enrollment');
 
       const labels = enrollment.map(e => e.level);
-      const values = enrollment.map(e => e.students / 1000); // in thousands
+      const values = enrollment.map(e => e.students); // absolute values
 
       chartInstance = KtmyCharts.createBarChart('chart-education-enrollment', {
         labels,
         datasets: [{
-          label: 'Students (Thousands)',
+          label: 'Students',
           data: values,
           colors: enrollment.map(e => e.color)
         }],
