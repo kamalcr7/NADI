@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — DataStore v2 (Static JSON-First)
+   KTMY — DataStore v2 (Static JSON-First)
    ============================================================
    Priority order:
    1. /data/*.json  — pre-fetched by GitHub Actions cron (server-side)
@@ -10,8 +10,8 @@
 (function () {
   'use strict';
 
-  const STORE_VERSION = 'v10';
-  const LS_PREFIX = `nadi_${STORE_VERSION}_`;
+  const STORE_VERSION = 'v13';
+  const LS_PREFIX = `ktmy_${STORE_VERSION}_`;
 
   /* --- File Map: dataset key → static JSON path --- */
   const DATA_FILES = {
@@ -106,7 +106,7 @@
     try {
       localStorage.setItem(lsKey(key), JSON.stringify({ ts: Date.now(), data }));
     } catch {
-      // Storage full — clear old NADI entries first
+      // Storage full — clear old KTMY entries first
       Object.keys(localStorage)
         .filter(k => k.startsWith(LS_PREFIX))
         .slice(0, 5)
@@ -300,7 +300,7 @@
   }
 
   /* ─── Public API ─────────────────────────────────────────── */
-  window.NadiStore = {
+  window.KtmyStore = {
     /**
      * Subscribe to a dataset key.
      * Fires immediately if data already loaded.

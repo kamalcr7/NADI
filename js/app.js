@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — Main Application Router & Orchestrator
+   KTMY — Main Application Router & Orchestrator
    ============================================================ */
 
 (function () {
@@ -45,8 +45,8 @@
     // Initialize section modules
     const { modules } = TABS[tabId];
     modules.forEach(name => {
-      if (window.NadiSections?.[name]) {
-        window.NadiSections[name].init();
+      if (window.KtmySections?.[name]) {
+        window.KtmySections[name].init();
       }
     });
 
@@ -121,22 +121,22 @@
       });
     }
 
-    updateBtns(NadiI18n.getLang());
+    updateBtns(KtmyI18n.getLang());
 
     pairs.forEach(({ en, bm }) => {
-      document.getElementById(en)?.addEventListener('click', () => NadiI18n.setLang('en'));
-      document.getElementById(bm)?.addEventListener('click', () => NadiI18n.setLang('bm'));
+      document.getElementById(en)?.addEventListener('click', () => KtmyI18n.setLang('en'));
+      document.getElementById(bm)?.addEventListener('click', () => KtmyI18n.setLang('bm'));
     });
 
-    NadiI18n.on(lang => {
+    KtmyI18n.on(lang => {
       updateBtns(lang);
       // Re-translate currently active modules
       (TABS[activeTabId]?.modules || []).forEach(name => {
-        if (window.NadiSections?.[name]?.translate) {
-          window.NadiSections[name].translate();
+        if (window.KtmySections?.[name]?.translate) {
+          window.KtmySections[name].translate();
         }
       });
-      NadiI18n.applyTranslations();
+      KtmyI18n.applyTranslations();
     });
   }
 
@@ -147,24 +147,45 @@
     });
   }
 
+  /* ---- Disclaimer & Terms Modal ---- */
+  function initDisclaimer() {
+    const overlay = document.getElementById('disclaimer-overlay');
+    const acceptBtn = document.getElementById('btn-accept-disclaimer');
+    if (!overlay || !acceptBtn) return;
+
+    // Check localStorage
+    const accepted = localStorage.getItem('ktmy_disclaimer_accepted');
+    if (accepted !== 'true') {
+      overlay.classList.add('visible');
+      document.body.classList.add('no-scroll');
+    }
+
+    acceptBtn.addEventListener('click', () => {
+      overlay.classList.remove('visible');
+      document.body.classList.remove('no-scroll');
+      localStorage.setItem('ktmy_disclaimer_accepted', 'true');
+    });
+  }
+
   /* ---- Main Init ---- */
   function init() {
     // Apply initial translations
-    NadiI18n.applyTranslations();
+    KtmyI18n.applyTranslations();
 
     // Init Chart.js global settings
-    NadiCharts.init();
+    KtmyCharts.init();
 
     // Init scroll animations
-    NadiAnimations.init();
+    KtmyAnimations.init();
 
     // Setup handlers
     initMobileMenu();
     initLanguageSelector();
     initBackToTop();
+    initDisclaimer();
 
     // Start background data fetching (staggered, respects rate limits)
-    NadiStore.start();
+    KtmyStore.start();
 
     // Start hash router
     window.addEventListener('hashchange', handleRouting);

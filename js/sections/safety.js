@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — Safety Alerts Console (DataStore-powered)
+   KTMY — Safety Alerts Console (DataStore-powered)
    ============================================================ */
 
 (function () {
@@ -21,13 +21,13 @@
       }
     }
 
-    NadiStore.on('weather_warnings', (data, status) => {
+    KtmyStore.on('weather_warnings', (data, status) => {
       if (status !== 'loading') { warnings = data || []; tryRender(); }
     });
-    NadiStore.on('earthquake', (data, status) => {
+    KtmyStore.on('earthquake', (data, status) => {
       if (status !== 'loading') { earthquakes = data || []; tryRender(); }
     });
-    NadiStore.on('flood_warnings', (data, status) => {
+    KtmyStore.on('flood_warnings', (data, status) => {
       if (status !== 'loading') { floods = data || []; tryRender(); }
     });
   }
@@ -40,13 +40,32 @@
 
   function renderSection(container, warningsRaw, earthquakesRaw, floodsRaw) {
     const warnings = parseList(warningsRaw);
-    const earthquakes = parseList(earthquakesRaw);
-    const floods = parseList(floodsRaw);
+    const allEarthquakes = parseList(earthquakesRaw);
+    const allFloods = parseList(floodsRaw);
 
-    const totalAlerts = warnings.length + earthquakes.length + floods.length;
+    // 1. Filter Flood Alerts to only warning-state stations (DANGER, WARNING, ALERT)
+    const activeFloods = allFloods.filter(f => 
+      ['ALERT', 'WARNING', 'DANGER'].includes(f.water_level_indicator)
+    );
+    // Sort active floods: DANGER first, then WARNING, then ALERT
+    const floodSeverityOrder = { 'DANGER': 3, 'WARNING': 2, 'ALERT': 1 };
+    activeFloods.sort((a, b) => (floodSeverityOrder[b.water_level_indicator] || 0) - (floodSeverityOrder[a.water_level_indicator] || 0));
+
+    // 2. Filter Seismic Events (earthquakes) to the last 30 days relative to the latest record
+    const sortedEarthquakes = [...allEarthquakes].sort((a, b) => new Date(b.localdatetime || b.utcdatetime) - new Date(a.localdatetime || a.utcdatetime));
+    const latestEarthquakeDate = sortedEarthquakes[0] ? new Date(sortedEarthquakes[0].localdatetime || sortedEarthquakes[0].utcdatetime) : new Date();
+    const earthquakeCutoffMs = latestEarthquakeDate.getTime() - 30 * 24 * 60 * 60 * 1000;
+    const recentEarthquakes = sortedEarthquakes.filter(e => {
+      const d = new Date(e.localdatetime || e.utcdatetime);
+      return d.getTime() >= earthquakeCutoffMs;
+    });
+
+    const totalAlerts = warnings.length + activeFloods.length + recentEarthquakes.length;
     const alertLevel = totalAlerts === 0 ? 'safe' : totalAlerts < 3 ? 'moderate' : 'high';
     const alertColors = { safe: 'var(--success)', moderate: 'var(--warning)', high: 'var(--danger)' };
     const alertLabels = { safe: 'All Clear', moderate: 'Moderate Alerts', high: 'High Alert' };
+
+    const isBm = KtmyI18n.getLang() === 'bm';
 
     container.innerHTML = `
       <!-- Status Banner -->
@@ -72,33 +91,31 @@
         <div class="glass-card reveal" style="border-top: 3px solid var(--danger);">
           <div style="font-size:2rem; margin-bottom:8px;">🌊</div>
           <h4>Flood Alerts</h4>
-          <div class="stat-number" style="color:var(--danger); font-size:2rem;">${floods.length}</div>
+          <div class="stat-number" style="color:var(--danger); font-size:2rem;">${activeFloods.length}</div>
           <p style="color:var(--text-muted); font-size:var(--fs-small);">Active flood warnings</p>
         </div>
         <div class="glass-card reveal" style="border-top: 3px solid var(--accent-orange);">
           <div style="font-size:2rem; margin-bottom:8px;">🫨</div>
           <h4>Seismic Events</h4>
-          <div class="stat-number" style="color:var(--accent-orange); font-size:2rem;">${earthquakes.length}</div>
+          <div class="stat-number" style="color:var(--accent-orange); font-size:2rem;">${recentEarthquakes.length}</div>
           <p style="color:var(--text-muted); font-size:var(--fs-small);">Recent earthquakes</p>
         </div>
       </div>
 
       <!-- Weather Warnings List -->
       ${renderAlertList('🌩️ Weather Warnings', warnings, w => {
-        const isBm = NadiI18n.getLang() === 'bm';
         return {
           title: isBm ? (w.heading_bm || w.warning_issue?.title_bm || 'Amaran Cuaca') : (w.heading_en || w.warning_issue?.title_en || 'Weather Warning'),
           body: isBm ? (w.text_bm || 'Cuaca buruk dijangka berlaku.') : (w.text_en || 'Severe weather conditions expected.'),
           meta: 'MET Malaysia',
           severity: 'warning'
         };
-      })}
+      }, isBm ? 'Semua tiada amaran cuaca aktif.' : 'No active weather warnings.')}
 
       <!-- Flood Warnings List -->
-      ${renderAlertList('🌊 Flood Alerts', floods, f => {
+      ${renderAlertList('🌊 Active Flood Alerts', activeFloods, f => {
         const isDanger = f.water_level_indicator === 'DANGER';
         const isWarning = f.water_level_indicator === 'WARNING';
-        const isBm = NadiI18n.getLang() === 'bm';
         return {
           title: `${f.station_name || 'Station'}, ${f.district || ''}`,
           body: isBm ? 
@@ -107,11 +124,10 @@
           meta: f.state || '',
           severity: isDanger ? 'danger' : isWarning ? 'orange' : 'warning'
         };
-      })}
+      }, isBm ? 'Semua stesen paras air sungai di tahap normal.' : 'All monitored river basins are at normal levels.')}
 
       <!-- Earthquake List -->
-      ${renderAlertList('🫨 Seismic Activity', earthquakes, e => {
-        const isBm = NadiI18n.getLang() === 'bm';
+      ${renderAlertList('🫨 Recent Seismic Activity (30 Days)', recentEarthquakes, e => {
         return {
           title: isBm ? 
             `Magnitud ${e.magdefault || '?'} — ${e.location || 'Lokasi Tidak Diketahui'}` :
@@ -122,7 +138,7 @@
           meta: e.status || '',
           severity: 'orange'
         };
-      })}
+      }, isBm ? 'Tiada aktiviti seismik dikesan dalam tempoh 30 hari yang lalu.' : 'No seismic activity recorded in the past 30 days.')}
 
       <!-- General Safety Tips -->
       <div class="glass-card reveal mt-xl">
@@ -145,12 +161,24 @@
       </div>
     `;
 
-    NadiI18n.applyTranslations();
-    NadiAnimations.initScrollReveals();
+    KtmyI18n.applyTranslations();
+    KtmyAnimations.initScrollReveals();
   }
 
-  function renderAlertList(title, items, mapFn) {
-    if (!items || items.length === 0) return '';
+  function renderAlertList(title, items, mapFn, fallbackMsg = '') {
+    if (!items || items.length === 0) {
+      if (fallbackMsg) {
+        return `
+          <div class="reveal mb-lg">
+            <h3 style="margin-bottom:var(--space-md);">${title}</h3>
+            <div class="glass-card" style="padding:var(--space-md); text-align:center; border-left:3px solid var(--success); background: rgba(0, 255, 136, 0.02);">
+              <span style="font-size:1.1rem; margin-right:6px;">✅</span>
+              <span style="color:var(--text-secondary); font-size:var(--fs-small);">${fallbackMsg}</span>
+            </div>
+          </div>`;
+      }
+      return '';
+    }
     const SEVERITY_COLOR = { warning: 'var(--warning)', danger: 'var(--danger)', orange: 'var(--accent-orange)' };
 
     const cards = items.slice(0, 10).map(item => {
@@ -172,9 +200,9 @@
       </div>`;
   }
 
-  window.NadiSections = window.NadiSections || {};
-  window.NadiSections.safety = {
+  window.KtmySections = window.KtmySections || {};
+  window.KtmySections.safety = {
     init,
-    translate() { NadiI18n.applyTranslations(); }
+    translate() { KtmyI18n.applyTranslations(); }
   };
 })();

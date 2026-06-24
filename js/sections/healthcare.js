@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — Healthcare & Dengue Surveillance Section Module
+   KTMY — Healthcare & Dengue Surveillance Section Module
    ============================================================ */
 
 (function () {
@@ -21,12 +21,12 @@
     container.innerHTML = `
       <div class="loading-state">
         <div class="spinner"></div>
-        <p data-i18n="common.loading">${NadiI18n.t('common.loading')}</p>
+        <p data-i18n="common.loading">${KtmyI18n.t('common.loading')}</p>
       </div>
     `;
 
-    // Subscribe to NADI healthcare data
-    NadiStore.on('healthcare', (data, status) => {
+    // Subscribe to KTMY healthcare data
+    KtmyStore.on('healthcare', (data, status) => {
       if (status === 'loading') return;
 
       let records = [];
@@ -63,7 +63,7 @@
     const totalDeaths = records.reduce((sum, r) => sum + parseFloat(r.death || r.deaths || 0), 0);
 
     const formattedDate = new Date(records[0]?.date || Date.now()).toLocaleDateString(
-      NadiI18n.getLang() === 'bm' ? 'ms-MY' : 'en-US',
+      KtmyI18n.getLang() === 'bm' ? 'ms-MY' : 'en-US',
       { day: 'numeric', month: 'short', year: 'numeric' }
     );
 
@@ -139,25 +139,25 @@
 
     // Render comparison chart
     setTimeout(() => {
-      NadiCharts.destroyChart('chart-healthcare-dengue');
+      KtmyCharts.destroyChart('chart-healthcare-dengue');
 
       const topStates = records.slice(0, 6);
       const labels = topStates.map(r => r.state || r.negeri || 'N/A');
       const dataValues = topStates.map(r => parseFloat(r.cases || 0));
 
-      chartInstance = NadiCharts.createBarChart('chart-healthcare-dengue', {
+      chartInstance = KtmyCharts.createBarChart('chart-healthcare-dengue', {
         labels,
         datasets: [{
-          label: NadiI18n.t('healthcare.diseases') || 'Dengue Cases',
+          label: KtmyI18n.t('healthcare.diseases') || 'Dengue Cases',
           data: dataValues,
-          color: NadiCharts.COLORS.crimson
+          color: KtmyCharts.COLORS.crimson
         }]
       });
     }, 0);
 
     // Apply translations
-    NadiI18n.applyTranslations();
-    NadiAnimations.initScrollReveals();
+    KtmyI18n.applyTranslations();
+    KtmyAnimations.initScrollReveals();
   }
 
   function translate() {
@@ -167,6 +167,6 @@
     }
   }
 
-  window.NadiSections = window.NadiSections || {};
-  window.NadiSections.healthcare = { init, translate };
+  window.KtmySections = window.KtmySections || {};
+  window.KtmySections.healthcare = { init, translate };
 })();

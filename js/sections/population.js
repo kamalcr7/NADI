@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — Population & Demographics Section (DataStore-powered)
+   KTMY — Population & Demographics Section (DataStore-powered)
    ============================================================ */
 
 (function () {
@@ -17,7 +17,7 @@
 
     container.innerHTML = `<div class="loading-state"><div class="spinner"></div><p>Loading population data...</p></div>`;
 
-    NadiStore.on('population', (data, status) => {
+    KtmyStore.on('population', (data, status) => {
       if (status === 'loading') return;
       const records = parseDS(data);
       if (status === 'error' || records.length === 0) {
@@ -25,7 +25,7 @@
           <div class="error-state">
             <div class="error-icon">👥</div>
             <p>Could not load population data.</p>
-            <button class="btn btn-outline" onclick="NadiStore.refresh('population')">Retry</button>
+            <button class="btn btn-outline" onclick="KtmyStore.refresh('population')">Retry</button>
           </div>`;
         return;
       }
@@ -120,13 +120,13 @@
 
     setTimeout(() => {
       if (stateEntries.length > 0) {
-        NadiCharts.destroyChart('chart-population-states');
-        NadiCharts.createBarChart('chart-population-states', {
+        KtmyCharts.destroyChart('chart-population-states');
+        KtmyCharts.createBarChart('chart-population-states', {
           labels: stateEntries.map(e => e.state),
           datasets: [{
             label: 'Population',
             data: stateEntries.map(e => e.value),
-            colors: NadiCharts.PALETTE.slice(0, stateEntries.length)
+            colors: KtmyCharts.PALETTE.slice(0, stateEntries.length)
           }],
           horizontal: true,
           yLabel: 'People'
@@ -136,25 +136,25 @@
       // Historical trend
       const trendMalaysia = sorted.filter(r => !r.state || r.state === 'Malaysia').slice(-20);
       if (trendMalaysia.length > 0) {
-        NadiCharts.destroyChart('chart-population-trend');
-        NadiCharts.createAreaChart('chart-population-trend', {
+        KtmyCharts.destroyChart('chart-population-trend');
+        KtmyCharts.createAreaChart('chart-population-trend', {
           labels: trendMalaysia.map(r => new Date(r.date).getFullYear()),
           datasets: [{
             label: 'Malaysia Population',
             data: trendMalaysia.map(r => parseFloat(r.population || r.value || 0) * 1000),
-            color: NadiCharts.COLORS.primary
+            color: KtmyCharts.COLORS.primary
           }]
         });
       }
     }, 0);
 
-    NadiI18n.applyTranslations();
-    NadiAnimations.initScrollReveals();
+    KtmyI18n.applyTranslations();
+    KtmyAnimations.initScrollReveals();
   }
 
-  window.NadiSections = window.NadiSections || {};
-  window.NadiSections.population = {
+  window.KtmySections = window.KtmySections || {};
+  window.KtmySections.population = {
     init,
-    translate() { NadiI18n.applyTranslations(); }
+    translate() { KtmyI18n.applyTranslations(); }
   };
 })();

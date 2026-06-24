@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — Fuel Prices Section Module (DataStore-powered)
+   KTMY — Fuel Prices Section Module (DataStore-powered)
    ============================================================ */
 
 (function () {
@@ -12,7 +12,7 @@
     if (!container) return;
 
     // Subscribe to DataStore — will fire immediately if data is cached
-    NadiStore.on('fuel', (data, status) => {
+    KtmyStore.on('fuel', (data, status) => {
       if (status === 'loading') {
         if (!rendered) showLoading(container);
         return;
@@ -28,7 +28,7 @@
       rendered = true;
     });
 
-    if (NadiStore.status('fuel') === 'idle') {
+    if (KtmyStore.status('fuel') === 'idle') {
       showLoading(container);
     }
   }
@@ -37,7 +37,7 @@
     container.innerHTML = `
       <div class="loading-state">
         <div class="spinner"></div>
-        <p>${NadiI18n.t('common.loading')}</p>
+        <p>${KtmyI18n.t('common.loading')}</p>
       </div>`;
   }
 
@@ -45,8 +45,8 @@
     container.innerHTML = `
       <div class="error-state">
         <div class="error-icon">⛽</div>
-        <p class="error-message">${NadiI18n.t('common.error')}</p>
-        <button class="btn btn-outline" onclick="NadiStore.refresh('fuel')">Retry</button>
+        <p class="error-message">${KtmyI18n.t('common.error')}</p>
+        <button class="btn btn-outline" onclick="KtmyStore.refresh('fuel')">Retry</button>
       </div>`;
   }
 
@@ -73,7 +73,7 @@
     const cDE = dieselE - parseFloat(previous.diesel_east_msia || previous.diesel_east || dieselE);
 
     const fmtDate = new Date(latest.date).toLocaleDateString(
-      NadiI18n.getLang() === 'bm' ? 'ms-MY' : 'en-US',
+      KtmyI18n.getLang() === 'bm' ? 'ms-MY' : 'en-US',
       { day: 'numeric', month: 'long', year: 'numeric' }
     );
 
@@ -118,27 +118,27 @@
     `;
 
     setTimeout(() => {
-      NadiCharts.destroyChart('chart-fuel-history');
+      KtmyCharts.destroyChart('chart-fuel-history');
       const chartRecords = records.slice(-30);
       const labels = chartRecords.map(r => new Date(r.date).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }));
-      chartInstance = NadiCharts.createLineChart('chart-fuel-history', {
+      chartInstance = KtmyCharts.createLineChart('chart-fuel-history', {
         labels,
         datasets: [
-          { label: 'RON 95', data: chartRecords.map(r => parseFloat(r.ron95)), color: NadiCharts.COLORS.gold },
-          { label: 'RON 97', data: chartRecords.map(r => parseFloat(r.ron97)), color: NadiCharts.COLORS.primary },
-          { label: 'Diesel (Peninsular)', data: chartRecords.map(r => parseFloat(r.diesel_peninsular || r.diesel)), color: NadiCharts.COLORS.blue },
+          { label: 'RON 95', data: chartRecords.map(r => parseFloat(r.ron95)), color: KtmyCharts.COLORS.gold },
+          { label: 'RON 97', data: chartRecords.map(r => parseFloat(r.ron97)), color: KtmyCharts.COLORS.primary },
+          { label: 'Diesel (Peninsular)', data: chartRecords.map(r => parseFloat(r.diesel_peninsular || r.diesel)), color: KtmyCharts.COLORS.blue },
         ],
         yLabel: 'RM / litre'
       });
     }, 0);
 
-    NadiI18n.applyTranslations();
-    NadiAnimations.initScrollReveals();
+    KtmyI18n.applyTranslations();
+    KtmyAnimations.initScrollReveals();
   }
 
-  window.NadiSections = window.NadiSections || {};
-  window.NadiSections.fuel = {
+  window.KtmySections = window.KtmySections || {};
+  window.KtmySections.fuel = {
     init,
-    translate() { NadiI18n.applyTranslations(); }
+    translate() { KtmyI18n.applyTranslations(); }
   };
 })();

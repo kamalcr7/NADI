@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — Employment & Jobs Section (DataStore-powered)
+   KTMY — Employment & Jobs Section (DataStore-powered)
    ============================================================ */
 
 (function () {
@@ -17,7 +17,7 @@
 
     container.innerHTML = `<div class="loading-state"><div class="spinner"></div><p>Loading labour force data...</p></div>`;
 
-    NadiStore.on('unemployment', (data, status) => {
+    KtmyStore.on('unemployment', (data, status) => {
       if (status === 'loading') return;
       const records = parseDS(data);
       if (status === 'error' || records.length === 0) {
@@ -134,26 +134,26 @@
 
       setTimeout(() => {
         if (sorted.length > 2) {
-          NadiCharts.destroyChart('chart-unemployment-trend');
-          NadiCharts.createAreaChart('chart-unemployment-trend', {
+          KtmyCharts.destroyChart('chart-unemployment-trend');
+          KtmyCharts.createAreaChart('chart-unemployment-trend', {
             labels: sorted.map(r => new Date(r.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })),
             datasets: [{
               label: 'Unemployment Rate (%)',
               data: sorted.map(r => parseFloat(r.u_rate || r.rate || r.unemployment || 0)),
-              color: NadiCharts.COLORS.gold
+              color: KtmyCharts.COLORS.gold
             }],
             yLabel: '%'
           });
         }
       }, 0);
 
-    NadiI18n.applyTranslations();
-    NadiAnimations.initScrollReveals();
+    KtmyI18n.applyTranslations();
+    KtmyAnimations.initScrollReveals();
   }
 
-  window.NadiSections = window.NadiSections || {};
-  window.NadiSections.employment = {
+  window.KtmySections = window.KtmySections || {};
+  window.KtmySections.employment = {
     init,
-    translate() { NadiI18n.applyTranslations(); }
+    translate() { KtmyI18n.applyTranslations(); }
   };
 })();

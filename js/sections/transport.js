@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — Transportation Section Module
+   KTMY — Transportation Section Module
    ============================================================ */
 
 (function () {
@@ -13,7 +13,7 @@
     if (!container) return;
 
     if (initialized && cachedData) {
-      renderSection(container, cachedData);
+      renderSection(container, cachedData.ridership, cachedData.fares);
       return;
     }
     initialized = true;
@@ -21,12 +21,22 @@
     container.innerHTML = `
       <div class="loading-state">
         <div class="spinner"></div>
-        <p data-i18n="common.loading">${NadiI18n.t('common.loading')}</p>
+        <p data-i18n="common.loading">${KtmyI18n.t('common.loading')}</p>
       </div>
     `;
 
-    // Subscribe to NADI transport data
-    NadiStore.on('transport', (data, status) => {
+    let ridershipData = null;
+    let faresData = null;
+
+    function tryRender() {
+      if (ridershipData !== null && faresData !== null) {
+        cachedData = { ridership: ridershipData, fares: faresData };
+        renderSection(container, ridershipData, faresData);
+      }
+    }
+
+    // Subscribe to KTMY transport ridership data
+    KtmyStore.on('transport', (data, status) => {
       if (status === 'loading') return;
 
       let records = [];
@@ -62,16 +72,14 @@
                           (parseFloat(r.rail_komuter_utara) || 0);
 
           const busSum = (parseFloat(r.bus_rkl) || 0) +
-                         (parseFloat(r.bus_rkn) || 0) +
-                         (parseFloat(r.bus_rpn) || 0);
+                         (parseFloat(r.bus_rpn) || 0) +
+                         (parseFloat(r.bus_rkn) || 0);
 
           monthlyMap[monthKey].rail += railSum;
           monthlyMap[monthKey].bus += busSum;
         });
         processedRecords = Object.values(monthlyMap);
       } else {
-        // Mock data is already monthly and in thousands (e.g. 22400)
-        // Multiply by 1000 to match the absolute scale of the daily data sum
         processedRecords = records.map(r => ({
           date: r.date,
           rail: parseFloat(r.rail || 0) * 1000,
@@ -80,14 +88,19 @@
       }
 
       processedRecords.sort((a, b) => new Date(a.date) - new Date(b.date));
-      cachedData = processedRecords;
+      ridershipData = processedRecords;
+      tryRender();
+    });
 
-      renderSection(container, cachedData);
+    // Subscribe to KTMY transport fares data
+    KtmyStore.on('transport_fares', (data, status) => {
+      if (status === 'loading') return;
+      faresData = data || getMockFaresData();
+      tryRender();
     });
   }
 
   function getMockRidershipData() {
-    // High-fidelity standard monthly ridership figures in Malaysia (in thousands)
     return [
       { date: '2025-07-01', rail: 22400, bus: 5600, total: 28000 },
       { date: '2025-08-01', rail: 23100, bus: 5800, total: 28900 },
@@ -104,13 +117,211 @@
     ];
   }
 
-  function renderSection(container, records) {
-    const latest = records[records.length - 1];
+  function getMockFaresData() {
+    return {
+      mrt_lrt: {
+        name: "MRT & LRT Fares",
+        operator: "RapidKL",
+        currency: "MYR",
+        minimum_fare: "RM1.00",
+        maximum_fare: "RM6.40 (single trip)",
+        day_pass: "RM5.00 (unlimited rides)",
+        notes: "Fares calculated by distance. Touch 'n Go required."
+      },
+      kktm: {
+        name: "KTM Komuter Fares",
+        operator: "KTMB",
+        routes: [
+          { route: "KL Sentral - Batu Caves", fare: "RM2.50", duration: "30 min" },
+          { route: "KL Sentral - Port Klang", fare: "RM4.80", duration: "70 min" },
+          { route: "KL Sentral - Rawang", fare: "RM3.90", duration: "50 min" },
+          { route: "KL Sentral - Seremban", fare: "RM7.50", duration: "120 min" }
+        ]
+      },
+      ets: {
+        name: "ETS (Electric Train Service)",
+        operator: "KTMB",
+        routes: [
+          { route: "KL Sentral - Ipoh", fare: "RM35-55", duration: "2h 15m", classes: ["Platinum", "Gold", "Silver"] },
+          { route: "KL Sentral - Butterworth", fare: "RM55-80", duration: "4h", classes: ["Platinum", "Gold"] },
+          { route: "Ipoh - Butterworth", fare: "RM25-40", duration: "1h 45m", classes: ["Platinum", "Gold", "Silver"] }
+        ]
+      },
+      klia_express: {
+        name: "KLIA Ekspres",
+        operator: "ERL",
+        fare: "RM55.00 (single) / RM100.00 (return)",
+        duration: "33 minutes",
+        frequency: "Every 20 minutes"
+      },
+      grab: {
+        name: "Grab (Ride-hailing)",
+        estimated_fares: [
+          { route: "KLIA - KLCC", fare: "RM70-100", duration: "45-60 min" },
+          { route: "KL Sentral - Bukit Bintang", fare: "RM8-15", duration: "15 min" },
+          { route: "KL Sentral - Petaling Jaya", fare: "RM25-40", duration: "30 min" }
+        ],
+        note: "Fares vary by demand (surge pricing)"
+      }
+    };
+  }
+
+  function renderSection(container, ridership, faresData) {
+    const latest = ridership[ridership.length - 1];
     
     // Total rail and bus ridership (formatted)
     const railRidership = parseFloat(latest.rail || 27800000);
     const busRidership = parseFloat(latest.bus || 7900000);
-    const totalRidership = railRidership + busRidership;
+
+    const isBm = KtmyI18n.getLang() === 'bm';
+    const fares = faresData.data || faresData;
+
+    // Build LRT/MRT card HTML
+    const lrt = fares.mrt_lrt || {};
+    const lrtHtml = `
+      <div class="glass-card reveal flex-col gap-sm">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:1.5rem;">🚇</span>
+          <h4 style="margin:0; font-size:var(--fs-body);">${lrt.name || 'MRT & LRT Fares'}</h4>
+        </div>
+        <div style="font-size:0.75rem; color:var(--text-muted);">${isBm ? 'Pengendali' : 'Operator'}: ${lrt.operator || 'RapidKL'}</div>
+        <div class="divider" style="margin:4px 0;"></div>
+        <div class="flex-between">
+          <span style="font-size:0.78rem; color:var(--text-secondary);">${isBm ? 'Tambang Minimum' : 'Minimum Fare'}</span>
+          <strong style="color:var(--text-primary); font-size:0.85rem;">${lrt.minimum_fare || 'RM 1.00'}</strong>
+        </div>
+        <div class="flex-between">
+          <span style="font-size:0.78rem; color:var(--text-secondary);">${isBm ? 'Tambang Maksimum' : 'Maximum Fare'}</span>
+          <strong style="color:var(--text-primary); font-size:0.85rem;">${lrt.maximum_fare || 'RM 6.40'}</strong>
+        </div>
+        <div class="flex-between" style="background: rgba(0, 201, 167, 0.08); padding: 6px 10px; border-radius: 6px; border: 1px dashed var(--primary);">
+          <span style="font-size:0.78rem; color:var(--primary); font-weight:600;">🎫 ${isBm ? 'Pas Harian MyCity' : 'MyCity Day Pass'}</span>
+          <strong style="color:var(--primary); font-size:0.85rem;">${lrt.day_pass || 'RM 5.00'}</strong>
+        </div>
+        <p style="font-size:0.68rem; color:var(--text-muted); margin:4px 0 0; line-height:1.3;">
+          ℹ️ ${isBm ? 'Tambang berdasarkan jarak perjalanan. Touch \'n Go diperlukan.' : 'Fares calculated by distance. Touch \'n Go required.'}
+        </p>
+      </div>
+    `;
+
+    // Build KLIA Ekspres card HTML
+    const klia = fares.klia_express || {};
+    const kliaHtml = `
+      <div class="glass-card reveal flex-col gap-sm">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:1.5rem;">✈️</span>
+          <h4 style="margin:0; font-size:var(--fs-body);">${klia.name || 'KLIA Ekspres'}</h4>
+        </div>
+        <div style="font-size:0.75rem; color:var(--text-muted);">${isBm ? 'Pengendali' : 'Operator'}: ${klia.operator || 'ERL'}</div>
+        <div class="divider" style="margin:4px 0;"></div>
+        <div class="flex-between">
+          <span style="font-size:0.78rem; color:var(--text-secondary);">${isBm ? 'Tambang' : 'Fares'}</span>
+          <strong style="color:var(--text-primary); font-size:0.75rem; text-align:right;">${isBm ? 'RM55 (Hala Selesa) / RM100 (Dua Hala)' : 'RM55 (Single) / RM100 (Return)'}</strong>
+        </div>
+        <div class="flex-between">
+          <span style="font-size:0.78rem; color:var(--text-secondary);">${isBm ? 'Tempoh Perjalanan' : 'Duration'}</span>
+          <strong style="color:var(--text-primary); font-size:0.85rem;">${klia.duration || '33 mins'}</strong>
+        </div>
+        <div class="flex-between">
+          <span style="font-size:0.78rem; color:var(--text-secondary);">${isBm ? 'Kekerapan' : 'Frequency'}</span>
+          <strong style="color:var(--text-primary); font-size:0.85rem;">${klia.frequency || 'Every 20 mins'}</strong>
+        </div>
+        <p style="font-size:0.68rem; color:var(--text-muted); margin:4px 0 0; line-height:1.3;">
+          ℹ️ ${isBm ? 'Hubungan tanpa henti antara KL Sentral dan Lapangan Terbang (KLIA T1 & T2).' : 'Non-stop connection between KL Sentral and Airport (KLIA T1 & T2).'}
+        </p>
+      </div>
+    `;
+
+    // Build Grab card HTML
+    const grab = fares.grab || {};
+    const grabRows = (grab.estimated_fares || []).map(r => `
+      <div class="flex-between" style="font-size:0.75rem; margin-bottom:4px;">
+        <span style="color:var(--text-secondary);">${r.route}</span>
+        <strong style="color:var(--text-primary);">${r.fare} <span style="font-size:0.65rem; color:var(--text-muted);">(${r.duration})</span></strong>
+      </div>
+    `).join('');
+    const grabHtml = `
+      <div class="glass-card reveal flex-col gap-sm">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:1.5rem;">🚗</span>
+          <h4 style="margin:0; font-size:var(--fs-body);">${grab.name || 'Grab (Ride-hailing)'}</h4>
+        </div>
+        <div style="font-size:0.75rem; color:var(--text-muted);">${isBm ? 'Anggaran Tambang Laluan Utama' : 'Estimated Fares for Key Routes'}</div>
+        <div class="divider" style="margin:4px 0;"></div>
+        <div class="flex-col gap-xs">
+          ${grabRows}
+        </div>
+        <p style="font-size:0.68rem; color:var(--warning); margin:4px 0 0; line-height:1.3;">
+          ⚠️ ${isBm ? 'Tambang berubah mengikut permintaan (harga lonjakan).' : 'Fares vary by demand (surge pricing).'}
+        </p>
+      </div>
+    `;
+
+    // Build KTM Komuter table HTML
+    const ktm = fares.kktm || {};
+    const ktmRows = (ktm.routes || []).map(r => `
+      <tr>
+        <td style="font-weight: 500; font-size: 0.78rem;">${r.route}</td>
+        <td style="font-weight: bold; color: var(--primary); font-size: 0.78rem; text-align: center;">${r.fare}</td>
+        <td style="color: var(--text-muted); font-size: 0.78rem; text-align: center;">${r.duration}</td>
+      </tr>
+    `).join('');
+    const ktmHtml = `
+      <div class="glass-card reveal" style="padding: 0; overflow-x: auto;">
+        <div style="padding: var(--space-md) var(--space-lg) 0; display:flex; align-items:center; gap:8px;">
+          <span style="font-size:1.5rem;">🚆</span>
+          <h4 style="margin:0; font-size:var(--fs-body);">${ktm.name || 'KTM Komuter Fares'}</h4>
+        </div>
+        <div style="padding: 2px var(--space-lg) 10px; font-size:0.72rem; color:var(--text-muted);">${isBm ? 'Pengendali' : 'Operator'}: KTMB · ${isBm ? 'Laluan popular dari KL Sentral' : 'Popular routes from KL Sentral'}</div>
+        <table class="data-table" style="margin-top: 4px;">
+          <thead>
+            <tr>
+              <th style="text-align: left; font-size: 0.72rem;">${isBm ? 'Laluan' : 'Route'}</th>
+              <th style="text-align: center; font-size: 0.72rem; width: 80px;">${isBm ? 'Tambang' : 'Fare'}</th>
+              <th style="text-align: center; font-size: 0.72rem; width: 100px;">${isBm ? 'Tempoh' : 'Duration'}</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${ktmRows}
+          </tbody>
+        </table>
+      </div>
+    `;
+
+    // Build ETS table HTML
+    const ets = fares.ets || {};
+    const etsRows = (ets.routes || []).map(r => `
+      <tr>
+        <td style="font-weight: 500; font-size: 0.78rem;">${r.route}</td>
+        <td style="font-weight: bold; color: var(--primary); font-size: 0.78rem; text-align: center;">${r.fare}</td>
+        <td style="color: var(--text-muted); font-size: 0.78rem; text-align: center;">${r.duration}</td>
+        <td style="font-size: 0.7rem; text-align: center;">
+          ${(r.classes || []).map(c => `<span style="background: rgba(255,255,255,0.06); padding: 2px 4px; border-radius: 4px; margin-right:2px; font-size:0.6rem; color:var(--text-secondary); border: 1px solid var(--glass-border);">${c}</span>`).join('')}
+        </td>
+      </tr>
+    `).join('');
+    const etsHtml = `
+      <div class="glass-card reveal" style="padding: 0; overflow-x: auto;">
+        <div style="padding: var(--space-md) var(--space-lg) 0; display:flex; align-items:center; gap:8px;">
+          <span style="font-size:1.5rem;">⚡</span>
+          <h4 style="margin:0; font-size:var(--fs-body);">${ets.name || 'ETS (Electric Train Service)'}</h4>
+        </div>
+        <div style="padding: 2px var(--space-lg) 10px; font-size:0.72rem; color:var(--text-muted);">${isBm ? 'Pengendali' : 'Operator'}: KTMB · ${isBm ? 'Tren antara bandar kelajuan tinggi' : 'High-speed intercity train service'}</div>
+        <table class="data-table" style="margin-top: 4px;">
+          <thead>
+            <tr>
+              <th style="text-align: left; font-size: 0.72rem;">${isBm ? 'Laluan' : 'Route'}</th>
+              <th style="text-align: center; font-size: 0.72rem; width: 90px;">${isBm ? 'Tambang' : 'Fare'}</th>
+              <th style="text-align: center; font-size: 0.72rem; width: 90px;">${isBm ? 'Tempoh' : 'Duration'}</th>
+              <th style="text-align: center; font-size: 0.72rem; width: 150px;">${isBm ? 'Kelas' : 'Classes'}</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${etsRows}
+          </tbody>
+        </table>
+      </div>
+    `;
 
     container.innerHTML = `
       <!-- Transport stats row -->
@@ -168,34 +379,57 @@
           </div>
         </div>
       </div>
+
+      <!-- Public Transport Fares & Rates Section -->
+      <div class="section-header mt-2xl reveal">
+        <div class="section-badge">
+          <span class="badge-dot"></span>
+          <span>${isBm ? 'Maklumat Tambang' : 'Fares & Rates'}</span>
+        </div>
+        <h2 class="section-title" style="font-size: var(--fs-h3);">${isBm ? '🎫 Tambang Pengangkutan & Ride-Hailing' : '🎫 Transit & Ride-Hailing Fares'}</h2>
+        <p class="section-subtitle" style="font-size: var(--fs-small);">${isBm ? 'Panduan tambang rujukan untuk LRT, MRT, KTM, ETS, KLIA Ekspres dan perkhidmatan teksi persendirian.' : 'Reference fare guides for RapidKL rail, KTM Komuter, ETS, KLIA Ekspres, and ride-hailing services.'}</p>
+      </div>
+
+      <!-- Fares Grid -->
+      <div class="grid grid-3 stagger mb-xl">
+        ${lrtHtml}
+        ${kliaHtml}
+        ${grabHtml}
+      </div>
+
+      <!-- Rail routes fares tables -->
+      <div class="grid grid-2 stagger">
+        ${ktmHtml}
+        ${etsHtml}
+      </div>
     `;
 
     // Render chart
     setTimeout(() => {
-      NadiCharts.destroyChart('chart-transport-ridership');
+      KtmyCharts.destroyChart('chart-transport-ridership');
 
-      const labels = records.map(r => new Date(r.date).toLocaleDateString(
-        NadiI18n.getLang() === 'bm' ? 'ms-MY' : 'en-US',
+      const labels = ridership.map(r => new Date(r.date).toLocaleDateString(
+        KtmyI18n.getLang() === 'bm' ? 'ms-MY' : 'en-US',
         { month: 'short', year: '2-digit' }
       ));
 
-      const railData = records.map(r => parseFloat(r.rail || 0) / 1e6); // in millions
-      const busData = records.map(r => parseFloat(r.bus || 0) / 1e6);
+      const railData = ridership.map(r => parseFloat(r.rail || 0) / 1e6); // in millions
+      const busData = ridership.map(r => parseFloat(r.bus || 0) / 1e6);
 
-      chartInstance = NadiCharts.createLineChart('chart-transport-ridership', {
+      chartInstance = KtmyCharts.createLineChart('chart-transport-ridership', {
         labels,
         datasets: [
           {
-            label: NadiI18n.t('transport.rail'),
+            label: KtmyI18n.t('transport.rail'),
             data: railData,
-            color: NadiCharts.COLORS.primary,
+            color: KtmyCharts.COLORS.primary,
             fill: true,
             extra: { backgroundColor: 'rgba(0, 201, 167, 0.1)' }
           },
           {
-            label: NadiI18n.t('transport.bus'),
+            label: KtmyI18n.t('transport.bus'),
             data: busData,
-            color: NadiCharts.COLORS.blue,
+            color: KtmyCharts.COLORS.blue,
             fill: true,
             extra: { backgroundColor: 'rgba(77, 124, 254, 0.1)' }
           }
@@ -205,17 +439,17 @@
     }, 0);
 
     // Apply translations
-    NadiI18n.applyTranslations();
-    NadiAnimations.initScrollReveals();
+    KtmyI18n.applyTranslations();
+    KtmyAnimations.initScrollReveals();
   }
 
   function translate() {
     const container = document.getElementById('section-transport-content');
     if (container && cachedData) {
-      renderSection(container, cachedData);
+      renderSection(container, cachedData.ridership, cachedData.fares);
     }
   }
 
-  window.NadiSections = window.NadiSections || {};
-  window.NadiSections.transport = { init, translate };
+  window.KtmySections = window.KtmySections || {};
+  window.KtmySections.transport = { init, translate };
 })();

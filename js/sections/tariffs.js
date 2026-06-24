@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — TNB Electricity Tariffs Section Module (DataStore-powered)
+   KTMY — TNB Electricity Tariffs Section Module (DataStore-powered)
    ============================================================ */
 
 (function () {
@@ -25,7 +25,7 @@
     if (!container) return;
 
     // Subscribe to DataStore — fires immediately if cached
-    NadiStore.on('tnb_tariffs', (data, status) => {
+    KtmyStore.on('tnb_tariffs', (data, status) => {
       if (status === 'loading') {
         if (!rendered) showLoading(container);
         return;
@@ -45,7 +45,7 @@
       rendered = true;
     });
 
-    if (NadiStore.status('tnb_tariffs') === 'idle') {
+    if (KtmyStore.status('tnb_tariffs') === 'idle') {
       showLoading(container);
     }
   }
@@ -54,7 +54,7 @@
     container.innerHTML = `
       <div class="loading-state">
         <div class="spinner"></div>
-        <p>${NadiI18n.t('common.loading')}</p>
+        <p>${KtmyI18n.t('common.loading')}</p>
       </div>`;
   }
 
@@ -62,8 +62,8 @@
     container.innerHTML = `
       <div class="error-state">
         <div class="error-icon">⚡</div>
-        <p class="error-message">${NadiI18n.t('common.error')}</p>
-        <button class="btn btn-outline" onclick="NadiStore.refresh('tnb_tariffs')">Retry</button>
+        <p class="error-message">${KtmyI18n.t('common.error')}</p>
+        <button class="btn btn-outline" onclick="KtmyStore.refresh('tnb_tariffs')">Retry</button>
       </div>`;
   }
 
@@ -178,17 +178,17 @@
       </div>
     `;
 
-    NadiI18n.applyTranslations();
-    NadiAnimations.initScrollReveals();
+    KtmyI18n.applyTranslations();
+    KtmyAnimations.initScrollReveals();
   }
 
   function translate() {
     const container = document.getElementById('section-tariffs-content');
     if (container && rendered) {
-      NadiI18n.applyTranslations();
+      KtmyI18n.applyTranslations();
     }
   }
 
-  window.NadiSections = window.NadiSections || {};
-  window.NadiSections.tariffs = { init, translate };
+  window.KtmySections = window.KtmySections || {};
+  window.KtmySections.tariffs = { init, translate };
 })();

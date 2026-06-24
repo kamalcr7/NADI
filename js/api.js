@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — API Client with Caching & Rate Limiting
+   KTMY — API Client with Caching & Rate Limiting
    ============================================================ */
 
 (function () {
@@ -76,7 +76,7 @@
       .sort()
       .map(k => `${k}=${params[k]}`)
       .join('&');
-    return `nadi_cache_${endpoint}_${sortedParams}`;
+    return `ktmy_cache_${endpoint}_${sortedParams}`;
   }
 
   function getFromCache(key, ttlCategory) {
@@ -102,7 +102,7 @@
         data: data
       }));
     } catch (e) {
-      /* localStorage full — clear old NADI entries */
+      /* localStorage full — clear old KTMY entries */
       clearOldCache();
       try {
         localStorage.setItem(key, JSON.stringify({
@@ -116,7 +116,7 @@
   }
 
   function clearOldCache() {
-    const keys = Object.keys(localStorage).filter(k => k.startsWith('nadi_cache_'));
+    const keys = Object.keys(localStorage).filter(k => k.startsWith('ktmy_cache_'));
     /* Remove oldest half */
     const entries = keys.map(k => {
       try {
@@ -203,7 +203,7 @@
   }
 
   /* --- Public API --- */
-  window.NadiAPI = {
+  window.KtmyAPI = {
     /**
      * Generic fetch from any endpoint
      * @param {string} endpoint - e.g. '/weather/forecast'
@@ -265,7 +265,7 @@
      * Clear all cached data
      */
     clearCache() {
-      const keys = Object.keys(localStorage).filter(k => k.startsWith('nadi_cache_'));
+      const keys = Object.keys(localStorage).filter(k => k.startsWith('ktmy_cache_'));
       keys.forEach(k => localStorage.removeItem(k));
     },
 

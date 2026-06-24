@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — Tourist Essentials & Holiday Directory Section Module
+   KTMY — Tourist Essentials & Holiday Directory Section Module
    ============================================================ */
 
 (function () {
@@ -40,7 +40,7 @@
     container.innerHTML = `
       <div class="loading-state">
         <div class="spinner"></div>
-        <p data-i18n="common.loading">${NadiI18n.t('common.loading')}</p>
+        <p data-i18n="common.loading">${KtmyI18n.t('common.loading')}</p>
       </div>
     `;
 
@@ -54,7 +54,7 @@
     }
 
     // Subscribe to exchange rate store
-    NadiStore.on('exchange', (data, status) => {
+    KtmyStore.on('exchange', (data, status) => {
       let records = [];
       if (Array.isArray(data)) records = data;
       else if (data && Array.isArray(data.data)) records = data.data;
@@ -78,7 +78,7 @@
     });
 
     // Subscribe to tourist arrivals store
-    NadiStore.on('tourism_data', (data, status) => {
+    KtmyStore.on('tourism_data', (data, status) => {
       let records = [];
       if (Array.isArray(data)) records = data;
       else if (data && Array.isArray(data.data)) records = data.data;
@@ -101,7 +101,7 @@
     // Build holiday list rows
     const holidayRows = holidays.map(h => {
       const formattedDate = new Date(h.date).toLocaleDateString(
-        NadiI18n.getLang() === 'bm' ? 'ms-MY' : 'en-US',
+        KtmyI18n.getLang() === 'bm' ? 'ms-MY' : 'en-US',
         { day: 'numeric', month: 'short' }
       );
       return `
@@ -123,7 +123,7 @@
       const female = parseFloat(latest.arrivals_female || 0);
       const formattedCount = count.toLocaleString();
       const dateStr = new Date(latest.date).toLocaleDateString(
-        NadiI18n.getLang() === 'bm' ? 'ms-MY' : 'en-US',
+        KtmyI18n.getLang() === 'bm' ? 'ms-MY' : 'en-US',
         { month: 'long', year: 'numeric' }
       );
 
@@ -255,33 +255,33 @@
 
     // Render chart
     setTimeout(() => {
-      NadiCharts.destroyChart('chart-tourist-arrivals');
+      KtmyCharts.destroyChart('chart-tourist-arrivals');
 
       if (arrivals && arrivals.length > 0) {
         const last12 = arrivals.filter(r => r.country === 'ALL').slice(-12);
         if (last12.length > 0) {
           const labels = last12.map(r => new Date(r.date).toLocaleDateString(
-            NadiI18n.getLang() === 'bm' ? 'ms-MY' : 'en-US',
+            KtmyI18n.getLang() === 'bm' ? 'ms-MY' : 'en-US',
             { month: 'short', year: 'numeric' }
           ));
           const dataValues = last12.map(r => parseFloat(r.arrivals || 0) / 1e6); // in millions
 
-          chartInstance = NadiCharts.createAreaChart('chart-tourist-arrivals', {
+          chartInstance = KtmyCharts.createAreaChart('chart-tourist-arrivals', {
             labels,
             datasets: [{
-              label: NadiI18n.getLang() === 'bm' ? 'Pelawat (Juta)' : 'Visitors (Millions)',
+              label: KtmyI18n.getLang() === 'bm' ? 'Pelawat (Juta)' : 'Visitors (Millions)',
               data: dataValues,
-              color: NadiCharts.COLORS.blue
+              color: KtmyCharts.COLORS.blue
             }],
-            yLabel: NadiI18n.getLang() === 'bm' ? 'Juta / Bulan' : 'Millions / Month'
+            yLabel: KtmyI18n.getLang() === 'bm' ? 'Juta / Bulan' : 'Millions / Month'
           });
         }
       }
     }, 0);
 
     // Apply translations
-    NadiI18n.applyTranslations();
-    NadiAnimations.initScrollReveals();
+    KtmyI18n.applyTranslations();
+    KtmyAnimations.initScrollReveals();
   }
 
   function translate() {
@@ -291,6 +291,6 @@
     }
   }
 
-  window.NadiSections = window.NadiSections || {};
-  window.NadiSections.tourism = { init, translate };
+  window.KtmySections = window.KtmySections || {};
+  window.KtmySections.tourism = { init, translate };
 })();

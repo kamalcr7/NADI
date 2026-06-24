@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — Consumer Prices Section Module (PriceCatcher)
+   KTMY — Consumer Prices Section Module (PriceCatcher)
    ============================================================ */
 
 (function () {
@@ -21,12 +21,12 @@
     container.innerHTML = `
       <div class="loading-state">
         <div class="spinner"></div>
-        <p data-i18n="common.loading">${NadiI18n.t('common.loading')}</p>
+        <p data-i18n="common.loading">${KtmyI18n.t('common.loading')}</p>
       </div>
     `;
 
-    // Subscribe to NADI prices data
-    NadiStore.on('prices', (data, status) => {
+    // Subscribe to KTMY prices data
+    KtmyStore.on('prices', (data, status) => {
       if (status === 'loading') return;
 
       let records = [];
@@ -144,8 +144,8 @@
     });
 
     // Apply translations
-    NadiI18n.applyTranslations();
-    NadiAnimations.initScrollReveals();
+    KtmyI18n.applyTranslations();
+    KtmyAnimations.initScrollReveals();
   }
 
   function translate() {
@@ -155,6 +155,6 @@
     }
   }
 
-  window.NadiSections = window.NadiSections || {};
-  window.NadiSections.prices = { init, translate };
+  window.KtmySections = window.KtmySections || {};
+  window.KtmySections.prices = { init, translate };
 })();

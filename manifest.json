@@ -1,6 +1,6 @@
 {
-  "name": "NADI — Malaysia Data Portal",
-  "short_name": "NADI",
+  "name": "KTMY — Malaysia Data Portal",
+  "short_name": "KTMY",
   "description": "Malaysia's all-in-one open data dashboard — weather, economy, fuel prices, government incentives, tariffs, and more.",
   "start_url": "/",
   "display": "standalone",

@@ -1,15 +1,28 @@
 /* ============================================================
-   NADI — Government Incentives & Support Section Module
+   KTMY — Government Incentives & Support Section Module
    ============================================================
    Loads curated incentive data from /data/incentives.json
    Falls back to hardcoded data if JSON unavailable.
-   Uses NadiStore.on() event pattern for reliable data loading.
+   Uses KtmyStore.on() event pattern for reliable data loading.
    ============================================================ */
 
 (function () {
   'use strict';
   let rendered = false;
   let activeTab = 'aid';
+
+  function escapeHTML(str) {
+    if (typeof str !== 'string') {
+      if (str === null || str === undefined) return '';
+      return String(str);
+    }
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
 
   /* --- Fallback data (used if incentives.json fails) --- */
   const FALLBACK = {
@@ -33,7 +46,7 @@
 
   /* --- Map from incentives.json structure to display format --- */
   function mapIncentiveData(json) {
-    // NadiStore strips _meta and returns data contents directly,
+    // KtmyStore strips _meta and returns data contents directly,
     // so json is already {str: ..., bsh: ..., education_aid: ..., etc.}
     // But handle both formats just in case.
     const d = json?.data || json || {};
@@ -88,8 +101,17 @@
     // Education
     if (d.education_aid?.programs) {
       d.education_aid.programs.forEach(p => {
-        result.study.push({ name: p.name, agency: 'Government', coverage: p.eligibility || 'Various', amount: p.amount, desc: p.name, link: '#' }); // education programs — link from JSON data if available
+        result.study.push({
+          name: p.name,
+          agency: 'Government',
+          coverage: p.eligibility || 'Various',
+          amount: p.amount || 'Subsidised',
+          desc: p.description || p.name,
+          link: p.website || p.link || '#'
+        });
       });
+    } else {
+      result.study = FALLBACK.study;
     }
 
     // Healthcare
@@ -191,7 +213,21 @@
         link: d.sara.website || '#'
       });
     }
-    result.business = FALLBACK.business;
+    // Business
+    if (d.business?.programs) {
+      d.business.programs.forEach(p => {
+        result.business.push({
+          name: p.name,
+          agency: p.name.includes('TERAJU') ? 'TERAJU' : p.name.includes('TEKUN') ? 'TEKUN' : 'MDEC / BSN',
+          coverage: p.eligibility || 'SMEs',
+          amount: p.amount || 'Variable',
+          desc: p.description || p.name,
+          link: p.website || p.link || '#'
+        });
+      });
+    } else {
+      result.business = FALLBACK.business;
+    }
 
     return result;
   }
@@ -214,17 +250,17 @@
     container.innerHTML = `
       <div class="loading-state">
         <div class="spinner"></div>
-        <p>${NadiI18n.t('common.loading')}</p>
+        <p>${KtmyI18n.t('common.loading')}</p>
       </div>`;
 
     // Subscribe to DataStore — fires immediately if cached
     let dataCallback = null;
-    const unsubscribe = NadiStore.on('incentives', (data, status) => {
+    const unsubscribe = KtmyStore.on('incentives', (data, status) => {
       if (status === 'loading') {
         if (!rendered) container.innerHTML = `
           <div class="loading-state">
             <div class="spinner"></div>
-            <p>${NadiI18n.t('common.loading')}</p>
+            <p>${KtmyI18n.t('common.loading')}</p>
           </div>`;
         return;
       }
@@ -246,8 +282,8 @@
     // Fallback: if data is already loaded (status 'done') but init was called
     // before the on() handler could fire (e.g. data was loaded between the
     // 'loading' emission and listener registration), re-check and render.
-    if (!rendered && NadiStore.status('incentives') === 'done') {
-      const existing = NadiStore.get('incentives');
+    if (!rendered && KtmyStore.status('incentives') === 'done') {
+      const existing = KtmyStore.get('incentives');
       if (existing) {
         let incentives = FALLBACK;
         try { incentives = mapIncentiveData(existing); } catch (e) {}
@@ -259,8 +295,8 @@
     // Final fallback: retry after a short delay if still not rendered
     if (!rendered) {
       const retryTimer = setTimeout(() => {
-        if (!rendered && NadiStore.status('incentives') === 'done') {
-          const existing = NadiStore.get('incentives');
+        if (!rendered && KtmyStore.status('incentives') === 'done') {
+          const existing = KtmyStore.get('incentives');
           if (existing) {
             let incentives = FALLBACK;
             try { incentives = mapIncentiveData(existing); } catch (e) {}
@@ -294,16 +330,16 @@
     const directoryHtml = items.map((inc, i) => `
       <div class="glass-card reveal mb-md" style="text-align: left;">
         <div class="flex-between">
-          <h4 style="color: var(--primary); font-weight: var(--fw-bold); font-size: var(--fs-h4);">${inc.name}</h4>
-          <span class="tag tag-primary">${inc.amount}</span>
+          <h4 style="color: var(--primary); font-weight: var(--fw-bold); font-size: var(--fs-h4);">${escapeHTML(inc.name)}</h4>
+          <span class="tag tag-primary">${escapeHTML(inc.amount)}</span>
         </div>
         <div class="text-muted mt-xs" style="font-size: var(--fs-xs); font-weight: 500;">
-          Agency: ${inc.agency} | Target: ${inc.coverage}
+          Agency: ${escapeHTML(inc.agency)} | Target: ${escapeHTML(inc.coverage)}
         </div>
-        <p class="mt-sm" style="font-size: var(--fs-small); color: var(--text-secondary);">${inc.desc}</p>
+        <p class="mt-sm" style="font-size: var(--fs-small); color: var(--text-secondary);">${escapeHTML(inc.desc)}</p>
         ${inc.link && inc.link !== '#' ? `
           <div class="mt-md">
-            <a href="${inc.link}" target="_blank" class="btn btn-outline" style="padding: 6px 16px; font-size: var(--fs-xs);">Learn More →</a>
+            <a href="${escapeHTML(inc.link)}" target="_blank" class="btn btn-outline" style="padding: 6px 16px; font-size: var(--fs-xs);">Learn More →</a>
           </div>
         ` : ''}
       </div>
@@ -343,17 +379,17 @@
       });
     });
 
-    NadiI18n.applyTranslations();
-    NadiAnimations.initScrollReveals();
+    KtmyI18n.applyTranslations();
+    KtmyAnimations.initScrollReveals();
   }
 
   function translate() {
     if (rendered) {
       const container = document.getElementById('section-government-content');
-      if (container) NadiI18n.applyTranslations();
+      if (container) KtmyI18n.applyTranslations();
     }
   }
 
-  window.NadiSections = window.NadiSections || {};
-  window.NadiSections.government = { init, translate };
+  window.KtmySections = window.KtmySections || {};
+  window.KtmySections.government = { init, translate };
 })();

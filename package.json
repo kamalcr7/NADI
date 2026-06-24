@@ -1,7 +1,7 @@
 {
-  "name": "nadi-malaysia-portal",
+  "name": "ktmy-malaysia-portal",
   "version": "1.0.0",
-  "description": "NADI — Malaysia's All-in-One Data Dashboard",
+  "description": "KTMY — Malaysia's All-in-One Data Dashboard",
   "scripts": {
     "fetch-data": "node scripts/fetch-data.js",
     "dev": "npx http-server . -p 3500 --cors -o",

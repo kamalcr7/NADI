@@ -1,5 +1,5 @@
 /* ============================================================
-   NADI — Scroll Animations & Visual Effects
+   KTMY — Scroll Animations & Visual Effects
    ============================================================ */
 
 (function () {
@@ -266,7 +266,7 @@
   }
 
   /* --- Expose --- */
-  window.NadiAnimations = {
+  window.KtmyAnimations = {
     init,
     animateCounter,
     onSectionVisible,

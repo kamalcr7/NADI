@@ -1,5 +1,5 @@
 /**
- * NADI Data Fetcher
+ * KTMY Data Fetcher
  * ==================
  * Runs server-side (GitHub Actions, local cron, etc.) every 2 hours.
  * Fetches all Malaysian data APIs and saves to /data/*.json
@@ -35,7 +35,7 @@ async function safeFetch(url, label) {
     try {
       console.log(`[${new Date().toISOString()}] Fetching: ${label} (attempt ${attempt})`);
       const res = await fetch(url, {
-        headers: { 'Accept': 'application/json', 'User-Agent': 'NADI-DataBot/1.0' },
+        headers: { 'Accept': 'application/json', 'User-Agent': 'KTMY-DataBot/1.0' },
         signal: AbortSignal.timeout(30000)
       });
 
@@ -68,7 +68,7 @@ function save(filename, data, meta = {}) {
   const payload = {
     _meta: {
       fetched_at: new Date().toISOString(),
-      source: 'NADI Data Bot',
+      source: 'KTMY Data Bot',
       ...meta
     },
     data: Array.isArray(data) ? data : (data.data || data)
@@ -157,7 +157,7 @@ async function fetchTNBTariffs() {
   console.log('  Attempting TNB tariff scrape from tnb.com.my...');
   try {
     const res = await fetch('https://www.tnb.com.my/residential/services-and-activities/tariff-information', {
-      headers: { 'User-Agent': 'NADI-DataBot/1.0', 'Accept': 'text/html' },
+      headers: { 'User-Agent': 'KTMY-DataBot/1.0', 'Accept': 'text/html' },
       signal: AbortSignal.timeout(30000)
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -180,7 +180,7 @@ async function fetchIncentives() {
   try {
     // Try MIDA investment incentives API (if available)
     const res = await fetch('https://www.mida.gov.my/api/incentives', {
-      headers: { 'User-Agent': 'NADI-DataBot/1.0', 'Accept': 'application/json' },
+      headers: { 'User-Agent': 'KTMY-DataBot/1.0', 'Accept': 'application/json' },
       signal: AbortSignal.timeout(30000)
     });
     if (res.ok) {
@@ -205,7 +205,7 @@ async function fetchHealthcare() {
   // but we try the general endpoint for dengue surveillance data.
   try {
     const res = await fetch(`${BASE_URL}/data-catalogue?id=dengue_cases&limit=100&sort=-date`, {
-      headers: { 'Accept': 'application/json', 'User-Agent': 'NADI-DataBot/1.0' },
+      headers: { 'Accept': 'application/json', 'User-Agent': 'KTMY-DataBot/1.0' },
       signal: AbortSignal.timeout(30000)
     });
     if (res.ok) {
@@ -228,7 +228,7 @@ async function fetchPrices() {
   console.log('  Attempting price data from data.gov.my PriceCatcher...');
   try {
     const res = await fetch(`${BASE_URL}/data-catalogue?id=pricecatcher&limit=50&sort=-date`, {
-      headers: { 'Accept': 'application/json', 'User-Agent': 'NADI-DataBot/1.0' },
+      headers: { 'Accept': 'application/json', 'User-Agent': 'KTMY-DataBot/1.0' },
       signal: AbortSignal.timeout(30000)
     });
     if (res.ok) {
@@ -270,7 +270,7 @@ function ensureDataset(filename, placeholder = { data: [] }) {
   const filePath = path.join(DATA_DIR, filename);
   if (!fs.existsSync(filePath)) {
     fs.writeFileSync(filePath, JSON.stringify({
-      _meta: { generated_at: new Date().toISOString(), source: 'NADI auto-placeholder' },
+      _meta: { generated_at: new Date().toISOString(), source: 'KTMY auto-placeholder' },
       ...placeholder
     }, null, 2));
     console.log(`  CREATED placeholder: ${filename}`);
@@ -278,7 +278,7 @@ function ensureDataset(filename, placeholder = { data: [] }) {
 }
 
 async function main() {
-  console.log('NADI Data Fetcher - Starting at ' + new Date().toISOString());
+  console.log('KTMY Data Fetcher - Starting at ' + new Date().toISOString());
 
   const startTime = Date.now();
   let successCount = 0;
