@@ -1,5 +1,10 @@
 /* ============================================================
    KTMY — Tourist Essentials & Holiday Directory Section Module
+   ------------------------------------------------------------
+   Data Sources:
+   1. Tourist Arrivals: Monthly visitor stats by country fetched
+      from Department of Statistics (DOSM) API (data.gov.my).
+   2. Holidays & Converter: Curated calendars and exchange rates.
    ============================================================ */
 
 (function () {
@@ -116,8 +121,9 @@
     }).join('');
 
     let latestArrivalsHtml = '';
-    if (arrivals && arrivals.length > 0) {
-      const latest = arrivals[arrivals.length - 1];
+    const allArrivals = arrivals.filter(r => r.country === 'ALL');
+    if (allArrivals && allArrivals.length > 0) {
+      const latest = allArrivals[allArrivals.length - 1];
       const count = parseFloat(latest.arrivals || 0);
       const male = parseFloat(latest.arrivals_male || 0);
       const female = parseFloat(latest.arrivals_female || 0);
@@ -142,6 +148,9 @@
             <span style="color: var(--text-secondary); font-size: var(--fs-small);">🙋‍♀️ Female Visitors</span>
             <span style="font-weight: var(--fw-bold); color: var(--text-primary);">${female.toLocaleString()}</span>
           </div>
+          <p style="font-size:0.65rem; color:var(--text-muted); text-align:center; margin:4px 0 0; line-height:1.3;">
+            ℹ️ Note: Official DOSM statistics exhibit a standard reporting lag (latest published values shown).
+          </p>
         </div>
       `;
     } else {

@@ -1,5 +1,8 @@
 /* ============================================================
    KTMY — Education Section Module
+   ------------------------------------------------------------
+   Data Source: Curated enrollment and infrastructure statistics
+   sourced from Ministry of Education (MOE) annual publications.
    ============================================================ */
 
 (function () {
@@ -70,29 +73,29 @@
       <div class="grid grid-2 stagger">
         <!-- Infrastructure breakdown card -->
         <div class="flex-col gap-md">
-          <div class="info-card reveal">
+          <a href="https://www.moe.gov.my" target="_blank" class="info-card reveal" style="text-decoration: none; transition: transform var(--duration-fast) var(--ease-out); cursor: pointer;">
             <div class="info-icon">🏫</div>
             <div class="info-content">
-              <h4>Ministry of Education (MOE)</h4>
+              <h4 style="display: flex; align-items: center; gap: 6px;">Ministry of Education (MOE) <span style="font-size:0.75rem; color:var(--primary);">🔗</span></h4>
               <p>Governs and coordinates primary, secondary, and post-secondary educational curriculums (KSSR, KSSM, SPM, STPM) across all states.</p>
             </div>
-          </div>
+          </a>
 
-          <div class="info-card reveal">
+          <a href="https://www.mohe.gov.my" target="_blank" class="info-card reveal" style="text-decoration: none; transition: transform var(--duration-fast) var(--ease-out); cursor: pointer;">
             <div class="info-icon">🎓</div>
             <div class="info-content">
-              <h4>Ministry of Higher Education (MOHE)</h4>
+              <h4 style="display: flex; align-items: center; gap: 6px;">Ministry of Higher Education (MOHE) <span style="font-size:0.75rem; color:var(--primary);">🔗</span></h4>
               <p>Oversees public universities (UA), polytechnics, community colleges, and private colleges/universities (IPTS).</p>
             </div>
-          </div>
+          </a>
 
-          <div class="info-card reveal">
+          <a href="https://www.tvet.gov.my" target="_blank" class="info-card reveal" style="text-decoration: none; transition: transform var(--duration-fast) var(--ease-out); cursor: pointer;">
             <div class="info-icon">💡</div>
             <div class="info-content">
-              <h4>TVET (Technical & Vocational Training)</h4>
+              <h4 style="display: flex; align-items: center; gap: 6px;">TVET Malaysia <span style="font-size:0.75rem; color:var(--primary);">🔗</span></h4>
               <p>High priority national agenda providing vocational skill pathways and industry certifications for secondary graduates.</p>
             </div>
-          </div>
+          </a>
         </div>
 
         <!-- Enrollment chart -->

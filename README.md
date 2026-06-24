@@ -34,6 +34,32 @@ graph TD
 
 ---
 
+## 📊 Data Authenticity & Source Ledger
+
+To maintain high performance, rate-limit safety, and verified listings, KTMY categorizes data flows into **API-Driven Datasets** (regularly updated via the automated fetch bot) and **Hand-Curated / Cross-Checked Directories** (maintained statically due to raw format constraints or lack of government JSON APIs).
+
+### 1. API-Driven Datasets (Fully Automated)
+These datasets are fetched directly from the official Malaysian Open Data portal (`api.data.gov.my`) and `Open-Meteo` by `scripts/fetch-data.js`:
+*   **Fuel Prices**: Raw daily fuel rates for RON95, RON97, and Diesel.
+*   **Exchange Rates**: Daily currency valuations relative to MYR.
+*   **GDP & Inflation**: Quarterly absolute/YoY GDP growth metrics and monthly Headline CPI.
+*   **Unemployment**: Monthly labor force and jobless rate indices.
+*   **External Trade**: Monthly import/export indices.
+*   **Transit Ridership**: Daily public transit passenger boarding volumes.
+*   **Tourism Arrivals**: Monthly visitor entries by country (exhibits standard DOSM publishing lag).
+*   **Weather & Warning Feeds**: Live 7-day forecast data and active disaster alerts (flood/seismic warnings).
+*   **Healthcare (Dengue)**: Weekly dengue cases and deaths by state.
+
+### 2. Hand-Curated & Scraped Directories (Verified References)
+These datasets cannot be parsed reliably from live APIs due to lack of JSON endpoints or overly large unstructured streams. They are cross-checked against official resources and saved in `data/`:
+*   **TNB Electricity Tariffs** (`data/tnb_tariffs.json`): Manually scraped from the Tenaga Nasional Berhad official tariff guide and cross-checked.
+*   **Government Incentives Directory** (`data/incentives.json`): Curated directly from LHDN, BSH, EPF, and MOF official announcement sheets.
+*   **Transport Fares** (`data/transport_fares.json`): Extracted from RapidKL, KTM Komuter, ETS, ERL, and Grab official fare matrices.
+*   **Consumer Prices / Groceries** (`data/prices.json`): Extracted from KPDN's PriceCatcher database representing retail averages in key supermarkets (Mydin, Lotus, Econsave).
+*   **Education Stats** (`js/sections/education.js`): Compiled from MOE's annual "Malaysia Education Quick Facts" publications.
+
+---
+
 ## 📂 Project Structure
 
 ```

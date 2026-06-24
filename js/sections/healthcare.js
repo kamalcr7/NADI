@@ -1,5 +1,11 @@
 /* ============================================================
    KTMY — Healthcare & Dengue Surveillance Section Module
+   ------------------------------------------------------------
+   Data Sources:
+   1. Dengue Surveillance: Live weekly cases and deaths data
+      fetched from Ministry of Health API (data.gov.my).
+   2. Facilities & Directories: Curated from MOH public hospital
+      registries and PHAM directories.
    ============================================================ */
 
 (function () {
@@ -132,6 +138,38 @@
           <h3 class="chart-title" data-i18n="healthcare.chart.title">Weekly Dengue Cases Comparison</h3>
           <div class="chart-container" style="height: 300px;">
             <canvas id="chart-healthcare-dengue"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-2 stagger mt-xl" style="text-align: left;">
+        <div class="glass-card reveal flex-col gap-sm">
+          <h4 style="margin:0; font-size:var(--fs-body); color:var(--primary);">🏥 Public Health & iDengue Portals</h4>
+          <p style="font-size:0.75rem; color:var(--text-secondary); line-height:1.4; margin:4px 0;">
+            Surveillance stats are pre-fetched from KKM's official dengue databases. For direct health services, inquiries, or reporting, please consult the official KKM resources.
+          </p>
+          <div class="flex-row gap-xs mt-sm" style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <a href="https://www.moh.gov.my" target="_blank" class="btn btn-outline" style="padding: 6px 12px; font-size: 0.68rem; text-decoration:none;">
+              🔗 Ministry of Health (MOH)
+            </a>
+            <a href="https://idengue.mysihhat.gov.my" target="_blank" class="btn btn-outline" style="padding: 6px 12px; font-size: 0.68rem; text-decoration:none;">
+              🦟 KKM iDengue Portal
+            </a>
+          </div>
+        </div>
+
+        <div class="glass-card reveal flex-col gap-sm">
+          <h4 style="margin:0; font-size:var(--fs-body); color:var(--primary);">🏥 Hospital Directories & Facilities</h4>
+          <p style="font-size:0.75rem; color:var(--text-secondary); line-height:1.4; margin:4px 0;">
+            Locate certified healthcare facilities, search public hospitals, or find registered private medical centers across all states.
+          </p>
+          <div class="flex-row gap-xs mt-sm" style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <a href="https://www.moh.gov.my/index.php/pages/view/directory-hospitals" target="_blank" class="btn btn-outline" style="padding: 6px 12px; font-size: 0.68rem; text-decoration:none;">
+              🏢 MOH Public Hospital List
+            </a>
+            <a href="https://hospitals-malaysia.org" target="_blank" class="btn btn-outline" style="padding: 6px 12px; font-size: 0.68rem; text-decoration:none;">
+              🏢 PHAM Private Hospital List
+            </a>
           </div>
         </div>
       </div>
