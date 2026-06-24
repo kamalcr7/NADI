@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "fetched_at": "2026-06-24T18:00:32.021Z",
+    "fetched_at": "2026-06-24T21:26:24.887Z",
     "source": "KTMY Data Bot",
     "api_key": "weather_warnings"
   },
@@ -48,21 +48,6 @@
       "instruction_en": null,
       "heading_bm": "Amaran Angin kencang dan laut bergelora (Kategori Pertama)",
       "text_bm": "Angin kencang barat berkelajuan 40-50 kmsj dengan ombak mencapai ketinggian sehingga 3.5 meter dijangka di kawasan perairan Phuket sehingga Sabtu, 27 Jun 2026.",
-      "instruction_bm": null
-    },
-    {
-      "warning_issue": {
-        "issued": "2026-06-25T00:45:00",
-        "title_bm": "Amaran Ribut Petir",
-        "title_en": "Thunderstorms Warning"
-      },
-      "valid_from": "2026-06-25T00:45:00",
-      "valid_to": "2026-06-25T04:00:00",
-      "heading_en": "Thunderstorms Warning",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Johor  (Batu Pahat, Kluang, Pontian, Kulai and Johor Bahru) until 4:00AM; Thursday, 25 June 2026.",
-      "instruction_en": null,
-      "heading_bm": "Amaran Ribut Petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Johor  (Batu Pahat, Kluang, Pontian, Kulai dan Johor Bahru) sehingga 4:00 pagi; Khamis, 25 Jun 2026.",
       "instruction_bm": null
     },
     {
