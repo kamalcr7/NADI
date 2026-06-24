@@ -7,6 +7,20 @@
   let initialized = false;
   let cachedTariffs = null;
 
+  const CATEGORY_ICONS = {
+    residential: '🏠',
+    commercial: '🏢',
+    industrial: '🏭',
+    agriculture: '🌾'
+  };
+
+  const CATEGORY_COLORS = {
+    residential: 'var(--primary)',
+    commercial: 'var(--accent-blue)',
+    industrial: 'var(--accent-purple)',
+    agriculture: 'var(--accent-gold)'
+  };
+
   function init() {
     const container = document.getElementById('section-tariffs-content');
     if (!container) return;
