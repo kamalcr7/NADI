@@ -102,6 +102,7 @@ These datasets cannot be parsed reliably from live APIs due to lack of JSON endp
 │   ├── datastore.js         # Unified datastore manager
 │   ├── i18n.js              # Localization (English and Bahasa Malaysia translations)
 │   ├── charts.js            # Wrapper functions around Chart.js
+│   ├── search.js            # Global autocomplete search module (v2.4)
 │   ├── animations.js        # Scroll reveal and UI micro-animations
 │   └── app.js               # Global router and navigation handler
 ├── scripts/                 # Server-side scripts
@@ -112,13 +113,48 @@ These datasets cannot be parsed reliably from live APIs due to lack of JSON endp
 
 ---
 
-## What's New in v2.0 (Rebrand & Core Updates)
+## What's New in v2.4
 
-*   **Platform Rebranding (KTMY)** — Fully rebranded the application from NADI to KTMY (Key to Malaysia) across all code namespaces, local storage keys, configurations, stylesheets, and documentation.
-*   **One-Time Terms & Disclaimer Popup** — Integrated a premium glassmorphic overlay modal that pops up on first load to inform users about the alpha/beta stage, data aggregation from official government APIs (data.gov.my, DOSM, MOH), and liability terms. The accepted state is stored in `localStorage` to prevent reappearance.
-*   **Refined Safety Alerts** — Monitored stations showing a normal water level are filtered out from flood warnings, and seismic records are restricted to the last 30 days, showing a clean "All Clear" fallback when no warnings exist.
-*   **Dynamic Government Incentives Directory** — Curated links, eligibility rules, and descriptions for education financing (PTPTN, JPA, MARA) and business grants (SME matching, TERAJU, TEKUN) are mapped dynamically from `data/incentives.json`.
-*   **Transit Pricing Reference** — Added curated pricing structures for RapidKL, KLIA Ekspres, Grab (e-hailing), KTM Komuter, and ETS routes in the Society & Transit section.
+### 🔍 Global Search
+*   **Autocomplete Search** — A new global search bar (in both the topbar and sidebar) lets users instantly find any dashboard section by name, description, or keyword tags. Results are language-aware (EN/BM) and navigate directly to the matched section with a brief highlight animation.
+
+### 💬 Feedback & Support Widget
+*   **Floating Action Button (FAB)** — A persistent 💬 feedback button at the bottom-right corner opens a card linking to:
+    *   **Google Form** — For feature requests, bug reports, and general feedback.
+    *   **GitHub Issues** — For technical reports and developer contributions.
+
+### 🌐 Complete Bahasa Melayu Translation
+*   **Full Dynamic i18n** — Every dynamic section now fully re-renders in Bahasa Melayu when the language toggle is switched. This includes:
+    *   Fuel subsidy info, eligibility descriptions, and quota details.
+    *   Education stat cards, school info cards, and chart labels.
+    *   Government incentive descriptions, stat cards, and directory items.
+    *   Safety alert headers, list items, and status labels.
+    *   Healthcare dengue statistics and chart labels.
+    *   Tourism, transport, population, employment, environment, and weather sections.
+*   **Translation Architecture**: Each section module implements a `translate()` method that re-invokes `renderSection()` with cached data, switching all UI text to the active language.
+
+### 📊 Chart Layout Improvements
+*   **Increased Chart Heights** — All chart containers have been given more vertical space for better readability:
+    *   Fuel: 380px | Education: 350px | Employment: 340px | Environment: 340px
+    *   Population: 350px | Tourism: 350px | Transport: 350px | Weather: 240–260px | Healthcare: 350px
+*   **Better Tooltips** — Charts now display values on hover for interactive data exploration.
+
+### 🔧 Data Accuracy Fixes (v2.1–v2.3)
+*   **Fuel Subsidy (BUDI MADANI)** — Corrected RON95 targeted subsidy price to RM1.99/litre. Updated monthly quota to 200 litres. Clarified eligibility: all Malaysian citizens (not restricted to income group).
+*   **Education Charts** — Changed Y-axis from "in thousands" to absolute values for clarity.
+*   **Tourism Data** — Supplemented 2025/2026 arrival figures from official Tourism Malaysia reports.
+*   **Cost of Living Groceries** — Cross-checked against KPDN PriceCatcher database.
+
+---
+
+## Previous Releases
+
+### v2.0 (Rebrand & Core Updates)
+*   **Platform Rebranding (KTMY)** — Fully rebranded from NADI to KTMY (Key to Malaysia).
+*   **One-Time Terms & Disclaimer Popup** — Glassmorphic overlay on first load.
+*   **Refined Safety Alerts** — Normal water levels filtered; seismic records restricted to 30 days.
+*   **Dynamic Government Incentives Directory** — PTPTN, JPA, MARA, SME grants from `data/incentives.json`.
+*   **Transit Pricing Reference** — RapidKL, KLIA Ekspres, Grab, KTM, ETS fare matrices.
 
 See `CHANGES-v1.2.md` for historical release details.
 
@@ -187,3 +223,6 @@ When modifying KTMY, preserve these core design guidelines:
 2.  **Filter Dimension Datasets**: Catalogue datasets from `data.gov.my` often merge absolute values, QoQ, YoY, and individual divisions. Always filter records (e.g. `series === 'abs'`, `division === 'overall'`) before drawing charts to avoid oscillation bugs.
 3.  **Scale Correctly**: Be mindful of units. The raw APIs report some statistics in absolute figures, some in thousands, and some in millions. Document the scaling conversions in your modules.
 4.  **Bust the Cache**: If you change any dynamic logic in a script file, bump the version query parameter in `index.html` (e.g., change `?v=7` to `?v=8`) and the `STORE_VERSION` in `datastore.js`.
+5.  **Implement `translate()` for new sections**: Every new section module must implement a `translate()` method that re-renders its content using the current language from `KtmyI18n.getLang()`. Cache fetched data at the module level (e.g., `lastData`) so `translate()` can call `renderSection()` without re-fetching.
+6.  **Register search items**: When adding a new dashboard tab, add a corresponding entry in `SEARCH_ITEMS` within `js/search.js` with EN/BM names, descriptions, and keyword tags.
+7.  **Chart container sizing**: Set chart container heights via inline CSS on `.chart-container` elements. Minimum recommended heights: 340px for line/bar charts, 260px for compact charts.
