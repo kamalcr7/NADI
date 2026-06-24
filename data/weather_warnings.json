@@ -1,47 +1,47 @@
 {
   "_meta": {
-    "fetched_at": "2026-06-23T23:11:48.482Z",
+    "fetched_at": "2026-06-24T03:59:35.324Z",
     "source": "KTMY Data Bot",
     "api_key": "weather_warnings"
   },
   "data": [
     {
       "warning_issue": {
-        "issued": "2026-06-24T05:00:00",
+        "issued": "2026-06-24T08:35:00",
         "title_bm": "Amaran Ribut Petir",
         "title_en": "Thunderstorms Warning"
       },
-      "valid_from": "2026-06-24T05:00:00",
-      "valid_to": "2026-06-24T09:00:00",
+      "valid_from": "2026-06-24T08:35:00",
+      "valid_to": "2026-06-24T13:00:00",
       "heading_en": "Warning on Thunderstorms",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of Perlis & Kedah, Penang, Perak, Selangor, N. Sembilan, Melaka, West Johor, Pahang, Terengganu, Western Sarawak and Lahad Datu until 9:00AM; Wednesday, 24 June 2026.",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of Perlis & Kedah, Penang, Perak, Selangor, N. Sembilan, Melaka, Johor, Terengganu and Western Sarawak until 1:00PM; Wednesday, 24 June 2026.",
       "instruction_en": null,
       "heading_bm": "Amaran Ribut petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan Perlis & Kedah, Pulau Pinang, Perak, Selangor, N. Sembilan, Melaka, Johor Barat, Pahang, Terengganu, Sarawak Barat dan Lahad Datu sehingga 9:00 pagi; Rabu, 24 Jun 2026.",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan Perlis & Kedah, Pulau Pinang, Perak, Selangor, N. Sembilan, Melaka, Johor, Terengganu dan Sarawak Barat sehingga 1:00 tengah hari; Rabu, 24 Jun 2026.",
       "instruction_bm": null
     },
     {
       "warning_issue": {
-        "issued": "2026-06-24T05:00:00",
+        "issued": "2026-06-24T08:35:00",
         "title_bm": "Amaran Ribut Petir",
         "title_en": "Thunderstorms Warning"
       },
-      "valid_from": "2026-06-24T05:00:00",
-      "valid_to": "2026-06-24T09:00:00",
+      "valid_from": "2026-06-24T08:35:00",
+      "valid_to": "2026-06-24T13:00:00",
       "heading_en": "Warning on Thunderstorms",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of southeastern part of Phuket, Straits of Melaka, Samui, Tioman, southern part of Condore, southeastern part of Bunguran, Reef North, southern part of Reef South, Layang-Layang, Palawan, Sulu and Sulawesi until 9:00AM; Wednesday, 24 June 2026.",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of eastern part of Phuket, Straits of Melaka, southern part of Samui, Tioman, Condore, Bunguran, Reef North, southern part of Reef South, Layang-Layang, Labuan, Palawan and Sulu until 1:00PM; Wednesday, 24 June 2026.",
       "instruction_en": null,
       "heading_bm": "Amaran Ribut petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan tenggara Phuket, Selat Melaka, Samui, Tioman, selatan Condore, tenggara Bunguran, Reef North, selatan Reef South, Layang-Layang, Palawan, Sulu dan Sulawesi sehingga 9:00 pagi; Rabu, 24 Jun 2026.",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan timur Phuket, Selat Melaka, selatan Samui, Tioman, Condore, Bunguran, Reef North, selatan Reef South, Layang-Layang, Labuan, Palawan dan Sulu sehingga 1:00 tengah hari; Rabu, 24 Jun 2026.",
       "instruction_bm": null
     },
     {
       "warning_issue": {
-        "issued": "2026-06-24T05:00:00",
+        "issued": "2026-06-24T08:35:00",
         "title_bm": "Amaran Ribut Petir",
         "title_en": "Thunderstorms Warning"
       },
-      "valid_from": "2026-06-24T05:00:00",
+      "valid_from": "2026-06-24T08:35:00",
       "valid_to": "2026-06-28T00:00:00",
       "heading_en": "Warning on Strong Wind and Rough Seas (First Category)",
       "text_en": "Strong westerly winds of 40-50 kmph with wave height up to 3.5 metres are expected over the waters of Phuket until Saturday, 27 June 2026.",
@@ -52,17 +52,17 @@
     },
     {
       "warning_issue": {
-        "issued": "2026-06-24T04:00:00",
+        "issued": "2026-06-24T11:55:00",
         "title_bm": "Amaran Ribut Petir",
         "title_en": "Thunderstorms Warning"
       },
-      "valid_from": "2026-06-24T04:00:00",
-      "valid_to": "2026-06-24T08:00:00",
+      "valid_from": "2026-06-24T11:55:00",
+      "valid_to": "2026-06-24T15:00:00",
       "heading_en": "Thunderstorms Warning",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Perlis ;  Kedah  (Langkawi, Kubang Pasu, Kota Setar, Yan and Kuala Muda);  Penang ;  Perak  (Kerian);  Pahang  (Jerantut, Kuantan and Pekan); and  Johor  (Tangkak, Muar, Batu Pahat and Pontian) until 8:00AM; Wednesday, 24 June 2026.",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Kedah  (Kota Setar, Pokok Sena, Yan, Pendang, Kuala Muda, Sik, Baling, Kulim and Bandar Baharu);  Penang  (North Seberang Perai, Central Seberang Perai and South Seberang Perai); and  Perak  (Kerian, Larut, Matang and Selama, Kuala Kangsar, Manjung, Perak Tengah, Bagan Datuk and Hilir Perak) until 3:00PM; Wednesday, 24 June 2026.",
       "instruction_en": null,
       "heading_bm": "Amaran Ribut Petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Perlis ;  Kedah  (Langkawi, Kubang Pasu, Kota Setar, Yan dan Kuala Muda);  Pulau Pinang ;  Perak  (Kerian);  Pahang  (Jerantut, Kuantan dan Pekan); dan  Johor  (Tangkak, Muar, Batu Pahat dan Pontian) sehingga 8:00 pagi; Rabu, 24 Jun 2026.",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Kedah  (Kota Setar, Pokok Sena, Yan, Pendang, Kuala Muda, Sik, Baling, Kulim dan Bandar Baharu);  Pulau Pinang  (Seberang Perai Utara, Seberang Perai Tengah dan Seberang Perai Selatan); dan  Perak  (Kerian, Larut, Matang Dan Selama, Kuala Kangsar, Manjung, Perak Tengah, Bagan Datuk dan Hilir Perak) sehingga 3:00 petang; Rabu, 24 Jun 2026.",
       "instruction_bm": null
     },
     {
