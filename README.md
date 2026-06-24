@@ -85,15 +85,15 @@ graph TD
 
 ---
 
-## What's New in v1.2
+## What's New in v2.0 (Rebrand & Core Updates)
 
-*   **TNB Electricity Tariffs** — Full residential 5-tier progressive rate table, plus commercial, industrial, and agriculture tariffs.
-*   **Government Incentives Directory** — 5-tab directory covering social aid (STR, BSH), education (PTPTN, JPA, MARA), SME grants, healthcare (PeKa B40, mySalam), and EPF retirement schemes.
-*   **Transport Fares Data** — Curated fare reference for LRT, MRT, monorail, KTM, bus, and e-hailing.
-*   **Fetch Script Phase 4** — Cron now guards curated data files (never overwrites hand-curated content).
-*   **Comprehensive Documentation** — `CHANGES-v1.2.md` with architecture overview, developer guide, and instructions for adding new sections.
+*   **Platform Rebranding (KTMY)** — Fully rebranded the application from NADI to KTMY (Key to Malaysia) across all code namespaces, local storage keys, configurations, stylesheets, and documentation.
+*   **One-Time Terms & Disclaimer Popup** — Integrated a premium glassmorphic overlay modal that pops up on first load to inform users about the alpha/beta stage, data aggregation from official government APIs (data.gov.my, DOSM, MOH), and liability terms. The accepted state is stored in `localStorage` to prevent reappearance.
+*   **Refined Safety Alerts** — Monitored stations showing a normal water level are filtered out from flood warnings, and seismic records are restricted to the last 30 days, showing a clean "All Clear" fallback when no warnings exist.
+*   **Dynamic Government Incentives Directory** — Curated links, eligibility rules, and descriptions for education financing (PTPTN, JPA, MARA) and business grants (SME matching, TERAJU, TEKUN) are mapped dynamically from `data/incentives.json`.
+*   **Transit Pricing Reference** — Added curated pricing structures for RapidKL, KLIA Ekspres, Grab (e-hailing), KTM Komuter, and ETS routes in the Society & Transit section.
 
-See `CHANGES-v1.2.md` for full details.
+See `CHANGES-v1.2.md` for historical release details.
 
 ---
 
