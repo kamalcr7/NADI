@@ -95,10 +95,9 @@
           </div>
         </div>
 
-        <!-- Energy mix doughnut chart -->
         <div class="glass-card reveal">
           <h3 class="chart-title" data-i18n="environment.electricity">Electricity Generation Mix</h3>
-          <div class="chart-container" style="height: 300px;">
+          <div class="chart-container" style="height: 340px;">
             <canvas id="chart-environment-mix"></canvas>
           </div>
         </div>

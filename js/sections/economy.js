@@ -152,7 +152,7 @@
       <!-- GDP Chart -->
       <div class="glass-card reveal mb-lg">
         <h3 class="chart-title">📊 Real GDP Trend (Quarterly)</h3>
-        <div class="chart-container" style="height:300px;">
+        <div class="chart-container" style="height:360px;">
           <canvas id="chart-gdp-trend"></canvas>
         </div>
       </div>
@@ -161,13 +161,13 @@
       <div class="grid grid-2 reveal mb-lg" style="gap: var(--space-md);">
         <div class="glass-card">
           <h3 class="chart-title">💹 Consumer Price Index (CPI)</h3>
-          <div class="chart-container" style="height:280px;">
+          <div class="chart-container" style="height:340px;">
             <canvas id="chart-cpi-trend"></canvas>
           </div>
         </div>
         <div class="glass-card">
           <h3 class="chart-title">🚢 External Trade (Exports & Imports)</h3>
-          <div class="chart-container" style="height:280px;">
+          <div class="chart-container" style="height:340px;">
             <canvas id="chart-trade-trend"></canvas>
           </div>
         </div>

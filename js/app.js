@@ -167,6 +167,44 @@
     });
   }
 
+  /* ---- Feedback Widget ---- */
+  function initFeedbackWidget() {
+    const fab = document.getElementById('feedback-fab');
+    const card = document.getElementById('feedback-card');
+    const closeBtn = document.getElementById('feedback-close-btn');
+
+    if (!fab || !card || !closeBtn) return;
+
+    function toggle() {
+      const isVisible = card.style.display !== 'none';
+      if (isVisible) {
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          card.style.display = 'none';
+        }, 200);
+      } else {
+        card.style.display = 'flex';
+        card.offsetHeight; // force reflow
+        card.style.opacity = '1';
+        card.style.transform = 'scale(1)';
+      }
+    }
+
+    fab.addEventListener('click', toggle);
+    closeBtn.addEventListener('click', toggle);
+
+    document.addEventListener('click', (e) => {
+      if (!fab.contains(e.target) && !card.contains(e.target) && card.style.display !== 'none') {
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          card.style.display = 'none';
+        }, 200);
+      }
+    });
+  }
+
   /* ---- Main Init ---- */
   function init() {
     // Apply initial translations
@@ -183,6 +221,12 @@
     initLanguageSelector();
     initBackToTop();
     initDisclaimer();
+    initFeedbackWidget();
+
+    // Init search
+    if (window.KtmySearch) {
+      window.KtmySearch.init();
+    }
 
     // Start background data fetching (staggered, respects rate limits)
     KtmyStore.start();

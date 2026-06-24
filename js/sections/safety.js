@@ -4,31 +4,31 @@
 
 (function () {
   'use strict';
+  let lastWarnings = null;
+  let lastEarthquakes = null;
+  let lastFloods = null;
 
   function init() {
     const container = document.getElementById('section-safety-content');
     if (!container) return;
 
-    container.innerHTML = `<div class="loading-state"><div class="spinner"></div><p>Checking safety alerts...</p></div>`;
-
-    let warnings = null;
-    let earthquakes = null;
-    let floods = null;
+    const isBm = KtmyI18n.getLang() === 'bm';
+    container.innerHTML = `<div class="loading-state"><div class="spinner"></div><p>${isBm ? 'Menyemak amaran keselamatan...' : 'Checking safety alerts...'}</p></div>`;
 
     function tryRender() {
-      if (warnings !== null && earthquakes !== null && floods !== null) {
-        renderSection(container, warnings, earthquakes, floods);
+      if (lastWarnings !== null && lastEarthquakes !== null && lastFloods !== null) {
+        renderSection(container, lastWarnings, lastEarthquakes, lastFloods);
       }
     }
 
     KtmyStore.on('weather_warnings', (data, status) => {
-      if (status !== 'loading') { warnings = data || []; tryRender(); }
+      if (status !== 'loading') { lastWarnings = data || []; tryRender(); }
     });
     KtmyStore.on('earthquake', (data, status) => {
-      if (status !== 'loading') { earthquakes = data || []; tryRender(); }
+      if (status !== 'loading') { lastEarthquakes = data || []; tryRender(); }
     });
     KtmyStore.on('flood_warnings', (data, status) => {
-      if (status !== 'loading') { floods = data || []; tryRender(); }
+      if (status !== 'loading') { lastFloods = data || []; tryRender(); }
     });
   }
 
@@ -39,6 +39,7 @@
   }
 
   function renderSection(container, warningsRaw, earthquakesRaw, floodsRaw) {
+    const isBm = KtmyI18n.getLang() === 'bm';
     const warnings = parseList(warningsRaw);
     const allEarthquakes = parseList(earthquakesRaw);
     const allFloods = parseList(floodsRaw);
@@ -47,11 +48,10 @@
     const activeFloods = allFloods.filter(f => 
       ['ALERT', 'WARNING', 'DANGER'].includes(f.water_level_indicator)
     );
-    // Sort active floods: DANGER first, then WARNING, then ALERT
     const floodSeverityOrder = { 'DANGER': 3, 'WARNING': 2, 'ALERT': 1 };
     activeFloods.sort((a, b) => (floodSeverityOrder[b.water_level_indicator] || 0) - (floodSeverityOrder[a.water_level_indicator] || 0));
 
-    // 2. Filter Seismic Events (earthquakes) to the last 30 days relative to the latest record
+    // 2. Filter Seismic Events to the last 30 days
     const sortedEarthquakes = [...allEarthquakes].sort((a, b) => new Date(b.localdatetime || b.utcdatetime) - new Date(a.localdatetime || a.utcdatetime));
     const latestEarthquakeDate = sortedEarthquakes[0] ? new Date(sortedEarthquakes[0].localdatetime || sortedEarthquakes[0].utcdatetime) : new Date();
     const earthquakeCutoffMs = latestEarthquakeDate.getTime() - 30 * 24 * 60 * 60 * 1000;
@@ -63,9 +63,11 @@
     const totalAlerts = warnings.length + activeFloods.length + recentEarthquakes.length;
     const alertLevel = totalAlerts === 0 ? 'safe' : totalAlerts < 3 ? 'moderate' : 'high';
     const alertColors = { safe: 'var(--success)', moderate: 'var(--warning)', high: 'var(--danger)' };
-    const alertLabels = { safe: 'All Clear', moderate: 'Moderate Alerts', high: 'High Alert' };
-
-    const isBm = KtmyI18n.getLang() === 'bm';
+    const alertLabels = {
+      safe: isBm ? 'Semua Selamat' : 'All Clear',
+      moderate: isBm ? 'Amaran Sederhana' : 'Moderate Alerts',
+      high: isBm ? 'Amaran Tinggi' : 'High Alert'
+    };
 
     container.innerHTML = `
       <!-- Status Banner -->
@@ -75,7 +77,7 @@
           <div>
             <h3 style="margin:0; color:${alertColors[alertLevel]};">${alertLabels[alertLevel]}</h3>
             <p style="margin:0; color:var(--text-secondary); font-size:var(--fs-small);">
-              ${totalAlerts} active alert${totalAlerts !== 1 ? 's' : ''} · Last checked: ${new Date().toLocaleTimeString('en-MY')}
+              ${totalAlerts} ${isBm ? 'amaran aktif' : 'active alert' + (totalAlerts !== 1 ? 's' : '')} · ${isBm ? 'Disemak terakhir' : 'Last checked'}: ${new Date().toLocaleTimeString('en-MY')}
             </p>
           </div>
         </div>
@@ -84,26 +86,26 @@
       <div class="grid grid-3 stagger mb-xl">
         <div class="glass-card reveal" style="border-top: 3px solid var(--warning);">
           <div style="font-size:2rem; margin-bottom:8px;">🌩️</div>
-          <h4>Weather Warnings</h4>
+          <h4>${isBm ? 'Amaran Cuaca' : 'Weather Warnings'}</h4>
           <div class="stat-number" style="color:var(--warning); font-size:2rem;">${warnings.length}</div>
-          <p style="color:var(--text-muted); font-size:var(--fs-small);">Active MET warnings</p>
+          <p style="color:var(--text-muted); font-size:var(--fs-small);">${isBm ? 'Amaran MET aktif' : 'Active MET warnings'}</p>
         </div>
         <div class="glass-card reveal" style="border-top: 3px solid var(--danger);">
           <div style="font-size:2rem; margin-bottom:8px;">🌊</div>
-          <h4>Flood Alerts</h4>
+          <h4>${isBm ? 'Amaran Banjir' : 'Flood Alerts'}</h4>
           <div class="stat-number" style="color:var(--danger); font-size:2rem;">${activeFloods.length}</div>
-          <p style="color:var(--text-muted); font-size:var(--fs-small);">Active flood warnings</p>
+          <p style="color:var(--text-muted); font-size:var(--fs-small);">${isBm ? 'Amaran banjir aktif' : 'Active flood warnings'}</p>
         </div>
         <div class="glass-card reveal" style="border-top: 3px solid var(--accent-orange);">
           <div style="font-size:2rem; margin-bottom:8px;">🫨</div>
-          <h4>Seismic Events</h4>
+          <h4>${isBm ? 'Aktiviti Seismik' : 'Seismic Events'}</h4>
           <div class="stat-number" style="color:var(--accent-orange); font-size:2rem;">${recentEarthquakes.length}</div>
-          <p style="color:var(--text-muted); font-size:var(--fs-small);">Recent earthquakes</p>
+          <p style="color:var(--text-muted); font-size:var(--fs-small);">${isBm ? 'Gempa bumi baru-baru ini' : 'Recent earthquakes'}</p>
         </div>
       </div>
 
       <!-- Weather Warnings List -->
-      ${renderAlertList('🌩️ Weather Warnings', warnings, w => {
+      ${renderAlertList(isBm ? '🌩️ Amaran Cuaca' : '🌩️ Weather Warnings', warnings, w => {
         return {
           title: isBm ? (w.heading_bm || w.warning_issue?.title_bm || 'Amaran Cuaca') : (w.heading_en || w.warning_issue?.title_en || 'Weather Warning'),
           body: isBm ? (w.text_bm || 'Cuaca buruk dijangka berlaku.') : (w.text_en || 'Severe weather conditions expected.'),
@@ -113,7 +115,7 @@
       }, isBm ? 'Semua tiada amaran cuaca aktif.' : 'No active weather warnings.')}
 
       <!-- Flood Warnings List -->
-      ${renderAlertList('🌊 Active Flood Alerts', activeFloods, f => {
+      ${renderAlertList(isBm ? '🌊 Amaran Banjir Aktif' : '🌊 Active Flood Alerts', activeFloods, f => {
         const isDanger = f.water_level_indicator === 'DANGER';
         const isWarning = f.water_level_indicator === 'WARNING';
         return {
@@ -127,7 +129,7 @@
       }, isBm ? 'Semua stesen paras air sungai di tahap normal.' : 'All monitored river basins are at normal levels.')}
 
       <!-- Earthquake List -->
-      ${renderAlertList('🫨 Recent Seismic Activity (30 Days)', recentEarthquakes, e => {
+      ${renderAlertList(isBm ? '🫨 Aktiviti Seismik Baru-baru ini (30 Hari)' : '🫨 Recent Seismic Activity (30 Days)', recentEarthquakes, e => {
         return {
           title: isBm ? 
             `Magnitud ${e.magdefault || '?'} — ${e.location || 'Lokasi Tidak Diketahui'}` :
@@ -142,15 +144,15 @@
 
       <!-- General Safety Tips -->
       <div class="glass-card reveal mt-xl">
-        <h3>🛡️ Emergency Contacts Malaysia</h3>
+        <h3>${isBm ? '🛡️ Talian Kecemasan Malaysia' : '🛡️ Emergency Contacts Malaysia'}</h3>
         <div class="grid grid-3 stagger mt-md">
           ${[
-            { icon: '🚒', label: 'Fire & Rescue (Bomba)', num: '994' },
-            { icon: '👮', label: 'Police Emergency', num: '999' },
-            { icon: '🚑', label: 'Ambulance', num: '999' },
-            { icon: '🆘', label: 'Civil Defence (APM)', num: '991' },
-            { icon: '🌊', label: 'Flood Ops Centre', num: '03-8064 2400' },
-            { icon: '☎️', label: 'General Emergency', num: '112' }
+            { icon: '🚒', label: isBm ? 'Bomba & Penyelamat' : 'Fire & Rescue (Bomba)', num: '994' },
+            { icon: '👮', label: isBm ? 'Kecemasan Polis' : 'Police Emergency', num: '999' },
+            { icon: '🚑', label: isBm ? 'Ambulans' : 'Ambulance', num: '999' },
+            { icon: '🆘', label: isBm ? 'Pertahanan Awam (APM)' : 'Civil Defence (APM)', num: '991' },
+            { icon: '🌊', label: isBm ? 'Pusat Ops Banjir' : 'Flood Ops Centre', num: '03-8064 2400' },
+            { icon: '☎️', label: isBm ? 'Kecemasan Am' : 'General Emergency', num: '112' }
           ].map(c => `
             <div class="glass-card" style="text-align:center; padding:var(--space-md); cursor:pointer;" onclick="window.location='tel:${c.num}'">
               <div style="font-size:1.8rem;">${c.icon}</div>
@@ -203,6 +205,11 @@
   window.KtmySections = window.KtmySections || {};
   window.KtmySections.safety = {
     init,
-    translate() { KtmyI18n.applyTranslations(); }
+    translate() {
+      const container = document.getElementById('section-safety-content');
+      if (container && lastWarnings && lastEarthquakes && lastFloods) {
+        renderSection(container, lastWarnings, lastEarthquakes, lastFloods);
+      }
+    }
   };
 })();

@@ -10,6 +10,7 @@
   'use strict';
   let rendered = false;
   let activeTab = 'aid';
+  let lastData = null;
 
   function escapeHTML(str) {
     if (typeof str !== 'string') {
@@ -313,62 +314,184 @@
     }
   }
 
+  function translateIncentive(inc, isBm) {
+    if (!isBm) return inc;
+    const copy = { ...inc };
+
+    const dict = {
+      // Names
+      'Sumbangan Tunai Rahmah (STR)': 'Sumbangan Tunai Rahmah (STR)',
+      'BUDI Madani Subsidies': 'Subsidi BUDI Madani',
+      'JPA Program Khas': 'Program Khas JPA',
+      'MARA Education Loans (SPIP)': 'Pinjaman Pendidikan MARA (SPIP)',
+      'PTPTN Study Financing': 'Pembiayaan Pendidikan PTPTN',
+      'SME Digitalisation Grant': 'Geran Pendigitalan PKS',
+      'TERAJU Superb Grant': 'Geran Superb TERAJU',
+      'TEKUN Niaga Financing': 'Pembiayaan TEKUN Niaga',
+      'Bantuan Sara Hidup (BSH)': 'Bantuan Sara Hidup (BSH)',
+      'EPF i-Saraan': 'KWSP i-Saraan',
+      'EPF i-Suri': 'KWSP i-Suri',
+      'Personal Tax Relief': 'Pelepasan Cukai Peribadi',
+      'e-Wallet Credit': 'Kredit e-Dompet',
+      'RON95 Targeted Subsidy System': 'Sistem Subsidi Bersasar RON95',
+      'RON95 Targeted Subsidy': 'Subsidi Bersasar RON95',
+      'SKDS Fleet Card': 'Kad Fleet SKDS',
+      'Subsidised Diesel Control System (SKDS) Fleet Card': 'Kad Fleet Sistem Kawalan Diesel Bersubsidi (SKDS)',
+      
+      // Coverages / Targets
+      'B40 & M40 Households / Singles': 'Isi Rumah / Bujang B40 & M40',
+      'B40 and M40 households': 'Isi rumah B40 dan M40',
+      'Smallholders, Farmers & Diesel Vehicle Owners': 'Pekebun Kecil, Petani & Pemilik Kenderaan Diesel',
+      'Post-SPM Top Scorers': 'Pelajar Cemerlang Pasca-SPM',
+      'Bumiputera students': 'Pelajar Bumiputera',
+      'All college/university students': 'Semua pelajar kolej/universiti',
+      'Micro-businesses & SMEs': 'Perniagaan Mikro & PKS',
+      'Bumiputera Startups': 'Syarikat Pemula Bumiputera',
+      'Micro-entrepreneurs': 'Usahawan Mikro',
+      'Self-employed & gig workers': 'Bekerja sendiri & pekerja gig',
+      'Housewives': 'Suri rumah',
+      'All taxpayers': 'Semua pembayar cukai',
+      'STR recipients': 'Penerima STR',
+      'Malaysian citizens (with driving licence)': 'Warganegara Malaysia (dengan lesen memandu)',
+      'Covers 85% of all Malaysian citizens': 'Meliputi 85% daripada semua warganegara Malaysia',
+      'Private diesel vehicle owners, smallholders, & farmers': 'Pemilik kenderaan diesel persendirian, pekebun kecil, & petani',
+      'Approved logistics, public transport, & commercial operators': 'Pengendali logistik, pengangkutan awam, & komersial yang diluluskan',
+      'Targeted eligible groups': 'Kumpulan layak yang disasarkan',
+      'All registered vehicle owners': 'Semua pemilik kenderaan berdaftar',
+      'Merged into STR': 'Digabungkan ke dalam STR',
+      
+      // Amounts
+      'Up to RM3,700 / year': 'Sehingga RM3,700 / tahun',
+      'RM200 / month': 'RM200 / bulan',
+      'Full tuition + living allowance': 'Yuran pengajian penuh + elaun sara hidup',
+      'Convertible loans (up to 90% discount)': 'Pinjaman boleh ubah (sehingga 90% diskaun)',
+      'Up to RM20,000 / year': 'Sehingga RM20,000 / tahun',
+      '50% matching grant up to RM5,000': 'Geran padanan 50% sehingga RM5,000',
+      'Up to RM500,000': 'Sehingga RM500,000',
+      'RM1,000 to RM100,000': 'RM1,000 hingga RM100,000',
+      'Up to RM300/year': 'Sehingga RM300/tahun',
+      'Up to RM300/year (15% match on first RM2,000 contributed)': 'Sehingga RM300/tahun (padanan 15% untuk RM2,000 pertama yang dicarum)',
+      'RM60/year': 'RM60/tahun',
+      'RM100': 'RM100',
+      'Variable': 'Pelbagai',
+      'RM2.05/litre (Unlimited)': 'RM2.05/liter (Tanpa Had)',
+      'RM2.10/litre (200L/month)': 'RM2.10/liter (200L/bulan)',
+      'RM1.88 - RM2.15/litre (Volume limits)': 'RM1.88 - RM2.15/liter (Had isipadu)',
+      'From RM2.05/litre': 'Dari RM2.05/liter',
+      'N/A': 'N/A'
+    };
+
+    if (dict[copy.name]) copy.name = dict[copy.name];
+    if (dict[copy.coverage]) copy.coverage = dict[copy.coverage];
+    if (dict[copy.amount]) copy.amount = dict[copy.amount];
+    if (dict[copy.agency]) copy.agency = dict[copy.agency];
+
+    const descDict = {
+      'Direct cash assistance for low-to-medium income households.': 'Bantuan tunai langsung untuk isi rumah berpendapatan rendah hingga sederhana.',
+      'Targeted diesel subsidy aid for eligible individuals.': 'Bantuan subsidi diesel bersasar untuk individu yang layak.',
+      'Scholarship for outstanding SPM scorers.': 'Biasiswa untuk pelajar cemerlang SPM.',
+      'Study loans for STEM subjects.': 'Pinjaman pengajian untuk subjek STEM.',
+      'Education loans for diploma and degree courses.': 'Pinjaman pendidikan untuk kursus diploma dan ijazah.',
+      'Helping small businesses adopt digital tools.': 'Membantu perniagaan kecil menggunakan alat digital.',
+      'Funding for innovative tech-enabled startups.': 'Pembiayaan untuk syarikat pemula berasaskan teknologi inovatif.',
+      'Fast micro-financing for small traders.': 'Pembiayaan mikro cepat untuk peniaga kecil.',
+      'Voluntary contributions for self-employed and gig workers.': 'Caruman sukarela untuk individu yang bekerja sendiri dan pekerja gig.',
+      'Contribution program for housewives.': 'Program caruman untuk suri rumah.',
+      'Annual income tax deductions for individuals.': 'Potongan cukai pendapatan tahunan untuk individu.',
+      'Cash aid for eligible B40 and M40 households': 'Bantuan tunai untuk isi rumah B40 dan M40 yang layak',
+      'Household living cost assistance (predecessor to STR, now merged)': 'Bantuan sara hidup isi rumah (pendahulu kepada STR, kini digabungkan)',
+      'BSH has been replaced by Sumbangan Tunai Rahmah (STR)': 'BSH telah digantikan oleh Sumbangan Tunai Rahmah (STR)',
+      'Voluntary contributions for self-employed and gig workers': 'Caruman sukarela untuk pekerja sendiri dan pekerja gig',
+      'Contribution program for housewives': 'Program caruman untuk suri rumah',
+      'Government fuel subsidy system covering RON95, diesel, and LPG': 'Sistem subsidi bahan api kerajaan meliputi RON95, diesel, dan LPG',
+      'Annual tax deductions for individuals': 'Potongan cukai tahunan untuk individu'
+    };
+    
+    if (descDict[copy.desc]) {
+      copy.desc = descDict[copy.desc];
+    } else if (copy.desc) {
+      copy.desc = copy.desc
+        .replace(/Quota:/g, 'Kuota:')
+        .replace(/Private diesel vehicle owners/g, 'Pemilik kenderaan diesel persendirian')
+        .replace(/General targeted subsidy/g, 'Subsidi bersasar am')
+        .replace(/unlimited volume/g, 'isipadu tanpa had')
+        .replace(/covers 85% of citizens/g, 'meliputi 85% warganegara')
+        .replace(/top 15% earn/g, '15% pendapatan tertinggi')
+        .replace(/top 15% earning class/g, 'golongan pendapatan T15 tertinggi')
+        .replace(/foreign nationals/g, 'warga asing')
+        .replace(/MyKad verification/g, 'pengesahan MyKad')
+        .replace(/at the pump/g, 'di pam')
+        .replace(/private pickup\/jeep owners/g, 'pemilik pikap/jeep persendirian')
+        .replace(/eligible private diesel vehicle owners/g, 'pemilik kenderaan diesel persendirian yang layak')
+        .replace(/smallholders/g, 'pekebun kecil')
+        .replace(/commercial transport/g, 'pengangkutan komersial')
+        .replace(/fleet cards/g, 'kad fleet');
+    }
+    
+    return copy;
+  }
+
   function renderSection(container, data) {
+    lastData = data;
+    const isBm = KtmyI18n.getLang() === 'bm';
     const { budget, incentives } = data;
 
     const tabsHtml = `
       <div class="tabs reveal mb-lg">
-        <button class="tab-btn ${activeTab === 'aid' ? 'active' : ''}" data-tab="aid">Social Aid & Subsidies</button>
-        <button class="tab-btn ${activeTab === 'study' ? 'active' : ''}" data-tab="study">Education Loans</button>
-        <button class="tab-btn ${activeTab === 'business' ? 'active' : ''}" data-tab="business">SME Grants</button>
-        <button class="tab-btn ${activeTab === 'healthcare' ? 'active' : ''}" data-tab="healthcare">Healthcare</button>
-        <button class="tab-btn ${activeTab === 'retirement' ? 'active' : ''}" data-tab="retirement">EPF & Retirement</button>
+        <button class="tab-btn ${activeTab === 'aid' ? 'active' : ''}" data-tab="aid">${isBm ? 'Bantuan Sosial & Subsidi' : 'Social Aid & Subsidies'}</button>
+        <button class="tab-btn ${activeTab === 'study' ? 'active' : ''}" data-tab="study">${isBm ? 'Pinjaman Pendidikan' : 'Education Loans'}</button>
+        <button class="tab-btn ${activeTab === 'business' ? 'active' : ''}" data-tab="business">${isBm ? 'Geran PKS' : 'SME Grants'}</button>
+        <button class="tab-btn ${activeTab === 'healthcare' ? 'active' : ''}" data-tab="healthcare">${isBm ? 'Kesihatan' : 'Healthcare'}</button>
+        <button class="tab-btn ${activeTab === 'retirement' ? 'active' : ''}" data-tab="retirement">${isBm ? 'KWSP & Persaraan' : 'EPF & Retirement'}</button>
       </div>
     `;
 
     const items = incentives[activeTab] || [];
-    const directoryHtml = items.map((inc, i) => `
-      <div class="glass-card reveal mb-md" style="text-align: left;">
-        <div class="flex-between">
-          <h4 style="color: var(--primary); font-weight: var(--fw-bold); font-size: var(--fs-h4);">${escapeHTML(inc.name)}</h4>
-          <span class="tag tag-primary">${escapeHTML(inc.amount)}</span>
-        </div>
-        <div class="text-muted mt-xs" style="font-size: var(--fs-xs); font-weight: 500;">
-          Agency: ${escapeHTML(inc.agency)} | Target: ${escapeHTML(inc.coverage)}
-        </div>
-        <p class="mt-sm" style="font-size: var(--fs-small); color: var(--text-secondary);">${escapeHTML(inc.desc)}</p>
-        ${inc.link && inc.link !== '#' ? `
-          <div class="mt-md">
-            <a href="${escapeHTML(inc.link)}" target="_blank" class="btn btn-outline" style="padding: 6px 16px; font-size: var(--fs-xs);">Learn More →</a>
+    const directoryHtml = items.map((inc, i) => {
+      const translatedInc = translateIncentive(inc, isBm);
+      return `
+        <div class="glass-card reveal mb-md" style="text-align: left;">
+          <div class="flex-between">
+            <h4 style="color: var(--primary); font-weight: var(--fw-bold); font-size: var(--fs-h4);">${escapeHTML(translatedInc.name)}</h4>
+            <span class="tag tag-primary">${escapeHTML(translatedInc.amount)}</span>
           </div>
-        ` : ''}
-      </div>
-    `).join('');
+          <div class="text-muted mt-xs" style="font-size: var(--fs-xs); font-weight: 500;">
+            ${isBm ? 'Agensi' : 'Agency'}: ${escapeHTML(translatedInc.agency)} | ${isBm ? 'Sasaran' : 'Target'}: ${escapeHTML(translatedInc.coverage)}
+          </div>
+          <p class="mt-sm" style="font-size: var(--fs-small); color: var(--text-secondary);">${escapeHTML(translatedInc.desc)}</p>
+          ${translatedInc.link && translatedInc.link !== '#' ? `
+            <div class="mt-md">
+              <a href="${escapeHTML(translatedInc.link)}" target="_blank" class="btn btn-outline" style="padding: 6px 16px; font-size: var(--fs-xs);">${isBm ? 'Ketahui Lanjut →' : 'Learn More →'}</a>
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }).join('');
 
     container.innerHTML = `
       <div class="grid grid-3 stagger mb-xl">
         <div class="glass-card reveal">
           <div class="stat-number glow text-primary-color">RM ${budget.revenue.toFixed(1)}B</div>
-          <div class="stat-label">Fiscal Revenue</div>
-          <div class="text-muted mt-sm" style="font-size: var(--fs-xs);">Projected Budget ${budget.year}</div>
+          <div class="stat-label">${isBm ? 'Hasil Fiskal' : 'Fiscal Revenue'}</div>
+          <div class="text-muted mt-sm" style="font-size: var(--fs-xs);">${isBm ? 'Unjuran Belanjawan' : 'Projected Budget'} ${budget.year}</div>
         </div>
         <div class="glass-card reveal">
           <div class="stat-number glow text-danger">RM ${budget.expenditure.toFixed(1)}B</div>
-          <div class="stat-label">Fiscal Expenditure</div>
-          <div class="text-muted mt-sm" style="font-size: var(--fs-xs);">Operating + Development</div>
+          <div class="stat-label">${isBm ? 'Perbelanjaan Fiskal' : 'Fiscal Expenditure'}</div>
+          <div class="text-muted mt-sm" style="font-size: var(--fs-xs);">${isBm ? 'Mengurus + Pembangunan' : 'Operating + Development'}</div>
         </div>
         <div class="glass-card reveal">
           <div class="stat-number glow text-warning">${((budget.deficit / budget.expenditure) * 100).toFixed(1)}%</div>
-          <div class="stat-label">Budget Deficit Ratio</div>
-          <div class="text-muted mt-sm" style="font-size: var(--fs-xs);">Deficit: RM ${Math.abs(budget.deficit).toFixed(1)}B</div>
+          <div class="stat-label">${isBm ? 'Nisbah Defisit Belanjawan' : 'Budget Deficit Ratio'}</div>
+          <div class="text-muted mt-sm" style="font-size: var(--fs-xs);">${isBm ? 'Defisit' : 'Deficit'}: RM ${Math.abs(budget.deficit).toFixed(1)}B</div>
         </div>
       </div>
 
-      <h3 class="chart-title reveal mb-md">Government Incentives & Support Directory</h3>
+      <h3 class="chart-title reveal mb-md">${isBm ? 'Direktori Insentif & Sokongan Kerajaan' : 'Government Incentives & Support Directory'}</h3>
       ${tabsHtml}
 
       <div class="flex-col mt-md">
-        ${directoryHtml || '<div class="glass-card text-center"><p class="text-muted">No data available for this category.</p></div>'}
+        ${directoryHtml || `<div class="glass-card text-center"><p class="text-muted">${isBm ? 'Tiada data tersedia untuk kategori ini.' : 'No data available for this category.'}</p></div>`}
       </div>
     `;
 
@@ -384,9 +507,9 @@
   }
 
   function translate() {
-    if (rendered) {
-      const container = document.getElementById('section-government-content');
-      if (container) KtmyI18n.applyTranslations();
+    const container = document.getElementById('section-government-content');
+    if (container && lastData) {
+      renderSection(container, lastData);
     }
   }
 

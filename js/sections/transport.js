@@ -405,7 +405,7 @@
         <!-- Ridership chart -->
         <div class="glass-card reveal">
           <h3 class="chart-title" data-i18n="transport.chart.title">12-Month Transit Ridership Trend</h3>
-          <div class="chart-container" style="height: 300px;">
+          <div class="chart-container" style="height: 350px;">
             <canvas id="chart-transport-ridership"></canvas>
           </div>
         </div>

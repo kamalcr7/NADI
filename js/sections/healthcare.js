@@ -136,7 +136,7 @@
         <!-- Hospital capacity chart -->
         <div class="glass-card reveal">
           <h3 class="chart-title" data-i18n="healthcare.chart.title">Weekly Dengue Cases Comparison</h3>
-          <div class="chart-container" style="height: 300px;">
+          <div class="chart-container" style="height: 350px;">
             <canvas id="chart-healthcare-dengue"></canvas>
           </div>
         </div>

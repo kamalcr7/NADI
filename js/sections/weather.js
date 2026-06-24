@@ -277,16 +277,16 @@
       <div class="grid grid-2 reveal mb-lg" style="gap: var(--space-md);">
         <div class="glass-card">
           <h4 class="chart-title">🌡️ Temperature (24h)</h4>
-          <div class="chart-container" style="height:220px;"><canvas id="chart-hourly-temp"></canvas></div>
+          <div class="chart-container" style="height:260px;"><canvas id="chart-hourly-temp"></canvas></div>
         </div>
         <div class="glass-card">
           <h4 class="chart-title">🌧️ Rain Probability (24h)</h4>
-          <div class="chart-container" style="height:220px;"><canvas id="chart-hourly-rain"></canvas></div>
+          <div class="chart-container" style="height:260px;"><canvas id="chart-hourly-rain"></canvas></div>
         </div>
       </div>
       <div class="glass-card reveal mb-lg">
         <h4 class="chart-title">💨 Wind Speed (24h)</h4>
-        <div class="chart-container" style="height:200px;"><canvas id="chart-hourly-wind"></canvas></div>
+        <div class="chart-container" style="height:240px;"><canvas id="chart-hourly-wind"></canvas></div>
       </div>
 
       <!-- Malaysia-Wide Status Grid -->
