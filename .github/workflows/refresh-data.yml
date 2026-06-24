@@ -19,6 +19,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # Fetch full history so rebase works correctly
+          fetch-depth: 0
 
       - name: Set up Node.js 20
         uses: actions/setup-node@v4
@@ -37,10 +40,12 @@ jobs:
       - name: Commit and push updated data files
         if: steps.check-changes.outputs.changed == 'true'
         run: |
-          git config user.name  "KTMY Data Bot"
+          git config user.name  "NADI Data Bot"
           git config user.email "bot@ktmy.my"
           git add data/
           git commit -m "chore: refresh data files [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+          # Pull with rebase in case another commit landed while we were fetching
+          git pull --rebase origin main
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
