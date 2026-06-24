@@ -231,7 +231,7 @@
       <div class="grid grid-2 stagger">
         <div class="glass-card reveal">
           <h3 class="chart-title" data-i18n="tourism.arrivals.title">Monthly Visitor Arrivals Trend</h3>
-          <div class="chart-container" style="height: 300px;">
+          <div class="chart-container" style="height: 350px;">
             <canvas id="chart-tourist-arrivals"></canvas>
           </div>
         </div>

@@ -531,6 +531,15 @@
         <div style="font-size:0.65rem; color:var(--text-muted); margin-top:2px;">Malaysia Data Portal</div>
       </div>
 
+      <!-- Sidebar Search -->
+      <div class="sidebar-search-container" style="padding: 0 var(--space-md) var(--space-md) var(--space-md); position: relative;">
+        <div class="search-input-wrapper" style="border-radius: var(--radius-md);">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="sidebar-search" placeholder="Search..." data-i18n="search.placeholder_short">
+        </div>
+        <div class="search-results-dropdown" id="sidebar-search-results" style="display: none; left: var(--space-md); right: var(--space-md);"></div>
+      </div>
+
       <nav class="sidebar-scroll">
 
         <!-- Overview -->
@@ -655,6 +664,14 @@
           <span>KTMY</span>
           <span class="sep">/</span>
           <span id="topbar-section-name">Overview</span>
+        </div>
+        <!-- Global Search -->
+        <div class="topbar-search">
+          <div class="search-input-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="global-search" placeholder="Search sections, tags, metrics..." data-i18n="search.placeholder">
+          </div>
+          <div class="search-results-dropdown" id="search-results" style="display: none;"></div>
         </div>
         <div class="topbar-actions">
           <span id="topbar-last-updated" style="font-size:0.72rem; color:var(--text-muted);"></span>
@@ -972,6 +989,28 @@
   <script src="js/sections/environment.js?v=13"></script>
   <script src="js/sections/tourism.js?v=13"></script>
   <script src="js/sections/tariffs.js?v=13"></script>
+
+  <!-- Floating Feedback Widget -->
+  <div class="feedback-fab" id="feedback-fab" title="Feedback & Support">💬</div>
+  <div class="feedback-card" id="feedback-card" style="display: none; opacity: 0; transform: scale(0.95); transition: all var(--duration-normal) var(--ease-out);">
+    <div class="feedback-card-header">
+      <h4 data-i18n="feedback.title">Feedback & Support</h4>
+      <button id="feedback-close-btn">&times;</button>
+    </div>
+    <div class="feedback-card-body">
+      <a href="https://forms.gle/vXF8JgR7Y4aQ8t2N8" target="_blank" rel="noopener" class="feedback-link-btn">
+        <span class="btn-icon">📝</span>
+        <span data-i18n="feedback.form_link">Google Form (Suggest Features & Bugs)</span>
+      </a>
+      <a href="https://github.com/kamalcr7/KTMY/issues/new" target="_blank" rel="noopener" class="feedback-link-btn">
+        <span class="btn-icon">🐛</span>
+        <span data-i18n="feedback.github_link">GitHub Issues (Tech Reports)</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Search Module -->
+  <script src="js/search.js?v=13"></script>
 
   <!-- App Router -->
   <script src="js/app.js?v=13"></script>

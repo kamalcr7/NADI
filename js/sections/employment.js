@@ -80,7 +80,7 @@
       ${sorted.length > 2 ? `
         <div class="glass-card reveal mb-lg">
           <h3 class="chart-title">📉 Unemployment Rate Trend</h3>
-          <div class="chart-container" style="height:280px;">
+          <div class="chart-container" style="height:340px;">
             <canvas id="chart-unemployment-trend"></canvas>
           </div>
         </div>` : ''}

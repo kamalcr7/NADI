@@ -87,7 +87,7 @@
       <!-- Historical Trend -->
       <div class="glass-card reveal">
         <h3 class="chart-title">📈 Population Growth Trend</h3>
-        <div class="chart-container" style="height:280px;">
+        <div class="chart-container" style="height:350px;">
           <canvas id="chart-population-trend"></canvas>
         </div>
       </div>

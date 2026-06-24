@@ -214,6 +214,14 @@
       'common.million': 'million',
       'common.rm': 'RM',
       'common.percent': '%',
+
+      /* --- Search & Feedback --- */
+      'search.placeholder': 'Search sections, tags, metrics...',
+      'search.placeholder_short': 'Search...',
+      'feedback.title': 'Feedback & Support',
+      'feedback.form_link': 'Google Form (Suggest Features & Bugs)',
+      'feedback.github_link': 'GitHub Issues (Tech Reports)',
+      'feedback.close': 'Close',
     },
 
     bm: {
@@ -419,6 +427,14 @@
       'common.million': 'juta',
       'common.rm': 'RM',
       'common.percent': '%',
+
+      /* --- Search & Feedback --- */
+      'search.placeholder': 'Cari seksyen, tag, metrik...',
+      'search.placeholder_short': 'Cari...',
+      'feedback.title': 'Maklum Balas & Sokongan',
+      'feedback.form_link': 'Borang Google (Cadang Ciri & Lapor Pepijat)',
+      'feedback.github_link': 'Isu GitHub (Laporan Teknikal)',
+      'feedback.close': 'Tutup',
     }
   };
 
