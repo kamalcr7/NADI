@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "fetched_at": "2026-06-26T09:36:11.253Z",
+    "fetched_at": "2026-06-26T12:15:20.357Z",
     "source": "KTMY Data Bot",
     "api_key": "earthquake"
   },
@@ -15185,6 +15185,25 @@
       "visible": true,
       "lat_vector": "40.2325° U",
       "lon_vector": "142.1629° T"
+    },
+    {
+      "utcdatetime": "2026-06-26T11:34:42",
+      "localdatetime": "2026-06-26T19:34:42",
+      "lat": 5.294203,
+      "lon": 125.144844,
+      "depth": 10,
+      "location": "Mindanao, Philippines",
+      "location_original": "Mindanao, Philippines",
+      "n_distancemas": "744km E Semporna,Sabah",
+      "n_distancerest": "140km S Koronadal City,Philippines",
+      "nbm_distancemas": "744km T Semporna,Sabah",
+      "nbm_distancerest": "140km S Koronadal City,Philippines",
+      "magdefault": 6.8,
+      "magtypedefault": "Mwp",
+      "status": "NORMAL",
+      "visible": true,
+      "lat_vector": "5.2942° U",
+      "lon_vector": "125.1448° T"
     }
   ]
 }
