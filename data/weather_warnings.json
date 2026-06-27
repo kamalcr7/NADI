@@ -1,40 +1,10 @@
 {
   "_meta": {
-    "fetched_at": "2026-06-27T15:19:35.006Z",
+    "fetched_at": "2026-06-27T17:16:16.492Z",
     "source": "KTMY Data Bot",
     "api_key": "weather_warnings"
   },
   "data": [
-    {
-      "warning_issue": {
-        "issued": "2026-06-27T22:50:00",
-        "title_bm": "Amaran Ribut Petir",
-        "title_en": "Thunderstorms Warning"
-      },
-      "valid_from": "2026-06-27T22:50:00",
-      "valid_to": "2026-06-28T01:00:00",
-      "heading_en": "Thunderstorms Warning",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Kelantan  (Tumpat, Pasir Mas, Kota Bharu, Bachok, Pasir Puteh and Gua Musang);  Terengganu  (Besut, Setiu and Kuala Nerus);  Pahang  (Lipis, Jerantut and Temerloh); and  Sabah:  Interior (Nabawan) and Sandakan (Telupid and Beluran) until 1:00AM; Sunday, 28 June 2026.",
-      "instruction_en": null,
-      "heading_bm": "Amaran Ribut Petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Kelantan  (Tumpat, Pasir Mas, Kota Bharu, Bachok, Pasir Puteh dan Gua Musang);  Terengganu  (Besut, Setiu dan Kuala Nerus);  Pahang  (Lipis, Jerantut dan Temerloh); dan  Sabah:  Pedalaman (Nabawan) dan Sandakan (Telupid dan Beluran) sehingga 1:00 pagi; Ahad, 28 Jun 2026.",
-      "instruction_bm": null
-    },
-    {
-      "warning_issue": {
-        "issued": "2026-06-25T22:35:00",
-        "title_bm": "Tiada Nasihat",
-        "title_en": "No Advisory"
-      },
-      "valid_from": null,
-      "valid_to": null,
-      "heading_en": "No Advisory",
-      "text_en": "No Tropical Cyclone system is observed under MMD monitoring region (Latitude: 0-20 North &amp; Longitude: 95-130 East)",
-      "instruction_en": null,
-      "heading_bm": "Tiada Nasihat",
-      "text_bm": "Tiada sistem Siklon Tropika dicerap di dalam kawasan pemantauan MMD (Latitud: 0-20 Utara &amp; Longitud: 95-130 Timur)",
-      "instruction_bm": null
-    },
     {
       "warning_issue": {
         "issued": "2026-06-27T22:00:00",
@@ -93,6 +63,36 @@
       "instruction_en": null,
       "heading_bm": "Amaran Angin kencang dan laut bergelora (Kategori Pertama)",
       "text_bm": "Angin kencang barat berkelajuan 40-50 kmsj dengan ombak mencapai ketinggian sehingga 3.5 meter dijangka di kawasan perairan Selat Melaka Utara, Samui, Condore, Reef North dan Layang-Layang dalam tempoh Selasa, 30 Jun 2026 sehingga Khamis, 2 Julai 2026.",
+      "instruction_bm": null
+    },
+    {
+      "warning_issue": {
+        "issued": "2026-06-28T00:50:00",
+        "title_bm": "Amaran Ribut Petir",
+        "title_en": "Thunderstorms Warning"
+      },
+      "valid_from": "2026-06-28T00:50:00",
+      "valid_to": "2026-06-28T04:00:00",
+      "heading_en": "Thunderstorms Warning",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Kelantan  (Tumpat, Pasir Mas, Kota Bharu, Tanah Merah, Bachok, Machang and Pasir Puteh); and  Terengganu  (Besut, Setiu and Kuala Nerus) until 4:00AM; Sunday, 28 June 2026.",
+      "instruction_en": null,
+      "heading_bm": "Amaran Ribut Petir",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Kelantan  (Tumpat, Pasir Mas, Kota Bharu, Tanah Merah, Bachok, Machang dan Pasir Puteh); dan  Terengganu  (Besut, Setiu dan Kuala Nerus) sehingga 4:00 pagi; Ahad, 28 Jun 2026.",
+      "instruction_bm": null
+    },
+    {
+      "warning_issue": {
+        "issued": "2026-06-27T22:30:00",
+        "title_bm": "Tiada Nasihat",
+        "title_en": "No Advisory"
+      },
+      "valid_from": null,
+      "valid_to": null,
+      "heading_en": "No Advisory",
+      "text_en": "No Tropical Cyclone system is observed under MMD monitoring region (Latitude: 0-20 North &amp; Longitude: 95-130 East)",
+      "instruction_en": null,
+      "heading_bm": "Tiada Nasihat",
+      "text_bm": "Tiada sistem Siklon Tropika dicerap di dalam kawasan pemantauan MMD (Latitud: 0-20 Utara &amp; Longitud: 95-130 Timur)",
       "instruction_bm": null
     }
   ]
