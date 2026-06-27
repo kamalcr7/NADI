@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "fetched_at": "2026-06-27T03:56:50.632Z",
+    "fetched_at": "2026-06-27T07:00:46.910Z",
     "source": "Open-Meteo API",
     "cities": 16
   },
@@ -15,7 +15,7 @@
       "data": {
         "latitude": 3.1282952,
         "longitude": 101.68548,
-        "generationtime_ms": 0.2340078353881836,
+        "generationtime_ms": 0.2994537353515625,
         "utc_offset_seconds": 28800,
         "timezone": "Asia/Kuala_Lumpur",
         "timezone_abbreviation": "GMT+8",
@@ -31,11 +31,11 @@
           "precipitation": "mm"
         },
         "current": {
-          "time": "2026-06-27T11:45",
+          "time": "2026-06-27T15:00",
           "interval": 900,
-          "temperature_2m": 31.2,
-          "relative_humidity_2m": 59,
-          "wind_speed_10m": 7.9,
+          "temperature_2m": 32.3,
+          "relative_humidity_2m": 57,
+          "wind_speed_10m": 8.7,
           "wind_direction_10m": 176,
           "weather_code": 51,
           "precipitation": 0.1
@@ -1317,7 +1317,7 @@
       "data": {
         "latitude": 5.448155,
         "longitude": 100.28998,
-        "generationtime_ms": 0.34499168395996094,
+        "generationtime_ms": 0.22077560424804688,
         "utc_offset_seconds": 28800,
         "timezone": "Asia/Kuala_Lumpur",
         "timezone_abbreviation": "GMT+8",
@@ -1333,13 +1333,13 @@
           "precipitation": "mm"
         },
         "current": {
-          "time": "2026-06-27T11:45",
+          "time": "2026-06-27T15:00",
           "interval": 900,
-          "temperature_2m": 29.8,
-          "relative_humidity_2m": 77,
-          "wind_speed_10m": 4.7,
-          "wind_direction_10m": 223,
-          "weather_code": 2,
+          "temperature_2m": 30.4,
+          "relative_humidity_2m": 73,
+          "wind_speed_10m": 9.2,
+          "wind_direction_10m": 227,
+          "weather_code": 3,
           "precipitation": 0
         },
         "hourly_units": {
@@ -2619,7 +2619,7 @@
       "data": {
         "latitude": 1.5114235,
         "longitude": 103.752975,
-        "generationtime_ms": 0.25653839111328125,
+        "generationtime_ms": 0.5356073379516602,
         "utc_offset_seconds": 28800,
         "timezone": "Asia/Kuala_Lumpur",
         "timezone_abbreviation": "GMT+8",
@@ -2635,13 +2635,13 @@
           "precipitation": "mm"
         },
         "current": {
-          "time": "2026-06-27T11:45",
+          "time": "2026-06-27T15:00",
           "interval": 900,
-          "temperature_2m": 31.3,
-          "relative_humidity_2m": 63,
-          "wind_speed_10m": 9.9,
-          "wind_direction_10m": 177,
-          "weather_code": 2,
+          "temperature_2m": 31.9,
+          "relative_humidity_2m": 59,
+          "wind_speed_10m": 10.2,
+          "wind_direction_10m": 193,
+          "weather_code": 0,
           "precipitation": 0
         },
         "hourly_units": {
@@ -3921,7 +3921,7 @@
       "data": {
         "latitude": 5.940246,
         "longitude": 116.100006,
-        "generationtime_ms": 0.2797842025756836,
+        "generationtime_ms": 0.6186962127685547,
         "utc_offset_seconds": 28800,
         "timezone": "Asia/Kuala_Lumpur",
         "timezone_abbreviation": "GMT+8",
@@ -3937,12 +3937,12 @@
           "precipitation": "mm"
         },
         "current": {
-          "time": "2026-06-27T11:45",
+          "time": "2026-06-27T15:00",
           "interval": 900,
-          "temperature_2m": 31.2,
-          "relative_humidity_2m": 66,
-          "wind_speed_10m": 3.2,
-          "wind_direction_10m": 304,
+          "temperature_2m": 30.6,
+          "relative_humidity_2m": 71,
+          "wind_speed_10m": 7.9,
+          "wind_direction_10m": 300,
           "weather_code": 3,
           "precipitation": 0
         },
@@ -5223,7 +5223,7 @@
       "data": {
         "latitude": 1.5817223,
         "longitude": 110.324875,
-        "generationtime_ms": 0.3644227981567383,
+        "generationtime_ms": 0.2830028533935547,
         "utc_offset_seconds": 28800,
         "timezone": "Asia/Kuala_Lumpur",
         "timezone_abbreviation": "GMT+8",
@@ -5239,13 +5239,13 @@
           "precipitation": "mm"
         },
         "current": {
-          "time": "2026-06-27T11:45",
+          "time": "2026-06-27T15:00",
           "interval": 900,
-          "temperature_2m": 30.6,
-          "relative_humidity_2m": 71,
-          "wind_speed_10m": 4.8,
-          "wind_direction_10m": 53,
-          "weather_code": 51,
+          "temperature_2m": 30.2,
+          "relative_humidity_2m": 75,
+          "wind_speed_10m": 3.8,
+          "wind_direction_10m": 319,
+          "weather_code": 95,
           "precipitation": 0.1
         },
         "hourly_units": {
@@ -6525,7 +6525,7 @@
       "data": {
         "latitude": 6.1511426,
         "longitude": 100.37594,
-        "generationtime_ms": 0.2351999282836914,
+        "generationtime_ms": 0.4131793975830078,
         "utc_offset_seconds": 28800,
         "timezone": "Asia/Kuala_Lumpur",
         "timezone_abbreviation": "GMT+8",
@@ -6541,13 +6541,13 @@
           "precipitation": "mm"
         },
         "current": {
-          "time": "2026-06-27T11:45",
+          "time": "2026-06-27T15:00",
           "interval": 900,
-          "temperature_2m": 29,
+          "temperature_2m": 29.6,
           "relative_humidity_2m": 79,
-          "wind_speed_10m": 6.7,
-          "wind_direction_10m": 226,
-          "weather_code": 95,
+          "wind_speed_10m": 9.1,
+          "wind_direction_10m": 262,
+          "weather_code": 51,
           "precipitation": 0.1
         },
         "hourly_units": {
@@ -7827,7 +7827,7 @@
       "data": {
         "latitude": 4.6045694,
         "longitude": 101.074646,
-        "generationtime_ms": 0.3151893615722656,
+        "generationtime_ms": 0.9851455688476562,
         "utc_offset_seconds": 28800,
         "timezone": "Asia/Kuala_Lumpur",
         "timezone_abbreviation": "GMT+8",
@@ -7843,14 +7843,14 @@
           "precipitation": "mm"
         },
         "current": {
-          "time": "2026-06-27T11:45",
+          "time": "2026-06-27T15:00",
           "interval": 900,
-          "temperature_2m": 30.7,
-          "relative_humidity_2m": 62,
-          "wind_speed_10m": 9.1,
-          "wind_direction_10m": 190,
-          "weather_code": 2,
-          "precipitation": 0
+          "temperature_2m": 31,
+          "relative_humidity_2m": 63,
+          "wind_speed_10m": 10,
+          "wind_direction_10m": 216,
+          "weather_code": 51,
+          "precipitation": 0.1
         },
         "hourly_units": {
           "time": "iso8601",
@@ -9129,7 +9129,7 @@
       "data": {
         "latitude": 3.0579963,
         "longitude": 101.53102,
-        "generationtime_ms": 0.3203153610229492,
+        "generationtime_ms": 0.2993345260620117,
         "utc_offset_seconds": 28800,
         "timezone": "Asia/Kuala_Lumpur",
         "timezone_abbreviation": "GMT+8",
@@ -9145,12 +9145,12 @@
           "precipitation": "mm"
         },
         "current": {
-          "time": "2026-06-27T11:45",
+          "time": "2026-06-27T15:00",
           "interval": 900,
-          "temperature_2m": 30.4,
-          "relative_humidity_2m": 71,
-          "wind_speed_10m": 9,
-          "wind_direction_10m": 180,
+          "temperature_2m": 31.7,
+          "relative_humidity_2m": 60,
+          "wind_speed_10m": 10.3,
+          "wind_direction_10m": 174,
           "weather_code": 3,
           "precipitation": 0
         },
@@ -10431,7 +10431,7 @@
       "data": {
         "latitude": 6.1511426,
         "longitude": 102.25563,
-        "generationtime_ms": 9.021520614624023,
+        "generationtime_ms": 0.2617835998535156,
         "utc_offset_seconds": 28800,
         "timezone": "Asia/Kuala_Lumpur",
         "timezone_abbreviation": "GMT+8",
@@ -10447,13 +10447,13 @@
           "precipitation": "mm"
         },
         "current": {
-          "time": "2026-06-27T11:45",
+          "time": "2026-06-27T15:00",
           "interval": 900,
-          "temperature_2m": 32.2,
-          "relative_humidity_2m": 57,
-          "wind_speed_10m": 4.5,
-          "wind_direction_10m": 284,
-          "weather_code": 51,
+          "temperature_2m": 31.3,
+          "relative_humidity_2m": 65,
+          "wind_speed_10m": 13.1,
+          "wind_direction_10m": 9,
+          "weather_code": 95,
           "precipitation": 0.1
         },
         "hourly_units": {
@@ -11733,7 +11733,7 @@
       "data": {
         "latitude": 5.307557,
         "longitude": 103.10174,
-        "generationtime_ms": 0.2696514129638672,
+        "generationtime_ms": 0.39696693420410156,
         "utc_offset_seconds": 28800,
         "timezone": "Asia/Kuala_Lumpur",
         "timezone_abbreviation": "GMT+8",
@@ -11749,14 +11749,14 @@
           "precipitation": "mm"
         },
         "current": {
-          "time": "2026-06-27T11:45",
+          "time": "2026-06-27T15:00",
           "interval": 900,
-          "temperature_2m": 30.7,
-          "relative_humidity_2m": 69,
-          "wind_speed_10m": 4.9,
-          "wind_direction_10m": 216,
-          "weather_code": 3,
-          "precipitation": 0
+          "temperature_2m": 28.8,
+          "relative_humidity_2m": 82,
+          "wind_speed_10m": 13.5,
+          "wind_direction_10m": 29,
+          "weather_code": 95,
+          "precipitation": 0.4
         },
         "hourly_units": {
           "time": "iso8601",
@@ -13035,7 +13035,7 @@
       "data": {
         "latitude": 2.7065024,
         "longitude": 101.91814,
-        "generationtime_ms": 0.21755695343017578,
+        "generationtime_ms": 0.22351741790771484,
         "utc_offset_seconds": 28800,
         "timezone": "Asia/Kuala_Lumpur",
         "timezone_abbreviation": "GMT+8",
@@ -13051,14 +13051,14 @@
           "precipitation": "mm"
         },
         "current": {
-          "time": "2026-06-27T11:45",
+          "time": "2026-06-27T15:00",
           "interval": 900,
-          "temperature_2m": 30.3,
-          "relative_humidity_2m": 63,
-          "wind_speed_10m": 11.2,
-          "wind_direction_10m": 179,
-          "weather_code": 51,
-          "precipitation": 0.1
+          "temperature_2m": 31.4,
+          "relative_humidity_2m": 58,
+          "wind_speed_10m": 10.6,
+          "wind_direction_10m": 183,
+          "weather_code": 1,
+          "precipitation": 0
         },
         "hourly_units": {
           "time": "iso8601",
@@ -14337,7 +14337,7 @@
       "data": {
         "latitude": 2.2144113,
         "longitude": 102.282524,
-        "generationtime_ms": 0.36919116973876953,
+        "generationtime_ms": 0.31578540802001953,
         "utc_offset_seconds": 28800,
         "timezone": "Asia/Kuala_Lumpur",
         "timezone_abbreviation": "GMT+8",
@@ -14353,13 +14353,13 @@
           "precipitation": "mm"
         },
         "current": {
-          "time": "2026-06-27T11:45",
+          "time": "2026-06-27T15:00",
           "interval": 900,
-          "temperature_2m": 30.2,
-          "relative_humidity_2m": 72,
-          "wind_speed_10m": 9.1,
-          "wind_direction_10m": 171,
-          "weather_code": 2,
+          "temperature_2m": 30.9,
+          "relative_humidity_2m": 65,
+          "wind_speed_10m": 12.6,
+          "wind_direction_10m": 167,
+          "weather_code": 1,
           "precipitation": 0
         },
         "hourly_units": {
@@ -15639,7 +15639,7 @@
       "data": {
         "latitude": 6.4323373,
         "longitude": 100.1844,
-        "generationtime_ms": 0.3153085708618164,
+        "generationtime_ms": 0.5066394805908203,
         "utc_offset_seconds": 28800,
         "timezone": "Asia/Kuala_Lumpur",
         "timezone_abbreviation": "GMT+8",
@@ -15655,14 +15655,14 @@
           "precipitation": "mm"
         },
         "current": {
-          "time": "2026-06-27T11:45",
+          "time": "2026-06-27T15:00",
           "interval": 900,
-          "temperature_2m": 28.4,
-          "relative_humidity_2m": 82,
-          "wind_speed_10m": 8.6,
-          "wind_direction_10m": 260,
-          "weather_code": 51,
-          "precipitation": 0.1
+          "temperature_2m": 29.3,
+          "relative_humidity_2m": 77,
+          "wind_speed_10m": 8.4,
+          "wind_direction_10m": 279,
+          "weather_code": 95,
+          "precipitation": 0.2
         },
         "hourly_units": {
           "time": "iso8601",
@@ -16941,7 +16941,7 @@
       "data": {
         "latitude": 4.182777,
         "longitude": 102.04897,
-        "generationtime_ms": 112.38694190979004,
+        "generationtime_ms": 1.7544031143188477,
         "utc_offset_seconds": 28800,
         "timezone": "Asia/Kuala_Lumpur",
         "timezone_abbreviation": "GMT+8",
@@ -16957,13 +16957,13 @@
           "precipitation": "mm"
         },
         "current": {
-          "time": "2026-06-27T11:45",
+          "time": "2026-06-27T15:00",
           "interval": 900,
-          "temperature_2m": 29.9,
-          "relative_humidity_2m": 71,
-          "wind_speed_10m": 2.3,
-          "wind_direction_10m": 129,
-          "weather_code": 2,
+          "temperature_2m": 31.3,
+          "relative_humidity_2m": 65,
+          "wind_speed_10m": 7.3,
+          "wind_direction_10m": 121,
+          "weather_code": 3,
           "precipitation": 0
         },
         "hourly_units": {
@@ -18243,7 +18243,7 @@
       "data": {
         "latitude": 5.8699474,
         "longitude": 118.101585,
-        "generationtime_ms": 0.3675222396850586,
+        "generationtime_ms": 0.24652481079101562,
         "utc_offset_seconds": 28800,
         "timezone": "Asia/Kuala_Lumpur",
         "timezone_abbreviation": "GMT+8",
@@ -18259,12 +18259,12 @@
           "precipitation": "mm"
         },
         "current": {
-          "time": "2026-06-27T11:45",
+          "time": "2026-06-27T15:00",
           "interval": 900,
-          "temperature_2m": 31,
-          "relative_humidity_2m": 67,
-          "wind_speed_10m": 5,
-          "wind_direction_10m": 195,
+          "temperature_2m": 32.1,
+          "relative_humidity_2m": 62,
+          "wind_speed_10m": 6.4,
+          "wind_direction_10m": 63,
           "weather_code": 3,
           "precipitation": 0
         },
@@ -19545,7 +19545,7 @@
       "data": {
         "latitude": 4.3936734,
         "longitude": 114.00983,
-        "generationtime_ms": 0.3243684768676758,
+        "generationtime_ms": 0.5365610122680664,
         "utc_offset_seconds": 28800,
         "timezone": "Asia/Kuala_Lumpur",
         "timezone_abbreviation": "GMT+8",
@@ -19561,12 +19561,12 @@
           "precipitation": "mm"
         },
         "current": {
-          "time": "2026-06-27T11:45",
+          "time": "2026-06-27T15:00",
           "interval": 900,
-          "temperature_2m": 31,
-          "relative_humidity_2m": 65,
-          "wind_speed_10m": 3.1,
-          "wind_direction_10m": 283,
+          "temperature_2m": 30.1,
+          "relative_humidity_2m": 66,
+          "wind_speed_10m": 10.4,
+          "wind_direction_10m": 296,
           "weather_code": 3,
           "precipitation": 0
         },

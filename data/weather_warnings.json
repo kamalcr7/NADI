@@ -1,13 +1,13 @@
 {
   "_meta": {
-    "fetched_at": "2026-06-27T03:53:09.402Z",
+    "fetched_at": "2026-06-27T06:56:59.258Z",
     "source": "KTMY Data Bot",
     "api_key": "weather_warnings"
   },
   "data": [
     {
       "warning_issue": {
-        "issued": "2026-06-27T08:20:00",
+        "issued": "2026-06-27T13:00:00",
         "title_bm": "Amaran Angin Kencang dan Laut Bergelora Kategori Kedua",
         "title_en": "Second Category Warning on Strong Winds and Rough Seas"
       },
@@ -22,37 +22,37 @@
     },
     {
       "warning_issue": {
-        "issued": "2026-06-27T08:20:00",
+        "issued": "2026-06-27T13:00:00",
         "title_bm": "Amaran Angin Kencang dan Laut Bergelora Kategori Kedua",
         "title_en": "Second Category Warning on Strong Winds and Rough Seas"
       },
-      "valid_from": "2026-06-27T08:20:00",
-      "valid_to": "2026-06-27T13:00:00",
+      "valid_from": "2026-06-27T13:00:00",
+      "valid_to": "2026-06-27T18:00:00",
       "heading_en": "Warning on Thunderstorms",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of Perlis & Kedah, Penang, Perak, Selangor, Terengganu and Kelantan until 1:00PM; Saturday, 27 June 2026.",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of Perlis & Kedah, Penang, Terengganu and Kelantan until 6:00PM; Saturday, 27 June 2026.",
       "instruction_en": null,
       "heading_bm": "Amaran Ribut petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan Perlis & Kedah, Pulau Pinang, Perak, Selangor, Terengganu dan Kelantan sehingga 1:00 tengah hari; Sabtu, 27 Jun 2026.",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan Perlis & Kedah, Pulau Pinang, Terengganu dan Kelantan sehingga 6:00 petang; Sabtu, 27 Jun 2026.",
       "instruction_bm": null
     },
     {
       "warning_issue": {
-        "issued": "2026-06-27T08:20:00",
+        "issued": "2026-06-27T13:00:00",
         "title_bm": "Amaran Angin Kencang dan Laut Bergelora Kategori Kedua",
         "title_en": "Second Category Warning on Strong Winds and Rough Seas"
       },
-      "valid_from": "2026-06-27T08:20:00",
-      "valid_to": "2026-06-27T13:00:00",
+      "valid_from": "2026-06-27T13:00:00",
+      "valid_to": "2026-06-27T18:00:00",
       "heading_en": "Warning on Thunderstorms",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of Phuket, Straits of Melaka, Samui and northern part of Tioman until 1:00PM; Saturday, 27 June 2026.",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of Phuket and Straits of Melaka until 6:00PM; Saturday, 27 June 2026.",
       "instruction_en": null,
       "heading_bm": "Amaran Ribut petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan Phuket, Selat Melaka, Samui dan utara Tioman sehingga 1:00 tengah hari; Sabtu, 27 Jun 2026.",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan Phuket dan Selat Melaka sehingga 6:00 petang; Sabtu, 27 Jun 2026.",
       "instruction_bm": null
     },
     {
       "warning_issue": {
-        "issued": "2026-06-27T08:20:00",
+        "issued": "2026-06-27T13:00:00",
         "title_bm": "Amaran Angin Kencang dan Laut Bergelora Kategori Kedua",
         "title_en": "Second Category Warning on Strong Winds and Rough Seas"
       },
@@ -67,17 +67,17 @@
     },
     {
       "warning_issue": {
-        "issued": "2026-06-27T11:15:00",
+        "issued": "2026-06-27T13:10:00",
         "title_bm": "Amaran Ribut Petir",
         "title_en": "Thunderstorms Warning"
       },
-      "valid_from": "2026-06-27T11:15:00",
-      "valid_to": "2026-06-27T14:00:00",
+      "valid_from": "2026-06-27T13:10:00",
+      "valid_to": "2026-06-27T16:00:00",
       "heading_en": "Thunderstorms Warning",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Kedah  (Kuala Muda, Kulim and Bandar Baharu);  Penang ;  Perak  (Kerian, Larut, Matang and Selama, Manjung, Bagan Datuk and Hilir Perak); and  Selangor  (Sabak Bernam and Kuala Selangor) until 2:00PM; Saturday, 27 June 2026.",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Kedah  (Yan, Pendang, Kuala Muda, Sik and Baling);  Perak  (Larut, Matang and Selama, Hulu Perak, Kuala Kangsar and Hilir Perak);  Kelantan  (Jeli, Tanah Merah, Bachok, Machang and Pasir Puteh);  Terengganu  (Besut and Setiu); and  Selangor  (Sabak Bernam, Kuala Selangor, Klang and Petaling) until 4:00PM; Saturday, 27 June 2026.",
       "instruction_en": null,
       "heading_bm": "Amaran Ribut Petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Kedah  (Kuala Muda, Kulim dan Bandar Baharu);  Pulau Pinang ;  Perak  (Kerian, Larut, Matang Dan Selama, Manjung, Bagan Datuk dan Hilir Perak); dan  Selangor  (Sabak Bernam dan Kuala Selangor) sehingga 2:00 petang; Sabtu, 27 Jun 2026.",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Kedah  (Yan, Pendang, Kuala Muda, Sik dan Baling);  Perak  (Larut, Matang Dan Selama, Hulu Perak, Kuala Kangsar dan Hilir Perak);  Kelantan  (Jeli, Tanah Merah, Bachok, Machang dan Pasir Puteh);  Terengganu  (Besut dan Setiu); dan  Selangor  (Sabak Bernam, Kuala Selangor, Klang dan Petaling) sehingga 4:00 petang; Sabtu, 27 Jun 2026.",
       "instruction_bm": null
     },
     {
