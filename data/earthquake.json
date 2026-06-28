@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "fetched_at": "2026-06-28T15:22:59.805Z",
+    "fetched_at": "2026-06-28T17:18:52.818Z",
     "source": "KTMY Data Bot",
     "api_key": "earthquake"
   },
@@ -15242,6 +15242,25 @@
       "visible": true,
       "lat_vector": "6.9350° S",
       "lon_vector": "125.7031° T"
+    },
+    {
+      "utcdatetime": "2026-06-28T16:12:21",
+      "localdatetime": "2026-06-29T00:12:21",
+      "lat": 28.239182,
+      "lon": 104.591454,
+      "depth": 182,
+      "location": "Sichuan, China",
+      "location_original": "Sichuan, China",
+      "n_distancemas": "2,440km N Padang Besar,Perlis",
+      "n_distancerest": "247km SW Chongqing,China",
+      "nbm_distancemas": "2,440km U Padang Besar,Perlis",
+      "nbm_distancerest": "247km BD Chongqing,China",
+      "magdefault": 5.3,
+      "magtypedefault": "mb",
+      "status": "NORMAL",
+      "visible": true,
+      "lat_vector": "28.2392° U",
+      "lon_vector": "104.5915° T"
     }
   ]
 }
