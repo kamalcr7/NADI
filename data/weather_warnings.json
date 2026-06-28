@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "fetched_at": "2026-06-28T13:57:28.071Z",
+    "fetched_at": "2026-06-28T15:22:41.112Z",
     "source": "KTMY Data Bot",
     "api_key": "weather_warnings"
   },
@@ -67,17 +67,17 @@
     },
     {
       "warning_issue": {
-        "issued": "2026-06-28T20:25:00",
+        "issued": "2026-06-28T23:00:00",
         "title_bm": "Amaran Ribut Petir",
         "title_en": "Thunderstorms Warning"
       },
-      "valid_from": "2026-06-28T20:25:00",
-      "valid_to": "2026-06-28T23:00:00",
+      "valid_from": "2026-06-28T23:00:00",
+      "valid_to": "2026-06-29T03:00:00",
       "heading_en": "Thunderstorms Warning",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Kedah  (Langkawi, Kuala Muda, Sik, Baling and Kulim);  Perak  (Hulu Perak);  Kelantan  (Tumpat, Pasir Mas, Kota Bharu, Jeli, Tanah Merah, Bachok, Machang, Pasir Puteh and Kuala Krai);  Terengganu  (Besut);  Pahang  (Temerloh, Maran, Kuantan, Pekan and Rompin);  Sarawak:  Kapit (Song) and Bintulu (Tatau and Bintulu); and  Sabah:  Tawau (Tawau) until 11:00PM; Sunday, 28 June 2026.",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Perlis ;  Kedah  (Langkawi and Kubang Pasu);  Perak  (Hulu Perak);  Kelantan  (Bachok, Pasir Puteh, Kuala Krai and Gua Musang);  Terengganu  (Besut, Marang and Dungun); and  Pahang  (Jerantut, Temerloh and Kuantan) until 3:00AM; Monday, 29 June 2026.",
       "instruction_en": null,
       "heading_bm": "Amaran Ribut Petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Kedah  (Langkawi, Kuala Muda, Sik, Baling dan Kulim);  Perak  (Hulu Perak);  Kelantan  (Tumpat, Pasir Mas, Kota Bharu, Jeli, Tanah Merah, Bachok, Machang, Pasir Puteh dan Kuala Krai);  Terengganu  (Besut);  Pahang  (Temerloh, Maran, Kuantan, Pekan dan Rompin);  Sarawak:  Kapit (Song) dan Bintulu (Tatau dan Bintulu); dan  Sabah:  Tawau (Tawau) sehingga 11:00 malam; Ahad, 28 Jun 2026.",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Perlis ;  Kedah  (Langkawi dan Kubang Pasu);  Perak  (Hulu Perak);  Kelantan  (Bachok, Pasir Puteh, Kuala Krai dan Gua Musang);  Terengganu  (Besut, Marang dan Dungun); dan  Pahang  (Jerantut, Temerloh dan Kuantan) sehingga 3:00 pagi; Isnin, 29 Jun 2026.",
       "instruction_bm": null
     },
     {
