@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "fetched_at": "2026-06-28T19:28:02.932Z",
+    "fetched_at": "2026-06-28T21:07:32.609Z",
     "source": "KTMY Data Bot",
     "api_key": "weather_warnings"
   },
@@ -67,17 +67,17 @@
     },
     {
       "warning_issue": {
-        "issued": "2026-06-29T00:25:00",
+        "issued": "2026-06-29T04:00:00",
         "title_bm": "Amaran Ribut Petir",
         "title_en": "Thunderstorms Warning"
       },
-      "valid_from": "2026-06-29T00:25:00",
-      "valid_to": "2026-06-29T04:00:00",
+      "valid_from": "2026-06-29T04:00:00",
+      "valid_to": "2026-06-29T07:00:00",
       "heading_en": "Thunderstorms Warning",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Perlis ;  Kedah ;  Penang ;  Perak  (Kerian and Larut, Matang and Selama);  Kelantan  (Kuala Krai and Gua Musang);  Pahang  (Lipis and Jerantut);  Negeri Sembilan  (Seremban, Port Dickson and Rembau); and  Melaka  until 4:00AM; Monday, 29 June 2026.",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Perlis ;  Kedah  (Langkawi, Kubang Pasu, Kota Setar, Pokok Sena, Yan, Pendang, Kuala Muda, Kulim and Bandar Baharu);  Penang ;  Negeri Sembilan  (Seremban, Port Dickson, Kuala Pilah, Rembau and Tampin); and  Melaka  until 7:00AM; Monday, 29 June 2026.",
       "instruction_en": null,
       "heading_bm": "Amaran Ribut Petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Perlis ;  Kedah ;  Pulau Pinang ;  Perak  (Kerian dan Larut, Matang Dan Selama);  Kelantan  (Kuala Krai dan Gua Musang);  Pahang  (Lipis dan Jerantut);  Negeri Sembilan  (Seremban, Port Dickson dan Rembau); dan  Melaka  sehingga 4:00 pagi; Isnin, 29 Jun 2026.",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Perlis ;  Kedah  (Langkawi, Kubang Pasu, Kota Setar, Pokok Sena, Yan, Pendang, Kuala Muda, Kulim dan Bandar Baharu);  Pulau Pinang ;  Negeri Sembilan  (Seremban, Port Dickson, Kuala Pilah, Rembau dan Tampin); dan  Melaka  sehingga 7:00 pagi; Isnin, 29 Jun 2026.",
       "instruction_bm": null
     },
     {
