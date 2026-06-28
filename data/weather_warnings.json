@@ -1,13 +1,13 @@
 {
   "_meta": {
-    "fetched_at": "2026-06-28T04:15:27.092Z",
+    "fetched_at": "2026-06-28T09:17:36.215Z",
     "source": "KTMY Data Bot",
     "api_key": "weather_warnings"
   },
   "data": [
     {
       "warning_issue": {
-        "issued": "2026-06-28T08:30:00",
+        "issued": "2026-06-28T17:00:00",
         "title_bm": "Amaran Angin Kencang dan Laut Bergelora Kategori Kedua",
         "title_en": "Second Category Warning on Strong Winds and Rough Seas"
       },
@@ -22,37 +22,37 @@
     },
     {
       "warning_issue": {
-        "issued": "2026-06-28T08:30:00",
+        "issued": "2026-06-28T17:00:00",
         "title_bm": "Amaran Angin Kencang dan Laut Bergelora Kategori Kedua",
         "title_en": "Second Category Warning on Strong Winds and Rough Seas"
       },
-      "valid_from": "2026-06-28T08:30:00",
-      "valid_to": "2026-06-28T13:00:00",
+      "valid_from": "2026-06-28T17:00:00",
+      "valid_to": "2026-06-28T21:00:00",
       "heading_en": "Warning on Thunderstorms",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of Perlis & Kedah, Penang, Perak, Selangor, N. Sembilan, Melaka, Western Sarawak and Western Sabah and Labuan, Eastern Sabah until 1:00PM; Sunday, 28 June 2026.",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of Perlis & Kedah, Penang, Perak, Pahang, Sarawak and Eastern Sabah until 9:00PM; Sunday, 28 June 2026.",
       "instruction_en": null,
       "heading_bm": "Amaran Ribut petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan Perlis & Kedah, Pulau Pinang, Perak, Selangor, N. Sembilan, Melaka, Sarawak Barat dan Sabah Barat dan Labuan, Sabah Timur sehingga 1:00 tengah hari; Ahad, 28 Jun 2026.",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan Perlis & Kedah, Pulau Pinang, Perak, Pahang, Sarawak dan Sabah Timur sehingga 9:00 malam; Ahad, 28 Jun 2026.",
       "instruction_bm": null
     },
     {
       "warning_issue": {
-        "issued": "2026-06-28T08:30:00",
+        "issued": "2026-06-28T17:00:00",
         "title_bm": "Amaran Angin Kencang dan Laut Bergelora Kategori Kedua",
         "title_en": "Second Category Warning on Strong Winds and Rough Seas"
       },
-      "valid_from": "2026-06-28T08:30:00",
-      "valid_to": "2026-06-28T13:00:00",
+      "valid_from": "2026-06-28T17:00:00",
+      "valid_to": "2026-06-28T21:00:00",
       "heading_en": "Warning on Thunderstorms",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of Phuket, Straits of Melaka, Samui, Tioman, southern part of Bunguran, southern part of Reef South, Labuan, eastern part of Palawan and Sulu until 1:00PM; Sunday, 28 June 2026.",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of Phuket, Straits of Melaka, Samui, northern part of Tioman, western part of Condore, southern part of Bunguran, Reef North, southern part of Reef South, Layang-Layang, Labuan, Palawan and Sulu until 9:00PM; Sunday, 28 June 2026.",
       "instruction_en": null,
       "heading_bm": "Amaran Ribut petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan Phuket, Selat Melaka, Samui, Tioman, selatan Bunguran, selatan Reef South, Labuan, timur Palawan dan Sulu sehingga 1:00 tengah hari; Ahad, 28 Jun 2026.",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan Phuket, Selat Melaka, Samui, utara Tioman, barat Condore, selatan Bunguran, Reef North, selatan Reef South, Layang-Layang, Labuan, Palawan dan Sulu sehingga 9:00 malam; Ahad, 28 Jun 2026.",
       "instruction_bm": null
     },
     {
       "warning_issue": {
-        "issued": "2026-06-28T08:30:00",
+        "issued": "2026-06-28T17:00:00",
         "title_bm": "Amaran Angin Kencang dan Laut Bergelora Kategori Kedua",
         "title_en": "Second Category Warning on Strong Winds and Rough Seas"
       },
@@ -67,17 +67,17 @@
     },
     {
       "warning_issue": {
-        "issued": "2026-06-28T11:15:00",
+        "issued": "2026-06-28T15:00:00",
         "title_bm": "Amaran Ribut Petir",
         "title_en": "Thunderstorms Warning"
       },
-      "valid_from": "2026-06-28T11:15:00",
-      "valid_to": "2026-06-28T15:00:00",
+      "valid_from": "2026-06-28T15:00:00",
+      "valid_to": "2026-06-28T19:00:00",
       "heading_en": "Thunderstorms Warning",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Kedah  (Kuala Muda);  Penang  (Southwest Penang Island, Northeast Penang Island and North Seberang Perai);  Negeri Sembilan  (Seremban, Port Dickson and Rembau);  Melaka ;  Sarawak:  Kuching, Serian, Samarahan and Sri Aman; and  Sabah:  Sandakan (Telupid, Beluran and Sandakan) and Kudat (Pitas and Kudat) until 3:00PM; Sunday, 28 June 2026.",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Perlis ;  Kedah  (Langkawi, Kubang Pasu, Padang Terap, Kuala Muda and Kulim);  Penang ;  Perak  (Hulu Perak, Kuala Kangsar, Manjung, Kinta, Perak Tengah, Kampar and Bagan Datuk);  Kelantan  (Gua Musang);  Terengganu  (Besut, Setiu, Kuala Nerus, Hulu Terengganu and Dungun);  Pahang  (Cameron Highlands, Raub, Bentong and Rompin);  Selangor  (Hulu Selangor, Gombak, Petaling, Kuala Langat, Hulu Langat and Sepang);  FT Kuala Lumpur ;  FT Putrajaya ;  Sarawak:  Kuching (Bau and Kuching), Serian, Samarahan, Sri Aman, Betong, Sarikei (Sarikei), Sibu (Selangau), Mukah, Kapit (Song and Kapit), Bintulu (Tatau) and Miri (Subis and Miri); and  Sabah:  Interior (Keningau and Tambunan), West Coast (Ranau) and Sandakan (Telupid, Kinabatangan, Beluran and Sandakan) until 7:00PM; Sunday, 28 June 2026.",
       "instruction_en": null,
       "heading_bm": "Amaran Ribut Petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Kedah  (Kuala Muda);  Pulau Pinang  (Barat Daya, Timur Laut dan Seberang Perai Utara);  Negeri Sembilan  (Seremban, Port Dickson dan Rembau);  Melaka ;  Sarawak:  Kuching, Serian, Samarahan dan Sri Aman; dan  Sabah:  Sandakan (Telupid, Beluran dan Sandakan) dan Kudat (Pitas dan Kudat) sehingga 3:00 petang; Ahad, 28 Jun 2026.",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Perlis ;  Kedah  (Langkawi, Kubang Pasu, Padang Terap, Kuala Muda dan Kulim);  Pulau Pinang ;  Perak  (Hulu Perak, Kuala Kangsar, Manjung, Kinta, Perak Tengah, Kampar dan Bagan Datuk);  Kelantan  (Gua Musang);  Terengganu  (Besut, Setiu, Kuala Nerus, Hulu Terengganu dan Dungun);  Pahang  (Tanah Tinggi Cameron, Raub, Bentong dan Rompin);  Selangor  (Hulu Selangor, Gombak, Petaling, Kuala Langat, Hulu Langat dan Sepang);  WP Kuala Lumpur ;  WP Putrajaya ;  Sarawak:  Kuching (Bau dan Kuching), Serian, Samarahan, Sri Aman, Betong, Sarikei (Sarikei), Sibu (Selangau), Mukah, Kapit (Song dan Kapit), Bintulu (Tatau) dan Miri (Subis dan Miri); dan  Sabah:  Pedalaman (Keningau dan Tambunan), Pantai Barat (Ranau) dan Sandakan (Telupid, Kinabatangan, Beluran dan Sandakan) sehingga 7:00 malam; Ahad, 28 Jun 2026.",
       "instruction_bm": null
     },
     {
