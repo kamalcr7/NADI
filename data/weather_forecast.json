@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "fetched_at": "2026-06-28T23:08:36.483Z",
+    "fetched_at": "2026-06-29T04:21:51.590Z",
     "source": "KTMY Data Bot",
     "api_key": "weather_forecast"
   },
@@ -6073,7 +6073,7 @@
         "location_name": "Putrajaya"
       },
       "date": "2026-06-29",
-      "morning_forecast": "Tiada hujan",
+      "morning_forecast": "Hujan di beberapa tempat",
       "afternoon_forecast": "Ribut petir di beberapa tempat",
       "night_forecast": "Mendung",
       "summary_forecast": "Ribut petir di beberapa tempat",
@@ -20871,7 +20871,7 @@
         "location_name": "WP Putrajaya"
       },
       "date": "2026-06-29",
-      "morning_forecast": "Tiada hujan",
+      "morning_forecast": "Hujan di beberapa tempat",
       "afternoon_forecast": "Ribut petir di beberapa tempat",
       "night_forecast": "Mendung",
       "summary_forecast": "Ribut petir di beberapa tempat",
@@ -30083,7 +30083,7 @@
         "location_name": "Putrajaya"
       },
       "date": "2026-06-29",
-      "morning_forecast": "Tiada hujan",
+      "morning_forecast": "Hujan",
       "afternoon_forecast": "Ribut petir",
       "night_forecast": "Mendung",
       "summary_forecast": "Ribut petir",
