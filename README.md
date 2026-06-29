@@ -86,7 +86,8 @@ These datasets cannot be parsed reliably from live APIs due to lack of JSON endp
 ├── css/                     # Styling sheet hierarchy
 │   ├── index.css            # Base styles, variables, typography, and theme tokens
 │   ├── components.css       # Cards, tables, loaders, alerts, and navigation styles
-│   └── responsive.css       # Mobile and tablet layouts
+│   ├── responsive.css       # Mobile and tablet layouts
+│   └── overhaul.css         # Premium glassmorphism effects, 3D card glare, sliding nav indicator, and micro-animations (v3.0)
 ├── js/                      # Frontend Logic
 │   ├── sections/            # Tab-specific UI renderers
 │   │   ├── hero.js          # Overview page
@@ -148,6 +149,16 @@ These datasets cannot be parsed reliably from live APIs due to lack of JSON endp
 ---
 
 ## Previous Releases
+
+### v3.0 (Premium UI Revamp & Micro-interactions)
+*   **Fluid Transitions & Sliding Indicators** — Desktop sidebar and mobile bottom nav sliding highlights.
+*   **Dynamic Card Glare Reflection** — Spotlight cursor tracking reflection on cards, bypassed for 3D rotation on charts.
+*   **Animated Splash Loader** — Hand-drawn SVG logo outline fading to page content.
+*   **Magnetic Button Interactions** — Micro-attraction hover physics for navigation & buttons.
+*   **Entrance Cascades & Numeric Tickers** — Staggered fade animations and counting digit increments.
+*   **Custom Chart Glow & Gradients** — Dataset shadow glow effects and vertical linear canvas gradients.
+
+See [CHANGES-v3.0.md](file:///c:/Users/PC/Desktop/Antigravity/Malaysia%20Website/CHANGES-v3.0.md) for full release features and developer setup.
 
 ### v2.0 (Rebrand & Core Updates)
 *   **Platform Rebranding (KTMY)** — Fully rebranded from NADI to KTMY (Key to Malaysia).

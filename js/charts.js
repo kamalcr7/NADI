@@ -5,6 +5,20 @@
 (function () {
   'use strict';
 
+  /* --- Utility: Hex to RGBA --- */
+  function hexToRgba(hex, alpha) {
+    hex = hex.replace('#', '');
+    if (hex.length === 3) {
+      hex = hex.split('').map(c => c + c).join('');
+    }
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+
+  let lineShadowPluginRegistered = false;
+
   /* --- Default Dark Theme Config --- */
   const CHART_COLORS = {
     primary: '#00C9A7',
@@ -57,6 +71,44 @@
   function setDefaults() {
     if (!window.Chart) return;
 
+    if (!lineShadowPluginRegistered) {
+      const lineShadowPlugin = {
+        id: 'lineShadowPlugin',
+        beforeDatasetDraw: (chart, args) => {
+          try {
+            const { ctx } = chart;
+            const { meta } = args;
+            if (meta && meta.type === 'line') {
+              let color = '#00C9A7';
+              if (meta.dataset && meta.dataset.options) {
+                color = meta.dataset.options.borderColor || color;
+              }
+              ctx.shadowColor = hexToRgba(color, 0.35);
+              ctx.shadowBlur = 10;
+              ctx.shadowOffsetY = 4;
+            }
+          } catch (e) {
+            console.error('[KTMY Charts Plugin] beforeDatasetDraw error:', e);
+          }
+        },
+        afterDatasetDraw: (chart, args) => {
+          try {
+            const { ctx } = chart;
+            const { meta } = args;
+            if (meta && meta.type === 'line') {
+              ctx.shadowColor = 'transparent';
+              ctx.shadowBlur = 0;
+              ctx.shadowOffsetY = 0;
+            }
+          } catch (e) {
+            console.error('[KTMY Charts Plugin] afterDatasetDraw error:', e);
+          }
+        }
+      };
+      Chart.register(lineShadowPlugin);
+      lineShadowPluginRegistered = true;
+    }
+
     Chart.defaults.color = CHART_COLORS.text;
     Chart.defaults.borderColor = CHART_COLORS.grid;
     Chart.defaults.font.family = "'Inter', sans-serif";
@@ -78,21 +130,26 @@
     Chart.defaults.maintainAspectRatio = false;
 
     // Default tooltip formatting for absolute numbers
-    Chart.defaults.plugins.tooltip.callbacks = {
-      label: function(context) {
-        let label = context.dataset.label || '';
-        if (label) {
-          label += ': ';
+    if (Chart.defaults.plugins.tooltip && Chart.defaults.plugins.tooltip.callbacks) {
+      Chart.defaults.plugins.tooltip.callbacks.label = function(context) {
+        try {
+          let label = (context.dataset && context.dataset.label) || '';
+          if (label) {
+            label += ': ';
+          }
+          const val = context.raw;
+          if (typeof val === 'number') {
+            label += val.toLocaleString();
+          } else {
+            label += val !== undefined && val !== null ? val : '';
+          }
+          return label;
+        } catch (e) {
+          console.error('[KTMY Charts Tooltip] Callback error:', e);
+          return '';
         }
-        const val = context.raw;
-        if (typeof val === 'number') {
-          label += val.toLocaleString();
-        } else {
-          label += val;
-        }
-        return label;
-      }
-    };
+      };
+    }
   }
 
   /* --- Factory: Line Chart --- */
@@ -100,22 +157,41 @@
     const canvas = document.getElementById(canvasId);
     if (!canvas || !window.Chart) return null;
 
+    const ctx = canvas.getContext('2d');
     const { labels, datasets, title, yLabel, showLegend = true } = config;
 
-    const chartDatasets = datasets.map((ds, i) => ({
-      label: ds.label,
-      data: ds.data,
-      borderColor: ds.color || PALETTE[i % PALETTE.length],
-      backgroundColor: ds.fill ? (ds.bgColor || PALETTE_LIGHT[i % PALETTE_LIGHT.length]) : 'transparent',
-      borderWidth: 2,
-      pointRadius: ds.pointRadius !== undefined ? ds.pointRadius : 3,
-      pointHoverRadius: 6,
-      pointBackgroundColor: ds.color || PALETTE[i % PALETTE.length],
-      pointBorderColor: 'transparent',
-      tension: 0.4,
-      fill: ds.fill || false,
-      ...ds.extra
-    }));
+    const chartDatasets = datasets.map((ds, i) => {
+      const color = ds.color || PALETTE[i % PALETTE.length];
+      
+      let background = 'transparent';
+      if (ds.fill) {
+        try {
+          const gradientHeight = canvas.offsetHeight || 300;
+          const grad = ctx.createLinearGradient(0, 0, 0, gradientHeight);
+          grad.addColorStop(0, hexToRgba(color, 0.25));
+          grad.addColorStop(1, hexToRgba(color, 0.0));
+          background = grad;
+        } catch (e) {
+          console.warn('[KTMY Charts] Failed to create vertical linear gradient, falling back to light color:', e);
+          background = PALETTE_LIGHT[i % PALETTE_LIGHT.length];
+        }
+      }
+
+      return {
+        label: ds.label,
+        data: ds.data,
+        borderColor: color,
+        backgroundColor: background,
+        borderWidth: 2.5,
+        pointRadius: ds.pointRadius !== undefined ? ds.pointRadius : 3,
+        pointHoverRadius: 6,
+        pointBackgroundColor: color,
+        pointBorderColor: 'transparent',
+        tension: 0.4,
+        fill: ds.fill || false,
+        ...ds.extra
+      };
+    });
 
     return new Chart(canvas, {
       type: 'line',
@@ -152,19 +228,64 @@
     const canvas = document.getElementById(canvasId);
     if (!canvas || !window.Chart) return null;
 
+    const ctx = canvas.getContext('2d');
     const { labels, datasets, title, horizontal = false, showLegend = false, stacked = false } = config;
 
-    const chartDatasets = datasets.map((ds, i) => ({
-      label: ds.label || '',
-      data: ds.data,
-      backgroundColor: ds.colors || ds.color || PALETTE[i % PALETTE.length],
-      borderColor: 'transparent',
-      borderRadius: 6,
-      borderSkipped: false,
-      barPercentage: 0.7,
-      categoryPercentage: 0.8,
-      ...ds.extra
-    }));
+    const chartDatasets = datasets.map((ds, i) => {
+      const baseColor = ds.color || PALETTE[i % PALETTE.length];
+      
+      let background = baseColor;
+      if (!ds.colors) {
+        try {
+          const width = canvas.offsetWidth || 500;
+          const height = canvas.offsetHeight || 300;
+          let grad;
+          if (horizontal) {
+            grad = ctx.createLinearGradient(0, 0, width, 0);
+          } else {
+            grad = ctx.createLinearGradient(0, height, 0, 0);
+          }
+          grad.addColorStop(0, baseColor);
+          const secondary = ds.colorSecondary || CHART_COLORS.blue;
+          grad.addColorStop(1, secondary);
+          background = grad;
+        } catch (e) {
+          console.warn('[KTMY Charts] Failed to create bar linear gradient, falling back to solid color:', e);
+          background = baseColor;
+        }
+      } else {
+        try {
+          const height = canvas.offsetHeight || 300;
+          const width = canvas.offsetWidth || 500;
+          background = ds.colors.map(col => {
+            let grad;
+            if (horizontal) {
+              grad = ctx.createLinearGradient(0, 0, width, 0);
+            } else {
+              grad = ctx.createLinearGradient(0, height, 0, 0);
+            }
+            grad.addColorStop(0, col);
+            grad.addColorStop(1, hexToRgba(col, 0.45));
+            return grad;
+          });
+        } catch (e) {
+          console.warn('[KTMY Charts] Failed to create multi-bar gradients, falling back to solid colors:', e);
+          background = ds.colors;
+        }
+      }
+
+      return {
+        label: ds.label || '',
+        data: ds.data,
+        backgroundColor: background,
+        borderColor: 'transparent',
+        borderRadius: 6,
+        borderSkipped: false,
+        barPercentage: 0.7,
+        categoryPercentage: 0.8,
+        ...ds.extra
+      };
+    });
 
     return new Chart(canvas, {
       type: 'bar',

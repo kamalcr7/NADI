@@ -292,7 +292,7 @@
       'section.visitor.subtitle': 'Currency converter, public holidays, emergency contacts, and travel tips.',
 
       /* --- Topbar --- */
-      'topbar.refresh': '⟳ Refresh',
+      'topbar.refresh': 'Refresh',
 
       /* --- Mobile Nav --- */
       'mobile.home': 'Home',
@@ -610,7 +610,7 @@
       'section.visitor.subtitle': 'Penukar mata wang, cuti umum, kenalan kecemasan, dan tips perjalanan.',
 
       /* --- Topbar --- */
-      'topbar.refresh': '⟳ Muat Semula',
+      'topbar.refresh': 'Muat Semula',
 
       /* --- Mobile Nav --- */
       'mobile.home': 'Utama',

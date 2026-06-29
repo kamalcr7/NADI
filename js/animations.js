@@ -126,7 +126,7 @@
      ============================================================ */
   function revealTabContent(tabEl) {
     if (!tabEl) return;
-    if (isTouchDevice()) return;
+    if (prefersReducedMotion()) return;
 
     const cards = tabEl.querySelectorAll(
       '.glass-card, .chart-container, .weather-card, .price-tag, ' +
@@ -171,14 +171,33 @@
   }
 
   /* ============================================================
-     6. 3D CARD TILT (desktop only)
+     6. 3D CARD TILT & GLARE EFFECT
      ============================================================ */
   function initCardTilt() {
-    if (isTouchDevice() || prefersReducedMotion()) return;
+    if (prefersReducedMotion()) return;
 
     function attachTilt(card) {
-      // Skip chart containers — mouse needed for tooltip interaction
-      if (card.classList.contains('chart-container')) return;
+      const isChartCard = card.querySelector('canvas') || card.querySelector('.chart-container') || card.classList.contains('chart-container');
+
+      // Dynamically add glare overlay
+      let glare = card.querySelector('.card-glare');
+      if (!glare) {
+        glare = document.createElement('div');
+        glare.className = 'card-glare';
+        card.appendChild(glare);
+      }
+
+      // Touch events support for mobile (subtle scale press)
+      if (isTouchDevice()) {
+        card.addEventListener('touchstart', () => {
+          card.style.transform = 'scale(0.97)';
+          card.style.transition = 'transform 0.15s ease';
+        }, { passive: true });
+        card.addEventListener('touchend', () => {
+          card.style.transform = '';
+        }, { passive: true });
+        return; // skip desktop tilt
+      }
 
       let rafId;
 
@@ -187,11 +206,19 @@
         rafId = requestAnimationFrame(() => {
           const rect = card.getBoundingClientRect();
           if (rect.width === 0) return;
-          const x = (e.clientX - rect.left) / rect.width;
-          const y = (e.clientY - rect.top) / rect.height;
-          const rotX = (y - 0.5) * -10;
-          const rotY = (x - 0.5) * 10;
-          card.style.transform = `translateY(-5px) perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+          const xVal = e.clientX - rect.left;
+          const yVal = e.clientY - rect.top;
+          
+          card.style.setProperty('--glare-x', xVal + 'px');
+          card.style.setProperty('--glare-y', yVal + 'px');
+
+          if (!isChartCard) {
+            const x = xVal / rect.width;
+            const y = yVal / rect.height;
+            const rotX = (y - 0.5) * -8;
+            const rotY = (x - 0.5) * 8;
+            card.style.transform = `translateY(-4px) perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+          }
         });
       }, { passive: true });
 
@@ -447,6 +474,249 @@
   }
 
   /* ============================================================
+     14. SPLASH SCREEN LOADER
+     ============================================================ */
+  function initSplashLoader() {
+    const loader = document.getElementById('ktmy-splash-loader');
+    if (!loader) return;
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        // Trigger tab content reveal of active tab after load
+        const activeTab = document.querySelector('.tab-content.active');
+        if (activeTab) revealTabContent(activeTab);
+      }, 700);
+    });
+
+    // Fallback: hide if loading takes too long
+    setTimeout(() => {
+      if (!loader.classList.contains('hidden')) {
+        loader.classList.add('hidden');
+      }
+    }, 3000);
+  }
+
+  /* ============================================================
+     15. ACTIVE TAB SLIDING NAV PILL (Sidebar & Mobile Nav)
+     ============================================================ */
+  function initSlidingNavPill() {
+    if (prefersReducedMotion()) return;
+
+    // 1. Sidebar Sliding Pill
+    const sidebarScroll = document.querySelector('.sidebar-scroll');
+    if (sidebarScroll) {
+      let pill = sidebarScroll.querySelector('.ktmy-sliding-pill');
+      if (!pill) {
+        pill = document.createElement('div');
+        pill.className = 'ktmy-sliding-pill';
+        sidebarScroll.appendChild(pill);
+      }
+
+      function updatePillPosition() {
+        const activeLink = sidebarScroll.querySelector('.tab-link.active');
+        if (activeLink) {
+          pill.style.top = activeLink.offsetTop + 'px';
+          pill.style.height = activeLink.offsetHeight + 'px';
+          pill.classList.add('visible');
+        } else {
+          pill.classList.remove('visible');
+        }
+      }
+
+      setTimeout(updatePillPosition, 100);
+      window.addEventListener('resize', updatePillPosition, { passive: true });
+
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach(mutation => {
+          if (mutation.attributeName === 'class') {
+            updatePillPosition();
+          }
+        });
+      });
+
+      sidebarScroll.querySelectorAll('.tab-link').forEach(link => {
+        observer.observe(link, { attributes: true, attributeFilter: ['class'] });
+        link.addEventListener('mouseenter', () => {
+          pill.style.top = link.offsetTop + 'px';
+          pill.style.height = link.offsetHeight + 'px';
+          pill.classList.add('visible');
+        });
+      });
+
+      sidebarScroll.addEventListener('mouseleave', () => {
+        updatePillPosition();
+      });
+    }
+
+    // 2. Mobile Bottom Nav Sliding Pill
+    const mobNav = document.getElementById('mobile-bottom-nav');
+    if (mobNav) {
+      let mobPill = mobNav.querySelector('.ktmy-mob-sliding-pill');
+      if (!mobPill) {
+        mobPill = document.createElement('div');
+        mobPill.className = 'ktmy-mob-sliding-pill';
+        mobNav.appendChild(mobPill);
+      }
+
+      function updateMobPillPosition() {
+        const activeItem = mobNav.querySelector('.mobile-bottom-item.active');
+        if (activeItem) {
+          mobPill.style.left = activeItem.offsetLeft + 'px';
+          mobPill.style.width = activeItem.offsetWidth + 'px';
+          mobPill.classList.add('visible');
+        } else {
+          mobPill.classList.remove('visible');
+        }
+      }
+
+      setTimeout(updateMobPillPosition, 100);
+      window.addEventListener('resize', updateMobPillPosition, { passive: true });
+
+      const mobObserver = new MutationObserver((mutations) => {
+        mutations.forEach(mutation => {
+          if (mutation.attributeName === 'class') {
+            updateMobPillPosition();
+          }
+        });
+      });
+
+      mobNav.querySelectorAll('.mobile-bottom-item').forEach(item => {
+        mobObserver.observe(item, { attributes: true, attributeFilter: ['class'] });
+      });
+    }
+  }
+
+  /* ============================================================
+     16. MAGNETIC HOVER EFFECT (Desktop only)
+     ============================================================ */
+  function initMagneticHover() {
+    if (isTouchDevice() || prefersReducedMotion()) return;
+
+    function attachMagnetic(el) {
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        el.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
+        el.style.transition = 'transform 0.08s ease-out';
+      }, { passive: true });
+
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = '';
+        el.style.transition = 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      }, { passive: true });
+    }
+
+    document.querySelectorAll('.btn, .quick-link-card, .topbar-refresh-btn, .lang-btn').forEach(attachMagnetic);
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach(mutation => {
+        mutation.addedNodes.forEach(node => {
+          if (!node || node.nodeType !== 1) return;
+          if (node.matches && (node.matches('.btn') || node.matches('.quick-link-card'))) {
+            attachMagnetic(node);
+          }
+          if (node.querySelectorAll) {
+            node.querySelectorAll('.btn, .quick-link-card').forEach(attachMagnetic);
+          }
+        });
+      });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
+  /* ============================================================
+     17. AUTO DYNAMIC NUMERIC COUNTER ANIMATIONS
+     ============================================================ */
+  function initTabCountersHook() {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach(mutation => {
+        mutation.addedNodes.forEach(node => {
+          if (!node || node.nodeType !== 1) return;
+          if (node.classList && (node.classList.contains('stat-number') || node.classList.contains('gauge-val') || node.classList.contains('city-temp'))) {
+            animateNumberEl(node);
+          }
+          if (node.querySelectorAll) {
+            node.querySelectorAll('.stat-number, .gauge-val, .city-temp').forEach(animateNumberEl);
+          }
+        });
+        
+        if (mutation.type === 'characterData' || mutation.type === 'childList') {
+          const target = mutation.target.parentElement;
+          if (target && (target.classList.contains('stat-number') || target.classList.contains('gauge-val') || target.classList.contains('city-temp'))) {
+            animateNumberEl(target);
+          }
+        }
+      });
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+  }
+
+  function animateNumberEl(el) {
+    if (prefersReducedMotion()) return;
+    if (el.id === 'hero-live-time') return;
+    if (el.id === 'hero-pop-counter') {
+      if (el.dataset.animatedOnce === 'true') return;
+      el.dataset.animatedOnce = 'true';
+    }
+    if (el.dataset.animating === 'true') return;
+    
+    const rawText = el.textContent.trim();
+    if (!rawText || rawText.includes('Loading') || rawText.includes('Loading...')) return;
+
+    const numMatch = rawText.match(/([+-]?[\d,]+\.?\d*)/);
+    if (!numMatch) return;
+
+    const numStr = numMatch[1];
+    const prefix = rawText.substring(0, numMatch.index);
+    const suffix = rawText.substring(numMatch.index + numStr.length);
+
+    const targetValue = parseFloat(numStr.replace(/,/g, ''));
+    if (isNaN(targetValue)) return;
+
+    el.dataset.animating = 'true';
+    animateCounter(el, targetValue, 1000, prefix, suffix);
+    
+    setTimeout(() => {
+      el.dataset.animating = 'false';
+    }, 1100);
+  }
+
+  /* ============================================================
+     18. REFRESH BUTTON MICRO-INTERACTIONS
+     ============================================================ */
+  function initRefreshBtn() {
+    const btn = document.querySelector('.topbar-refresh-btn');
+    if (!btn) return;
+
+    btn.addEventListener('click', () => {
+      if (btn.classList.contains('refreshing')) return;
+      btn.classList.add('refreshing');
+
+      setTimeout(() => {
+        btn.classList.remove('refreshing');
+
+        // Flash metrics in the active panel
+        const activeTab = document.querySelector('.tab-content.active');
+        if (activeTab) {
+          const metrics = activeTab.querySelectorAll('.stat-number, .gauge-val, .city-temp');
+          metrics.forEach(el => {
+            el.classList.remove('ktmy-glow-pulse');
+            void el.offsetWidth; // force reflow
+            el.classList.add('ktmy-glow-pulse');
+            setTimeout(() => {
+              el.classList.remove('ktmy-glow-pulse');
+            }, 850);
+          });
+        }
+      }, 850);
+    });
+  }
+
+  /* ============================================================
      INIT
      ============================================================ */
   function init() {
@@ -461,6 +731,11 @@
     initActiveNavTracking();
     initCardTilt();
     initTabSwitchHook();
+    initSplashLoader();
+    initSlidingNavPill();
+    initMagneticHover();
+    initTabCountersHook();
+    initRefreshBtn();
 
     // Reveal the initially active tab content
     setTimeout(() => {
