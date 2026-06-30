@@ -1,10 +1,10 @@
 {
   "_meta": {
-    "generated_at": "2026-06-30T20:08:53.081Z",
-    "duration_ms": 256878,
+    "generated_at": "2026-06-30T23:21:18.051Z",
+    "duration_ms": 255849,
     "success": 19,
     "failed": 0,
-    "next_refresh": "2026-06-30T22:08:53.081Z"
+    "next_refresh": "2026-07-01T01:21:18.051Z"
   },
   "datasets": [
     "weather_forecast.json",
