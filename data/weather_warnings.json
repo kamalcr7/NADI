@@ -1,38 +1,38 @@
 {
   "_meta": {
-    "fetched_at": "2026-07-01T12:40:58.385Z",
+    "fetched_at": "2026-07-01T16:29:59.252Z",
     "source": "KTMY Data Bot",
     "api_key": "weather_warnings"
   },
   "data": [
     {
       "warning_issue": {
-        "issued": "2026-07-01T20:15:00",
-        "title_bm": "Amaran Ribut Petir",
-        "title_en": "Thunderstorms Warning"
-      },
-      "valid_from": "2026-07-01T20:15:00",
-      "valid_to": "2026-07-02T01:00:00",
-      "heading_en": "Thunderstorms Warning",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Kedah  (Langkawi);  Perak  (Kampar, Batang Padang and Muallim);  Kelantan  (Gua Musang);  Terengganu ;  Pahang  (Cameron Highlands, Lipis, Raub and Jerantut);  Selangor  (Hulu Selangor); and  Sabah:  Interior (Nabawan), West Coast (Ranau), Sandakan (Tongod, Telupid and Beluran) and Kudat until 1:00AM; Thursday, 2 July 2026.",
-      "instruction_en": null,
-      "heading_bm": "Amaran Ribut Petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Kedah  (Langkawi);  Perak  (Kampar, Batang Padang dan Muallim);  Kelantan  (Gua Musang);  Terengganu ;  Pahang  (Tanah Tinggi Cameron, Lipis, Raub dan Jerantut);  Selangor  (Hulu Selangor); dan  Sabah:  Pedalaman (Nabawan), Pantai Barat (Ranau), Sandakan (Tongod, Telupid dan Beluran) dan Kudat sehingga 1:00 pagi; Khamis, 2 Julai 2026.",
-      "instruction_bm": null
-    },
-    {
-      "warning_issue": {
-        "issued": "2026-07-01T18:30:00",
+        "issued": "2026-07-01T21:05:00",
         "title_bm": "Nasihat Lekukan Tropika",
         "title_en": "Tropical Depression Advisory"
       },
       "valid_from": null,
       "valid_to": null,
       "heading_en": "Tropical Depression Advisory",
-      "text_en": "Category:  Tropical Depression Advisory (NN)                  Time of Observation:  17:00, 01 July 2026                  Location:  Latitude 14.5 North and Longitude 116.2 East                  Movement:  West 30 km/h.                  Maximum wind speed:  56 km/h                  Distance from nearest international city:  approximately 423 km Southwest of Santa Cruz, Philippines                  Distance from nearest Malaysian city:  Approximately 848 km Northwest of Kudat.                  Threat to Malaysia:  No significant impact.",
+      "text_en": "Category:  Tropical Depression Advisory (a)                  Time of Observation:  20:00, 01 July 2026                  Location:  Latitude 16.7 North and Longitude 116.3 East                  Movement:  Northwest 35 km/h.                  Maximum wind speed:  56 km/h                  Distance from nearest international city:  approximately 397 km Northwest of Santa Cruz, Philippines.                  Distance from nearest Malaysian city:  Approximately 1091 km Northwest of Kudat, Sabah.                  Threat to Malaysia:  No significant impact.",
       "instruction_en": null,
       "heading_bm": "Nasihat Lekukan Tropika",
-      "text_bm": "Kategori:  Nasihat Lekukan Tropika (NN)                  Masa Pencerapan:  17:00, 01 Julai 2026                  Kedudukan:  Latitud 14.5 Utara dan Longitud 116.2 Timur                  Pergerakan:  Ke arah Barat dengan kelajuan 30 km/j.                  Kelajuan angin maksimum:  56 km/j                  Jarak dari bandar antarabangsa terdekat:  kira-kira 423 km ke Barat Daya Santa Cruz, Filipina.                  Jarak dari bandar terdekat:  Kira-kira 848 km ke Barat Laut Laut Kudat.                  Kesan terhadap Malaysia:  Tiada kesan signifikan.",
+      "text_bm": "Kategori:  Nasihat Lekukan Tropika (a)                  Masa Pencerapan:  20:00, 01 Julai 2026                  Kedudukan:  Latitud 16.7 Utara dan Longitud 116.3 Timur                  Pergerakan:  Ke arah Barat Laut dengan kelajuan 35 km/j.                  Kelajuan angin maksimum:  56 km/j                  Jarak dari bandar antarabangsa terdekat:  kira-kira 397 km ke Barat Laut Santa Cruz, Filipina.                  Jarak dari bandar terdekat:  Kira-kira 1091 km ke Barat Laut Kudat, Sabah.                  Kesan terhadap Malaysia:  Tiada kesan signifikan.",
+      "instruction_bm": null
+    },
+    {
+      "warning_issue": {
+        "issued": "2026-07-01T22:00:00",
+        "title_bm": "Amaran Ribut Petir",
+        "title_en": "Thunderstorms Warning"
+      },
+      "valid_from": "2026-07-01T22:00:00",
+      "valid_to": "2026-07-02T02:00:00",
+      "heading_en": "Thunderstorms Warning",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Perlis ;  Kedah  (Langkawi, Kubang Pasu, Kota Setar, Pokok Sena, Padang Terap, Yan, Pendang and Kuala Muda);  Penang ;  Kelantan  (Gua Musang);  Terengganu ;  Pahang  (Jerantut);  Sabah:  Interior (Sipitang, Kuala Penyu and Beaufort) and West Coast (Papar, Putatan, Penampang and Kota Kinabalu); and  FT Labuan  until 2:00AM; Thursday, 2 July 2026.",
+      "instruction_en": null,
+      "heading_bm": "Amaran Ribut Petir",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Perlis ;  Kedah  (Langkawi, Kubang Pasu, Kota Setar, Pokok Sena, Padang Terap, Yan, Pendang dan Kuala Muda);  Pulau Pinang ;  Kelantan  (Gua Musang);  Terengganu ;  Pahang  (Jerantut);  Sabah:  Pedalaman (Sipitang, Kuala Penyu dan Beaufort) dan Pantai Barat (Papar, Putatan, Penampang dan Kota Kinabalu); dan  WP Labuan  sehingga 2:00 pagi; Khamis, 2 Julai 2026.",
       "instruction_bm": null
     },
     {
