@@ -1,32 +1,32 @@
 {
   "_meta": {
-    "fetched_at": "2026-07-02T10:45:40.472Z",
+    "fetched_at": "2026-07-02T14:11:58.004Z",
     "source": "KTMY Data Bot",
     "api_key": "weather_warnings"
   },
   "data": [
     {
       "warning_issue": {
-        "issued": "2026-07-02T17:15:00",
-        "title_bm": "Amaran Ribut Petir",
-        "title_en": "Thunderstorms Warning"
+        "issued": "2026-07-02T21:15:00",
+        "title_bm": "Nasihat Lekukan Tropika",
+        "title_en": "Tropical Depression Advisory"
       },
-      "valid_from": "2026-07-02T17:15:00",
-      "valid_to": "2026-07-02T20:00:00",
-      "heading_en": "Thunderstorms Warning",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Kelantan  (Tumpat, Pasir Mas, Kota Bharu, Jeli, Tanah Merah, Bachok, Machang, Pasir Puteh and Kuala Krai);  Terengganu  (Besut, Setiu, Kuala Nerus and Kuala Terengganu);  Pahang  (Bentong, Temerloh, Maran, Bera and Rompin);  Selangor  (Hulu Selangor, Gombak and Hulu Langat);  FT Kuala Lumpur ;  Negeri Sembilan  (Jelebu and Jempol);  Sarawak:  Kuching, Serian (Tebedu), Samarahan (Samarahan and Asajaya), Sarikei (Julau), Sibu (Kanowit and Selangau), Mukah (Mukah), Kapit (Song), Bintulu, Miri (Subis) and Limbang; and  Sabah:  Interior (Sipitang, Tenom, Beaufort, Keningau and Tambunan), West Coast (Tuaran, Ranau and Kota Belud) and Sandakan (Telupid, Beluran and Sandakan) until 8:00PM; Thursday, 2 July 2026.",
+      "valid_from": null,
+      "valid_to": null,
+      "heading_en": "Tropical Depression Advisory",
+      "text_en": "Category:  Tropical Depression Advisory (TDa)                  Time of Observation:  20:00, 02 July 2026                  Location:  Latitude 17.1 North and Longitude 110.4 East                  Movement:  West 20 km/h.                  Maximum wind speed:  56 km/h                  Distance from nearest international city:  approximately 163 km Northwest of Sanya, China.                  Distance from nearest Malaysian city:  Approximately 1330 km Northwest of Kudat, Sabah.                  Threat to Malaysia:  No significant impact.",
       "instruction_en": null,
-      "heading_bm": "Amaran Ribut Petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Kelantan  (Tumpat, Pasir Mas, Kota Bharu, Jeli, Tanah Merah, Bachok, Machang, Pasir Puteh dan Kuala Krai);  Terengganu  (Besut, Setiu, Kuala Nerus dan Kuala Terengganu);  Pahang  (Bentong, Temerloh, Maran, Bera dan Rompin);  Selangor  (Hulu Selangor, Gombak dan Hulu Langat);  WP Kuala Lumpur ;  Negeri Sembilan  (Jelebu dan Jempol);  Sarawak:  Kuching, Serian (Tebedu), Samarahan (Samarahan dan Asajaya), Sarikei (Julau), Sibu (Kanowit dan Selangau), Mukah (Mukah), Kapit (Song), Bintulu, Miri (Subis) dan Limbang; dan  Sabah:  Pedalaman (Sipitang, Tenom, Beaufort, Keningau dan Tambunan), Pantai Barat (Tuaran, Ranau dan Kota Belud) dan Sandakan (Telupid, Beluran dan Sandakan) sehingga 8:00 malam; Khamis, 2 Julai 2026.",
+      "heading_bm": "Nasihat Lekukan Tropika",
+      "text_bm": "Kategori:  Nasihat Lekukan Tropika (TDa)                  Masa Pencerapan:  20:00, 02 Julai 2026                  Kedudukan:  Latitud 17.1 Utara dan Longitud 110.4 Timur                  Pergerakan:  Ke arah Barat dengan kelajuan 20 km/j.                  Kelajuan angin maksimum:  56 km/j                  Jarak dari bandar antarabangsa terdekat:  kira-kira 163 km ke Barat Laut Sanya, China.                  Jarak dari bandar terdekat:  Kira-kira 1330 km ke Barat Laut Kudat, Sabah.                  Kesan terhadap Malaysia:  Tiada kesan signifikan.",
       "instruction_bm": null
     },
     {
       "warning_issue": {
-        "issued": "2026-07-02T18:00:00",
+        "issued": "2026-07-02T20:15:00",
         "title_bm": "Amaran Angin Kencang dan Laut Bergelora Kategori Kedua",
         "title_en": "Second Category Warning on Strong Winds and Rough Seas"
       },
-      "valid_from": "2026-07-02T18:00:00",
+      "valid_from": "2026-07-02T20:15:00",
       "valid_to": "2026-07-09T00:00:00",
       "heading_en": "Warning on Strong Wind and Rough Seas (Second Category)",
       "text_en": "Strong westerly winds of 50-60 kmph with wave height up to 4.5 metres are expected over the waters of Phuket until Wednesday, 8 July 2026.",
@@ -37,41 +37,41 @@
     },
     {
       "warning_issue": {
-        "issued": "2026-07-02T18:00:00",
+        "issued": "2026-07-02T20:15:00",
         "title_bm": "Amaran Angin Kencang dan Laut Bergelora Kategori Kedua",
         "title_en": "Second Category Warning on Strong Winds and Rough Seas"
       },
-      "valid_from": "2026-07-02T18:00:00",
-      "valid_to": "2026-07-02T21:00:00",
+      "valid_from": "2026-07-02T20:15:00",
+      "valid_to": "2026-07-03T01:00:00",
       "heading_en": "Warning on Thunderstorms",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of Pahang, Terengganu, Kelantan, Western Sarawak and Western Sabah and Labuan until 9:00PM; Thursday, 2 July 2026.",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of Perlis & Kedah, Penang, Pahang, Terengganu, Kelantan, Sarawak and Western Sabah and Labuan, Eastern Sabah until 1:00AM; Friday, 3 July 2026.",
       "instruction_en": null,
       "heading_bm": "Amaran Ribut petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan Pahang, Terengganu, Kelantan, Sarawak Barat dan Sabah Barat dan Labuan sehingga 9:00 malam; Khamis, 2 Julai 2026.",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan Perlis & Kedah, Pulau Pinang, Pahang, Terengganu, Kelantan, Sarawak dan Sabah Barat dan Labuan, Sabah Timur sehingga 1:00 pagi; Jumaat, 3 Julai 2026.",
       "instruction_bm": null
     },
     {
       "warning_issue": {
-        "issued": "2026-07-02T18:00:00",
+        "issued": "2026-07-02T20:15:00",
         "title_bm": "Amaran Angin Kencang dan Laut Bergelora Kategori Kedua",
         "title_en": "Second Category Warning on Strong Winds and Rough Seas"
       },
-      "valid_from": "2026-07-02T18:00:00",
-      "valid_to": "2026-07-02T21:00:00",
+      "valid_from": "2026-07-02T20:15:00",
+      "valid_to": "2026-07-03T01:00:00",
       "heading_en": "Warning on Thunderstorms",
-      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of Northern Straits of Melaka, Samui, northern part of Tioman, Condore, Reef North, Layang-Layang and Palawan until 9:00PM; Thursday, 2 July 2026.",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the waters of Phuket, Straits of Melaka, Samui, Tioman, Condore, Reef North, Reef South, Layang-Layang, Labuan, Palawan and Sulu until 1:00AM; Friday, 3 July 2026.",
       "instruction_en": null,
       "heading_bm": "Amaran Ribut petir",
-      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan Selat Melaka Utara, Samui, utara Tioman, Condore, Reef North, Layang-Layang dan Palawan sehingga 9:00 malam; Khamis, 2 Julai 2026.",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di kawasan perairan Phuket, Selat Melaka, Samui, Tioman, Condore, Reef North, Reef South, Layang-Layang, Labuan, Palawan dan Sulu sehingga 1:00 pagi; Jumaat, 3 Julai 2026.",
       "instruction_bm": null
     },
     {
       "warning_issue": {
-        "issued": "2026-07-02T18:00:00",
+        "issued": "2026-07-02T20:15:00",
         "title_bm": "Amaran Angin Kencang dan Laut Bergelora Kategori Kedua",
         "title_en": "Second Category Warning on Strong Winds and Rough Seas"
       },
-      "valid_from": "2026-07-02T18:00:00",
+      "valid_from": "2026-07-02T20:15:00",
       "valid_to": "2026-07-09T00:00:00",
       "heading_en": "Warning on Strong Wind and Rough Seas (First Category)",
       "text_en": "Strong westerly winds of 40-50 kmph with wave height up to 3.5 metres are expected over the waters of Northern Straits of Melaka, northeastern part of Condore, northern part of Reef North and Palawan until Wednesday, 8 July 2026.",
@@ -82,17 +82,17 @@
     },
     {
       "warning_issue": {
-        "issued": "2026-07-02T18:15:00",
-        "title_bm": "Nasihat Lekukan Tropika",
-        "title_en": "Tropical Depression Advisory"
+        "issued": "2026-07-02T20:35:00",
+        "title_bm": "Amaran Ribut Petir",
+        "title_en": "Thunderstorms Warning"
       },
-      "valid_from": null,
-      "valid_to": null,
-      "heading_en": "Tropical Depression Advisory",
-      "text_en": "Category:  Tropical Depression Advisory (a)                  Time of Observation:  17:00, 02 July 2026                  Location:  Latitude 17.6 North and Longitude 110.9 East                  Movement:  West 20 km/h.                  Maximum wind speed:  56 km/h                  Distance from nearest international city:  approximately 166 km Northwest of Sanya, China.                  Distance from nearest Malaysian city:  Approximately 1351 km Northwest of Kudat, Sabah.                  Threat to Malaysia:  No significant impact.",
+      "valid_from": "2026-07-02T20:35:00",
+      "valid_to": "2026-07-02T23:00:00",
+      "heading_en": "Thunderstorms Warning",
+      "text_en": "Thunderstorms, heavy rain and strong winds are expected over the states of  Kedah  (Yan, Pendang, Kuala Muda, Sik, Baling, Kulim and Bandar Baharu);  Penang ;  Perak  (Kerian and Larut, Matang and Selama);  Kelantan  (Gua Musang);  Terengganu ;  Pahang  (Cameron Highlands, Lipis, Jerantut and Kuantan);  Sarawak:  Sarikei, Sibu (Sibu), Kapit (Belaga), Miri and Limbang;  Sabah:  Interior (Sipitang, Kuala Penyu and Beaufort), West Coast (Ranau and Kota Belud), Sandakan (Telupid, Beluran and Sandakan) and Kudat; and  FT Labuan  until 11:00PM; Thursday, 2 July 2026.",
       "instruction_en": null,
-      "heading_bm": "Nasihat Lekukan Tropika",
-      "text_bm": "Kategori:  Nasihat Lekukan Tropika (a)                  Masa Pencerapan:  17:00, 02 Julai 2026                  Kedudukan:  Latitud 17.6 Utara dan Longitud 110.9 Timur                  Pergerakan:  Ke arah Barat dengan kelajuan 20 km/j.                  Kelajuan angin maksimum:  56 km/j                  Jarak dari bandar antarabangsa terdekat:  kira-kira 166 km ke Barat Laut Sanya, China.                  Jarak dari bandar terdekat:  Kira-kira 1351 km ke Barat Laut Kudat, Sabah.                  Kesan terhadap Malaysia:  Tiada kesan signifikan.",
+      "heading_bm": "Amaran Ribut Petir",
+      "text_bm": "Ribut petir, hujan lebat dan angin kencang dijangka di negeri  Kedah  (Yan, Pendang, Kuala Muda, Sik, Baling, Kulim dan Bandar Baharu);  Pulau Pinang ;  Perak  (Kerian dan Larut, Matang Dan Selama);  Kelantan  (Gua Musang);  Terengganu ;  Pahang  (Tanah Tinggi Cameron, Lipis, Jerantut dan Kuantan);  Sarawak:  Sarikei, Sibu (Sibu), Kapit (Belaga), Miri dan Limbang;  Sabah:  Pedalaman (Sipitang, Kuala Penyu dan Beaufort), Pantai Barat (Ranau dan Kota Belud), Sandakan (Telupid, Beluran dan Sandakan) dan Kudat; dan  WP Labuan  sehingga 11:00 malam; Khamis, 2 Julai 2026.",
       "instruction_bm": null
     }
   ]
